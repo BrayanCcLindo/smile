@@ -61,8 +61,6 @@ function Header() {
         <div className="hidden lg:flex lg:gap-x-12">
           <ul className="  flex items-center gap-8 text-base font-medium">
             {routes.map((route) => {
-              if (route.private && !stateProfile) return null;
-
               return (
                 <li className="text" key={route.to}>
                   <NavLink

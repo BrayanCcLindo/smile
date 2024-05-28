@@ -5,7 +5,7 @@ import {
   getDocs,
   onSnapshot,
   query,
-  where,
+  // where,
 } from "firebase/firestore";
 import { useSmileContext } from "./userContext";
 import { UserData } from "../type/types";
@@ -17,21 +17,28 @@ export const useGetUserData = () => {
 
   useEffect(() => {
     const FetchUserData = async () => {
+      // if (stateProfile) {
       const actualUser = query(
-        collection(db, "usuarios"),
-        where("id", "==", stateProfile.uid)
+        collection(db, "usuarios")
+        // where("id", "==", stateProfile.uid)
       );
 
       const uniqueUser = await getDocs(actualUser);
+      const index = uniqueUser.docs.findIndex(
+        (user) => user.data().id === stateProfile.uid
+      );
 
-      const userData = uniqueUser.docs[0].data() as UserData;
+      // const index = uniqueUser.docs.length;
+      const userData = uniqueUser?.docs[index]?.data() as UserData;
 
       setUser(userData);
+      // }
     };
     return () => {
       FetchUserData();
     };
   }, []);
+
   return { user };
 };
 

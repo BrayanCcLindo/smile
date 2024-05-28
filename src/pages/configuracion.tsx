@@ -48,9 +48,9 @@ function Profile() {
               <div className="flex flex-col sm:flex-row mt-10">
                 <div className="sm:w-1/3  sm:pr-8 sm:py-8">
                   <ul className=" font-medium flex flex-col  gap-4">
-                    {profileRoutes.map((route) => {
+                    {profileRoutes.map((route, index) => {
                       return (
-                        <li className="text" key={route.to}>
+                        <li className="text" key={index}>
                           <Link
                             className="text-indigo-500  hover:underline"
                             to={route.to}

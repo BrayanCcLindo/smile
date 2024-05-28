@@ -10,6 +10,7 @@ function Homepage() {
   const { data } = useGetCampaigns();
   const firstThreeCampaigns = data.slice(0, 3);
   const { user } = useGetUserData();
+
   const userPhoto = user?.userPhoto;
 
   return (
