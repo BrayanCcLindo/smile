@@ -17,22 +17,22 @@ export const useGetUserData = () => {
 
   useEffect(() => {
     const FetchUserData = async () => {
-      // if (stateProfile) {
-      const actualUser = query(
-        collection(db, "usuarios")
-        // where("id", "==", stateProfile.uid)
-      );
+      if (stateProfile) {
+        const actualUser = query(
+          collection(db, "usuarios")
+          // where("id", "==", stateProfile.uid)
+        );
 
-      const uniqueUser = await getDocs(actualUser);
-      const index = uniqueUser.docs.findIndex(
-        (user) => user.data().id === stateProfile.uid
-      );
+        const uniqueUser = await getDocs(actualUser);
+        const index = uniqueUser.docs.findIndex(
+          (user) => user.data().id === stateProfile.uid
+        );
 
-      // const index = uniqueUser.docs.length;
-      const userData = uniqueUser.docs[index].data() as UserData;
+        // const index = uniqueUser.docs.length;
+        const userData = uniqueUser.docs[index].data() as UserData;
 
-      setUser(userData);
-      // }
+        setUser(userData);
+      }
     };
     return () => {
       FetchUserData();

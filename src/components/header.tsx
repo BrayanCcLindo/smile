@@ -7,6 +7,7 @@ import MainLinkButton from "./mainLinkButton";
 
 function Header() {
   const { stateProfile } = useSmileContext();
+  console.log(stateProfile, "state");
 
   const [showMenu, setShowMenu] = useState(true);
 
