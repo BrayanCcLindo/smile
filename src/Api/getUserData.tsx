@@ -29,7 +29,7 @@ export const useGetUserData = () => {
       );
 
       // const index = uniqueUser.docs.length;
-      const userData = uniqueUser?.docs[index]?.data() as UserData;
+      const userData = uniqueUser.docs[index].data() as UserData;
 
       setUser(userData);
       // }
