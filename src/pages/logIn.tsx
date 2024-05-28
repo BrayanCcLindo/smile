@@ -36,7 +36,6 @@ function LogIn() {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((user) => {
         console.log(user);
-
         navigate("/perfil");
       })
       .catch((Error) => {

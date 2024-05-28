@@ -17,18 +17,18 @@ export const useGetUserData = () => {
 
   useEffect(() => {
     const FetchUserData = async () => {
-      if (stateProfile) {
-        const actualUser = query(
-          collection(db, "usuarios")
-          // where("id", "==", stateProfile.uid)
-        );
+      const actualUser = query(
+        collection(db, "usuarios")
+        // where("id", "==", stateProfile.uid)
+      );
 
-        const uniqueUser = await getDocs(actualUser);
-        const index = uniqueUser.docs.findIndex(
-          (user) => user.data().id === stateProfile.uid
-        );
+      const uniqueUser = await getDocs(actualUser);
+      const index = uniqueUser.docs.findIndex(
+        (user) => user.data().id === stateProfile.uid
+      );
 
-        // const index = uniqueUser.docs.length;
+      // const index = uniqueUser.docs.length;
+      if (uniqueUser.docs[index]) {
         const userData = uniqueUser.docs[index].data() as UserData;
 
         setUser(userData);
