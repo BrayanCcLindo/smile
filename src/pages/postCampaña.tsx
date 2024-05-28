@@ -136,9 +136,12 @@ function PostCampaña() {
                           </tr>
                         </thead>
                         <tbody>
-                          {aprovedDonations.map((donation) => {
+                          {aprovedDonations.map((donation, index) => {
                             return (
-                              <tr className="border-b-2 border-gray-200 px-4 py-3">
+                              <tr
+                                key={index}
+                                className="border-b-2 border-gray-200 px-4 py-3"
+                              >
                                 <td className="px-4 py-3">
                                   {donation.donadorYapeNombre}
                                 </td>

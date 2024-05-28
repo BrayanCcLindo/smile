@@ -9,15 +9,15 @@ import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const fbconfig = {
-  apiKey: "AIzaSyAa1_bYtaVXUHb44clKzl-oeVJZE635w_c",
-  authDomain: "first-test-b0033.firebaseapp.com",
-  databaseURL: "https://first-test-b0033-default-rtdb.firebaseio.com",
-  projectId: "first-test-b0033",
-  storageBucket: "first-test-b0033.appspot.com",
-  messagingSenderId: "28214120891",
-  appId: "1:28214120891:web:f0caf60324555e825bf49e",
-  measurementId: "G-JPGWMC71TD",
+  apiKey: "AIzaSyBTKJm68Pf1Ds-rr2oLpovR-Tnfjqmp1j4",
+  authDomain: "smile-donation.firebaseapp.com",
+  projectId: "smile-donation",
+  storageBucket: "smile-donation.appspot.com",
+  messagingSenderId: "997059848053",
+  appId: "1:997059848053:web:ce098409cb85cbf26c153c",
+  measurementId: "G-WWYL0PWVC2",
 };
+
 export const app = initializeApp(fbconfig);
 export const db = getFirestore(app);
 export const auth = getAuth();
