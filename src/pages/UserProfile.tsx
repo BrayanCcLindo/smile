@@ -11,7 +11,6 @@ import CallToAction from "../components/callToAction";
 
 function UserProfile() {
   const { user } = useGetUserData();
-  console.log(user, "user");
 
   const { userCampaigns } = useGetUserCampaigns();
   const { stateProfile } = useSmileContext();
