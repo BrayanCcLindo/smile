@@ -70,7 +70,6 @@ function Configuracion() {
                     <button
                       onClick={() => {
                         handleSignOut();
-                        updateUser(null);
                       }}
                       className="font-medium text-indigo-500 flex items-center justify-end gap-2"
                     >
