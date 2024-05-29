@@ -97,7 +97,7 @@ const profileReducer = (state, action) => {
   switch (action.type) {
     case "NEW_USER": {
       state = action.user;
-      console.log(action.user, "action2");
+      console.log(action.user, "action3");
 
       return state;
     }
@@ -179,6 +179,7 @@ export function SmileProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const unsuscribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log(currentUser, "currentUser");
       // @ts-expect-error need to push
 
       updateUser(currentUser);
@@ -187,7 +188,7 @@ export function SmileProvider({ children }: { children: ReactNode }) {
     return () => {
       unsuscribe();
     };
-  }, [stateProfile]);
+  }, []);
 
   const updateUser = (user: UserData | null) => {
     dispatchProfile({

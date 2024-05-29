@@ -37,9 +37,10 @@ function LogIn() {
   const submitUserLogIn = (data: LoginType) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((user) => {
+        console.log(user.user, "LOGIN");
         // @ts-expect-error need to push
 
-        updateUser(user);
+        updateUser(user.user);
         navigate("/perfil");
       })
       .catch((Error) => {

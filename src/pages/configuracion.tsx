@@ -70,6 +70,7 @@ function Configuracion() {
                     <button
                       onClick={() => {
                         handleSignOut();
+                        updateUser(null);
                       }}
                       className="font-medium text-indigo-500 flex items-center justify-end gap-2"
                     >
@@ -119,7 +120,7 @@ function Configuracion() {
                       </div>
                     </div>
                   </div>
-                  <form method="POST">
+                  {/* <form method="POST">
                     <div className="space-y-12">
                       <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div className="col-span-full">
@@ -162,7 +163,7 @@ function Configuracion() {
                         </div>
                       </div>
                     </div>
-                  </form>
+                  </form> */}
                 </div>
               </div>
             </div>

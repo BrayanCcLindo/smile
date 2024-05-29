@@ -78,12 +78,6 @@ function UserProfile() {
                       ¿Listo para crear tu camapaña Smile?
                     </h4>
 
-                    {/* <Link
-                      className="bg-indigo-500 px-4 py-3 rounded-md  text-sm font-semibold leading-6  text-white"
-                      to={stateProfile ? "/formulario-campaña" : "/sign-in"}
-                    >
-                      {!stateProfile ? "Registrarme" : "Crear Camapaña"}
-                    </Link> */}
                     <div className="flex items-center gap-7">
                       <MainLinkButton
                         link={stateProfile ? "/nueva-campaña" : "/sign-in"}
