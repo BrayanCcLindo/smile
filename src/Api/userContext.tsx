@@ -96,8 +96,8 @@ if (typeof window !== "undefined") {
 const profileReducer = (state, action) => {
   switch (action.type) {
     case "NEW_USER": {
-      state = action.user.user;
-      console.log(action.user, "action1");
+      state = action.user;
+      console.log(action.user, "action2");
 
       return state;
     }
