@@ -97,7 +97,7 @@ const profileReducer = (state, action) => {
   switch (action.type) {
     case "NEW_USER": {
       state = action.user.user;
-      console.log(action.user.user, "action");
+      console.log(action.user, "action1");
 
       return state;
     }
