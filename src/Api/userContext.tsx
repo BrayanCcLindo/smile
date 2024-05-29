@@ -96,7 +96,8 @@ if (typeof window !== "undefined") {
 const profileReducer = (state, action) => {
   switch (action.type) {
     case "NEW_USER": {
-      state = action.user;
+      state = action.user.user;
+      console.log(action, "action");
 
       return state;
     }
@@ -162,7 +163,7 @@ export function SmileProvider({ children }: { children: ReactNode }) {
         await addDoc(collection(db, "usuarios"), {
           name: res.user.displayName,
           email: res.user.email,
-          id: res.user.uid,
+          uid: res.user.uid,
           userPhoto: "/Images/defaultuser.jpg",
         });
       } else {

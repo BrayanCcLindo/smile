@@ -31,7 +31,7 @@ function FormularioCamapaña() {
   const { data } = useGetCampaigns();
 
   const { stateProfile } = useSmileContext();
-  console.log(stateProfile, "stateProfile");
+  console.log(user, "user");
 
   const mySchema: ZodType<FormCampaign> = z.object({
     name: z
@@ -95,7 +95,7 @@ function FormularioCamapaña() {
 
   return (
     <>
-      {user ? (
+      {stateProfile ? (
         <div className="mt-32 sm:mx-auto sm:w-full sm:max-w-3xl border px-10 py-4 mb-16 rounded-xl">
           <form method="POST" onSubmit={handleSubmit(submitCampaign)}>
             <div className="space-y-12">

@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 
 function UserProfile() {
   const { user } = useGetUserData();
+  console.log(user, "user");
+
   const { stateProfile } = useSmileContext();
 
   const { data } = useGetCampaigns();

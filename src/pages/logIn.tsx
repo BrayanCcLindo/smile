@@ -39,7 +39,7 @@ function LogIn() {
       .then((user) => {
         // @ts-expect-error need to push
 
-        updateUser(user.user);
+        updateUser(user);
         navigate("/perfil");
       })
       .catch((Error) => {

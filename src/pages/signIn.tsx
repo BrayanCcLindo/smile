@@ -72,7 +72,7 @@ function SignIn() {
       });
       // @ts-expect-error need to push
 
-      updateUser(res.user);
+      updateUser(res);
 
       navigate("/perfil");
     } catch (error) {
