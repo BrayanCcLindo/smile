@@ -1,10 +1,12 @@
 import { z, ZodType } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "../components/mainLinkButton";
+import { auth } from "../firebase/firebase";
+import { useSmileContext } from "../Api/userContext";
 
 type LoginType = {
   email: string;
@@ -12,8 +14,8 @@ type LoginType = {
 };
 
 function LogIn() {
-  const auth = getAuth();
   const [errorExist, setErrorExist] = useState(false);
+  const { updateUser } = useSmileContext();
 
   const navigate = useNavigate();
 
@@ -35,7 +37,9 @@ function LogIn() {
   const submitUserLogIn = (data: LoginType) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((user) => {
-        console.log(user);
+        // @ts-expect-error need to push
+
+        updateUser(user.user);
         navigate("/perfil");
       })
       .catch((Error) => {

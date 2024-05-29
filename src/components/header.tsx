@@ -64,6 +64,9 @@ function Header() {
               return (
                 <li className="text" key={route.to}>
                   <NavLink
+                    onClick={() => {
+                      setShowMenu(true);
+                    }}
                     className={({ isActive }) => {
                       return isActive
                         ? "text-main "
@@ -160,6 +163,9 @@ function Header() {
                   return (
                     <li key={route.to}>
                       <NavLink
+                        onClick={() => {
+                          setShowMenu(true);
+                        }}
                         className={({ isActive }) => {
                           return isActive
                             ? "text-main"

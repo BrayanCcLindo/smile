@@ -1,20 +1,44 @@
 import { Link } from "react-router-dom";
 import { CampañaGiftSmileType } from "../type/types";
 import { Rocket } from "lucide-react";
+import { useSmileContext } from "../Api/userContext";
 
 function Card({
   campaña,
   photo,
 }: {
   campaña: CampañaGiftSmileType;
-  photo: string | undefined;
+  photo?: string | undefined;
 }) {
+  const { stateProfile } = useSmileContext();
+
+  // const campaignIndex = data?.findIndex((campaign) => campaign?.slug === slug);
+  // const actualPost = data[campaignIndex];
+
+  // const aprovedDonations = actualPost?.donaciones?.filter(
+  //   (donations) => donations.validation === true
+  // );
+  // const activeDonations = aprovedDonations
+  //   ?.map((donations) => parseInt(donations.montoDonacion))
+  //   .reduce((acc, actual) => acc + actual, 0)
+  //   .toFixed(2);
+  const aprovedDonations = campaña.donaciones.filter(
+    (donations) => donations.validation === true
+  );
+  const activeDonations = aprovedDonations
+    ?.map((donations) => parseInt(donations.montoDonacion))
+    .reduce((acc, actual) => acc + actual, 0)
+    .toFixed(2);
+
   return (
     <article className="group flex max-w-xl flex-col items-start justify-between relative border shadow-md duration-150 hover:duration-150 rounded-xl hover:shadow-xl hover:-translate-y-2 group">
-      <Link className="absolute inset-0 rounded-xl z-20" to={campaña.to}></Link>
-      <div className="flex p-3 items-center justify-start gap-4 group-hover:text-main">
-        <Rocket />
-        <h2 className="mt-3 text-lg font-semibold leading-6 text-gray-900  group-hover:text-main  ">
+      <Link
+        className="absolute inset-0 rounded-xl z-20"
+        to={!stateProfile ? "/log-in" : campaña.to}
+      ></Link>
+      <div className="flex p-3  items-center justify-between gap-3 group-hover:text-main">
+        <Rocket className="min-w-[30px] h-[30px] " />
+        <h2 className="mt-3 text-lg font-semibold leading-6 text-gray-900  group-hover:text-main line-clamp-1 ">
           {" "}
           {campaña.nombre}
         </h2>
@@ -40,7 +64,15 @@ function Card({
             {campaña.descripcion}
           </p>
         </div>
-        <div className="relative mt-8 flex items-center gap-x-4 border-t border-t-gray-200 pt-2">
+        <div className="flex justify-between  mt-6    ">
+          <p className="flex items-center gap-2 ">
+            Recaudo
+            <span className="font-bold">S/. {activeDonations} </span>
+            de
+            <span className="font-bold"> S/. {campaña.meta} </span>
+          </p>
+        </div>
+        <div className="relative mt-4 flex items-center gap-x-4 border-t border-t-gray-200 pt-2">
           <img
             src={photo ?? "/Images/defaultuser.jpg"}
             alt="imagen-de-campaña"

@@ -2,14 +2,14 @@ import Card from "../components/card";
 import { useGetCampaigns } from "../Api/getCampaigns";
 import MainLinkButton from "../components/mainLinkButton";
 import Loader from "../components/loader";
-import { useGetUserData } from "../Api/getUserData";
+// import { useGetUserData } from "../Api/getUserData";
 import CallToAction from "../components/callToAction";
 
 function Campañas() {
   const { data } = useGetCampaigns();
-  const { user } = useGetUserData();
+  // const { user } = useGetUserData();
 
-  const userPhoto = user?.userPhoto;
+  // const userPhoto = user?.userPhoto;
 
   return (
     <section className="text-gray-600 body-font mt-20 max-w-7xl mx-auto">
@@ -35,9 +35,7 @@ function Campañas() {
         </div>
         <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {data.length > 0 ? (
-            data.map((campaña, index) => (
-              <Card key={index} campaña={campaña} photo={userPhoto} />
-            ))
+            data.map((campaña, index) => <Card key={index} campaña={campaña} />)
           ) : (
             <div className="flex items-center justify-center col-span-3">
               <Loader />

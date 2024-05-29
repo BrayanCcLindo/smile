@@ -40,7 +40,7 @@ function PostCampaña() {
               )}
               <img
                 alt="ecommerce"
-                className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded-lg"
+                className="lg:w-1/2 aspect-square w-full lg:h-auto h-64 object-cover object-center rounded-lg"
                 src={actualPost?.imagenCampaña}
               />
               <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 px-4 mt-6 lg:mt-0">

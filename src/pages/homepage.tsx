@@ -2,16 +2,15 @@ import { Eye, LockKeyhole, Rocket } from "lucide-react";
 import MainLinkButton from "../components/mainLinkButton";
 import { useGetCampaigns } from "../Api/getCampaigns";
 import Card from "../components/card";
-import { useGetUserData } from "../Api/getUserData";
 import { Link } from "react-router-dom";
 import CallToAction from "../components/callToAction";
+// import { useSmileContext } from "../Api/userContext";
 
 function Homepage() {
   const { data } = useGetCampaigns();
-  const firstThreeCampaigns = data.slice(0, 3);
-  const { user } = useGetUserData();
+  // const { stateProfile } = useSmileContext();
 
-  const userPhoto = user?.userPhoto;
+  const firstThreeCampaigns = data.slice(0, 3);
 
   return (
     <section className="bg-white py-24 sm:py-10 mt-32">
@@ -100,7 +99,7 @@ function Homepage() {
           </div>
           <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {firstThreeCampaigns.map((campaña, index) => (
-              <Card key={index} campaña={campaña} photo={userPhoto} />
+              <Card key={index} campaña={campaña} />
             ))}
           </div>
           <div className="flex justify-end items-center">

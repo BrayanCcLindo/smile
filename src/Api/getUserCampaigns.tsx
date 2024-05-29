@@ -1,39 +1,47 @@
-import { db } from "../firebase/firebase";
-import { useEffect, useState } from "react";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { useSmileContext } from "./userContext";
-import { CampañaGiftSmileType } from "../type/types";
+// import { db } from "../firebase/firebase";
+// import { useEffect, useState } from "react";
+// import { collection, getDocs, query } from "firebase/firestore";
+// import { useSmileContext } from "./userContext";
+// import { CampañaGiftSmileType } from "../type/types";
 
-export const useGetUserCampaigns = () => {
-  const { stateProfile } = useSmileContext();
+// export const useGetUserCampaigns = () => {
+//   const { stateProfile } = useSmileContext();
 
-  const [userCampaigns, setUserCampaigns] = useState<CampañaGiftSmileType[]>(
-    []
-  );
+//   const [userCampaigns, setUserCampaigns] = useState<CampañaGiftSmileType[]>(
+//     []
+//   );
 
-  useEffect(() => {
-    const FetchUserCampaignsData = async () => {
-      const userCampaignsQuery = query(
-        collection(db, "campañas"),
-        where("id", "==", stateProfile.uid)
-      );
-      const campañas: CampañaGiftSmileType[] = [];
-      const userActualCampaigns = await getDocs(userCampaignsQuery);
-      userActualCampaigns.docs.forEach((campaign) => {
-        // @ts-expect-error need to push
+//   useEffect(() => {
+//     const FetchUserCampaignsData = async () => {
+//       if (stateProfile.uid) {
+//         const userCampaignsQuery = query(
+//           collection(db, "campañas")
+//           // where("id", "==", stateProfile.uid)
+//         );
+//         const userActualCampaigns = await getDocs(userCampaignsQuery);
+//         // userActualCampaigns.docs.forEach((campaign) => {
+//         //   // [...campañas, id= campaign.id, campañaId= campaign.id]
+//         //   // campañas.push({
+//         //   //   id: campaign.id,
+//         //   //   campañaId: campaign.id,ukj,0
+//         //   //   ...campaign.data(),
+//         //   // });
+//         // });
+//         const validData = userActualCampaigns.docs
+//           .map((data) => {
+//             const realData = data.data();
+//             return realData;
+//           })
+//           .filter((campaña) => campaña.id === stateProfile.uid);
 
-        campañas.push({
-          id: campaign.id,
-          campañaId: campaign.id,
-          ...campaign.data(),
-        });
-      });
+//         // @ts-expect-error need to push
 
-      setUserCampaigns(campañas);
-    };
-    return () => {
-      FetchUserCampaignsData();
-    };
-  }, []);
-  return { userCampaigns };
-};
+//         setUserCampaigns(validData);
+//       }
+//     };
+//     return () => {
+//       FetchUserCampaignsData();
+//     };
+//   }, [stateProfile]);
+//   return { userCampaigns };
+// };

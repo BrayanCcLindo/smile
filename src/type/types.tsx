@@ -1,7 +1,6 @@
 export type UserType = {
   apiKey: string;
   appName: string;
-
   createdAt: string;
   email: string;
   displayName: string;
@@ -33,7 +32,7 @@ export type UserData = {
 
 export type SmileContextType = {
   stateProfile: UserType;
-  updateUser: (user: UserType | null) => void;
+  updateUser: (user: UserData | null) => void;
 
   googleSignIn: () => void;
   logOut: () => void;

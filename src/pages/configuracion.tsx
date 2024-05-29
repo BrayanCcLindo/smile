@@ -9,19 +9,24 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodType } from "zod";
+import { useSmileContext } from "../Api/userContext";
 
 type UpdateUserType = {
   userPhoto: FileList;
 };
 
-function Profile() {
+function Configuracion() {
   const { user } = useGetUserData();
+  const { updateUser } = useSmileContext();
+
   const navigate = useNavigate();
   const [userPhoto, setUserPhoto] = useState("/Images/defaultuser.jpg");
 
   async function handleSignOut() {
     try {
       await signOut(auth);
+      updateUser(null);
+
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -151,9 +156,9 @@ function Profile() {
                               className="block w-full  border-0 py-1.5 px-2 text-gray-900 border-b border-b-gray-900 placeholder:text-gray-400 outline-none  sm:text-sm sm:leading-6 trim"
                             />
                           </div>
-                          {/* <div className=" flex items-center justify-end gap-x-6 mt-10">
+                          <div className=" flex items-center justify-end gap-x-6 mt-10">
                             <Button type="submit">Actualizar</Button>
-                          </div> */}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -170,4 +175,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Configuracion;

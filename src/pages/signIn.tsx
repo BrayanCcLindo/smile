@@ -9,9 +9,12 @@ import { auth, db } from "../firebase/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { FormData } from "../type/types";
 import { Button } from "../components/mainLinkButton";
+import { useSmileContext } from "../Api/userContext";
 
 function SignIn() {
   const navigate = useNavigate();
+  const { updateUser } = useSmileContext();
+
   // const { googleSignIn } = useSmileContext();
   const [errorExist, setErrorExist] = useState(false);
   // const iniciar = async () => {
@@ -54,12 +57,22 @@ function SignIn() {
         data.email,
         data.password
       );
+      // const user: UserType = res.user;
+      // const newUser = {
+      //   email: res.user.email,
+      //   name: data.nombre,
+      //   id: res.user.uid,
+      //   userPhoto: "/Images/defaultuser.jpg",
+      // };
       await addDoc(collection(db, "usuarios"), {
         name: data.nombre,
         email: data.email,
-        id: res.user.uid,
+        uid: res.user.uid,
         userPhoto: "/Images/defaultuser.jpg",
       });
+      // @ts-expect-error need to push
+
+      updateUser(res.user);
 
       navigate("/perfil");
     } catch (error) {

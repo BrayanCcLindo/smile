@@ -48,7 +48,6 @@ function ButtonDialog({ campaña }: { campaña: CampañaGiftSmileType }) {
 
   const submitCampaignChanges = async (data: UpdateCampaignType) => {
     // const unsub = updateDoc(doc(db, "campañas", campaña.campañaId));
-    // console.log(unsub, "unsub");
     const updatedInfo = {
       nombre: data.name,
       descripcion: data.description,

@@ -5,16 +5,15 @@ import {
   useEffect,
   useReducer,
 } from "react";
-import { SmileContextType, UserType } from "../type/types";
+import { SmileContextType, UserData, UserType } from "../type/types";
 import {
   GoogleAuthProvider,
-  getAuth,
   onAuthStateChanged,
   signOut,
   signInWithPopup,
 } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "../firebase/firebase";
+import { auth, db } from "../firebase/firebase";
 import { useGetUsuarios } from "./getUserData";
 
 export const SmileContext = createContext<SmileContextType>(
@@ -140,7 +139,6 @@ const profileReducer = (state, action) => {
 // };
 
 export function SmileProvider({ children }: { children: ReactNode }) {
-  const auth = getAuth();
   const { usuarios } = useGetUsuarios();
 
   const [stateProfile, dispatchProfile] = useReducer(
@@ -184,12 +182,13 @@ export function SmileProvider({ children }: { children: ReactNode }) {
 
       updateUser(currentUser);
     });
+
     return () => {
       unsuscribe();
     };
-  }, [auth]);
+  }, []);
 
-  const updateUser = (user: UserType | null) => {
+  const updateUser = (user: UserData | null) => {
     dispatchProfile({
       type: "NEW_USER",
       user: user,

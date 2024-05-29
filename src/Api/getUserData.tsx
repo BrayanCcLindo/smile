@@ -17,27 +17,27 @@ export const useGetUserData = () => {
 
   useEffect(() => {
     const FetchUserData = async () => {
-      const actualUser = query(
-        collection(db, "usuarios")
-        // where("id", "==", stateProfile.uid)
-      );
+      if (stateProfile.uid) {
+        const actualUser = query(collection(db, "usuarios"));
 
-      const uniqueUser = await getDocs(actualUser);
-      const index = uniqueUser.docs.findIndex(
-        (user) => user.data().id === stateProfile.uid
-      );
+        const uniqueUser = await getDocs(actualUser);
 
-      // const index = uniqueUser.docs.length;
-      if (uniqueUser.docs[index]) {
-        const userData = uniqueUser.docs[index].data() as UserData;
+        const index = uniqueUser.docs.findIndex(
+          (user) => user.data().uid === stateProfile.uid
+        );
 
-        setUser(userData);
+        if (uniqueUser.docs[index]) {
+          const userData = uniqueUser.docs[index].data() as UserData;
+
+          setUser(userData);
+        }
+        // setUser(userData);
       }
     };
     return () => {
       FetchUserData();
     };
-  }, []);
+  }, [stateProfile]);
 
   return { user };
 };

@@ -19,7 +19,7 @@ import PostCampaña from "./pages/postCampaña";
 import FormularioCamapaña from "./pages/formularioCampaña";
 // import CampañasFavoritas from "./pages/campañasFavoritas";
 import DonacionPasarela from "./pages/donacionPasarela";
-import Profile from "./pages/configuracion";
+import Configuracion from "./pages/configuracion";
 
 function MainLayout() {
   return (
@@ -30,18 +30,11 @@ function MainLayout() {
     </>
   );
 }
-function ProtectRoute({ children }: { children: React.ReactNode }) {
-  const { stateProfile } = useSmileContext();
-  if (!stateProfile) {
-    return <Navigate to="/" />;
-  }
-  return children;
-}
 
 function RouteGoogleSign({ children }: { children: React.ReactNode }) {
   const { stateProfile } = useSmileContext();
-  if (stateProfile) {
-    return <Navigate to="/perfil" />;
+  if (!stateProfile) {
+    return <Navigate to="/sign-in" />;
   }
   return children;
 }
@@ -53,43 +46,51 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<Homepage />} />
-            <Route
-              path="/log-in"
-              element={
-                <RouteGoogleSign>
-                  <LogIn />
-                </RouteGoogleSign>
-              }
-            />
-            <Route
-              path="/sign-in"
-              element={
-                <RouteGoogleSign>
-                  <SignIn />
-                </RouteGoogleSign>
-              }
-            />
+            <Route path="/log-in" element={<LogIn />} />
+            <Route path="/sign-in" element={<SignIn />} />
             <Route path="/como-funciona" element={<ComoFunciona />} />
             <Route path="/campañas" element={<Campañas />} />
             {/* <Route path="/campañas/favoritos" element={<CampañasFavoritas />} /> */}
             <Route path="/nueva-campaña" element={<NuevaCampaña />} />
-            <Route path="/configuracion" element={<Profile />} />
+            <Route
+              path="/configuracion"
+              element={
+                <RouteGoogleSign>
+                  <Configuracion />
+                </RouteGoogleSign>
+              }
+            />
             <Route
               path="/formulario-campaña"
-              element={<FormularioCamapaña />}
+              element={
+                <RouteGoogleSign>
+                  <FormularioCamapaña />
+                </RouteGoogleSign>
+              }
             />
             <Route
               path="/campañas/:slug/donar"
-              element={<DonacionPasarela />}
+              element={
+                <RouteGoogleSign>
+                  <DonacionPasarela />
+                </RouteGoogleSign>
+              }
             />
-            <Route path="/campañas/:slug" element={<PostCampaña />} />
+            <Route
+              path="/campañas/:slug"
+              element={
+                <RouteGoogleSign>
+                  <PostCampaña />
+                </RouteGoogleSign>
+              }
+            />
             {/* <Route path="/perfil" element={<UserProfile />} /> */}
             <Route
               path="/perfil"
               element={
-                <ProtectRoute>
+                <RouteGoogleSign>
                   <UserProfile />
-                </ProtectRoute>
+                </RouteGoogleSign>
               }
             />
           </Route>
