@@ -17,6 +17,8 @@ export const useGetUserData = () => {
 
   useEffect(() => {
     const FetchUserData = async () => {
+      console.log(stateProfile, "stateProfile");
+
       if (stateProfile.uid) {
         const actualUser = query(collection(db, "usuarios"));
 
