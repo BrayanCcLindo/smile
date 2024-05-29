@@ -187,7 +187,7 @@ export function SmileProvider({ children }: { children: ReactNode }) {
     return () => {
       unsuscribe();
     };
-  }, []);
+  }, [stateProfile]);
 
   const updateUser = (user: UserData | null) => {
     dispatchProfile({
