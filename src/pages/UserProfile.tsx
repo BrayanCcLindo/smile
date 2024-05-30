@@ -70,7 +70,7 @@ function UserProfile() {
                     <Card
                       key={index}
                       campaña={campaña}
-                      photo={user?.userPhoto ?? "/Images/defaultuser.jpg"}
+                      // photo={user?.userPhoto ?? "/Images/defaultuser.jpg"}
                     />
                   ))
                 ) : (
@@ -79,7 +79,7 @@ function UserProfile() {
                       ¿Listo para crear tu camapaña Smile?
                     </h4>
 
-                    <div className="flex items-center gap-7">
+                    <div className="flex items-center gap-7 flex-wrap">
                       <MainLinkButton
                         link={stateProfile ? "/nueva-campaña" : "/sign-in"}
                       >

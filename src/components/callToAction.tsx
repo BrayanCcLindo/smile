@@ -13,7 +13,7 @@ function CallToAction() {
             <p className="mt-6 text-lg leading-8 ">
               Únete a los miles como tú que encuentran ayuda en Smile.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
+            <div className="mt-10 flex items-center justify-center gap-6 flex-wrap lg:justify-start">
               <MainLinkButton link="/nueva-campaña">
                 Crear Campaña
               </MainLinkButton>

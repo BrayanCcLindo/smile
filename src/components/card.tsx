@@ -4,10 +4,10 @@ import { Rocket } from "lucide-react";
 
 function Card({
   campaña,
-  photo,
-}: {
+}: // photo,
+{
   campaña: CampañaGiftSmileType;
-  photo?: string | undefined;
+  // photo?: string | undefined;
 }) {
   // const { stateProfile } = useSmileContext();
 
@@ -70,7 +70,7 @@ function Card({
         </div>
         <div className="relative mt-4 flex items-center gap-x-4 border-t border-t-gray-200 pt-2">
           <img
-            src={photo ?? "/Images/defaultuser.jpg"}
+            src={"/Images/defaultuser.jpg"}
             alt="imagen-de-campaña"
             className="h-10 w-10 object-cover rounded-full bg-gray-50"
           />

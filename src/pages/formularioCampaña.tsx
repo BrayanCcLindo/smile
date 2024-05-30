@@ -59,7 +59,7 @@ function FormularioCamapaña() {
 
   const submitCampaign = async (values: FormCampaign) => {
     const title = values.name.trim();
-    const slug = title.toLocaleLowerCase().split(" ").join("-");
+    const slug = title.replace(/[\s'-]+/g, "-").toLowerCase();
     const result = format(new Date(), "d 'de' MMMM yyyy");
     const campaignExist = data.some(
       (campaign) => campaign.nombre === values.name.trim()

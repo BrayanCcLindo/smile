@@ -560,17 +560,17 @@ function DonacionPasarela() {
                     </p>
                   </div>
                   <div className="border-t border-gray-200  py-2 mt-10 flex gap-4 items-start text-main">
-                    <ShieldCheck strokeWidth={1} size={100} />
+                    <ShieldCheck strokeWidth={1} size={30} />
                     <div className="text-gray-900">
                       <h3 className=" font-medium title-font ">
                         Smile protege tu donativo
                       </h3>
-                      <p className="text-sm text-gray-500 mt-2">
+                      {/* <p className="text-sm text-gray-500 mt-2">
                         Te garantizamos un reembolso completo de tu donativo
                         durante un año en el caso poco probable de que se
                         produzca algún tipo fraude. Consulta la Garantía de
                         Smile.
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                 </form>

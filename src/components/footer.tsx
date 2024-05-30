@@ -49,11 +49,11 @@ function Footer() {
                 <h3 className=" font-medium title-font text-white">
                   Smile protege tu donativo
                 </h3>
-                <p className="leading-8 text-base mt-2 text-gray-400">
+                {/* <p className="leading-8 text-base mt-2 text-gray-400">
                   Te garantizamos un reembolso completo de tu donativo durante
                   un año en el caso poco probable de que se produzca algún tipo
                   fraude. Consulta la Garantía de Smile.
-                </p>
+                </p> */}
               </div>
             </dl>
           </div>

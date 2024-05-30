@@ -1,5 +1,7 @@
+import { HandHeart, Handshake, TrendingUp } from "lucide-react";
 import CallToAction from "../components/callToAction";
 import MainLinkButton from "../components/mainLinkButton";
+import { Link } from "react-router-dom";
 
 function ComoFunciona() {
   return (
@@ -55,8 +57,11 @@ function ComoFunciona() {
                 Puedes escoger la periocidad de tu impacto
               </h2>
               <div className="leading-relaxed">
-                Los Smilers, al estar en línea, tienen una cobertura mayor, ya
-                que puedes recibir aportes desde cualquier parte del Perú.
+                Los Smilers, al estar en línea, disfrutan de una cobertura
+                ampliada, permitiéndoles recibir aportes desde cualquier rincón
+                del Perú. Esta conectividad abre un mundo de posibilidades,
+                asegurando que cada contribución, sin importar su origen,
+                impulse tu proyecto hacia el éxito.
               </div>
             </div>
             <div className="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
@@ -79,16 +84,55 @@ function ComoFunciona() {
               <h2 className="title-font font-medium text-3xl text-main">4</h2>
               <p className="leading-relaxed">Productos</p>
             </div>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-6 lg:justify-start">
+              <MainLinkButton link="/nueva-campaña">
+                Crear Campaña
+              </MainLinkButton>
+
+              <Link
+                to="/campañas"
+                className="text-sm font-semibold leading-6 text-main"
+              >
+                Ver Campañas <span aria-hidden="true">→</span>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
 
       <div className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container px-5 pt-24 mx-auto">
           <div className="flex flex-col text-center w-full mb-20">
             <h2 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-main">
-              ¿Para qué puedo hacer una Smile?
+              ¿Para qué puedo hacer una campaña Smile?
             </h2>
+            <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
+              Puedes crear un smile para diversos proyectos como:
+            </p>
+            <div className="flex items-center justify-center flex-wrap ">
+              <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
+                <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                  <Handshake className=" text-main w-12 h-12 mb-3 inline-block" />
+
+                  <p className="leading-relaxed">Apoyo a Fundaciones</p>
+                </div>
+              </div>
+              <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
+                <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                  <TrendingUp className=" text-main w-12 h-12 mb-3 inline-block" />
+
+                  <p className="leading-relaxed">Emprendedores</p>
+                </div>
+              </div>
+              <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
+                <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                  <HandHeart className=" text-main w-12 h-12 mb-3 inline-block" />
+
+                  <p className="leading-relaxed">Apoyo Social</p>
+                </div>
+              </div>
+            </div>
+
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
               Solo necesitas mucho entusiasmo, dedicación y la ayuda de tu
               comunidad, quienes realizarán los aportes financieros y la
@@ -96,87 +140,35 @@ function ComoFunciona() {
               tu meta.
             </p>
           </div>
-          <div className="flex flex-wrap -m-4 text-center">
-            <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
-              <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="text-main w-12 h-12 mb-3 inline-block"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 17l4 4 4-4m-4-5v9"></path>
-                  <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>
-                </svg>
-                <h2 className="title-font font-medium text-3xl text-gray-900">
-                  2.7K
-                </h2>
-                <p className="leading-relaxed">Downloads</p>
-              </div>
-            </div>
-            <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
-              <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="text-main w-12 h-12 mb-3 inline-block"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
-                  <circle cx="9" cy="7" r="4"></circle>
-                  <path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"></path>
-                </svg>
-                <h2 className="title-font font-medium text-3xl text-gray-900">
-                  1.3K
-                </h2>
-                <p className="leading-relaxed">Users</p>
-              </div>
-            </div>
-            <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
-              <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="text-main w-12 h-12 mb-3 inline-block"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M3 18v-6a9 9 0 0118 0v6"></path>
-                  <path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"></path>
-                </svg>
-                <h2 className="title-font font-medium text-3xl text-gray-900">
-                  74
-                </h2>
-                <p className="leading-relaxed">Files</p>
-              </div>
-            </div>
-            <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
-              <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="text-main w-12 h-12 mb-3 inline-block"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
-                <h2 className="title-font font-medium text-3xl text-gray-900">
-                  46
-                </h2>
-                <p className="leading-relaxed">Places</p>
-              </div>
-            </div>
+        </div>
+        <div className="container px-5 py-10 mx-auto">
+          <div className="flex flex-col  w-full mb-20">
+            <h2 className="sm:text-3xl text-2xl font-medium text-center title-font mb-4 text-main">
+              ¿Quién puede crear una Smile?
+            </h2>
+            <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
+              <span className="font-medium">
+                ¡Todos pueden crear una Smile!
+              </span>{" "}
+              Si tienes un sueño, un proyecto, una iniciativa social o una idea
+              de negocio, Smile es para ti. No importa si eres una sola persona
+              o una comunidad unida por el mismo ideal.
+            </p>
+
+            <p className="lg:w-2/3 mx-auto leading-relaxed text-base mt-5">
+              <span className="font-medium">
+                🚀 Smile está abierta a estudiantes, innovadores, fundaciones,
+                activistas, jóvenes, adultos, emprendedores… ¡para TODOS!
+              </span>
+              <br />
+              ¿Qué esperas para unirte al #SmilePower 💪?{" "}
+              <Link
+                to="/nueva-campaña"
+                className="text-sm font-semibold leading-6 text-main"
+              >
+                Crea tu Campaña <span aria-hidden="true">→</span>
+              </Link>
+            </p>
           </div>
         </div>
       </div>
