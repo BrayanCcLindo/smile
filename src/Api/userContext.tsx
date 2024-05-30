@@ -75,14 +75,14 @@ export const SmileContext = createContext<SmileContextType>(
 // };
 
 let initialProfile: UserType | null;
-if (typeof window !== "undefined") {
-  const storedUser = localStorage.getItem("user");
+// if (typeof window !== "undefined") {
+//   const storedUser = localStorage.getItem("user");
 
-  initialProfile = storedUser ? JSON.parse(storedUser) : "";
-}
-const updateFavoriteStorage = (state: string) => {
-  window.localStorage.setItem("user", JSON.stringify(state));
-};
+//   initialProfile = storedUser ? JSON.parse(storedUser) : "";
+// }
+// const updateFavoriteStorage = (state: string) => {
+//   window.localStorage.setItem("user", JSON.stringify(state));
+// };
 // @ts-expect-error need to push
 
 const profileReducer = (state, action) => {
@@ -90,7 +90,6 @@ const profileReducer = (state, action) => {
     case "NEW_USER": {
       state = action.user;
 
-      updateFavoriteStorage(action.user.uid);
       return state;
     }
 

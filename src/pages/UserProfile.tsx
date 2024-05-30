@@ -12,9 +12,9 @@ import { Link } from "react-router-dom";
 
 function UserProfile() {
   const { user } = useGetUserData();
-  console.log(user, "user");
 
   const { stateProfile } = useSmileContext();
+  console.log(user, stateProfile, "user");
 
   const { data } = useGetCampaigns();
   const userCampaigns = data.filter(
@@ -23,18 +23,18 @@ function UserProfile() {
 
   return (
     <>
-      {user ? (
+      {stateProfile ? (
         <div className="relative isolate overflow-hidden  py-24 sm:py-32">
           <div className="mx-auto  lg:mx-0 relative text-white bg-gray-900 py-20">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
               <div className="flex flex-col justify-between gap-8 items-center sm:flex-row">
                 <h2 className="text-3xl font-bold tracking-tight text-center  sm:text-6xl sm:text-left">
                   Bienvenido a Smile
-                  <br /> {user.name}
+                  <br /> {user?.name ?? stateProfile.displayName}
                 </h2>
                 <div className="flex flex-col gap-4 items-center justify-center">
                   <img
-                    src={user.userPhoto ?? "/public/Images/defaultuser.jpg"}
+                    src={user?.userPhoto ?? "/Images/defaultuser.jpg"}
                     height={150}
                     width={150}
                     alt="foto-usuario"
@@ -58,7 +58,9 @@ function UserProfile() {
                 Tus Campañas Smile
               </h3>
               <p className="mt-6 text-center leading-8 text-sm">
-                <span className="font-medium">{user.name}</span>{" "}
+                <span className="font-medium">
+                  {user?.name ?? stateProfile.displayName}
+                </span>{" "}
                 {userCampaigns.length > 0
                   ? `tienes ${userCampaigns.length} campañas creadas`
                   : "aún no has creado ninguna campaña."}
@@ -69,7 +71,7 @@ function UserProfile() {
                     <Card
                       key={index}
                       campaña={campaña}
-                      photo={user.userPhoto}
+                      photo={user?.userPhoto ?? "/Images/defaultuser.jpg"}
                     />
                   ))
                 ) : (

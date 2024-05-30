@@ -70,10 +70,11 @@ function SignIn() {
         uid: res.user.uid,
         userPhoto: "/Images/defaultuser.jpg",
       });
+      const actualuser = { ...res.user, displayName: data.nombre };
 
       // @ts-expect-error need to push
 
-      updateUser(res.user);
+      updateUser(actualuser);
 
       navigate("/perfil");
     } catch (error) {

@@ -38,8 +38,8 @@ function LogIn() {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((user) => {
         console.log(user.user, "LOGIN");
-        // @ts-expect-error need to push
 
+        // @ts-expect-error need to push
         updateUser(user.user);
         navigate("/perfil");
       })
