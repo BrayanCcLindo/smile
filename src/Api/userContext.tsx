@@ -170,7 +170,6 @@ export function SmileProvider({ children }: { children: ReactNode }) {
 
   // useEffect(() => {
   //   const unsuscribe = onAuthStateChanged(auth, (currentUser) => {
-  //     console.log(currentUser, "currentUser");
   //     // @ts-expect-error need to push
 
   //     updateUser(currentUser);

@@ -14,7 +14,6 @@ function UserProfile() {
   const { user } = useGetUserData();
 
   const { stateProfile } = useSmileContext();
-  console.log(user, stateProfile, "user");
 
   const { data } = useGetCampaigns();
   const userCampaigns = data.filter(

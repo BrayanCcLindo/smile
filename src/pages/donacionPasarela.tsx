@@ -12,7 +12,7 @@ import { db } from "../firebase/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import YapeDialog from "../components/yapeDialog";
 import emailjs from "@emailjs/browser";
-import { useGetUserData } from "../Api/getUserData";
+import { useSmileContext } from "../Api/userContext";
 
 type FormPayment = {
   mail: string;
@@ -51,7 +51,9 @@ function DonacionPasarela() {
   // const totalDonation = (Number(initialDonation) + Number(smileTip)).toFixed(2);
 
   const { slug } = useParams();
-  const { user } = useGetUserData();
+  // const { user } = useGetUserData();
+  const { stateProfile } = useSmileContext();
+
   const { data } = useGetCampaigns();
   const campaignIndex = data.findIndex((campaign) => campaign.slug === slug);
   const actualPost = data[campaignIndex];
@@ -80,7 +82,7 @@ function DonacionPasarela() {
   const submitData = async (data: FormPayment) => {
     const result = format(new Date(), "d 'de' MMMM yyyy");
     const donationYapeInfo = {
-      donadorYapeNombre: user?.name,
+      donadorYapeNombre: stateProfile.displayName,
       montoDonacion: data.monto,
       imagenDonacion: image,
       donadorYapeCorreo: data.mail,
@@ -317,7 +319,7 @@ function DonacionPasarela() {
                                       id="mail"
                                       name="mail"
                                       readOnly
-                                      defaultValue={user?.email}
+                                      defaultValue={stateProfile.email}
                                       className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
                                     />
                                   </div>

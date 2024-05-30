@@ -31,7 +31,6 @@ function FormularioCamapaña() {
   const { data } = useGetCampaigns();
 
   const { stateProfile } = useSmileContext();
-  console.log(user, "user");
 
   const mySchema: ZodType<FormCampaign> = z.object({
     name: z
