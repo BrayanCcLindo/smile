@@ -67,7 +67,7 @@ function FormularioCamapaña() {
     );
 
     try {
-      if (!campaignExist && user && stateProfile.uid) {
+      if (!campaignExist && stateProfile.uid) {
         await addDoc(collection(db, "campañas"), {
           nombre: title,
           descripcion: values.description,
@@ -78,7 +78,7 @@ function FormularioCamapaña() {
           to: `/campañas/${slug}`,
           fechaInicio: values.date,
           tipo: values.type,
-          creador: user.name,
+          creador: user?.name ?? stateProfile.displayName,
           // imagen: userPhoto,
           fechaCreacion: result,
           donaciones: [],
