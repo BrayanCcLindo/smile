@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { CampañaGiftSmileType } from "../type/types";
 import { Rocket } from "lucide-react";
-import { useSmileContext } from "../Api/userContext";
 
 function Card({
   campaña,
