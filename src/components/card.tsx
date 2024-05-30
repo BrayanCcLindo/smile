@@ -10,7 +10,7 @@ function Card({
   campaña: CampañaGiftSmileType;
   photo?: string | undefined;
 }) {
-  const { stateProfile } = useSmileContext();
+  // const { stateProfile } = useSmileContext();
 
   // const campaignIndex = data?.findIndex((campaign) => campaign?.slug === slug);
   // const actualPost = data[campaignIndex];
@@ -32,10 +32,7 @@ function Card({
 
   return (
     <article className="group flex max-w-xl flex-col items-start justify-between relative border shadow-md duration-150 hover:duration-150 rounded-xl hover:shadow-xl hover:-translate-y-2 group">
-      <Link
-        className="absolute inset-0 rounded-xl z-20"
-        to={!stateProfile ? "/log-in" : campaña.to}
-      ></Link>
+      <Link className="absolute inset-0 rounded-xl z-20" to={campaña.to}></Link>
       <div className="flex p-3  items-center justify-between gap-3 group-hover:text-main">
         <Rocket className="min-w-[30px] h-[30px] " />
         <h2 className="mt-3 text-lg font-semibold leading-6 text-gray-900  group-hover:text-main line-clamp-1 ">

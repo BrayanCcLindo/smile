@@ -35,9 +35,14 @@ function PostCampaña() {
         <section className="text-gray-600 body-font overflow-hidden mt-20">
           <div className="container px-5 py-24 mx-auto ">
             <div className="relative lg:w-4/5 mx-auto flex flex-wrap pb-4 lg:pb-0    border border-gray-200 rounded-lg">
-              {stateProfile.uid === actualPost.id && (
+              {/* {stateProfile.uid === actualPost.id ? (
                 <ButtonDialog campaña={actualPost} />
-              )}
+              ) : null} */}
+              {!stateProfile
+                ? null
+                : stateProfile.uid === actualPost.id && (
+                    <ButtonDialog campaña={actualPost} />
+                  )}
               <img
                 alt="ecommerce"
                 className="lg:w-1/2 aspect-square w-full lg:h-auto h-64 object-cover object-center rounded-lg"
@@ -71,7 +76,7 @@ function PostCampaña() {
                   <MainLinkButton
                     link={
                       !stateProfile
-                        ? `/nueva-campaña`
+                        ? `/log-in`
                         : `/campañas/${actualPost?.slug}/donar`
                     }
                   >

@@ -76,14 +76,7 @@ function App() {
                 </RouteGoogleSign>
               }
             />
-            <Route
-              path="/campañas/:slug"
-              element={
-                <RouteGoogleSign>
-                  <PostCampaña />
-                </RouteGoogleSign>
-              }
-            />
+            <Route path="/campañas/:slug" element={<PostCampaña />} />
             {/* <Route path="/perfil" element={<UserProfile />} /> */}
             <Route
               path="/perfil"
