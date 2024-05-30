@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useGetUserData } from "../Api/getUserData";
 import Loader from "../components/loader";
 import { Button } from "../components/mainLinkButton";
 import { profileRoutes } from "../constants/routes";
@@ -9,13 +8,15 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodType } from "zod";
+import { useSmileContext } from "../Api/userContext";
 
 type UpdateUserType = {
   userPhoto: FileList;
 };
 
 function Configuracion() {
-  const { user } = useGetUserData();
+  // const { user } = useGetUserData();
+  const { stateProfile } = useSmileContext();
 
   const navigate = useNavigate();
   const [userPhoto, setUserPhoto] = useState("/Images/defaultuser.jpg");
@@ -45,7 +46,7 @@ function Configuracion() {
 
   return (
     <>
-      {user ? (
+      {stateProfile ? (
         <section className="text-gray-600 body-font mt-10">
           <div className="container px-5 py-24 mx-auto flex flex-col">
             <div className="lg:w-4/6 mx-auto">
@@ -118,7 +119,7 @@ function Configuracion() {
                       </div>
                     </div>
                   </div>
-                  {/* <form method="POST">
+                  <form method="POST">
                     <div className="space-y-12">
                       <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div className="col-span-full">
@@ -133,7 +134,7 @@ function Configuracion() {
                               id="nombres"
                               name="nombres"
                               readOnly
-                              defaultValue={user.name}
+                              defaultValue={stateProfile.displayName}
                               className="block w-full  border-0 py-1.5 px-2 text-gray-900 border-b border-b-gray-900 placeholder:text-gray-400 outline-none  sm:text-sm sm:leading-6 trim"
                             />
                           </div>
@@ -149,7 +150,7 @@ function Configuracion() {
                             <input
                               id="correo"
                               name="correo"
-                              defaultValue={user.email}
+                              defaultValue={stateProfile.email}
                               type="email"
                               readOnly
                               className="block w-full  border-0 py-1.5 px-2 text-gray-900 border-b border-b-gray-900 placeholder:text-gray-400 outline-none  sm:text-sm sm:leading-6 trim"
@@ -161,7 +162,7 @@ function Configuracion() {
                         </div>
                       </div>
                     </div>
-                  </form> */}
+                  </form>
                 </div>
               </div>
             </div>
