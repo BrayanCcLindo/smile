@@ -1,6 +1,17 @@
-import { ReactNode, createContext, useContext, useReducer } from "react";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
 import { SmileContextType, UserData, UserType } from "../type/types";
-import { GoogleAuthProvider, signOut, signInWithPopup } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signOut,
+  signInWithPopup,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
 import { useGetUsuarios } from "./getUserData";
@@ -168,17 +179,13 @@ export function SmileProvider({ children }: { children: ReactNode }) {
     signOut(auth);
   };
 
-  // useEffect(() => {
-  //   const unsuscribe = onAuthStateChanged(auth, (currentUser) => {
-  //     // @ts-expect-error need to push
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      // @ts-expect-error need to push
 
-  //     updateUser(currentUser);
-  //   });
-
-  //   return () => {
-  //     unsuscribe();
-  //   };
-  // }, []);
+      updateUser(currentUser);
+    });
+  }, []);
 
   const updateUser = (user: UserData | null) => {
     dispatchProfile({

@@ -54,8 +54,8 @@ function LogIn() {
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           className="mx-auto h-10 w-auto"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-          alt="Your Company"
+          src="/Images/smileOficilLogo (1).png"
+          alt="smile-logo"
         />
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Acceda a su cuenta
@@ -94,14 +94,14 @@ function LogIn() {
               <label className="block text-sm font-medium leading-6 text-gray-900">
                 Contraseña
               </label>
-              <div className="text-sm">
+              {/* <div className="text-sm">
                 <a
                   href="#"
                   className="font-semibold text-indigo-600 hover:text-indigo-500"
                 >
                   ¿Ha olvidado la contraseña?
                 </a>
-              </div>
+              </div> */}
             </div>
             <div className="mt-2">
               <input

@@ -34,7 +34,15 @@ function MainLayout() {
 function RouteGoogleSign({ children }: { children: React.ReactNode }) {
   const { stateProfile } = useSmileContext();
   if (!stateProfile) {
-    return <Navigate to="/sign-in" />;
+    return <Navigate to="/log-in" />;
+  }
+  return children;
+}
+
+function RouteSignIn({ children }: { children: React.ReactNode }) {
+  const { stateProfile } = useSmileContext();
+  if (stateProfile) {
+    return <Navigate to={"/"} />;
   }
   return children;
 }
@@ -46,8 +54,22 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<Homepage />} />
-            <Route path="/log-in" element={<LogIn />} />
-            <Route path="/sign-in" element={<SignIn />} />
+            <Route
+              path="/log-in"
+              element={
+                <RouteSignIn>
+                  <LogIn />
+                </RouteSignIn>
+              }
+            />
+            <Route
+              path="/sign-in"
+              element={
+                <RouteSignIn>
+                  <SignIn />
+                </RouteSignIn>
+              }
+            />
             <Route path="/como-funciona" element={<ComoFunciona />} />
             <Route path="/campañas" element={<Campañas />} />
             {/* <Route path="/campañas/favoritos" element={<CampañasFavoritas />} /> */}
