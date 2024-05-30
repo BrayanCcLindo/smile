@@ -9,7 +9,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodType } from "zod";
-import { useSmileContext } from "../Api/userContext";
 
 type UpdateUserType = {
   userPhoto: FileList;
@@ -17,7 +16,6 @@ type UpdateUserType = {
 
 function Configuracion() {
   const { user } = useGetUserData();
-  const { updateUser } = useSmileContext();
 
   const navigate = useNavigate();
   const [userPhoto, setUserPhoto] = useState("/Images/defaultuser.jpg");
@@ -25,7 +23,8 @@ function Configuracion() {
   async function handleSignOut() {
     try {
       await signOut(auth);
-      updateUser(null);
+      // updateUser(null);
+      window.localStorage.clear();
 
       navigate("/");
     } catch (error) {

@@ -7,39 +7,34 @@ import {
   query,
   // where,
 } from "firebase/firestore";
-import { useSmileContext } from "./userContext";
 import { UserData } from "../type/types";
 
 export const useGetUserData = () => {
-  const { stateProfile } = useSmileContext();
+  const mainId = JSON.parse(window.localStorage.getItem("user") ?? "");
 
   const [user, setUser] = useState<UserData | null>(null);
 
   useEffect(() => {
     const FetchUserData = async () => {
-      console.log(stateProfile, "GETUSERDATA");
+      const actualUser = query(collection(db, "usuarios"));
 
-      if (stateProfile.uid) {
-        const actualUser = query(collection(db, "usuarios"));
+      const uniqueUser = await getDocs(actualUser);
 
-        const uniqueUser = await getDocs(actualUser);
+      const index = uniqueUser.docs.findIndex(
+        (user) => user.data().uid === mainId
+      );
 
-        const index = uniqueUser.docs.findIndex(
-          (user) => user.data().uid === stateProfile.uid
-        );
+      if (uniqueUser.docs[index]) {
+        const userData = uniqueUser.docs[index].data() as UserData;
 
-        if (uniqueUser.docs[index]) {
-          const userData = uniqueUser.docs[index].data() as UserData;
-
-          setUser(userData);
-        }
-        // setUser(userData);
+        setUser(userData);
       }
+      // setUser(userData);
     };
     return () => {
       FetchUserData();
     };
-  }, [stateProfile]);
+  }, [mainId]);
 
   return { user };
 };

@@ -82,7 +82,7 @@ function Header() {
           </ul>
         </div>
         <div className="hidden lg:flex items-center gap-4 lg:flex-1 lg:justify-end">
-          {!stateProfile ? (
+          {stateProfile ? (
             <>
               {" "}
               <Link className="text-gray-900 hover:text-main" to="/log-in">
