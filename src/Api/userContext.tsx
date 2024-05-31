@@ -177,7 +177,8 @@ export function SmileProvider({ children }: { children: ReactNode }) {
       const provider = new GoogleAuthProvider();
       const res = await signInWithPopup(auth, provider);
       // @ts-expect-error need to push
-      updateUser(res);
+
+      updateUser(res.user);
       const userExist = usuarios.some(
         (usuario) => usuario.email === res.user.email
       );
