@@ -86,6 +86,9 @@ function UserProfile() {
                         Crear Campaña
                       </MainLinkButton>
                       <Link
+                        onClick={() => {
+                          window.scrollTo(0, 0);
+                        }}
                         to="/campañas"
                         className="text-sm font-semibold leading-6 text-main"
                       >

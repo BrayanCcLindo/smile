@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { QrCode, ShieldCheck } from "lucide-react";
+import { CreditCard, QrCode, ShieldCheck } from "lucide-react";
 import { MouseEventHandler, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -271,30 +271,9 @@ function DonacionPasarela() {
                       Metodo de Pago
                     </legend>
 
-                    <div className="mt-6  border border-gray-300 rounded-xl">
-                      {/* <div className="border-b border-gray-300">
-                        <div className="flex  items-center gap-x-3 p-6 ">
-                          <input
-                            checked={inputValue === "apple-pay"}
-                            onChange={(e) => {
-                              SetInputValue(e.target.value);
-                            }}
-                            value="apple-pay"
-                            id="apple-pay"
-                            name="Metodo-pago"
-                            type="radio"
-                            className="h-4 w-4 border-gray-300 text-main focus:ring-main"
-                          />
-                          <label
-                            htmlFor="apple-pay"
-                            className="flex items-center gap-4 text-sm font-medium leading-6 text-gray-900"
-                          >
-                            <HandCoins strokeWidth={1} /> Apple Pay
-                          </label>
-                        </div>
-                      </div> */}
+                    <div className="mt-6  border border-gray-300 rounded-xl pb-6">
                       <div className=" border-gray-300">
-                        <div className="flex  items-center gap-x-3 p-6">
+                        <div className="flex  items-center gap-x-3 p-6 border-">
                           <label
                             htmlFor="yape-plin"
                             className="flex items-center gap-4 text-sm font-medium leading-6 text-gray-900"
@@ -302,104 +281,146 @@ function DonacionPasarela() {
                             <QrCode strokeWidth={1} /> Yape o Plin
                           </label>
                         </div>
-                        <div className="px-10">
-                          <div className="space-y-6">
-                            <div className="border-b border-gray-900/10 pb-6">
-                              <div className="mt-3 grid grid-cols-1 gap-x-3 gap-y-4 sm:grid-cols-6">
-                                <div className="col-span-3 sm:col-span-full">
+                        <div className="space-y-6">
+                          <div className="">
+                            <div className="grid grid-cols-1 gap-x-3 gap-y-4 sm:grid-cols-6">
+                              <div className="py-5 px-10 flex flex-col col-span-3 sm:col-span-full gap-x-3 gap-y-4 border-b border-gray-300">
+                                <label
+                                  htmlFor="mail"
+                                  className="block text-sm font-medium leading-6 text-gray-900"
+                                >
+                                  Correo
+                                </label>
+                                <div className="mt-2">
+                                  <input
+                                    {...register("mail")}
+                                    id="mail"
+                                    name="mail"
+                                    readOnly
+                                    defaultValue={stateProfile.email}
+                                    className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
+                                  />
+                                </div>
+                                <div className="col-span-full">
+                                  <YapeDialog type="yape" />
+                                </div>
+                              </div>
+
+                              <div className="col-span-3 sm:col-span-full ">
+                                <div className="flex  items-center gap-x-3  px-6 pb-6 pt-3">
                                   <label
-                                    htmlFor="mail"
-                                    className="block text-sm font-medium leading-6 text-gray-900"
+                                    htmlFor="transferencia"
+                                    className="flex items-center gap-4 text-sm font-medium leading-6 text-gray-900"
                                   >
-                                    Correo
+                                    <CreditCard strokeWidth={1} /> Transferencia
                                   </label>
-                                  <div className="mt-2">
-                                    <input
-                                      {...register("mail")}
-                                      id="mail"
-                                      name="mail"
-                                      readOnly
-                                      defaultValue={stateProfile.email}
-                                      className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
-                                    />
-                                  </div>
                                 </div>
-                                <div className="col-span-3 sm:col-span-full">
-                                  <div className="mt-2 sr-only">
-                                    <input
-                                      {...register("id_campana")}
-                                      id="id_campana"
-                                      name="id_campana"
-                                      defaultValue={actualPost.campañaId}
-                                      className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
-                                    />
-                                  </div>
+                                <div className="mt-2 sr-only">
+                                  <input
+                                    {...register("id_campana")}
+                                    id="id_campana"
+                                    name="id_campana"
+                                    defaultValue={actualPost.campañaId}
+                                    className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
+                                  />
                                 </div>
-                                <div className="col-span-full">
-                                  <YapeDialog />
-                                </div>
+                              </div>
 
-                                <div className="col-span-full">
-                                  <label className="block text-sm font-medium leading-6 text-gray-900">
-                                    Comprobante
-                                  </label>
-                                  <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                                    <div className="text-center text-gray-600">
-                                      <div className="mt-4 flex text-sm justify-center  leading-6 text-gray-600">
-                                        <label className="relative cursor-pointer text-center rounded-md bg-white font-semibold text-main focus-within:outline-none focus-within:ring-2 focus-within:ring-main focus-within:ring-offset-2 hover:text-main">
-                                          <span> Subir Imagen</span>
-                                          <input
-                                            onChange={(event) => {
-                                              const mainImage =
-                                                event.target.files?.[0];
+                              <div className="col-span-3 sm:col-span-full text-gray-900">
+                                <div className="flex flex-col  px-10 pb-5 text-sm border-b border-gray-300">
+                                  <h3 className=" font-medium leading-6">
+                                    Banco
+                                  </h3>
+                                  <div className="flex gap-4 items-center">
+                                    <img
+                                      className="object-cover object-center rounded-lg"
+                                      width={40}
+                                      height={40}
+                                      src="https://pbs.twimg.com/profile_images/1607365667950305283/HpdPjItg_400x400.jpg"
+                                      alt=""
+                                    />
+                                    <p>InterBank</p>
+                                  </div>
+                                  <h3 className=" font-medium leading-6 mt-4 ">
+                                    Titular
+                                  </h3>
+                                  <p>JULIO CESAR CERVANTES ESPONDA</p>
+                                  <h3 className=" font-medium leading-6 mt-4 ">
+                                    Tipo de Cuenta
+                                  </h3>
+                                  <p>Cuenta Simple - Soles</p>
+                                  <h3 className=" font-medium leading-6 mt-4 ">
+                                    Numeró de Cuenta
+                                  </h3>
+                                  <p>5153140681443</p>
+                                  <h3 className=" font-medium leading-6 mt-4 ">
+                                    Numeró de Cuenta Interbancario (CCI)
+                                  </h3>
+                                  <p className="mb-4">00351501314068144347</p>
+                                  <YapeDialog type="transferencia" />
+                                </div>
+                              </div>
 
-                                              const reader = new FileReader();
-                                              reader.addEventListener(
-                                                "load",
-                                                () => {
-                                                  setImage(
-                                                    reader.result as string
-                                                  );
-                                                }
-                                              );
-                                              if (mainImage) {
-                                                reader.readAsDataURL(mainImage);
+                              <div className="col-span-full px-10">
+                                <label className="block text-sm font-medium leading-6 text-gray-900">
+                                  Comprobante
+                                </label>
+                                <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                                  <div className="text-center text-gray-600">
+                                    <div className="mt-4 flex text-sm justify-center  leading-6 text-gray-600">
+                                      <label className="relative cursor-pointer text-center rounded-md bg-white font-semibold text-main focus-within:outline-none focus-within:ring-2 focus-within:ring-main focus-within:ring-offset-2 hover:text-main">
+                                        <span> Subir Comprobante</span>
+                                        <input
+                                          onChange={(event) => {
+                                            const mainImage =
+                                              event.target.files?.[0];
+
+                                            const reader = new FileReader();
+                                            reader.addEventListener(
+                                              "load",
+                                              () => {
+                                                setImage(
+                                                  reader.result as string
+                                                );
                                               }
-                                            }}
-                                            // {...register("imagen", {
-                                            //   onChange: (event) => {
+                                            );
+                                            if (mainImage) {
+                                              reader.readAsDataURL(mainImage);
+                                            }
+                                          }}
+                                          // {...register("imagen", {
+                                          //   onChange: (event) => {
 
-                                            //   },
-                                            // })}
-                                            accept="image/png image/jpg imgage/jpeg"
-                                            id="imagen"
-                                            type="file"
-                                            className="sr-only"
-                                          />
-                                        </label>
-                                        <p className="pl-1">en formato</p>
-                                      </div>
-                                      <p className="text-xs leading-5 text-gray-600">
-                                        PNG, JPG, JPEG
-                                      </p>
+                                          //   },
+                                          // })}
+                                          accept="image/png image/jpg imgage/jpeg"
+                                          id="imagen"
+                                          type="file"
+                                          className="sr-only"
+                                        />
+                                      </label>
+                                      <p className="pl-1">en formato</p>
                                     </div>
+                                    <p className="text-xs leading-5 text-gray-600">
+                                      PNG, JPG, JPEG
+                                    </p>
                                   </div>
-                                  <div className="flex items-center justify-center">
-                                    {image && (
-                                      <img
-                                        className="object-cover"
-                                        width={150}
-                                        height={150}
-                                        src={image}
-                                        alt="comprobante"
-                                      />
-                                    )}
-                                    {/* {errors.imagen && (
+                                </div>
+                                <div className="flex items-center justify-center">
+                                  {image && (
+                                    <img
+                                      className="object-cover"
+                                      width={150}
+                                      height={150}
+                                      src={image}
+                                      alt="comprobante"
+                                    />
+                                  )}
+                                  {/* {errors.imagen && (
                                       <p className="font-medium text-red-500 text-sm">
                                         {errors.imagen.message}
                                       </p>
                                     )} */}
-                                  </div>
                                 </div>
                               </div>
                             </div>

@@ -7,8 +7,12 @@ type ButtonLinkType = {
 };
 
 function MainLinkButton({ link, children }: ButtonLinkType) {
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
   return (
     <Link
+      onClick={scrollToTop}
       to={link}
       className="bg-gradient-to-r flex gap-4 items-center justify-center  text-sm from-main to-[#299cd5] hover:from-[#299cd5] hover:to-main text-white font-semibold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out"
     >

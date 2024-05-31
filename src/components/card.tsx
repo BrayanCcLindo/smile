@@ -31,7 +31,13 @@ function Card({
 
   return (
     <article className="group flex max-w-xl flex-col items-start justify-between relative border shadow-md duration-150 hover:duration-150 rounded-xl hover:shadow-xl hover:-translate-y-2 group">
-      <Link className="absolute inset-0 rounded-xl z-20" to={campaña.to}></Link>
+      <Link
+        onClick={() => {
+          window.scrollTo(0, 0);
+        }}
+        className="absolute inset-0 rounded-xl z-20"
+        to={campaña.to}
+      ></Link>
       <div className="flex p-3  items-center justify-between gap-3 group-hover:text-main">
         <Rocket className="min-w-[30px] h-[30px] " />
         <h2 className="mt-3 text-lg font-semibold leading-6 text-gray-900  group-hover:text-main line-clamp-1 ">
@@ -62,7 +68,7 @@ function Card({
         </div>
         <div className="flex justify-between  mt-6    ">
           <p className="flex items-center gap-2 ">
-            Recaudo
+            Recaudó
             <span className="font-bold">S/. {activeDonations} </span>
             de
             <span className="font-bold"> S/. {campaña.meta} </span>

@@ -4,7 +4,7 @@ import { useSmileContext } from "../Api/userContext";
 function NuevaCampaña() {
   const { stateProfile } = useSmileContext();
   return (
-    <section className="text-gray-600 body-font">
+    <section className="text-gray-600 body-font mt-10">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-col">
           <div className="h-1 bg-gray-200 rounded overflow-hidden">
@@ -29,6 +29,9 @@ function NuevaCampaña() {
         <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 border-b border-gray-900/10 pb-12">
           <div className="p-4 md:w-1/3 relative group">
             <Link
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
               className="absolute inset-0"
               to={stateProfile ? "/formulario-campaña" : "/sign-in"}
             ></Link>
@@ -72,6 +75,9 @@ function NuevaCampaña() {
           </div>
           <div className="p-4 md:w-1/3 relative group">
             <Link
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
               className="absolute inset-0"
               to={stateProfile ? "/formulario-campaña" : "/sign-in"}
             ></Link>
@@ -115,6 +121,9 @@ function NuevaCampaña() {
           </div>
           <div className="p-4 md:w-1/3 relative group">
             <Link
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
               className="absolute inset-0"
               to={stateProfile ? "/formulario-campaña" : "/sign-in"}
             ></Link>

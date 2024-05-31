@@ -9,6 +9,9 @@ function Header() {
   const { stateProfile } = useSmileContext();
 
   const [showMenu, setShowMenu] = useState(true);
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
 
   // useEffect(() => {
   //   if (stateProfile) {
@@ -23,7 +26,7 @@ function Header() {
       >
         <div className="flex lg:flex-1">
           <Link to="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
+            <span className="sr-only">Smile</span>
             <img
               className="h-8 w-auto"
               src="/Images/smileOficilLogo (1).png"
@@ -66,6 +69,7 @@ function Header() {
                   <NavLink
                     onClick={() => {
                       setShowMenu(true);
+                      window.scrollTo(0, 0);
                     }}
                     className={({ isActive }) => {
                       return isActive
@@ -85,13 +89,21 @@ function Header() {
           {!stateProfile ? (
             <>
               {" "}
-              <Link className="text-gray-900 hover:text-main" to="/log-in">
+              <Link
+                onClick={scrollToTop}
+                className="text-gray-900 hover:text-main"
+                to="/log-in"
+              >
                 Iniciar Sesión <span aria-hidden="true">&rarr;</span>
               </Link>
             </>
           ) : (
             <>
-              <Link className=" rounded-full " to={"/perfil"}>
+              <Link
+                onClick={scrollToTop}
+                className=" rounded-full "
+                to={"/perfil"}
+              >
                 <img
                   width={50}
                   height={50}
@@ -165,6 +177,7 @@ function Header() {
                       <NavLink
                         onClick={() => {
                           setShowMenu(true);
+                          window.scrollTo(0, 0);
                         }}
                         className={({ isActive }) => {
                           return isActive
@@ -181,11 +194,19 @@ function Header() {
               </ul>
               <div className="py-6 flex gap-4 flex-col ">
                 {!stateProfile ? (
-                  <Link className="text-gray-900 hover:text-main" to="/log-in">
+                  <Link
+                    onClick={scrollToTop}
+                    className="text-gray-900 hover:text-main"
+                    to="/log-in"
+                  >
                     Iniciar Sesión <span aria-hidden="true">&rarr;</span>
                   </Link>
                 ) : (
-                  <Link className="text-gray-900 hover:text-main" to="/perfil">
+                  <Link
+                    onClick={scrollToTop}
+                    className="text-gray-900 hover:text-main"
+                    to="/perfil"
+                  >
                     Perfíl <span aria-hidden="true">&rarr;</span>
                   </Link>
                 )}

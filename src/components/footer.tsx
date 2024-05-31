@@ -2,13 +2,20 @@ import { Link } from "react-router-dom";
 import MainLinkButton from "./mainLinkButton";
 
 function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
   return (
     <>
       <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
             <div className="max-w-xs lg:max-w-lg">
-              <Link to={"/"} className="flex items-center justify-center">
+              <Link
+                onClick={scrollToTop}
+                to={"/"}
+                className="flex items-center justify-center"
+              >
                 <img
                   className="object-cover"
                   width={300}
@@ -35,13 +42,19 @@ function Footer() {
                 </h3>
                 <ul className="mt-2 leading-7 text-gray-400">
                   <li className="hover:text-white">
-                    <Link to={"/"}>Inicio</Link>
+                    <Link onClick={scrollToTop} to={"/"}>
+                      Inicio
+                    </Link>
                   </li>
                   <li className="hover:text-white">
-                    <Link to={"/como-funciona"}>Como Funciona</Link>
+                    <Link onClick={scrollToTop} to={"/como-funciona"}>
+                      Como Funciona
+                    </Link>
                   </li>
                   <li className="hover:text-white">
-                    <Link to={"/campañas"}>Campañas</Link>
+                    <Link onClick={scrollToTop} to={"/campañas"}>
+                      Campañas
+                    </Link>
                   </li>
                 </ul>
               </div>
