@@ -15,15 +15,15 @@ function SignIn() {
   const navigate = useNavigate();
   const { updateUser } = useSmileContext();
 
-  // const { googleSignIn } = useSmileContext();
+  const { googleSignIn } = useSmileContext();
   const [errorExist, setErrorExist] = useState(false);
-  // const iniciar = async () => {
-  //   try {
-  //     await googleSignIn();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const iniciar = async () => {
+    try {
+      await googleSignIn();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const mySchema: ZodType<FormData> = z
     .object({
@@ -107,14 +107,14 @@ function SignIn() {
         method="POST"
         className="mx-auto mt-6 max-w-xl sm:mt-6"
       >
-        {/* <button
+        <button
           className="flex items-center gap-4 px-6 py-4 rounded-xl w-full border border-gray-300 justify-center font-semibold hover:shadow-lg"
           onClick={iniciar}
           type="button"
         >
           <img src="/svg/google.svg" alt="" />
           Google
-        </button> */}
+        </button>
         <div className="grid grid-cols-1 gap-y-6 pt-9 mt-9 border-t border-gray-300">
           <div>
             <label className="block text-sm font-semibold leading-6 text-gray-900">

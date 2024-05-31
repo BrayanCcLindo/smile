@@ -15,9 +15,16 @@ type LoginType = {
 
 function LogIn() {
   const [errorExist, setErrorExist] = useState(false);
-  const { updateUser } = useSmileContext();
-
+  const { updateUser, logInGoogle } = useSmileContext();
   const navigate = useNavigate();
+  const iniciar = async () => {
+    try {
+      await logInGoogle();
+      navigate("/perfil");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const mySchema: ZodType<LoginType> = z.object({
     email: z
@@ -69,6 +76,14 @@ function LogIn() {
           action="#"
           method="POST"
         >
+          <button
+            className="flex items-center gap-4 px-6 py-4 rounded-xl w-full border border-gray-300 justify-center font-semibold hover:shadow-lg"
+            onClick={iniciar}
+            type="button"
+          >
+            <img src="/svg/google.svg" alt="" />
+            Google
+          </button>
           <div>
             <label className="block text-sm font-medium leading-6 text-gray-900">
               Correo

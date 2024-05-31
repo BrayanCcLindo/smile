@@ -33,7 +33,7 @@ export type UserData = {
 export type SmileContextType = {
   stateProfile: UserType;
   updateUser: (user: UserData | null) => void;
-
+  logInGoogle: () => void;
   googleSignIn: () => void;
   logOut: () => void;
   // stateFavorites: CampañaGiftSmileType[] | undefined;

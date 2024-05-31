@@ -154,27 +154,6 @@ export function SmileProvider({ children }: { children: ReactNode }) {
   //   initialFavoriteCampaigns
   // );
 
-  const googleSignIn = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      const res = await signInWithPopup(auth, provider);
-      const userExist = usuarios.some(
-        (usuario) => usuario.email === res.user.email
-      );
-      if (!userExist) {
-        await addDoc(collection(db, "usuarios"), {
-          name: res.user.displayName,
-          email: res.user.email,
-          uid: res.user.uid,
-          userPhoto: "/Images/defaultuser.jpg",
-        });
-      } else {
-        console.log("Ya esta Creado cuenta con Google");
-      }
-    } catch (error) {
-      console.log(error, "error al iniciar con google");
-    }
-  };
   const logOut = () => {
     signOut(auth);
   };
@@ -193,6 +172,41 @@ export function SmileProvider({ children }: { children: ReactNode }) {
       user: user,
     });
   };
+  const googleSignIn = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const res = await signInWithPopup(auth, provider);
+      // @ts-expect-error need to push
+      updateUser(res);
+      const userExist = usuarios.some(
+        (usuario) => usuario.email === res.user.email
+      );
+      if (!userExist) {
+        await addDoc(collection(db, "usuarios"), {
+          name: res.user.displayName,
+          email: res.user.email,
+          uid: res.user.uid,
+          userPhoto: "/Images/defaultuser.jpg",
+        });
+      } else {
+        console.log("Ya esta Creado cuenta con Google");
+      }
+    } catch (error) {
+      console.log(error, "error al iniciar con google");
+    }
+  };
+
+  const logInGoogle = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const res = await signInWithPopup(auth, provider);
+      // @ts-expect-error need to push
+
+      updateUser(res.user);
+    } catch (error) {
+      console.log(error, "error al iniciar con google");
+    }
+  };
 
   // const addCampaignToFavorite = (campaña: CampañaGiftSmileType) => {
   //   dispatchFavorites({
@@ -206,7 +220,7 @@ export function SmileProvider({ children }: { children: ReactNode }) {
       value={{
         stateProfile,
         updateUser,
-
+        logInGoogle,
         googleSignIn,
         logOut,
         // stateFavorites,
