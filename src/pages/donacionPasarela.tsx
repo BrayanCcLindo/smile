@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { CreditCard, QrCode, ShieldCheck } from "lucide-react";
+import { Copy, CreditCard, QrCode, ShieldCheck } from "lucide-react";
 import { MouseEventHandler, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -46,6 +46,8 @@ function DonacionPasarela() {
   const [initialDonation, setInitialDonation] = useState("0");
   const [image, setImage] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
+  const cuentaRef = useRef<HTMLParagraphElement>(null);
+  const InterCuentaRef = useRef<HTMLParagraphElement>(null);
   // const smileTip = (Number(initialDonation) * 0.1).toFixed(2);
 
   // const totalDonation = (Number(initialDonation) + Number(smileTip)).toFixed(2);
@@ -60,6 +62,31 @@ function DonacionPasarela() {
 
   const handleButtonValue = (value: string) => {
     setInitialDonation(value);
+  };
+
+  const handleAccountCopy = () => {
+    if (cuentaRef.current) {
+      navigator.clipboard
+        .writeText(cuentaRef.current.innerText)
+        .then(() => {
+          console.log("Contenido copiado al portapapeles!");
+        })
+        .catch((err) => {
+          console.log("Error al copiar el contenido: ", err);
+        });
+    }
+  };
+  const handleIntAccountCopy = () => {
+    if (InterCuentaRef.current) {
+      navigator.clipboard
+        .writeText(InterCuentaRef.current.innerText)
+        .then(() => {
+          console.log("Contenido copiado al portapapeles!");
+        })
+        .catch((err) => {
+          console.log("Error al copiar el contenido: ", err);
+        });
+    }
   };
 
   const mySchema: ZodType<FormPayment> = z.object({
@@ -352,11 +379,35 @@ function DonacionPasarela() {
                                   <h3 className=" font-medium leading-6 mt-4 ">
                                     Numeró de Cuenta
                                   </h3>
-                                  <p>5153140681443</p>
+                                  <p
+                                    ref={cuentaRef}
+                                    className="border flex justify-between items-center border-gray-300 p-2 rounded-lg"
+                                  >
+                                    5153140681443
+                                    <button
+                                      type="button"
+                                      onClick={handleAccountCopy}
+                                      className="text-main"
+                                    >
+                                      <Copy />
+                                    </button>
+                                  </p>
                                   <h3 className=" font-medium leading-6 mt-4 ">
                                     Numeró de Cuenta Interbancario (CCI)
                                   </h3>
-                                  <p className="mb-4">00351501314068144347</p>
+                                  <p
+                                    ref={InterCuentaRef}
+                                    className="border flex justify-between items-center border-gray-300 p-2 rounded-lg mb-4"
+                                  >
+                                    00351501314068144347
+                                    <button
+                                      type="button"
+                                      onClick={handleIntAccountCopy}
+                                      className="text-main"
+                                    >
+                                      <Copy />
+                                    </button>
+                                  </p>
                                   <YapeDialog type="transferencia" />
                                 </div>
                               </div>

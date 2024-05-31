@@ -1,16 +1,11 @@
 import { useParams } from "react-router-dom";
-import {
-  Link2,
-  Share2,
-  Facebook,
-  Linkedin,
-  HeartHandshake,
-} from "lucide-react";
+import { Link2, Facebook, Linkedin, HeartHandshake } from "lucide-react";
 import { useSmileContext } from "../Api/userContext";
 import ButtonDialog from "../components/buttonDialog";
 import { useGetCampaigns } from "../Api/getCampaigns";
 import Loader from "../components/loader";
 import MainLinkButton from "../components/mainLinkButton";
+import { handleShareURL } from "../Api/socialShare";
 
 function PostCampaña() {
   const { data } = useGetCampaigns();
@@ -28,6 +23,9 @@ function PostCampaña() {
     ?.map((donations) => parseInt(donations.montoDonacion))
     .reduce((acc, actual) => acc + actual, 0)
     .toFixed(2);
+
+  const currentURL = window.location.href;
+  const wspURL = `https://api.whatsapp.com/send?text=${actualPost?.nombre} aportemos en su Smile 🚀 → ${currentURL}`;
 
   return (
     <>
@@ -84,7 +82,12 @@ function PostCampaña() {
                   </MainLinkButton>
                 </div>
                 <div className="flex items-center justify-between pt-3">
-                  <button className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white">
+                  <button
+                    onClick={() => {
+                      handleShareURL(currentURL);
+                    }}
+                    className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white"
+                  >
                     <Link2 strokeWidth={1} />
                   </button>
                   <button className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white">
@@ -93,9 +96,13 @@ function PostCampaña() {
                   <button className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white">
                     <Linkedin strokeWidth={1} />
                   </button>
-                  <button className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white">
-                    <Share2 strokeWidth={1} />
-                  </button>
+                  <a
+                    href={wspURL}
+                    target="_blank"
+                    className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white"
+                  >
+                    <img src="/svg/whatsApp.svg" alt="" />
+                  </a>
                 </div>
               </div>
             </div>
