@@ -19,6 +19,9 @@ function CallToAction() {
               </MainLinkButton>
 
               <Link
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
                 to="/como-funciona"
                 className="text-sm font-semibold leading-6 text-main"
               >

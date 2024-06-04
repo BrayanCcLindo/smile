@@ -622,7 +622,7 @@ function DonacionPasarela() {
                       {/* {inputValue === "credito-debito" && (
                         <Button type="submit">Donar Ahora</Button>
                       )} */}
-                      <Button type="submit">Yapear</Button>
+                      <Button type="submit">Enviar Comprobante</Button>
                     </div>
 
                     <p className="text-sm text-gray-500 mt-5">

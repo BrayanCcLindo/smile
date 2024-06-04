@@ -9,36 +9,115 @@ function ComoFunciona() {
       <div className="text-gray-600 body-font bg-main/10 mt-20">
         <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center ">
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <span className="text-base font-semibold leading-7 text-gray-900">
-              Como Funciona
-            </span>
             <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-main">
-              Smile
+              ¿Como funciona Smile?
             </h1>
             <p className="mb-8 leading-relaxed">
-              Una campaña de crowdfunding básicamente es una “Alcancía en
-              línea”, donde se busca recaudar fondos de diferentes personas que
-              comparten los mismos ideales y quieren llevar a cabo un proyecto
-              juntos.
+              Una campaña de crowdfunding es como una 'alcancía en línea', donde
+              personas con ideales comunes se unen para recaudar fondos y llevar
+              a cabo proyectos significativos juntos.
             </p>
-            <div className="flex justify-center">
-              <MainLinkButton link={"/nueva-campaña"}>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-6 lg:justify-start">
+              <MainLinkButton link="/nueva-campaña">
                 Crear Campaña
               </MainLinkButton>
+
+              <Link
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+                to="/campañas"
+                className="text-sm font-semibold leading-6 text-main"
+              >
+                Ver Campañas <span aria-hidden="true">→</span>
+              </Link>
             </div>
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img
-              className="object-cover object-center rounded"
-              alt="hero"
-              src="/Images/pexels-this-is-zun-1116302-1.jpg"
-            />
+            <video
+              className="rounded-lg"
+              preload="none"
+              controls
+              poster="/Images/imagenVideo.jpg"
+              muted
+            >
+              <source src="/video/videoSmile.webm" type="video/webm"></source>
+            </video>
           </div>
         </div>
       </div>
-
+      <div className="flex items-center justify-center mt-10 px-6 "></div>
       <div className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto flex justify-center flex-wrap">
+          <div className="container px-5  mx-auto">
+            <div className="flex flex-col text-center w-full mb-20">
+              <h2 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-main">
+                ¿Para qué puedo hacer una campaña Smile?
+              </h2>
+              <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
+                Puedes crear un smile para diversos proyectos como:
+              </p>
+              <div className="flex items-center justify-center flex-wrap ">
+                <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
+                  <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                    <Handshake className=" text-main w-12 h-12 mb-3 inline-block" />
+
+                    <p className="leading-relaxed">Apoyo a Fundaciones</p>
+                  </div>
+                </div>
+                <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
+                  <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                    <TrendingUp className=" text-main w-12 h-12 mb-3 inline-block" />
+
+                    <p className="leading-relaxed">Emprendedores</p>
+                  </div>
+                </div>
+                <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
+                  <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                    <HandHeart className=" text-main w-12 h-12 mb-3 inline-block" />
+
+                    <p className="leading-relaxed">Apoyo Social</p>
+                  </div>
+                </div>
+              </div>
+
+              <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
+                Solo necesitas mucho entusiasmo, dedicación y la ayuda de tu
+                comunidad, quienes realizarán los aportes financieros y la
+                difusión de tu campaña para que llegue a muchos corazones y
+                logres tu meta.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-col  w-full mb-20">
+            <h2 className="sm:text-3xl text-2xl font-medium text-center title-font mb-4 text-main">
+              ¿Quién puede crear una Smile?
+            </h2>
+            <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
+              <span className="font-medium">
+                ¡Todos pueden crear una Smile!
+              </span>{" "}
+              Si tienes un sueño, un proyecto, una iniciativa social o una idea
+              de negocio, Smile es para ti. No importa si eres una sola persona
+              o una comunidad unida por el mismo ideal.
+            </p>
+
+            <p className="lg:w-2/3 mx-auto leading-relaxed text-base mt-5">
+              <span className="font-medium">
+                🚀 Smile está abierta a estudiantes, innovadores, fundaciones,
+                activistas, jóvenes, adultos, emprendedores… ¡para TODOS!
+              </span>
+              <br />
+              ¿Qué esperas para unirte al #SmilePower 💪?{" "}
+              <Link
+                to="/nueva-campaña"
+                className="text-sm font-semibold leading-6 text-main"
+              >
+                Crea tu Campaña <span aria-hidden="true">→</span>
+              </Link>
+            </p>
+          </div>
+
           <div className="relative  sm:w-1/3 w-5/6 rounded-lg mt-6 mb-10 sm:m-0 sm:pr-10 content-start ">
             <img
               className="object-cover object-center w-full h-full lg:-rotate-12 shadow-2xl"
@@ -51,7 +130,7 @@ function ComoFunciona() {
               alt="stats"
             />
           </div>
-          <div className="flex flex-wrap  mt-auto mb-auto lg:w-1/2 sm:w-2/3  ">
+          <div className="flex flex-wrap  mt-auto mb-auto lg:w-1/2 sm:w-2/3  pt-16">
             <div className="w-full sm:p-4 px-4 mb-6">
               <h2 className="title-font font-medium text-3xl mb-2 text-gray-900">
                 Puedes escoger la periocidad de tu impacto
@@ -100,78 +179,6 @@ function ComoFunciona() {
         </div>
       </div>
 
-      <div className="text-gray-600 body-font">
-        <div className="container px-5 pt-24 mx-auto">
-          <div className="flex flex-col text-center w-full mb-20">
-            <h2 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-main">
-              ¿Para qué puedo hacer una campaña Smile?
-            </h2>
-            <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-              Puedes crear un smile para diversos proyectos como:
-            </p>
-            <div className="flex items-center justify-center flex-wrap ">
-              <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
-                <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
-                  <Handshake className=" text-main w-12 h-12 mb-3 inline-block" />
-
-                  <p className="leading-relaxed">Apoyo a Fundaciones</p>
-                </div>
-              </div>
-              <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
-                <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
-                  <TrendingUp className=" text-main w-12 h-12 mb-3 inline-block" />
-
-                  <p className="leading-relaxed">Emprendedores</p>
-                </div>
-              </div>
-              <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
-                <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
-                  <HandHeart className=" text-main w-12 h-12 mb-3 inline-block" />
-
-                  <p className="leading-relaxed">Apoyo Social</p>
-                </div>
-              </div>
-            </div>
-
-            <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-              Solo necesitas mucho entusiasmo, dedicación y la ayuda de tu
-              comunidad, quienes realizarán los aportes financieros y la
-              difusión de tu campaña para que llegue a muchos corazones y logres
-              tu meta.
-            </p>
-          </div>
-        </div>
-        <div className="container px-5 py-10 mx-auto">
-          <div className="flex flex-col  w-full mb-20">
-            <h2 className="sm:text-3xl text-2xl font-medium text-center title-font mb-4 text-main">
-              ¿Quién puede crear una Smile?
-            </h2>
-            <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-              <span className="font-medium">
-                ¡Todos pueden crear una Smile!
-              </span>{" "}
-              Si tienes un sueño, un proyecto, una iniciativa social o una idea
-              de negocio, Smile es para ti. No importa si eres una sola persona
-              o una comunidad unida por el mismo ideal.
-            </p>
-
-            <p className="lg:w-2/3 mx-auto leading-relaxed text-base mt-5">
-              <span className="font-medium">
-                🚀 Smile está abierta a estudiantes, innovadores, fundaciones,
-                activistas, jóvenes, adultos, emprendedores… ¡para TODOS!
-              </span>
-              <br />
-              ¿Qué esperas para unirte al #SmilePower 💪?{" "}
-              <Link
-                to="/nueva-campaña"
-                className="text-sm font-semibold leading-6 text-main"
-              >
-                Crea tu Campaña <span aria-hidden="true">→</span>
-              </Link>
-            </p>
-          </div>
-        </div>
-      </div>
       <CallToAction />
     </section>
 

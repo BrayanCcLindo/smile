@@ -46,11 +46,26 @@ function UserProfile() {
                 </div>
               </div>
               <p className="mt-6 text-lg leading-8 text-gray-300">
-                Smile es una plataforma de crowdfunding o financiamiento
-                colectivo, donde puedes crear campañas
+                <span className="font-medium text-white">
+                  Cambia vidas hoy:
+                </span>{" "}
+                Descubre campañas inspiradoras y dona para crear un impacto Real
               </p>
+              <div className="mt-10 flex items-center justify-center gap-6 flex-wrap lg:justify-start">
+                <MainLinkButton link="/campañas">
+                  Ver campañas y Donar
+                </MainLinkButton>
+
+                <Link
+                  to="/como-funciona"
+                  className="text-sm font-semibold leading-6 text-white"
+                >
+                  Ver como funciona Smile <span aria-hidden="true">→</span>
+                </Link>
+              </div>
             </div>
           </div>
+
           <div className="mx-auto max-w-7xl px-6 lg:px-8 text-gray-900">
             <div className="mx-auto mt-10  lg:mx-0 lg:max-w-none">
               <h3 className="sm:text-3xl text-2xl text-center font-medium title-font mb-2 text-gray-900">
@@ -76,7 +91,7 @@ function UserProfile() {
                 ) : (
                   <div className="flex justify-center items-center flex-col gap-4 mt-7 col-span-3">
                     <h4 className="text-xl font-medium title-font">
-                      ¿Listo para crear tu camapaña Smile?
+                      ¿Listo para crear tu campaña Smile?
                     </h4>
 
                     <div className="flex items-center gap-7 flex-wrap">
