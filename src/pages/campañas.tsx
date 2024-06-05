@@ -1,6 +1,5 @@
 import Card from "../components/card";
 import { useGetCampaigns } from "../Api/getCampaigns";
-import MainLinkButton from "../components/mainLinkButton";
 import Loader from "../components/loader";
 // import { useGetUserData } from "../Api/getUserData";
 import CallToAction from "../components/callToAction";
