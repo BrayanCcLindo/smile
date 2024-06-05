@@ -7,7 +7,7 @@ function Footer() {
   };
   return (
     <>
-      <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-24 lg:py-32">
+      <div className="relative isolate overflow-hidden bg-[#14244f] py-16 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
             <div className="max-w-xs lg:max-w-lg">

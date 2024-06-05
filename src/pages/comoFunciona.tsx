@@ -1,48 +1,117 @@
-import { HandHeart, Handshake, TrendingUp } from "lucide-react";
+import {
+  Album,
+  HandHeart,
+  Handshake,
+  HeartHandshake,
+  SmilePlus,
+  TrendingUp,
+} from "lucide-react";
 import CallToAction from "../components/callToAction";
-import MainLinkButton from "../components/mainLinkButton";
 import { Link } from "react-router-dom";
+import MainLinkButton from "../components/mainLinkButton";
 
 function ComoFunciona() {
   return (
     <section>
-      <div className="text-gray-600 body-font bg-main/10 mt-20">
-        <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center ">
-          <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-main">
-              ¿Como funciona Smile?
-            </h1>
-            <p className="mb-8 leading-relaxed">
-              Una campaña de crowdfunding es como una 'alcancía en línea', donde
-              personas con ideales comunes se unen para recaudar fondos y llevar
-              a cabo proyectos significativos juntos.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-6 lg:justify-start">
-              <MainLinkButton link="/nueva-campaña">
-                Crear Campaña
-              </MainLinkButton>
+      <div className="text-gray-600 body-font text-base mt-20 bg-main/10">
+        <div className="container px-5 py-24 mx-auto flex flex-wrap">
+          <div className="flex flex-wrap w-full justify-between">
+            <div className="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6">
+              <h1 className="title-font  text-3xl mb-4 font-medium text-main">
+                ¿Cómo funcionan las donaciones en Smile?
+              </h1>
+              <div className="flex relative pb-12">
+                <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
+                  <div className="h-full w-1 bg-main/20 pointer-events-none"></div>
+                </div>
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-main inline-flex items-center justify-center text-white relative z-10">
+                  <HandHeart />
+                </div>
+                <div className="flex-grow pl-4 ">
+                  <h2 className="font-medium title-font  text-gray-900 mb-1 tracking-wider">
+                    ¿Por Qué Donar?
+                  </h2>
+                  <p className="leading-relaxed">
+                    <span className="font-semibold">
+                      Tu Donación Marca la Diferencia
+                    </span>{" "}
+                    <br />
+                    Únete, dona y transforma vidas con tu valioso aporte. Tu
+                    participación es fundamental para hacer la diferencia.
+                  </p>
+                </div>
+              </div>
+              <div className="flex relative pb-12">
+                <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
+                  <div className="h-full w-1 bg-main/20 pointer-events-none"></div>
+                </div>
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-main inline-flex items-center justify-center text-white relative z-10">
+                  <Album />
+                </div>
+                <div className="flex-grow pl-4">
+                  <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+                    Descubre Nuestras Campañas
+                  </h2>
+                  <p className="leading-relaxed">
+                    <span className="font-semibold">
+                      Historias que Inspiran
+                    </span>{" "}
+                    <br />
+                    Explora un mar de oportunidades: Descubre nuestras campañas,
+                    listas para ser exploradas y apoyadas por ti
+                  </p>
+                </div>
+              </div>
 
-              <Link
-                onClick={() => {
-                  window.scrollTo(0, 0);
-                }}
-                to="/campañas"
-                className="text-sm font-semibold leading-6 text-main"
-              >
-                Ver Campañas <span aria-hidden="true">→</span>
-              </Link>
+              <div className="flex relative pb-12">
+                <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
+                  <div className="h-full w-1 bg-main/20 pointer-events-none"></div>
+                </div>
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-main inline-flex items-center justify-center text-white relative z-10">
+                  <SmilePlus />
+                </div>
+                <div className="flex-grow pl-4">
+                  <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+                    Cómo Funciona
+                  </h2>
+                  <p className="leading-relaxed">
+                    <span className="font-semibold">Tu Donación en Acción</span>{" "}
+                    <br />
+                    Realiza donación y observa cómo transforma vidas en tiempo
+                    real. ¡Únete y sé parte del cambio ahora mismo!
+                  </p>
+                </div>
+              </div>
+              <div className="flex relative">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-main inline-flex items-center justify-center text-white relative z-10">
+                  <HeartHandshake />
+                </div>
+                <div className="flex-grow pl-4">
+                  <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+                    Únete a Nosotros
+                  </h2>
+                  <p className="leading-relaxed">
+                    <span className="font-semibold">Haz la Diferencia Hoy</span>{" "}
+                    <br />
+                    Únete ya y sé parte del cambio. Tu contribución es crucial.
+                    ¡No esperes más para marcar la diferencia!
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <video
-              className="rounded-lg"
-              preload="none"
-              controls
-              poster="/Images/imagenVideo.jpg"
-              muted
-            >
-              <source src="/video/videoSmile.webm" type="video/webm"></source>
-            </video>
+            <div className=" w-full md:mt-0 mt-10 lg:w-3/5 md:w-1/2">
+              <video
+                className="rounded-lg"
+                preload="none"
+                controls
+                poster="/Images/imagenVideo.jpg"
+              >
+                <source src="/video/videoSmile.webm" type="video/webm"></source>
+              </video>
+              <div className=" mt-10">
+                <MainLinkButton link="/campañas">Donar Ahora</MainLinkButton>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -52,7 +121,7 @@ function ComoFunciona() {
           <div className="container px-5  mx-auto">
             <div className="flex flex-col text-center w-full mb-20">
               <h2 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-main">
-                ¿Para qué puedo hacer una campaña Smile?
+                ¿Cómo funcionan las campañas en Smile?
               </h2>
               <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
                 Puedes crear un smile para diversos proyectos como:
@@ -91,12 +160,10 @@ function ComoFunciona() {
           </div>
           <div className="flex flex-col  w-full mb-20">
             <h2 className="sm:text-3xl text-2xl font-medium text-center title-font mb-4 text-main">
-              ¿Quién puede crear una Smile?
+              ¿Quiénes pueden crear una Smile?
             </h2>
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-              <span className="font-medium">
-                ¡Todos pueden crear una Smile!
-              </span>{" "}
+              <span className="font-medium">¡Todos pueden crear un Smile!</span>{" "}
               Si tienes un sueño, un proyecto, una iniciativa social o una idea
               de negocio, Smile es para ti. No importa si eres una sola persona
               o una comunidad unida por el mismo ideal.
@@ -133,7 +200,7 @@ function ComoFunciona() {
           <div className="flex flex-wrap  mt-auto mb-auto lg:w-1/2 sm:w-2/3  pt-16">
             <div className="w-full sm:p-4 px-4 mb-6">
               <h2 className="title-font font-medium text-3xl mb-2 text-gray-900">
-                Puedes escoger la periocidad de tu impacto
+                Puedes escoger la prioridad de tu impacto.
               </h2>
               <div className="leading-relaxed">
                 Los Smilers, al estar en línea, disfrutan de una cobertura
@@ -162,18 +229,6 @@ function ComoFunciona() {
             <div className="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
               <h2 className="title-font font-medium text-3xl text-main">4</h2>
               <p className="leading-relaxed">Productos</p>
-            </div>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-6 lg:justify-start">
-              <MainLinkButton link="/nueva-campaña">
-                Crear Campaña
-              </MainLinkButton>
-
-              <Link
-                to="/campañas"
-                className="text-sm font-semibold leading-6 text-main"
-              >
-                Ver Campañas <span aria-hidden="true">→</span>
-              </Link>
             </div>
           </div>
         </div>

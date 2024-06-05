@@ -30,7 +30,7 @@ function Card({
     .toFixed(2);
 
   return (
-    <article className="group flex max-w-xl flex-col items-start justify-between relative border shadow-md duration-150 hover:duration-150 rounded-xl hover:shadow-xl hover:-translate-y-2 group">
+    <article className="group flex max-w-xl flex-col items-start justify-between relative border shadow-md duration-150 hover:duration-150 rounded-xl hover:shadow-xl  group overflow-hidden">
       <Link
         onClick={() => {
           window.scrollTo(0, 0);
@@ -46,7 +46,7 @@ function Card({
         </h2>
       </div>
       <img
-        className=" object-cover h-[300px] w-full"
+        className=" object-cover h-[300px] aspect-square w-full group-hover:scale-105 hover:duration-300 duration-300"
         width={300}
         height={300}
         src={campaña.imagenCampaña}

@@ -20,7 +20,7 @@ function LogIn() {
   const iniciar = async () => {
     try {
       await logInGoogle();
-      navigate("/perfil");
+      navigate(-1);
     } catch (error) {
       console.log(error);
     }

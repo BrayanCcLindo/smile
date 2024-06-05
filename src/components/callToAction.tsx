@@ -11,12 +11,11 @@ function CallToAction() {
               ¿Listo para empezar?
             </h2>
             <p className="mt-6 text-lg leading-8 ">
-              Únete a los miles como tú que encuentran ayuda en Smile.
+              Únete a los miles como tú que están marcando la diferencia con
+              Smile. ¡Tu ayuda importa!
             </p>
             <div className="mt-10 flex items-center justify-center gap-6 flex-wrap lg:justify-start">
-              <MainLinkButton link="/nueva-campaña">
-                Crear Campaña
-              </MainLinkButton>
+              <MainLinkButton link="/campañas">Donar Ahora</MainLinkButton>
 
               <Link
                 onClick={() => {
