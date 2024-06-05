@@ -12,6 +12,7 @@ import { UserData } from "../type/types";
 
 export const useGetUserData = () => {
   const { stateProfile } = useSmileContext();
+  console.log(stateProfile, "stateProfile");
 
   const [user, setUser] = useState<UserData | null>(null);
 

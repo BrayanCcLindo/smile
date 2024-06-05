@@ -12,10 +12,14 @@ import { useGetCampaigns } from "../Api/getCampaigns";
 import Card from "../components/card";
 import { Link } from "react-router-dom";
 import CallToAction from "../components/callToAction";
+import { useGetUserData } from "../Api/getUserData";
 // import { useSmileContext } from "../Api/userContext";
 
 function Homepage() {
   const { data } = useGetCampaigns();
+  const { user } = useGetUserData();
+  console.log(user, "user");
+
   // const { stateProfile } = useSmileContext();
 
   const firstThreeCampaigns = data.slice(0, 3);
