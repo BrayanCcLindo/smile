@@ -55,6 +55,7 @@ export type CampañaGiftSmileType = {
   creador: string;
   cargo: string;
   imagen: string;
+  historia: string;
   donaciones: {
     donadorYapeNombre: string;
     fechaDonacionYape: string;

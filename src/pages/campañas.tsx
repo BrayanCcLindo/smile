@@ -23,7 +23,11 @@ function Campañas() {
           <div className="lg:w-1/2 w-full leading-relaxed text-gray-500 flex flex-col justify-center items-start gap-6">
             <p>
               Únete a nuestras campañas y marca la diferencia hoy. Tu donación
-              ayudará a muchas personas
+              ayudará a muchas personas, cada aporte cuenta.{" "}
+              <span className="font-semibold">
+                ¡Dona hoy desde 4 soles y sé parte de estas historias de
+                esperanza y solidaridad!
+              </span>
             </p>
           </div>
         </div>

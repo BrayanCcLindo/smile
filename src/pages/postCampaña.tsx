@@ -120,8 +120,10 @@ function PostCampaña() {
                     </span>
                   </div>
                   <div className="md:flex-grow">
-                    <p className="leading-relaxed line-clamp-3">
-                      {actualPost.descripcion}
+                    <p className="leading-relaxed">
+                      {actualPost.historia
+                        ? actualPost.historia
+                        : actualPost.descripcion}
                     </p>
                   </div>
                 </div>

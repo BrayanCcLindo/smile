@@ -24,9 +24,10 @@ function Homepage() {
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Smile
           </h1>
-          <p className=" my-6 text-lg leading-8 text-gray-600">
-            Con Smile, tus donaciones transforman ideas en realidades,
-            <br /> una sonrisa a la vez
+          <p className=" my-6 text-lg leading-8 text-gray-600 text-center">
+            ¡Bienvenidos! Aquí, cada clic es una oportunidad para transformar
+            vidas
+            <br /> y apoyar proyectos que cambian el mundo.
           </p>
           <div className="mt-10 flex items-center justify-center gap-6 flex-wrap lg:justify-start">
             <MainLinkButton link="/campañas">Donar Ahora</MainLinkButton>

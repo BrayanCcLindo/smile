@@ -7,8 +7,8 @@ function Footer() {
   };
   return (
     <>
-      <div className="relative isolate overflow-hidden bg-[#14244f] py-16 sm:py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative isolate shadow-2xl  bg-[#f2f2f2]  py-8 sm:py-12 lg:py-16 ">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 ">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
             <div className="max-w-xs lg:max-w-lg">
               <Link
@@ -20,46 +20,43 @@ function Footer() {
                   className="object-cover"
                   width={300}
                   height={300}
-                  src="/Images/logoSmileBlanco.webp"
+                  src="/public/Images/smileOficilLogo (1).png"
                   alt="logo-smile"
                 />
               </Link>
 
-              <p className="mt-4  leading-8 text-gray-300">
-                Smile es una plataforma de crowdfunding o financiamiento
-                colectivo, donde puedes crear campañas
+              <p className="mt-4  leading-8 ">
+                ¡Bienvenidos! Aquí, cada clic es una oportunidad para
+                transformar vidas
+                <br /> y apoyar proyectos que cambian el mundo.
               </p>
               <div className="mt-6 flex max-w-md gap-x-4">
-                <MainLinkButton link="/nueva-campaña">
-                  Crear Campaña
-                </MainLinkButton>
+                <MainLinkButton link="/campañas">Donar Ahora</MainLinkButton>
               </div>
             </div>
             <dl className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
               <div className="flex flex-col items-start">
-                <h3 className="mt-4 font-semibold text-white">
-                  Enlaces Útiles
-                </h3>
-                <ul className="mt-2 leading-7 text-gray-400">
-                  <li className="hover:text-white">
+                <h3 className="mt-4 font-semibold ">Enlaces Útiles</h3>
+                <ul className="mt-2 leading-7 ">
+                  <li className="hover:text-main">
                     <Link onClick={scrollToTop} to={"/"}>
                       Inicio
                     </Link>
                   </li>
-                  <li className="hover:text-white">
+                  <li className="hover:text-main">
                     <Link onClick={scrollToTop} to={"/como-funciona"}>
                       Como Funciona
                     </Link>
                   </li>
-                  <li className="hover:text-white">
+                  <li className="hover:text-main">
                     <Link onClick={scrollToTop} to={"/campañas"}>
                       Campañas
                     </Link>
                   </li>
                 </ul>
               </div>
-              <div className=" py-2 text-lg leading-8 text-gray-300 max-w-xs">
-                <h3 className=" font-medium title-font text-white">
+              <div className=" py-2 text-lg leading-8  max-w-xs">
+                <h3 className=" font-medium title-font ">
                   Smile protege tu donativo
                 </h3>
                 {/* <p className="leading-8 text-base mt-2 text-gray-400">
