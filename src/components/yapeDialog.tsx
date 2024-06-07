@@ -1,5 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { Image, ListTodo, TriangleAlert, X } from "lucide-react";
+import { ListTodo, TriangleAlert, X } from "lucide-react";
 function YapeDialog({ type }: { type: "transferencia" | "yape" }) {
   return (
     <Dialog.Root>
@@ -23,22 +23,9 @@ function YapeDialog({ type }: { type: "transferencia" | "yape" }) {
                 <ListTodo />
               </div>
               <p className="flex-grow pl-4">
-                <span className="font-medium">
-                  Cuando finalices la transferencia toma una captura o foto al
-                  comprobante&nbsp;
-                </span>
+                Cuando finalices la transferencia envianos el{" "}
+                <span className="font-medium">Número de Operacion&nbsp;</span>
                 de la transferencia que te entrega tu banco
-              </p>
-            </li>
-            <li className="flex relative  ">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full text-main inline-flex items-center justify-center  relative z-10">
-                <Image />
-              </div>
-              <p className="flex-grow pl-4">
-                <span className="font-medium">
-                  En el comprobante de transferencia debe mostrarse:
-                </span>{" "}
-                monto, Nro de la operación, Nro de la cuenta de origen y destino
               </p>
             </li>
           </ul>

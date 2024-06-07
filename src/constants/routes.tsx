@@ -15,6 +15,11 @@ export const routes = [
     text: "Campañas",
     private: false,
   },
+  // {
+  //   to: "/nosotros",
+  //   text: "Nosotros",
+  //   private: false,
+  // },
 ];
 
 export const profileRoutes = [

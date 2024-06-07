@@ -14,7 +14,7 @@ function MainLinkButton({ link, children }: ButtonLinkType) {
     <Link
       onClick={scrollToTop}
       to={link}
-      className="bg-gradient-to-r flex gap-4 items-center justify-center  text-sm from-main to-[#299cd5] hover:from-[#299cd5] hover:to-main text-white font-semibold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out"
+      className="bg-gradient-to-r flex gap-4 items-center justify-center  from-main to-[#299cd5] hover:from-[#299cd5] hover:to-main text-white font-semibold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out text-lg"
     >
       {children}
     </Link>
@@ -32,7 +32,7 @@ export function Button({ type, children }: ButtonType) {
   return (
     <button
       type={type}
-      className="bg-gradient-to-r  w-full flex gap-4 items-center justify-center  text-sm from-main to-[#299cd5] hover:from-[#299cd5] hover:to-main text-white font-semibold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out"
+      className="bg-gradient-to-r  w-full flex gap-4 items-center justify-center from-main to-[#299cd5] hover:from-[#299cd5] hover:to-main text-white font-semibold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out text-lg"
     >
       {children}
     </button>

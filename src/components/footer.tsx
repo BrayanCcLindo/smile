@@ -7,7 +7,7 @@ function Footer() {
   };
   return (
     <>
-      <div className="relative isolate shadow-2xl  bg-[#f2f2f2]  py-8 sm:py-12 lg:py-16 ">
+      <div className="relative isolate border-t border-gray-[#f2f2f2]  bg-[#f2f2f2]  py-8 sm:py-12 lg:py-16 ">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 ">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
             <div className="max-w-xs lg:max-w-lg">
@@ -20,7 +20,7 @@ function Footer() {
                   className="object-cover"
                   width={300}
                   height={300}
-                  src="/public/Images/smileOficilLogo (1).png"
+                  src="/Images/smileOficilLogo (1).png"
                   alt="logo-smile"
                 />
               </Link>

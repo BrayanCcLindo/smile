@@ -20,6 +20,7 @@ import FormularioCamapaña from "./pages/formularioCampaña";
 // import CampañasFavoritas from "./pages/campañasFavoritas";
 import DonacionPasarela from "./pages/donacionPasarela";
 import Configuracion from "./pages/configuracion";
+// import Nosotros from "./pages/nosotros";
 
 function MainLayout() {
   return (
@@ -74,6 +75,7 @@ function App() {
             <Route path="/campañas" element={<Campañas />} />
             {/* <Route path="/campañas/favoritos" element={<CampañasFavoritas />} /> */}
             <Route path="/nueva-campaña" element={<NuevaCampaña />} />
+            {/* <Route path="/nosotros" element={<Nosotros />} /> */}
             <Route
               path="/configuracion"
               element={
@@ -92,11 +94,7 @@ function App() {
             />
             <Route
               path="/campañas/:slug/donar"
-              element={
-                <RouteGoogleSign>
-                  <DonacionPasarela />
-                </RouteGoogleSign>
-              }
+              element={<DonacionPasarela />}
             />
             <Route path="/campañas/:slug" element={<PostCampaña />} />
             {/* <Route path="/perfil" element={<UserProfile />} /> */}

@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { Copy, CreditCard, QrCode, ShieldCheck } from "lucide-react";
+import { Copy, CreditCard, Info, QrCode, ShieldCheck } from "lucide-react";
 import { MouseEventHandler, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,12 +12,13 @@ import { db } from "../firebase/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import YapeDialog from "../components/yapeDialog";
 import emailjs from "@emailjs/browser";
-import { useSmileContext } from "../Api/userContext";
 
 type FormPayment = {
   mail: string;
   monto: string;
   id_campana: string;
+  nombre: string;
+  operacion: string;
   // imagen: FileList;
 };
 
@@ -44,7 +45,7 @@ function DonacionPasarela() {
   const navigate = useNavigate();
 
   const [initialDonation, setInitialDonation] = useState("0");
-  const [image, setImage] = useState("");
+  // const [image, setImage] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
   const cuentaRef = useRef<HTMLParagraphElement>(null);
   const InterCuentaRef = useRef<HTMLParagraphElement>(null);
@@ -54,7 +55,6 @@ function DonacionPasarela() {
 
   const { slug } = useParams();
   // const { user } = useGetUserData();
-  const { stateProfile } = useSmileContext();
 
   const { data } = useGetCampaigns();
   const campaignIndex = data.findIndex((campaign) => campaign.slug === slug);
@@ -93,6 +93,8 @@ function DonacionPasarela() {
     monto: z.string().min(1, { message: "Ingrese el monto a donar" }),
     mail: z.string().email(),
     id_campana: z.string(),
+    nombre: z.string().min(1, { message: "Este campo es requerido" }),
+    operacion: z.string().min(1, { message: "Este campo es requerido" }),
     // imagen: z
     //   .instanceof(FileList)
     //   .refine((val) => val.length > 0, "Este campo es requerido"),
@@ -109,9 +111,9 @@ function DonacionPasarela() {
   const submitData = async (data: FormPayment) => {
     const result = format(new Date(), "d 'de' MMMM yyyy");
     const donationYapeInfo = {
-      donadorYapeNombre: stateProfile.displayName,
+      donadorYapeNombre: data.nombre,
       montoDonacion: data.monto,
-      imagenDonacion: image,
+      codigoDonacion: data.operacion,
       donadorYapeCorreo: data.mail,
       fechaDonacionYape: result,
       validation: false,
@@ -312,22 +314,6 @@ function DonacionPasarela() {
                           <div className="">
                             <div className="grid grid-cols-1 gap-x-3 gap-y-4 sm:grid-cols-6">
                               <div className="py-5 px-10 flex flex-col col-span-3 sm:col-span-full gap-x-3 gap-y-4 border-b border-gray-300">
-                                <label
-                                  htmlFor="mail"
-                                  className="block text-sm font-medium leading-6 text-gray-900"
-                                >
-                                  Correo
-                                </label>
-                                <div className="mt-2">
-                                  <input
-                                    {...register("mail")}
-                                    id="mail"
-                                    name="mail"
-                                    readOnly
-                                    defaultValue={stateProfile.email}
-                                    className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
-                                  />
-                                </div>
                                 <div className="col-span-full">
                                   <YapeDialog type="yape" />
                                 </div>
@@ -411,67 +397,66 @@ function DonacionPasarela() {
                                   <YapeDialog type="transferencia" />
                                 </div>
                               </div>
-
-                              <div className="col-span-full px-10">
-                                <label className="block text-sm font-medium leading-6 text-gray-900">
-                                  Comprobante
+                              <div className="col-span-3 sm:pr-0 sm:pl-10 px-10">
+                                <label
+                                  htmlFor="mail"
+                                  className="block text-sm font-medium leading-6 text-gray-900"
+                                >
+                                  Nombre
                                 </label>
-                                <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                                  <div className="text-center text-gray-600">
-                                    <div className="mt-4 flex text-sm justify-center  leading-6 text-gray-600">
-                                      <label className="relative cursor-pointer text-center rounded-md bg-white font-semibold text-main focus-within:outline-none focus-within:ring-2 focus-within:ring-main focus-within:ring-offset-2 hover:text-main">
-                                        <span> Subir Comprobante</span>
-                                        <input
-                                          onChange={(event) => {
-                                            const mainImage =
-                                              event.target.files?.[0];
-
-                                            const reader = new FileReader();
-                                            reader.addEventListener(
-                                              "load",
-                                              () => {
-                                                setImage(
-                                                  reader.result as string
-                                                );
-                                              }
-                                            );
-                                            if (mainImage) {
-                                              reader.readAsDataURL(mainImage);
-                                            }
-                                          }}
-                                          // {...register("imagen", {
-                                          //   onChange: (event) => {
-
-                                          //   },
-                                          // })}
-                                          accept="image/png image/jpg imgage/jpeg"
-                                          id="imagen"
-                                          type="file"
-                                          className="sr-only"
-                                        />
-                                      </label>
-                                      <p className="pl-1">en formato</p>
+                                <div className="mt-2">
+                                  <input
+                                    {...register("nombre")}
+                                    id="nombre"
+                                    name="nombre"
+                                    className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
+                                  />
+                                </div>
+                              </div>
+                              <div className="col-span-3 sm:pr-10 sm:pl-0 px-10 ">
+                                <label
+                                  htmlFor="mail"
+                                  className="block text-sm font-medium leading-6 text-gray-900"
+                                >
+                                  Correo
+                                </label>
+                                <div className="mt-2">
+                                  <input
+                                    {...register("mail")}
+                                    id="mail"
+                                    name="mail"
+                                    className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
+                                  />
+                                </div>
+                              </div>
+                              <div className="col-span-3 sm:col-span-full px-10">
+                                <div className=" relative ">
+                                  <label
+                                    htmlFor="mail"
+                                    className="block text-sm font-medium leading-6 text-gray-900"
+                                  >
+                                    N° de Operación
+                                  </label>
+                                  <div className="  group absolute right-0 top-0">
+                                    <Info className="" color="#cccccc" />
+                                    <div className="p-5 bg-[#f2f2f2] absolute right-0 top-0 translate-x-10 rounded-xl hidden  z-10 group-hover:flex w-[300px] translate-y-10">
+                                      <img
+                                        width={300}
+                                        height={300}
+                                        className="object-cover object-center"
+                                        src="/Images/comprovante.jpg"
+                                        alt=""
+                                      />
                                     </div>
-                                    <p className="text-xs leading-5 text-gray-600">
-                                      PNG, JPG, JPEG
-                                    </p>
                                   </div>
                                 </div>
-                                <div className="flex items-center justify-center">
-                                  {image && (
-                                    <img
-                                      className="object-cover"
-                                      width={150}
-                                      height={150}
-                                      src={image}
-                                      alt="comprobante"
-                                    />
-                                  )}
-                                  {/* {errors.imagen && (
-                                      <p className="font-medium text-red-500 text-sm">
-                                        {errors.imagen.message}
-                                      </p>
-                                    )} */}
+                                <div className="mt-2">
+                                  <input
+                                    {...register("operacion")}
+                                    id="operacion"
+                                    name="operacion"
+                                    className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
+                                  />
                                 </div>
                               </div>
                             </div>
@@ -618,10 +603,10 @@ function DonacionPasarela() {
                       <span className="text-gray-500 ">Aportación Total</span>
                       <span className="ml-auto ">S/. {totalDonation}</span>
                     </div> */}
-                    <div className="w-full mt-3">
-                      {/* {inputValue === "credito-debito" && (
+                    {/* {inputValue === "credito-debito" && (
                         <Button type="submit">Donar Ahora</Button>
                       )} */}
+                    <div className="w-full mt-3">
                       <Button type="submit">Enviar Comprobante</Button>
                     </div>
 

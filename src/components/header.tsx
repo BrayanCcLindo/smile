@@ -4,6 +4,7 @@ import { useSmileContext } from "../Api/userContext";
 import { useState } from "react";
 // import { Heart } from "lucide-react";
 import MainLinkButton from "./mainLinkButton";
+// import NavMenu from "./navMenu";
 
 function Header() {
   const { stateProfile } = useSmileContext();
@@ -83,6 +84,7 @@ function Header() {
                 </li>
               );
             })}
+            {/* <NavMenu /> */}
           </ul>
         </div>
         <div className="hidden lg:flex items-center gap-4 lg:flex-1 lg:justify-end">
