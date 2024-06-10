@@ -45,6 +45,7 @@ function DonacionPasarela() {
   const navigate = useNavigate();
 
   const [initialDonation, setInitialDonation] = useState("0");
+
   // const [image, setImage] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
   const cuentaRef = useRef<HTMLParagraphElement>(null);
@@ -91,7 +92,7 @@ function DonacionPasarela() {
 
   const mySchema: ZodType<FormPayment> = z.object({
     monto: z.string().min(1, { message: "Ingrese el monto a donar" }),
-    mail: z.string().email(),
+    mail: z.string().email().min(1, { message: "Este campo es requerido" }),
     id_campana: z.string(),
     nombre: z.string().min(1, { message: "Este campo es requerido" }),
     operacion: z.string().min(1, { message: "Este campo es requerido" }),
@@ -257,6 +258,9 @@ function DonacionPasarela() {
 
                   <div className="mt-4">
                     <div className="mt-2 relative">
+                      <span className="px-4 py-1 rounded-full text-sm  text-black absolute left-[4px] top-1/2 -translate-y-1/2">
+                        S/.
+                      </span>
                       <input
                         id="monto"
                         {...register("monto", {
@@ -269,8 +273,8 @@ function DonacionPasarela() {
                         })}
                         name="monto"
                         value={initialDonation}
-                        placeholder="S/. Otro monto"
-                        className="block w-full rounded-xl border-0 px-4 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
+                        placeholder="Otro monto"
+                        className="pl-10 block w-full rounded-xl border-0 pr-4 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
                       />
                       <span className="px-4 py-1 rounded-full text-sm font-medium bg-gray-200 text-black absolute right-[4px] top-1/2 -translate-y-1/2">
                         PEN
@@ -281,7 +285,7 @@ function DonacionPasarela() {
                         {errors.monto.message}
                       </p>
                     ) : (
-                      <p className="font-medium text-red-500 text-sm">
+                      <p className="font-medium text-main text-sm">
                         Aporte mínimo S/. 4
                       </p>
                     )}

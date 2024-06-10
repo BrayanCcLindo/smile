@@ -70,3 +70,7 @@ export type FormData = {
   password: string;
   "confirm-password": string;
 };
+export enum SmileType {
+  Social = "Social Smile",
+  Gift = "Gift Smile",
+}
