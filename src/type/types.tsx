@@ -48,7 +48,7 @@ export type CampañaGiftSmileType = {
   imagenCampaña: string;
   meta: string;
   id: string;
-  fechaCreacion: string;
+  fechaFinal: string;
   campañaId: string;
   fechaInicio: string;
   tipo: string;

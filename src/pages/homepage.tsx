@@ -36,7 +36,7 @@ function Homepage() {
               to="/como-funciona"
               className="text-sm font-semibold leading-6 text-main "
             >
-              Como funciona <span aria-hidden="true">→</span>
+              ¿Cómo funciona? <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>

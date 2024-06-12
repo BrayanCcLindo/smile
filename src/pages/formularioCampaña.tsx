@@ -24,6 +24,7 @@ type FormCampaign = {
 
 function FormularioCamapaña() {
   const [image, setImage] = useState("");
+
   // const [userPhoto, setUserPhoto] = useState("/Images/defaultuser.jpg");
   const navigate = useNavigate();
   const { user } = useGetUserData();
@@ -60,7 +61,7 @@ function FormularioCamapaña() {
   const submitCampaign = async (values: FormCampaign) => {
     const title = values.name.trim();
     const slug = title.replace(/[\s'-]+/g, "-").toLowerCase();
-    const result = format(new Date(), "d 'de' MMMM yyyy");
+    const result = format(new Date(), "yyyy-M-d");
     const campaignExist = data.some(
       (campaign) => campaign.nombre === values.name.trim()
     );
@@ -75,11 +76,11 @@ function FormularioCamapaña() {
           imagenCampaña: image,
           meta: values.meta,
           to: `/campañas/${slug}`,
-          fechaInicio: values.date,
           tipo: values.type,
           creador: user?.name ?? stateProfile.displayName,
           // imagen: userPhoto,
-          fechaCreacion: result,
+          fechaInicio: result,
+          fechaFinal: values.date,
           donaciones: [],
         });
 

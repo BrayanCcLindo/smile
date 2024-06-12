@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { CampañaGiftSmileType, SmileType } from "../type/types";
-import { HandHeart, Rocket } from "lucide-react";
+import { Clock, HandHeart, HeartHandshake, Rocket } from "lucide-react";
 import { twMerge } from "tailwind-merge";
+import ProgressBar from "./progressBar";
+import { formatDistanceToNow } from "date-fns";
+import { es } from "date-fns/locale";
 
 function Card({
   campaña,
@@ -70,33 +73,64 @@ function Card({
           {campaña.nombre}
         </h2>
       </div>
-      <img
-        className=" object-cover h-[300px] aspect-square w-full group-hover:scale-105 hover:duration-300 duration-300"
-        width={300}
-        height={300}
-        src={campaña.imagenCampaña}
-        alt=""
-      />
+      <div className="relative h-[300px] overflow-hidden">
+        <img
+          className=" object-cover w-full  aspect-square group-hover:scale-105 hover:duration-300 duration-300"
+          width={300}
+          height={300}
+          src={campaña.imagenCampaña}
+          alt=""
+        />
+        <span
+          className={twMerge(
+            `absolute z-[2] rounded-full top-2 right-2  px-3 py-1.5 font-medium `,
+            campaña.tipo === SmileType.Social && "bg-alternative text-white",
+            campaña.tipo === SmileType.Gift && "bg-main text-white"
+          )}
+        >
+          {campaña.tipo}
+        </span>
+      </div>
       <div className="px-3 py-1">
-        <div className="flex items-center gap-x-4 text-xs mt-4">
-          <time dateTime="2020-03-16" className="text-gray-500">
-            {campaña.fechaCreacion}
-          </time>
+        <div className="flex items-center gap-x-4 text-xs mt-4 justify-between">
           <span
             className={twMerge(
-              `relative z-10 rounded-full   px-3 py-1.5 font-medium `,
-              campaña.tipo === SmileType.Social &&
-                "bg-alternative/10 text-alternative",
-              campaña.tipo === SmileType.Gift && "bg-main/10 text-main"
+              "flex items-center gap-2 font-medium",
+              campaña.tipo === SmileType.Social && " text-alternative",
+              campaña.tipo === SmileType.Gift && " text-main"
             )}
           >
-            {campaña.tipo}
+            <HeartHandshake />
+            {aprovedDonations.length} Donaciones
           </span>
+
+          <p
+            className={twMerge(
+              "flex items-center gap-1 ",
+              campaña.tipo === SmileType.Social && " text-alternative",
+              campaña.tipo === SmileType.Gift && " text-main"
+            )}
+          >
+            <Clock />
+            Quedan:
+            <span className="font-medium">
+              {" "}
+              {formatDistanceToNow(new Date(campaña.fechaFinal), {
+                locale: es,
+              })}
+            </span>
+          </p>
         </div>
         <div className="group relative">
           <p className="mt-5  line-clamp-3 text-sm leading-relaxed text-gray-600  ">
             {campaña.descripcion}
           </p>
+        </div>
+        <div className="mt-5">
+          <ProgressBar
+            progress={parseInt(activeDonations)}
+            total={parseInt(campaña.meta)}
+          />
         </div>
         <div className="flex justify-between  mt-6    ">
           <p className="flex items-center gap-2 ">

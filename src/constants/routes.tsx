@@ -6,7 +6,7 @@ export const routes = [
   },
   {
     to: "/como-funciona",
-    text: "Como Funciona",
+    text: "¿Cómo funciona?",
     private: false,
   },
 

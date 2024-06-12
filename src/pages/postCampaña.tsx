@@ -1,11 +1,14 @@
 import { useParams } from "react-router-dom";
-import { Link2, Facebook, Linkedin, HeartHandshake } from "lucide-react";
+import { Link2, HeartHandshake } from "lucide-react";
 import { useSmileContext } from "../Api/userContext";
 import ButtonDialog from "../components/buttonDialog";
 import { useGetCampaigns } from "../Api/getCampaigns";
 import Loader from "../components/loader";
 import MainLinkButton from "../components/mainLinkButton";
 import { handleShareURL } from "../Api/socialShare";
+import { format, formatDistanceToNow } from "date-fns";
+import { es } from "date-fns/locale";
+import ProgressBar from "../components/progressBar";
 
 function PostCampaña() {
   const { data } = useGetCampaigns();
@@ -26,6 +29,22 @@ function PostCampaña() {
 
   const currentURL = window.location.href;
   const wspURL = `https://api.whatsapp.com/send?text=${actualPost?.nombre} aportemos en su Smile 🚀 → ${currentURL}`;
+
+  // const fechaInicial = format(
+  //   new Date(actualPost?.fechaInicio),
+  //   "d 'de' MMMM yyyy"
+  // );
+
+  // console.log(fechaInicial, "fechaInicial");
+
+  // const result2 = formatDistance(
+  //   new Date(actualPost?.fechaFinal),
+  //   new Date(actualPost?.fechaInicio),
+  //   {
+  //     addSuffix: true,
+  //     locale: es,
+  //   }
+  // );
 
   return (
     <>
@@ -48,55 +67,100 @@ function PostCampaña() {
               />
               <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 px-4 mt-6 lg:mt-0">
                 <h2 className="text-sm title-font text-gray-500 tracking-widest">
-                  NOMBRE DE CAMAPAÑA
+                  NOMBRE DE CAMPAÑA
                 </h2>
                 <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
                   {actualPost?.nombre}
                 </h1>
-                <div className="flex mb-4">
-                  <span className="flex items-center gap-2 text-main font-medium">
+                <div className="flex mb-4 justify-between text-sm text-main">
+                  <span className="flex items-center gap-2  font-medium">
                     <HeartHandshake />
                     {aprovedDonations.length} Donaciones
                   </span>
+                  <span className="">
+                    Termina en{" "}
+                    {formatDistanceToNow(new Date(actualPost.fechaFinal), {
+                      locale: es,
+                    })}
+                  </span>
                 </div>
+
                 <p className="leading-relaxed break-words">
                   {actualPost?.descripcion}
                 </p>
-                <div className="flex justify-between  mt-6  pb-5 border-b-2 border-gray-100 mb-5">
-                  <p className="flex items-center gap-2 text-2xl">
+                <div className="mt-5">
+                  <ProgressBar
+                    progress={parseInt(activeDonations)}
+                    total={parseInt(actualPost?.meta)}
+                  />
+                </div>
+                <div className="flex justify-between  mt-4  pb-5 border-b-2 border-gray-100 mb-5">
+                  <p className="flex items-center gap-2 text-lg sm:text-2xl">
                     Recaudado
                     <span className="font-bold">S/. {activeDonations} </span>
                     de
                     <span className="font-bold"> S/. {actualPost?.meta} </span>
                   </p>
                 </div>
+
                 <div className="mb-5">
                   <MainLinkButton link={`/campañas/${actualPost?.slug}/donar`}>
                     Donar
                   </MainLinkButton>
                 </div>
-                <div className="flex items-center justify-between pt-3">
-                  <button
-                    onClick={() => {
-                      handleShareURL(currentURL);
-                    }}
-                    className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white"
-                  >
-                    <Link2 strokeWidth={1} />
-                  </button>
-                  <button className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white">
+                <span className=" font-medium">
+                  Ayúdanos compartiendolo con tus familiares y amigos
+                </span>
+                <div className="flex items-center justify-between pt-3 gap-4">
+                  <div className="flex justify-between flex-1 border-r-2 border-gray-200 px-4">
+                    <button
+                      onClick={() => {
+                        handleShareURL(currentURL);
+                      }}
+                      className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white"
+                    >
+                      <Link2 strokeWidth={1} />
+                    </button>
+                    <a
+                      href={wspURL}
+                      target="_blank"
+                      className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white"
+                    >
+                      <img src="/svg/whatsApp.svg" alt="" />
+                    </a>
+                  </div>
+                  <div className="flex flex-1 ">
+                    <div className="flex  gap-2 text-left   flex-wrap ">
+                      Duracion:
+                      <p className="flex flex-wrap gap-4 font-semibold">
+                        <span>
+                          {format(
+                            new Date(actualPost.fechaInicio),
+                            "d 'de' MMMM",
+                            {
+                              locale: es,
+                            }
+                          )}
+                        </span>{" "}
+                        -{" "}
+                        <span>
+                          {format(
+                            new Date(actualPost.fechaFinal),
+                            "d 'de' MMMM",
+                            {
+                              locale: es,
+                            }
+                          )}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                  {/* <button className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white">
                     <Facebook strokeWidth={1} />
-                  </button>
-                  <button className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white">
+                  </button> */}
+                  {/* <button className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white">
                     <Linkedin strokeWidth={1} />
-                  </button>
-                  <a
-                    href={wspURL}
-                    target="_blank"
-                    className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white"
-                  >
-                    <img src="/svg/whatsApp.svg" alt="" />
-                  </a>
+                  </button> */}
                 </div>
               </div>
             </div>
@@ -110,7 +174,11 @@ function PostCampaña() {
                       HISTORIA
                     </span>
                     <span className="mt-1 text-gray-500 text-sm">
-                      {actualPost.fechaCreacion}
+                      {format(
+                        new Date(actualPost.fechaInicio),
+                        "d 'de' MMMM yyyy",
+                        { locale: es }
+                      )}
                     </span>
                   </div>
                   <div className="md:flex-grow">

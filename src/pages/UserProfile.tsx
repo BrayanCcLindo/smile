@@ -60,7 +60,7 @@ function UserProfile() {
                   to="/como-funciona"
                   className="text-sm font-semibold leading-6 text-white"
                 >
-                  Ver como funciona Smile <span aria-hidden="true">→</span>
+                  Ver cómo funciona Smile <span aria-hidden="true">→</span>
                 </Link>
               </div>
             </div>
