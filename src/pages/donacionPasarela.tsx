@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { Copy, CreditCard, Info, QrCode, ShieldCheck } from "lucide-react";
+import { Info, ShieldCheck } from "lucide-react";
 import { MouseEventHandler, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,8 +10,8 @@ import { Button } from "../components/mainLinkButton";
 import { format } from "date-fns";
 import { db } from "../firebase/firebase";
 import { doc, updateDoc } from "firebase/firestore";
-import YapeDialog from "../components/yapeDialog";
 import emailjs from "@emailjs/browser";
+import SelectPayment from "../components/selectPayment";
 
 type FormPayment = {
   mail: string;
@@ -48,8 +48,7 @@ function DonacionPasarela() {
 
   // const [image, setImage] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
-  const cuentaRef = useRef<HTMLParagraphElement>(null);
-  const InterCuentaRef = useRef<HTMLParagraphElement>(null);
+
   // const smileTip = (Number(initialDonation) * 0.1).toFixed(2);
 
   // const totalDonation = (Number(initialDonation) + Number(smileTip)).toFixed(2);
@@ -65,36 +64,11 @@ function DonacionPasarela() {
     setInitialDonation(value);
   };
 
-  const handleAccountCopy = () => {
-    if (cuentaRef.current) {
-      navigator.clipboard
-        .writeText(cuentaRef.current.innerText)
-        .then(() => {
-          console.log("Contenido copiado al portapapeles!");
-        })
-        .catch((err) => {
-          console.log("Error al copiar el contenido: ", err);
-        });
-    }
-  };
-  const handleIntAccountCopy = () => {
-    if (InterCuentaRef.current) {
-      navigator.clipboard
-        .writeText(InterCuentaRef.current.innerText)
-        .then(() => {
-          console.log("Contenido copiado al portapapeles!");
-        })
-        .catch((err) => {
-          console.log("Error al copiar el contenido: ", err);
-        });
-    }
-  };
-
   const mySchema: ZodType<FormPayment> = z.object({
     monto: z.string().min(1, { message: "Ingrese el monto a donar" }),
     mail: z.string().email().min(1, { message: "Este campo es requerido" }),
     id_campana: z.string(),
-    nombre: z.string().min(1, { message: "Este campo es requerido" }),
+    nombre: z.string(),
     operacion: z.string().min(1, { message: "Este campo es requerido" }),
     // imagen: z
     //   .instanceof(FileList)
@@ -299,199 +273,89 @@ function DonacionPasarela() {
                       usuarios que donen.
                     </p>
                   </div>
-                  <fieldset className="">
-                    <legend className=" font-medium title-font leading-6 text-gray-900">
-                      Metodo de Pago
-                    </legend>
+                  <h3 className=" font-medium title-font leading-6 text-gray-900">
+                    Metodo de Pago
+                  </h3>
+                  <SelectPayment />
+                  <div className="mt-2 sr-only">
+                    <input
+                      {...register("id_campana")}
+                      id="id_campana"
+                      name="id_campana"
+                      defaultValue={actualPost.campañaId}
+                      className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                  <fieldset className="mt-6 ">
+                    <h3 className=" font-medium title-font leading-6 text-gray-900 ">
+                      ¿Hiciste tu donación con Yape, Plin o Transferencia?
+                    </h3>
+                    <p>Ayúdanos a validar tu donación. </p>
 
-                    <div className="mt-6  border border-gray-300 rounded-xl pb-6">
+                    <div className="mt-6  border border-gray-300 rounded-xl py-6">
                       <div className=" border-gray-300">
                         <div className="space-y-6">
-                          <div className="">
-                            <div className="col-span-3 sm:col-span-full text-gray-900">
-                              <div className="flex flex-col  px-10 p-5 text-sm border-b border-gray-300">
-                                <img
-                                  width={40}
-                                  height={40}
-                                  src="/Images/logo-paypal.jpg"
-                                  alt=""
-                                />
-                                <h3 className=" font-medium leading-6">
-                                  PayPal
-                                </h3>
-
-                                <h3 className=" font-medium leading-6 mt-4 ">
-                                  Titular
-                                </h3>
-                                <p>
-                                  Julio Cervantes Esponda{" "}
-                                  <span className="text-gray-500">
-                                    @cesar0511
-                                  </span>
-                                </p>
-                                <a
-                                  className="bg-gradient-to-r flex gap-4 items-center justify-center  from-main to-[#299cd5] hover:from-[#299cd5] hover:to-main text-white font-semibold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out text-sm mt-5"
-                                  href="https://www.paypal.me/cesar0511"
-                                  target="_blank"
-                                >
-                                  Donar con PayPal
-                                </a>
-                              </div>
-                            </div>
-                            <div className="flex  items-center gap-x-3 p-6 border-">
+                          <div className="grid grid-cols-1 gap-x-3 gap-y-4 sm:grid-cols-6">
+                            <div className="col-span-3 sm:pr-0 sm:pl-10 px-10">
                               <label
-                                htmlFor="yape-plin"
-                                className="flex items-center gap-4 text-sm font-medium leading-6 text-gray-900"
+                                htmlFor="mail"
+                                className="block text-sm font-medium leading-6 text-gray-900"
                               >
-                                <QrCode strokeWidth={1} /> Yape o Plin
+                                Nombre
                               </label>
+                              <div className="mt-2">
+                                <input
+                                  {...register("nombre")}
+                                  id="nombre"
+                                  name="nombre"
+                                  className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
+                                />
+                              </div>
                             </div>
-                            <div className="grid grid-cols-1 gap-x-3 gap-y-4 sm:grid-cols-6">
-                              <div className="py-5 px-10 flex flex-col col-span-3 sm:col-span-full gap-x-3 gap-y-4 border-b border-gray-300">
-                                <div className="col-span-full">
-                                  <YapeDialog type="yape" />
-                                </div>
+                            <div className="col-span-3 sm:pr-10 sm:pl-0 px-10 ">
+                              <label
+                                htmlFor="mail"
+                                className="block text-sm font-medium leading-6 text-gray-900"
+                              >
+                                Correo
+                              </label>
+                              <div className="mt-2">
+                                <input
+                                  {...register("mail")}
+                                  id="mail"
+                                  name="mail"
+                                  className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
+                                />
                               </div>
-
-                              <div className="col-span-3 sm:col-span-full ">
-                                <div className="flex  items-center gap-x-3  px-6 pb-6 pt-3">
-                                  <label
-                                    htmlFor="transferencia"
-                                    className="flex items-center gap-4 text-sm font-medium leading-6 text-gray-900"
-                                  >
-                                    <CreditCard strokeWidth={1} /> Transferencia
-                                  </label>
-                                </div>
-                                <div className="mt-2 sr-only">
-                                  <input
-                                    {...register("id_campana")}
-                                    id="id_campana"
-                                    name="id_campana"
-                                    defaultValue={actualPost.campañaId}
-                                    className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
-                                  />
-                                </div>
-                              </div>
-
-                              <div className="col-span-3 sm:col-span-full text-gray-900">
-                                <div className="flex flex-col  px-10 pb-5 text-sm border-b border-gray-300">
-                                  <h3 className=" font-medium leading-6">
-                                    Banco
-                                  </h3>
-                                  <div className="flex gap-4 items-center">
+                            </div>
+                            <div className="col-span-3 sm:col-span-full px-10">
+                              <div className=" relative ">
+                                <label
+                                  htmlFor="mail"
+                                  className="block text-sm font-medium leading-6 text-gray-900"
+                                >
+                                  N° de Operación
+                                </label>
+                                <div className="  group absolute right-0 top-0">
+                                  <Info className="" color="#cccccc" />
+                                  <div className="p-5 bg-[#f2f2f2] absolute right-0 top-0 translate-x-10 rounded-xl hidden  z-10 group-hover:flex w-[300px] translate-y-10">
                                     <img
-                                      className="object-cover object-center rounded-lg"
-                                      width={40}
-                                      height={40}
-                                      src="https://pbs.twimg.com/profile_images/1607365667950305283/HpdPjItg_400x400.jpg"
+                                      width={300}
+                                      height={300}
+                                      className="object-cover object-center"
+                                      src="/Images/comprovante.jpg"
                                       alt=""
                                     />
-                                    <p>InterBank</p>
-                                  </div>
-                                  <h3 className=" font-medium leading-6 mt-4 ">
-                                    Titular
-                                  </h3>
-                                  <p>JULIO CESAR CERVANTES ESPONDA</p>
-                                  <h3 className=" font-medium leading-6 mt-4 ">
-                                    Tipo de Cuenta
-                                  </h3>
-                                  <p>Cuenta Simple - Soles</p>
-                                  <h3 className=" font-medium leading-6 mt-4 ">
-                                    Numeró de Cuenta
-                                  </h3>
-                                  <p
-                                    ref={cuentaRef}
-                                    className="border flex justify-between items-center border-gray-300 p-2 rounded-lg"
-                                  >
-                                    5153140681443
-                                    <button
-                                      type="button"
-                                      onClick={handleAccountCopy}
-                                      className="text-main"
-                                    >
-                                      <Copy />
-                                    </button>
-                                  </p>
-                                  <h3 className=" font-medium leading-6 mt-4 ">
-                                    Numeró de Cuenta Interbancario (CCI)
-                                  </h3>
-                                  <p
-                                    ref={InterCuentaRef}
-                                    className="border flex justify-between items-center border-gray-300 p-2 rounded-lg mb-4"
-                                  >
-                                    00351501314068144347
-                                    <button
-                                      type="button"
-                                      onClick={handleIntAccountCopy}
-                                      className="text-main"
-                                    >
-                                      <Copy />
-                                    </button>
-                                  </p>
-                                  <YapeDialog type="transferencia" />
-                                </div>
-                              </div>
-                              <div className="col-span-3 sm:pr-0 sm:pl-10 px-10">
-                                <label
-                                  htmlFor="mail"
-                                  className="block text-sm font-medium leading-6 text-gray-900"
-                                >
-                                  Nombre
-                                </label>
-                                <div className="mt-2">
-                                  <input
-                                    {...register("nombre")}
-                                    id="nombre"
-                                    name="nombre"
-                                    className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-span-3 sm:pr-10 sm:pl-0 px-10 ">
-                                <label
-                                  htmlFor="mail"
-                                  className="block text-sm font-medium leading-6 text-gray-900"
-                                >
-                                  Correo
-                                </label>
-                                <div className="mt-2">
-                                  <input
-                                    {...register("mail")}
-                                    id="mail"
-                                    name="mail"
-                                    className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-span-3 sm:col-span-full px-10">
-                                <div className=" relative ">
-                                  <label
-                                    htmlFor="mail"
-                                    className="block text-sm font-medium leading-6 text-gray-900"
-                                  >
-                                    N° de Operación
-                                  </label>
-                                  <div className="  group absolute right-0 top-0">
-                                    <Info className="" color="#cccccc" />
-                                    <div className="p-5 bg-[#f2f2f2] absolute right-0 top-0 translate-x-10 rounded-xl hidden  z-10 group-hover:flex w-[300px] translate-y-10">
-                                      <img
-                                        width={300}
-                                        height={300}
-                                        className="object-cover object-center"
-                                        src="/Images/comprovante.jpg"
-                                        alt=""
-                                      />
-                                    </div>
                                   </div>
                                 </div>
-                                <div className="mt-2">
-                                  <input
-                                    {...register("operacion")}
-                                    id="operacion"
-                                    name="operacion"
-                                    className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
-                                  />
-                                </div>
+                              </div>
+                              <div className="mt-2">
+                                <input
+                                  {...register("operacion")}
+                                  id="operacion"
+                                  name="operacion"
+                                  className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
+                                />
                               </div>
                             </div>
                           </div>
@@ -641,7 +505,7 @@ function DonacionPasarela() {
                         <Button type="submit">Donar Ahora</Button>
                       )} */}
                     <div className="w-full mt-3">
-                      <Button type="submit">Enviar Comprobante</Button>
+                      <Button type="submit">Validar Donación</Button>
                     </div>
 
                     <p className="text-sm text-gray-500 mt-5">

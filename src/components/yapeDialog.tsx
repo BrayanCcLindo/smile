@@ -1,5 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { ListTodo, TriangleAlert, X } from "lucide-react";
+import { ListTodo, TriangleAlert, Vote, X } from "lucide-react";
 function YapeDialog({ type }: { type: "transferencia" | "yape" }) {
   return (
     <Dialog.Root>
@@ -23,18 +23,25 @@ function YapeDialog({ type }: { type: "transferencia" | "yape" }) {
                 <ListTodo />
               </div>
               <p className="flex-grow pl-4">
-                Cuando finalices la transferencia envianos el{" "}
-                <span className="font-medium">Número de Operacion&nbsp;</span>
-                de la transferencia que te entrega tu banco
+                Cuando finalices la transferencia envíanos el{" "}
+                <span className="font-medium">Número de operación&nbsp;</span>
+                de la transferencia que te entrega tu banco.
+              </p>
+            </li>
+            <li className="flex relative  ">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full text-main inline-flex items-center justify-center  relative z-10">
+                <Vote />
+              </div>
+              <p className="flex-grow pl-4">
+                Por favor, déjanos tus datos en el formulario breve de abajo
+                para{" "}
+                <span className="font-medium">validar tu donación&nbsp;</span>y
+                mantenerte informado sobre el uso de los fondos recaudados.
               </p>
             </li>
           </ul>
           {type === "yape" && (
             <div className="flex flex-col justify-center items-center">
-              <h3 className=" font-medium leading-6 mt-4 ">
-                Escanear código QR o yapear a:
-              </h3>
-              <p>912923010</p>
               <img
                 className="object-cover object-center w-2/5 h-w-2/5"
                 src="/Images/YapeCesar.jpeg"
