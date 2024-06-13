@@ -306,16 +306,46 @@ function DonacionPasarela() {
 
                     <div className="mt-6  border border-gray-300 rounded-xl pb-6">
                       <div className=" border-gray-300">
-                        <div className="flex  items-center gap-x-3 p-6 border-">
-                          <label
-                            htmlFor="yape-plin"
-                            className="flex items-center gap-4 text-sm font-medium leading-6 text-gray-900"
-                          >
-                            <QrCode strokeWidth={1} /> Yape o Plin
-                          </label>
-                        </div>
                         <div className="space-y-6">
                           <div className="">
+                            <div className="col-span-3 sm:col-span-full text-gray-900">
+                              <div className="flex flex-col  px-10 p-5 text-sm border-b border-gray-300">
+                                <img
+                                  width={40}
+                                  height={40}
+                                  src="/Images/logo-paypal.jpg"
+                                  alt=""
+                                />
+                                <h3 className=" font-medium leading-6">
+                                  PayPal
+                                </h3>
+
+                                <h3 className=" font-medium leading-6 mt-4 ">
+                                  Titular
+                                </h3>
+                                <p>
+                                  Julio Cervantes Esponda{" "}
+                                  <span className="text-gray-500">
+                                    @cesar0511
+                                  </span>
+                                </p>
+                                <a
+                                  className="bg-gradient-to-r flex gap-4 items-center justify-center  from-main to-[#299cd5] hover:from-[#299cd5] hover:to-main text-white font-semibold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out text-sm mt-5"
+                                  href="https://www.paypal.me/cesar0511"
+                                  target="_blank"
+                                >
+                                  Donar con PayPal
+                                </a>
+                              </div>
+                            </div>
+                            <div className="flex  items-center gap-x-3 p-6 border-">
+                              <label
+                                htmlFor="yape-plin"
+                                className="flex items-center gap-4 text-sm font-medium leading-6 text-gray-900"
+                              >
+                                <QrCode strokeWidth={1} /> Yape o Plin
+                              </label>
+                            </div>
                             <div className="grid grid-cols-1 gap-x-3 gap-y-4 sm:grid-cols-6">
                               <div className="py-5 px-10 flex flex-col col-span-3 sm:col-span-full gap-x-3 gap-y-4 border-b border-gray-300">
                                 <div className="col-span-full">
