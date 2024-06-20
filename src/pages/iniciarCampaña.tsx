@@ -15,14 +15,12 @@ function NuevaCampaña() {
               Ayúdanos a definir tu Smile
             </h1>
             <p className="sm:w-3/5 leading-relaxed text-base sm:pl-10 pl-0">
-              Escoge el objetivo de lo que necesitas y habilita funcionalidades
-              exclusivas. <br />
-              <span className="font-bold text-main">Los Smilers</span>, al estar
-              en línea, tienen una cobertura mayor ya que puedes recibir aportes
-              desde cualquier parte del Mundo. Tu comunidad, familia y amigos
-              pueden difundir la información compartiendo el link único de tu
-              Smile por redes sociales y llegar a personas que no conoces, pero
-              comparten tus ideas.
+              ¡Haz realidad tus sueños y genera impacto! ¿Quieres financiar tu
+              proyecto o causa pero no sabes por dónde empezar? ¡Estás en el
+              lugar correcto!
+              <span className="font-bold text-main"> SMILE</span> te ofrece tres
+              opciones de campañas para que elijas la que mejor se adapte a tus
+              necesidades:
             </p>
           </div>
         </div>
@@ -46,12 +44,12 @@ function NuevaCampaña() {
                   CATEGORIA
                 </h2>
                 <h1 className="title-font text-lg font-medium text-gray-900 mb-3 group-hover:text-main">
-                  Gift Smile
+                  Albergues, fundaciones y ONG
                 </h1>
                 <p className="leading-relaxed mb-3 ">
-                  Ideal para los momentos que necesitas apoyo de tu comunidad,
-                  como movimientos ciudadanos, proyectos personales, de animales
-                  o momentos difíciles cuando la unión hará la diferencia.
+                  Consigue donaciones para tu causa social y sigue generando un
+                  impacto positivo en tu comunidad. Comparte tu historia y
+                  moviliza a tus seguidores para que te apoyen.
                 </p>
                 <div className="flex items-center flex-wrap ">
                   <p className="text-main inline-flex font-semibold items-center md:mb-2 lg:mb-0">
@@ -92,12 +90,12 @@ function NuevaCampaña() {
                   CATEGORIA
                 </h2>
                 <h1 className=" title-font text-lg font-medium text-gray-900 mb-3 group-hover:text-main">
-                  Start Smile
+                  Emprendedores
                 </h1>
                 <p className="leading-relaxed mb-3">
-                  Ideal para creadores, diseñadores, innovadores que tienen un
-                  nuevo producto o servicio y desean financiarlo con una
-                  pre-venta en una campaña todo o nada.
+                  Lanza tu proyecto innovador con nuestro modelo "Todo o Nada".
+                  Recauda fondos a través de la compra anticipada de tus
+                  productos o servicios y alcanza tus metas financieras.
                 </p>
                 <div className="flex items-center flex-wrap ">
                   <p className="text-main inline-flex font-semibold items-center md:mb-2 lg:mb-0">
@@ -138,11 +136,12 @@ function NuevaCampaña() {
                   CATEGORIA
                 </h2>
                 <h1 className=" title-font text-lg font-medium text-gray-900 mb-3 group-hover:text-main">
-                  Social Smile
+                  Impacto Social
                 </h1>
                 <p className="leading-relaxed mb-3">
-                  Recibe todos los servicios de Smile. Marca exclusiva para
-                  fundaciones, emergencias por catástrofes naturales o médicas.
+                  Financia proyectos que promuevan la educación, la salud, la
+                  igualdad, la sostenibilidad y más. ¡Contribuye a un mundo
+                  mejor y moviliza a otros para que se sumen a tu causa!
                 </p>
                 <div className="flex items-center flex-wrap ">
                   <p className="text-main inline-flex font-semibold items-center md:mb-2 lg:mb-0">

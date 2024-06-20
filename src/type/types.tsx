@@ -71,6 +71,7 @@ export type FormData = {
   "confirm-password": string;
 };
 export enum SmileType {
-  Social = "Social Smile",
-  Gift = "Gift Smile",
+  Social = "Impacto Social",
+  Fundaciones = "Albergues, fundaciones y ONG",
+  Emprendedores = "Emprendedores",
 }

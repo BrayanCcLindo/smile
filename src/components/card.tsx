@@ -37,7 +37,8 @@ function Card({
     <article
       className={twMerge(
         "group flex max-w-xl flex-col items-start justify-between relative border shadow duration-150 hover:duration-150 rounded-xl hover:shadow-md   group overflow-hidden",
-        campaña.tipo === SmileType.Gift && "hover:shadow-main hover:shadow-lg",
+        campaña.tipo === SmileType.Fundaciones &&
+          "hover:shadow-main hover:shadow-lg",
         campaña.tipo === SmileType.Social &&
           "hover:shadow-alternative  hover:shadow-lg"
       )}
@@ -52,11 +53,11 @@ function Card({
       <div
         className={twMerge(
           "flex p-3  items-center justify-between gap-3 ",
-          campaña.tipo === SmileType.Gift && "group-hover:text-main",
+          campaña.tipo === SmileType.Fundaciones && "group-hover:text-main",
           campaña.tipo === SmileType.Social && "group-hover:text-alternative"
         )}
       >
-        {campaña.tipo === SmileType.Gift ? (
+        {campaña.tipo === SmileType.Fundaciones ? (
           <Rocket className="min-w-[30px] h-[30px] " />
         ) : (
           <HandHeart className="min-w-[30px] h-[30px] " />
@@ -65,7 +66,7 @@ function Card({
         <h2
           className={twMerge(
             "mt-3 text-lg font-semibold leading-6 text-gray-900   line-clamp-1 ",
-            campaña.tipo === SmileType.Gift && "group-hover:text-main",
+            campaña.tipo === SmileType.Fundaciones && "group-hover:text-main",
             campaña.tipo === SmileType.Social && "group-hover:text-alternative"
           )}
         >
@@ -85,7 +86,7 @@ function Card({
           className={twMerge(
             `absolute z-[2] rounded-full top-2 right-2  px-3 py-1.5 font-medium `,
             campaña.tipo === SmileType.Social && "bg-alternative text-white",
-            campaña.tipo === SmileType.Gift && "bg-main text-white"
+            campaña.tipo === SmileType.Fundaciones && "bg-main text-white"
           )}
         >
           {campaña.tipo}
@@ -97,7 +98,7 @@ function Card({
             className={twMerge(
               "flex items-center gap-2 font-medium",
               campaña.tipo === SmileType.Social && " text-alternative",
-              campaña.tipo === SmileType.Gift && " text-main"
+              campaña.tipo === SmileType.Fundaciones && " text-main"
             )}
           >
             <HeartHandshake />
@@ -108,7 +109,7 @@ function Card({
             className={twMerge(
               "flex items-center gap-1 ",
               campaña.tipo === SmileType.Social && " text-alternative",
-              campaña.tipo === SmileType.Gift && " text-main"
+              campaña.tipo === SmileType.Fundaciones && " text-main"
             )}
           >
             <Clock />

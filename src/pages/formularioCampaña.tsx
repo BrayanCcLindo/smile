@@ -12,6 +12,7 @@ import { format } from "date-fns";
 import { useGetCampaigns } from "../Api/getCampaigns";
 import { Button } from "../components/mainLinkButton";
 import Loader from "../components/loader";
+import { SmileType } from "../type/types";
 
 type FormCampaign = {
   name: string;
@@ -207,9 +208,13 @@ function FormularioCamapaña() {
                         name="type"
                         className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-main  sm:text-sm sm:leading-6"
                       >
-                        <option value={"Gift Smile"}>Gift Smile</option>
-                        {/* <option value={"Start Smile"}>Start Smile</option> */}
-                        <option value={"Social Smile"}>Social Smile</option>
+                        <option value={SmileType.Fundaciones}>
+                          Albergues, fundaciones y ONG
+                        </option>
+                        <option value={SmileType.Emprendedores}>
+                          Emprendedores
+                        </option>
+                        <option value={SmileType.Social}>Impacto Social</option>
                       </select>
                     </div>
                   </div>
