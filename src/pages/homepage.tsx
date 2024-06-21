@@ -25,9 +25,11 @@ function Homepage() {
             Smile
           </h1>
           <p className=" my-6 text-lg leading-8 text-gray-600 text-center">
-            ¡Bienvenidos! Aquí, cada clic es una oportunidad para transformar
-            vidas
-            <br /> y apoyar proyectos que cambian el mundo.
+            ¡Descubre proyectos que te apasionan y hazlos realidad! Apoya causas
+            sociales, impulsa emprendimientos innovadores y genera un impacto
+            positivo en tu comunidad. Dona o realiza precompras en campañas que
+            te inspiren.
+            <br /> ¡Explora SMILE y encuentra proyectos que te emocionen!
           </p>
           <div className="mt-10 flex items-center justify-center gap-6 flex-wrap lg:justify-start">
             <MainLinkButton link="/campañas">Donar Ahora</MainLinkButton>
