@@ -22,14 +22,14 @@ function Homepage() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center flex flex-col items-center">
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Smile
+            Kuzi
           </h1>
           <p className=" my-6 text-lg leading-8 text-gray-600 text-center">
             ¡Descubre proyectos que te apasionan y hazlos realidad! Apoya causas
             sociales, impulsa emprendimientos innovadores y genera un impacto
             positivo en tu comunidad. Dona o realiza precompras en campañas que
             te inspiren.
-            <br /> ¡Explora SMILE y encuentra proyectos que te emocionen!
+            <br /> ¡Explora KUZI y encuentra proyectos que te emocionen!
           </p>
           <div className="mt-10 flex items-center justify-center gap-6 flex-wrap lg:justify-start">
             <MainLinkButton link="/campañas">Donar Ahora</MainLinkButton>
@@ -86,7 +86,7 @@ function Homepage() {
               id="campañasTop"
               className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900"
             >
-              Recaudar fondos en Smile es fácil, eficaz y fiable.
+              Recaudar fondos en Kuzi es fácil, eficaz y fiable.
             </h1>
             <div className="h-1 w-20 bg-main rounded"></div>
           </div>
@@ -100,7 +100,7 @@ function Homepage() {
                   Transparencia
                 </h2>
                 <p className="leading-relaxed text-base text-center">
-                  Reportes claros y en tiempo Real. Tus 'Smilers' podrán ver el
+                  Reportes claros y en tiempo Real. Tus 'Kuzis' podrán ver el
                   total recaudado y recibir actualizaciones detalladas sobre el
                   uso de los recursos
                 </p>
@@ -115,7 +115,7 @@ function Homepage() {
                   Seguridad
                 </h2>
                 <p className="leading-relaxed text-base text-center">
-                  Cada 'Smiler' es verificado por nuestro equipo y sistema para
+                  Cada 'Kuzi' es verificado por nuestro equipo y sistema para
                   proteger a todos los usuarios. Además, cada contribución se
                   somete a rigurosos filtros de seguridad
                 </p>
@@ -130,8 +130,8 @@ function Homepage() {
                   Agilidad
                 </h2>
                 <p className="leading-relaxed text-base text-center">
-                  Crea tu Smile en cuestión de segundos y comienza a recibir
-                  contribuciones de inmediato. Tus 'Smilers' podrán colaborar
+                  Crea tu Kuzi en cuestión de segundos y comienza a recibir
+                  contribuciones de inmediato. Tus 'Kuzis' podrán colaborar
                   utilizando su método de pago preferido
                 </p>
               </div>

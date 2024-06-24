@@ -62,7 +62,7 @@ function LogIn() {
         <img
           className="mx-auto h-10 w-auto"
           src="/Images/smileOficilLogo (1).png"
-          alt="smile-logo"
+          alt="kuzi-logo"
         />
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Acceda a su cuenta
@@ -142,7 +142,7 @@ function LogIn() {
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500 ">
-          ¿No tiene cuenta Smile?
+          ¿No tiene cuenta Kuzi?
           <Link
             to="/sign-in"
             className="ml-1 font-semibold leading-6 text-indigo-600 hover:text-indigo-500"

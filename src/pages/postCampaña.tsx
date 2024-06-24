@@ -28,7 +28,7 @@ function PostCampaña() {
     .toFixed(2);
 
   const currentURL = window.location.href;
-  const wspURL = `https://api.whatsapp.com/send?text=${actualPost?.nombre} aportemos en su Smile 🚀 → ${currentURL}`;
+  const wspURL = `https://api.whatsapp.com/send?text=${actualPost?.nombre} aportemos en su Kuzi 🚀 → ${currentURL}`;
 
   // const fechaInicial = format(
   //   new Date(actualPost?.fechaInicio),
@@ -193,7 +193,7 @@ function PostCampaña() {
                   <div className="py-8 flex flex-col flex-wrap md:flex-nowrap md:flex-row">
                     <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
                       <span className="font-semibold title-font text-gray-700">
-                        SMILERS
+                        DONADORES KUZI
                       </span>
                     </div>
                     <div className="md:flex-grow">

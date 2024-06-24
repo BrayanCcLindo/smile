@@ -18,7 +18,7 @@ function ComoFunciona() {
           <div className="flex flex-wrap w-full justify-between">
             <div className="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6">
               <h1 className="title-font  text-3xl mb-4 font-medium text-main">
-                ¿Cómo funcionan las donaciones en Smile?
+                ¿Cómo funcionan las donaciones en Kuzi?
               </h1>
               <div className="flex relative pb-12">
                 <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
@@ -121,10 +121,10 @@ function ComoFunciona() {
           <div className="container px-5  mx-auto">
             <div className="flex flex-col text-center w-full mb-20">
               <h2 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-main">
-                ¿Cómo funcionan las campañas en Smile?
+                ¿Cómo funcionan las campañas en Kuzi?
               </h2>
               <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-                Puedes crear un smile para diversos proyectos como:
+                Puedes crear un Kuzi para diversos proyectos como:
               </p>
               <div className="flex items-center justify-center flex-wrap ">
                 <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
@@ -160,22 +160,22 @@ function ComoFunciona() {
           </div>
           <div className="flex flex-col  w-full mb-20">
             <h2 className="sm:text-3xl text-2xl font-medium text-center title-font mb-4 text-main">
-              ¿Quiénes pueden crear una Smile?
+              ¿Quiénes pueden crear una Kuzi?
             </h2>
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-              <span className="font-medium">¡Todos pueden crear un Smile!</span>{" "}
+              <span className="font-medium">¡Todos pueden crear un Kuzi!</span>{" "}
               Si tienes un sueño, un proyecto, una iniciativa social o una idea
-              de negocio, Smile es para ti. No importa si eres una sola persona
-              o una comunidad unida por el mismo ideal.
+              de negocio, Kuzi es para ti. No importa si eres una sola persona o
+              una comunidad unida por el mismo ideal.
             </p>
 
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base mt-5">
               <span className="font-medium">
-                🚀 Smile está abierta a estudiantes, innovadores, fundaciones,
+                🚀 Kuzi está abierta a estudiantes, innovadores, fundaciones,
                 activistas, jóvenes, adultos, emprendedores… ¡para TODOS!
               </span>
               <br />
-              ¿Qué esperas para unirte al #SmilePower 💪?{" "}
+              ¿Qué esperas para unirte al #KuziPower 💪?{" "}
               <Link
                 to="/nueva-campaña"
                 className="text-sm font-semibold leading-6 text-main"
@@ -203,7 +203,7 @@ function ComoFunciona() {
                 Puedes escoger la prioridad de tu impacto.
               </h2>
               <div className="leading-relaxed">
-                Los Smilers, al estar en línea, disfrutan de una cobertura
+                Los Kuzis, al estar en línea, disfrutan de una cobertura
                 ampliada, permitiéndoles recibir aportes desde cualquier rincón
                 del Perú. Esta conectividad abre un mundo de posibilidades,
                 asegurando que cada contribución, sin importar su origen,

@@ -57,7 +57,7 @@ function Footer() {
               </div>
               <div className=" py-2 text-lg leading-8  max-w-xs">
                 <h3 className=" font-medium title-font ">
-                  Smile protege tu donativo
+                  Kuzi protege tu donativo
                 </h3>
                 {/* <p className="leading-8 text-base mt-2 text-gray-400">
                   Te garantizamos un reembolso completo de tu donativo durante

@@ -266,10 +266,10 @@ function DonacionPasarela() {
                   </div>
                   <div className="mt-10 mb-10">
                     <h3 className=" font-medium title-font text-gray-900">
-                      Aportación voluntaria a los servicios de Smile
+                      Aportación voluntaria a los servicios de Kuzi
                     </h3>
                     <p className="text-base mt-2">
-                      Smile aplica una comisión de la plataforma del 0 % a los
+                      Kuzi aplica una comisión de la plataforma del 0 % a los
                       usuarios que donen.
                     </p>
                   </div>
@@ -510,7 +510,7 @@ function DonacionPasarela() {
 
                     <p className="text-sm text-gray-500 mt-5">
                       Al elegir el método de pago anterior, aceptas los Términos
-                      de Servicio de Smile y declaras tu conformidad con la
+                      de Servicio de Kuzi y declaras tu conformidad con la
                       Declaración de Privacidad
                     </p>
                   </div>
@@ -518,7 +518,7 @@ function DonacionPasarela() {
                     <ShieldCheck strokeWidth={1} size={30} />
                     <div className="text-gray-900">
                       <h3 className=" font-medium title-font ">
-                        Smile protege tu donativo
+                        Kuzi protege tu donativo
                       </h3>
                       {/* <p className="text-sm text-gray-500 mt-2">
                         Te garantizamos un reembolso completo de tu donativo

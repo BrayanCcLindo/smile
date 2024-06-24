@@ -12,13 +12,13 @@ function NuevaCampaña() {
           </div>
           <div className="flex flex-wrap sm:flex-row flex-col py-6 mb-12">
             <h1 className="sm:w-2/5 text-gray-900 font-medium title-font text-2xl mb-2 sm:mb-0">
-              Ayúdanos a definir tu Smile
+              Ayúdanos a definir tu Kuzi
             </h1>
             <p className="sm:w-3/5 leading-relaxed text-base sm:pl-10 pl-0">
               ¡Haz realidad tus sueños y genera impacto! ¿Quieres financiar tu
               proyecto o causa pero no sabes por dónde empezar? ¡Estás en el
               lugar correcto!
-              <span className="font-bold text-main"> SMILE</span> te ofrece tres
+              <span className="font-bold text-main"> KUZI</span> te ofrece tres
               opciones de campañas para que elijas la que mejor se adapte a tus
               necesidades:
             </p>

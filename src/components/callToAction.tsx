@@ -12,7 +12,7 @@ function CallToAction() {
             </h2>
             <p className="mt-6 text-lg leading-8 ">
               Únete a los miles como tú que están marcando la diferencia con
-              Smile. ¡Tu ayuda importa!
+              Kuzi. ¡Tu ayuda importa!
             </p>
             <div className="mt-10 flex items-center justify-center gap-6 flex-wrap lg:justify-start">
               <MainLinkButton link="/campañas">Donar Ahora</MainLinkButton>
