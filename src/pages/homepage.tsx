@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import CallToAction from "../components/callToAction";
 import { useGetUserData } from "../Api/getUserData";
 import Loader from "../components/loader";
+import LogoSection from "../components/logoSection";
 // import { useSmileContext } from "../Api/userContext";
 
 function Homepage() {
@@ -70,6 +71,9 @@ function Homepage() {
           </div>
           <div className="flex justify-end items-center">
             <Link
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
               to="/campañas"
               className="text-sm mt-2 font-semibold leading-6 text-main"
             >
@@ -86,7 +90,7 @@ function Homepage() {
               id="campañasTop"
               className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900"
             >
-              Recaudar fondos en Kuzi es fácil, eficaz y fiable.
+              Recaudar fondos en Kuzi es fácil, eficaz y fiable
             </h1>
             <div className="h-1 w-20 bg-main rounded"></div>
           </div>
@@ -136,6 +140,9 @@ function Homepage() {
                 </p>
               </div>
             </div>
+          </div>
+          <div className="my-20">
+            <LogoSection />
           </div>
         </div>
       </div>

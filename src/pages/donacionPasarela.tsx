@@ -48,6 +48,9 @@ function DonacionPasarela() {
 
   // const [image, setImage] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
+  const validarDonacionRef = useRef<HTMLFieldSetElement>(null);
+  const montoDonacionRef = useRef<HTMLDivElement>(null);
+  const metodoPagoRef = useRef<HTMLHeadingElement>(null);
 
   // const smileTip = (Number(initialDonation) * 0.1).toFixed(2);
 
@@ -123,10 +126,40 @@ function DonacionPasarela() {
     }
   };
 
+  const handleValidationScroll = () => {
+    const offset = 105; // Ajusta este valor según tus necesidades
+    const element = validarDonacionRef?.current;
+    if (element) {
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
+  const handleMontoScroll = () => {
+    const offset = 150; // Ajusta este valor según tus necesidades
+    const element = montoDonacionRef?.current;
+    if (element) {
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
+  const handleMetodoDonacion = () => {
+    const offset = 105; // Ajusta este valor según tus necesidades
+    const element = metodoPagoRef?.current;
+    if (element) {
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       {actualPost ? (
-        <section className="text-gray-600 body-font">
+        <section className="text-gray-600 body-font mt-20">
           <div className="container  px-5 py-24 mx-auto flex flex-col">
             <div className=" lg:w-4/6 mx-auto">
               <div className="rounded-lg h-64 overflow-hidden">
@@ -156,7 +189,44 @@ function DonacionPasarela() {
                   onSubmit={handleSubmit(submitData)}
                   className="sm:w-1/2 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left"
                 >
-                  <h3 className="font-medium">Iniciar el Donativo</h3>
+                  <h3 className="font-medium">
+                    Realiza tu donación siguiendo estos sencillos pasos:
+                  </h3>
+
+                  <ul className="text-sm list-disc ml-4 marker:text-main mb-10 mt-4 space-y-2">
+                    <li>
+                      Elige el monto de tu donación{" "}
+                      <a
+                        className="font-medium text-main cursor-pointer"
+                        // href={"#validar-donacion"}
+                        onClick={handleMontoScroll}
+                      >
+                        aquí
+                      </a>
+                    </li>
+
+                    <li>
+                      Escoge el metodo de pago, yape/plin o transferencia,{" "}
+                      <a
+                        className="font-medium text-main cursor-pointer"
+                        // href={"#validar-donacion"}
+                        onClick={handleMetodoDonacion}
+                      >
+                        aquí
+                      </a>
+                    </li>
+                    <li>
+                      Una vez realizada la donación, ayudanos a validarlo
+                      rellenando el siguiente{" "}
+                      <a
+                        className="font-medium text-main cursor-pointer"
+                        // href={"#validar-donacion"}
+                        onClick={handleValidationScroll}
+                      >
+                        formulario
+                      </a>
+                    </li>
+                  </ul>
                   <ul className="flex items-center gap-2 justify-between mt-3">
                     <li>
                       <ButtonDonations
@@ -230,7 +300,7 @@ function DonacionPasarela() {
                     </li>
                   </ul>
 
-                  <div className="mt-4">
+                  <div ref={montoDonacionRef} className="mt-4">
                     <div className="mt-2 relative">
                       <span className="px-4 py-1 rounded-full text-sm  text-black absolute left-[4px] top-1/2 -translate-y-1/2">
                         S/.
@@ -273,7 +343,10 @@ function DonacionPasarela() {
                       usuarios que donen.
                     </p>
                   </div>
-                  <h3 className=" font-medium title-font leading-6 text-gray-900">
+                  <h3
+                    ref={metodoPagoRef}
+                    className=" font-medium title-font leading-6 text-gray-900"
+                  >
                     Metodo de Pago
                   </h3>
                   <SelectPayment />
@@ -286,7 +359,11 @@ function DonacionPasarela() {
                       className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
                     />
                   </div>
-                  <fieldset className="mt-6 ">
+                  <fieldset
+                    ref={validarDonacionRef}
+                    id="validar-donacion"
+                    className="mt-6 "
+                  >
                     <h3 className=" font-medium title-font leading-6 text-gray-900 ">
                       ¿Hiciste tu donación con Yape, Plin o Transferencia?
                     </h3>
