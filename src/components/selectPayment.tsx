@@ -59,7 +59,7 @@ function SelectPayment() {
                 width={40}
                 height={40}
                 src="/Images/logo-paypal.jpg"
-                alt=""
+                alt="logo-paypal"
               />{" "}
               Paypal
             </label>

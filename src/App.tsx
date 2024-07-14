@@ -17,10 +17,13 @@ import Campañas from "./pages/campañas";
 import NuevaCampaña from "./pages/iniciarCampaña";
 import PostCampaña from "./pages/postCampaña";
 import FormularioCamapaña from "./pages/formularioCampaña";
+import { Toaster } from "sonner";
+
 // import CampañasFavoritas from "./pages/campañasFavoritas";
 import DonacionPasarela from "./pages/donacionPasarela";
 import Configuracion from "./pages/configuracion";
 // import Nosotros from "./pages/nosotros";
+import { useEffect, useState } from "react";
 
 function MainLayout() {
   return (
@@ -49,8 +52,29 @@ function RouteSignIn({ children }: { children: React.ReactNode }) {
 }
 
 function App() {
+  const [isLoading, setIsloading] = useState<boolean>(false);
+  useEffect(() => {
+    if (isLoading) {
+      const timer = setTimeout(() => {
+        setIsloading(false);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
+
   return (
     <SmileProvider>
+      <Toaster
+        richColors
+        theme="light"
+        // toastOptions={{
+        //   unstyled: true,
+
+        //   classNames: { toast: "bg-red-500", title: "text-red-500" },
+        // }}
+        position="top-right"
+      />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainLayout />}>
@@ -94,7 +118,12 @@ function App() {
             />
             <Route
               path="/campañas/:slug/donar"
-              element={<DonacionPasarela />}
+              element={
+                <DonacionPasarela
+                  setIsloading={setIsloading}
+                  isLoading={isLoading}
+                />
+              }
             />
             <Route path="/campañas/:slug" element={<PostCampaña />} />
             {/* <Route path="/perfil" element={<UserProfile />} /> */}

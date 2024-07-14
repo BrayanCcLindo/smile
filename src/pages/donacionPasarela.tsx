@@ -12,6 +12,7 @@ import { db } from "../firebase/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import emailjs from "@emailjs/browser";
 import SelectPayment from "../components/selectPayment";
+import { toast } from "sonner";
 
 type FormPayment = {
   mail: string;
@@ -41,7 +42,13 @@ const ButtonDonations = ({ value, text, onclick }: ButtonDontationType) => {
   );
 };
 
-function DonacionPasarela() {
+function DonacionPasarela({
+  isLoading,
+  setIsloading,
+}: {
+  setIsloading: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoading: boolean;
+}) {
   const navigate = useNavigate();
 
   const [initialDonation, setInitialDonation] = useState("0");
@@ -52,12 +59,7 @@ function DonacionPasarela() {
   const montoDonacionRef = useRef<HTMLDivElement>(null);
   const metodoPagoRef = useRef<HTMLHeadingElement>(null);
 
-  // const smileTip = (Number(initialDonation) * 0.1).toFixed(2);
-
-  // const totalDonation = (Number(initialDonation) + Number(smileTip)).toFixed(2);
-
   const { slug } = useParams();
-  // const { user } = useGetUserData();
 
   const { data } = useGetCampaigns();
   const campaignIndex = data.findIndex((campaign) => campaign.slug === slug);
@@ -101,6 +103,7 @@ function DonacionPasarela() {
       ...actualPost,
       donaciones: [...actualPost.donaciones, donationYapeInfo],
     };
+    setIsloading(true);
 
     try {
       if (formRef.current) {
@@ -111,6 +114,7 @@ function DonacionPasarela() {
           .then(
             () => {
               console.log("SUCCESS!");
+              navigate(-1);
             },
             (error) => {
               console.log("FAILED...", error.text);
@@ -120,19 +124,26 @@ function DonacionPasarela() {
 
       const donationRef = doc(db, "campañas", actualPost.campañaId);
       updateDoc(donationRef, updatedYapeInfo);
-      navigate(-1);
+      toast.success("Su donación fue realizada con exito", {
+        duration: 3000,
+      });
     } catch (error) {
       console.log(error, "error al donar");
     }
   };
 
   const handleValidationScroll = () => {
-    const offset = 105; // Ajusta este valor según tus necesidades
+    // const offset = 105; // Ajusta este valor según tus necesidades
     const element = validarDonacionRef?.current;
     if (element) {
-      const y =
-        element.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({ top: y, behavior: "smooth" });
+      // const y =
+      //   element.getBoundingClientRect().top + window.pageYOffset - offset;
+      // window.scrollTo({ top: y, behavior: "smooth" });
+      element.scrollIntoView({
+        behavior: "smooth", // Desplazamiento suave
+        block: "center", // Alineación vertical al centro
+        inline: "nearest", // Alineación horizontal a la posición más cercana
+      });
     }
   };
 
@@ -364,7 +375,7 @@ function DonacionPasarela() {
                     id="validar-donacion"
                     className="mt-6 "
                   >
-                    <h3 className=" font-medium title-font leading-6 text-gray-900 ">
+                    <h3 className="font-medium title-font leading-6 text-gray-900 scroll-mt-11">
                       ¿Hiciste tu donación con Yape, Plin o Transferencia?
                     </h3>
                     <p>Ayúdanos a validar tu donación. </p>
@@ -582,7 +593,9 @@ function DonacionPasarela() {
                         <Button type="submit">Donar Ahora</Button>
                       )} */}
                     <div className="w-full mt-3">
-                      <Button type="submit">Validar Donación</Button>
+                      <Button type="submit" isLoading={isLoading}>
+                        Validar Donación
+                      </Button>
                     </div>
 
                     <p className="text-sm text-gray-500 mt-5">
