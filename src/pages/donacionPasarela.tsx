@@ -19,7 +19,7 @@ type FormPayment = {
   monto: string;
   id_campana: string;
   nombre: string;
-  operacion: string;
+  operacion: number;
   // imagen: FileList;
 };
 
@@ -74,7 +74,7 @@ function DonacionPasarela({
     mail: z.string().email().min(1, { message: "Este campo es requerido" }),
     id_campana: z.string(),
     nombre: z.string(),
-    operacion: z.string().min(1, { message: "Este campo es requerido" }),
+    operacion: z.number().min(1, { message: "Este campo es requerido" }),
     // imagen: z
     //   .instanceof(FileList)
     //   .refine((val) => val.length > 0, "Este campo es requerido"),
@@ -126,6 +126,7 @@ function DonacionPasarela({
       updateDoc(donationRef, updatedYapeInfo);
       toast.success("Su donación fue realizada con exito", {
         duration: 3000,
+        position: "top-center"
       });
     } catch (error) {
       console.log(error, "error al donar");
