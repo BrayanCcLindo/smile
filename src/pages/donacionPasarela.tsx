@@ -19,7 +19,7 @@ type FormPayment = {
   monto: string;
   id_campana: string;
   nombre: string;
-  operacion: number;
+  operacion: string;
   // imagen: FileList;
 };
 
@@ -52,6 +52,7 @@ function DonacionPasarela({
   const navigate = useNavigate();
 
   const [initialDonation, setInitialDonation] = useState("0");
+  const [numberOperation, setNumberOperation] = useState(0);
 
   // const [image, setImage] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
@@ -74,7 +75,7 @@ function DonacionPasarela({
     mail: z.string().email().min(1, { message: "Este campo es requerido" }),
     id_campana: z.string(),
     nombre: z.string(),
-    operacion: z.number().min(1, { message: "Este campo es requerido" }),
+    operacion: z.string().min(1, { message: "Este campo es requerido" }),
     // imagen: z
     //   .instanceof(FileList)
     //   .refine((val) => val.length > 0, "Este campo es requerido"),
@@ -89,11 +90,12 @@ function DonacionPasarela({
   });
 
   const submitData = async (data: FormPayment) => {
+    console.log(data, "data");
     const result = format(new Date(), "d 'de' MMMM yyyy");
     const donationYapeInfo = {
       donadorYapeNombre: data.nombre,
       montoDonacion: data.monto,
-      codigoDonacion: data.operacion,
+      codigoDonacion: numberOperation,
       donadorYapeCorreo: data.mail,
       fechaDonacionYape: result,
       validation: false,
@@ -126,7 +128,7 @@ function DonacionPasarela({
       updateDoc(donationRef, updatedYapeInfo);
       toast.success("Su donación fue realizada con exito", {
         duration: 3000,
-        position: "top-center"
+        position: "top-center",
       });
     } catch (error) {
       console.log(error, "error al donar");
@@ -441,10 +443,17 @@ function DonacionPasarela({
                               <div className="mt-2">
                                 <input
                                   {...register("operacion")}
+                                  onChange={(e) => {
+                                    const value = parseInt(e.target.value);
+                                    setNumberOperation(value);
+                                  }}
                                   id="operacion"
                                   name="operacion"
                                   className="block w-full rounded-xl border-0 py-4 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
                                 />
+                                {errors.operacion && (
+                                  <p>{errors.operacion.message}</p>
+                                )}
                               </div>
                             </div>
                           </div>
