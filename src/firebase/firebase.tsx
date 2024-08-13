@@ -13,9 +13,9 @@ const fbconfig = {
   authDomain: import.meta.env.VITE_API_AUTH_DOMAIN,
   projectId: import.meta.env.VITE_API_PROJECT_ID,
   storageBucket: import.meta.env.VITE_API_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.API_API_MESSAGING_SENDER,
+  messagingSenderId: import.meta.env.VITE_API_MESSAGING_SENDER,
   appId: import.meta.env.VITE_API_ID,
-  measurementId: import.meta.env.VITE_API_MEASUREMENT_ID,
+  measurementId: import.meta.env.VITE_API_MEASUREMENT_ID
 };
 
 export const app = initializeApp(fbconfig);
