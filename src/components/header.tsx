@@ -20,7 +20,7 @@ function Header() {
   //   }
   // }, [stateProfile]);
   return (
-    <header className="bg-white fixed top-0 shadow-sm right-0 left-0 z-10">
+    <header className={"bg-white fixed top-0 shadow-sm right-0 left-0 z-10"}>
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8"
         aria-label="Global"

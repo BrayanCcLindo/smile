@@ -5,7 +5,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Navigate,
+  Navigate
 } from "react-router-dom";
 import Homepage from "./pages/homepage";
 import LogIn from "./pages/logIn";
