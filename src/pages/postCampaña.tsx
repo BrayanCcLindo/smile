@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Link2, HeartHandshake } from "lucide-react";
+import { Link2, HeartHandshake, MapPin } from "lucide-react";
 import { useSmileContext } from "../Api/userContext";
 import ButtonDialog from "../components/buttonDialog";
 import { useGetCampaigns } from "../Api/getCampaigns";
@@ -9,14 +9,18 @@ import { handleShareURL } from "../Api/socialShare";
 import { format, formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 import ProgressBar from "../components/progressBar";
+import { useRef } from "react";
 
 function PostCampaña() {
   const { data } = useGetCampaigns();
   const { slug } = useParams();
   const { stateProfile } = useSmileContext();
+  const locationRef = useRef<HTMLIFrameElement>(null);
 
-  const campaignIndex = data?.findIndex((campaign) => campaign?.slug === slug);
-  const actualPost = data[campaignIndex];
+  const campaignIndex = [...data]?.findIndex(
+    (campaign) => campaign?.slug === slug
+  );
+  const actualPost = [...data][campaignIndex];
 
   const aprovedDonations = actualPost?.donaciones?.filter(
     (donations) => donations.validation === true
@@ -30,21 +34,15 @@ function PostCampaña() {
   const currentURL = window.location.href;
   const wspURL = `https://api.whatsapp.com/send?text=${actualPost?.nombre} aportemos en su Kuzi 🚀 → ${currentURL}`;
 
-  // const fechaInicial = format(
-  //   new Date(actualPost?.fechaInicio),
-  //   "d 'de' MMMM yyyy"
-  // );
-
-  // console.log(fechaInicial, "fechaInicial");
-
-  // const result2 = formatDistance(
-  //   new Date(actualPost?.fechaFinal),
-  //   new Date(actualPost?.fechaInicio),
-  //   {
-  //     addSuffix: true,
-  //     locale: es,
-  //   }
-  // );
+  const handleLocationScroll = () => {
+    const offset = 150; // Ajusta este valor según tus necesidades
+    const element = locationRef?.current;
+    if (element) {
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
   return (
     <>
@@ -112,14 +110,14 @@ function PostCampaña() {
                   Ayúdanos compartiendolo con tus familiares y amigos
                 </span>
                 <div className="flex items-center justify-between pt-3 gap-4">
-                  <div className="flex justify-between flex-1 border-r-2 border-gray-200 px-4">
+                  <div className="flex justify-between flex-1 flex-wrap border-r-2 border-gray-200 px-4">
                     <button
                       onClick={() => {
                         handleShareURL(currentURL);
                       }}
                       className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white"
                     >
-                      <Link2 strokeWidth={1} />
+                      <Link2 strokeWidth={2} />
                     </button>
                     <a
                       href={wspURL}
@@ -128,6 +126,14 @@ function PostCampaña() {
                     >
                       <img src="/svg/whatsApp.svg" alt="" />
                     </a>
+                    {actualPost.ubicación && (
+                      <button
+                        onClick={handleLocationScroll}
+                        className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white"
+                      >
+                        <MapPin />
+                      </button>
+                    )}
                   </div>
                   <div className="flex flex-1 ">
                     <div className="flex  gap-2 text-left   flex-wrap ">
@@ -155,12 +161,6 @@ function PostCampaña() {
                       </p>
                     </div>
                   </div>
-                  {/* <button className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white">
-                    <Facebook strokeWidth={1} />
-                  </button> */}
-                  {/* <button className="p-4 rounded-full bg-[#f2f2f2] text-main hover:bg-indigo-300 hover:text-white">
-                    <Linkedin strokeWidth={1} />
-                  </button> */}
                 </div>
               </div>
             </div>
@@ -230,41 +230,23 @@ function PostCampaña() {
                     </div>
                   </div>
                 )}
-                {/* <div className="py-8 flex flex-wrap md:flex-nowrap">
-                  <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-                    <span className="font-semibold title-font text-gray-700">
-                      CATEGORY
-                    </span>
-                    <span className="text-sm text-gray-500">12 Jun 2019</span>
+                {actualPost.ubicación && (
+                  <div className="py-8 flex flex-col flex-wrap md:flex-nowrap md:flex-row">
+                    <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                      <span className="font-semibold title-font text-gray-700">
+                        UBICACIÓN
+                      </span>
+                    </div>
+                    <div className="md:flex-grow">
+                      <iframe
+                        ref={locationRef}
+                        className="w-full h-[450px]"
+                        src={actualPost.ubicación}
+                        loading="lazy"
+                      ></iframe>
+                    </div>
                   </div>
-                  <div className="md:flex-grow">
-                    <h2 className="text-2xl font-medium text-gray-900 title-font mb-2">
-                      Woke master cleanse drinking vinegar salvia
-                    </h2>
-                    <p className="leading-relaxed">
-                      Glossier echo park pug, church-key sartorial biodiesel
-                      vexillologist pop-up snackwave ramps cornhole. Marfa 3
-                      wolf moon party messenger bag selfies, poke vaporware
-                      kombucha lumbersexual pork belly polaroid hoodie portland
-                      craft beer.
-                    </p>
-                    <a className="text-main inline-flex items-center mt-4">
-                      Learn More
-                      <svg
-                        className="w-4 h-4 ml-2"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M5 12h14"></path>
-                        <path d="M12 5l7 7-7 7"></path>
-                      </svg>
-                    </a>
-                  </div>
-                </div> */}
+                )}
               </div>
             </div>
           </div>

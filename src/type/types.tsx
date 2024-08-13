@@ -63,6 +63,7 @@ export type CampañaGiftSmileType = {
     donadorYapeCorreo: string;
     validation: boolean;
   }[];
+  ubicación: string;
 };
 export type FormData = {
   nombre: string;
@@ -73,5 +74,7 @@ export type FormData = {
 export enum SmileType {
   Social = "Impacto Social",
   Fundaciones = "Albergues, fundaciones y ONG",
-  Emprendedores = "Emprendedores",
+  Emprendedores = "Emprendedores"
 }
+
+//Themes
