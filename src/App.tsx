@@ -18,11 +18,8 @@ import NuevaCampaña from "./pages/iniciarCampaña";
 import PostCampaña from "./pages/postCampaña";
 import FormularioCamapaña from "./pages/formularioCampaña";
 import { Toaster } from "sonner";
-
-// import CampañasFavoritas from "./pages/campañasFavoritas";
 import DonacionPasarela from "./pages/donacionPasarela";
 import Configuracion from "./pages/configuracion";
-// import Nosotros from "./pages/nosotros";
 import { useEffect, useState } from "react";
 
 function MainLayout() {
@@ -70,7 +67,6 @@ function App() {
         theme="light"
         // toastOptions={{
         //   unstyled: true,
-
         //   classNames: { toast: "bg-red-500", title: "text-red-500" },
         // }}
         position="top-right"
@@ -97,9 +93,7 @@ function App() {
             />
             <Route path="/como-funciona" element={<ComoFunciona />} />
             <Route path="/campañas" element={<Campañas />} />
-            {/* <Route path="/campañas/favoritos" element={<CampañasFavoritas />} /> */}
             <Route path="/nueva-campaña" element={<NuevaCampaña />} />
-            {/* <Route path="/nosotros" element={<Nosotros />} /> */}
             <Route
               path="/configuracion"
               element={
@@ -126,7 +120,6 @@ function App() {
               }
             />
             <Route path="/campañas/:slug" element={<PostCampaña />} />
-            {/* <Route path="/perfil" element={<UserProfile />} /> */}
             <Route
               path="/perfil"
               element={

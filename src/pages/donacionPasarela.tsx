@@ -1,26 +1,26 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { Info, ShieldCheck } from 'lucide-react';
-import { MouseEventHandler, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z, ZodType } from 'zod';
-import { useGetCampaigns } from '../Api/getCampaigns';
-import Loader from '../components/loader';
-import { Button } from '../components/mainLinkButton';
-import { format } from 'date-fns';
-import { db } from '../firebase/firebase';
-import { doc, updateDoc } from 'firebase/firestore';
-import emailjs from '@emailjs/browser';
-import SelectPayment from '../components/selectPayment';
-import { toast } from 'sonner';
+import { useNavigate, useParams } from "react-router-dom";
+import { Info, ShieldCheck } from "lucide-react";
+import { MouseEventHandler, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z, ZodType } from "zod";
+import { useGetCampaigns } from "../Api/getCampaigns";
+import Loader from "../components/loader";
+import { Button } from "../components/mainLinkButton";
+import { format } from "date-fns";
+import { db } from "../firebase/firebase";
+import { doc, updateDoc } from "firebase/firestore";
+import emailjs from "@emailjs/browser";
+import SelectPayment from "../components/selectPayment";
+import { toast } from "sonner";
+import FormErrors from "../components/formErrors";
 
 type FormPayment = {
   mail: string;
   monto: string;
   id_campana: string;
   nombre: string;
-  operacion: string;
-  // imagen: FileList;
+  donation: string;
 };
 
 type ButtonDontationType = {
@@ -51,10 +51,9 @@ function DonacionPasarela({
 }) {
   const navigate = useNavigate();
 
-  const [initialDonation, setInitialDonation] = useState('0');
-  const [numberOperation, setNumberOperation] = useState(0);
+  const [initialDonation, setInitialDonation] = useState("");
+  const [numberOperation, setNumberOperation] = useState("");
 
-  // const [image, setImage] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
   const validarDonacionRef = useRef<HTMLFieldSetElement>(null);
   const montoDonacionRef = useRef<HTMLDivElement>(null);
@@ -71,14 +70,14 @@ function DonacionPasarela({
   };
 
   const mySchema: ZodType<FormPayment> = z.object({
-    monto: z.string().min(1, { message: 'Ingrese el monto a donar' }),
-    mail: z.string().email().min(1, { message: 'Este campo es requerido' }),
+    monto: z.string().min(1, { message: "Ingrese el monto a donar" }),
+    mail: z
+      .string()
+      .email({ message: "Ingrese un email valido" })
+      .min(1, { message: "Este campo es requerido" }),
     id_campana: z.string(),
-    nombre: z.string(),
-    operacion: z.string().min(1, { message: 'Este campo es requerido' })
-    // imagen: z
-    //   .instanceof(FileList)
-    //   .refine((val) => val.length > 0, "Este campo es requerido"),
+    nombre: z.string().min(1, { message: "Este campo es requerido" }),
+    donation: z.string().min(1, { message: "Este campo es requerido" })
   });
 
   const {
@@ -86,11 +85,11 @@ function DonacionPasarela({
     handleSubmit,
     formState: { errors }
   } = useForm<FormPayment>({
-    resolver: zodResolver(mySchema)
+    resolver: zodResolver(mySchema),
+    mode: "all"
   });
 
   const submitData = async (data: FormPayment) => {
-    console.log(data, 'data');
     const result = format(new Date(), "d 'de' MMMM yyyy");
     const donationYapeInfo = {
       donadorYapeNombre: data.nombre,
@@ -110,42 +109,38 @@ function DonacionPasarela({
     try {
       if (formRef.current) {
         emailjs
-          .sendForm('service_gz3oalc', 'template_ee4t0e4', formRef.current, {
-            publicKey: '8MaF0S-WNDUM7q1YJ'
+          .sendForm("service_gz3oalc", "template_ee4t0e4", formRef.current, {
+            publicKey: "8MaF0S-WNDUM7q1YJ"
           })
           .then(
             () => {
-              console.log('SUCCESS!');
+              console.log("SUCCESS!");
               navigate(-1);
             },
             error => {
-              console.log('FAILED...', error.text);
+              console.log("FAILED...", error.text);
             }
           );
       }
 
-      const donationRef = doc(db, 'campañas', actualPost.campañaId);
+      const donationRef = doc(db, "campañas", actualPost.campañaId);
       updateDoc(donationRef, updatedYapeInfo);
-      toast.success('Su donación fue realizada con exito', {
+      toast.success("Su donación fue realizada con exito", {
         duration: 3000,
-        position: 'top-center'
+        position: "top-center"
       });
     } catch (error) {
-      console.log(error, 'error al donar');
+      console.log(error, "error al donar");
     }
   };
 
   const handleValidationScroll = () => {
-    // const offset = 105; // Ajusta este valor según tus necesidades
     const element = validarDonacionRef?.current;
     if (element) {
-      // const y =
-      //   element.getBoundingClientRect().top + window.pageYOffset - offset;
-      // window.scrollTo({ top: y, behavior: "smooth" });
       element.scrollIntoView({
-        behavior: 'smooth', // Desplazamiento suave
-        block: 'center', // Alineación vertical al centro
-        inline: 'nearest' // Alineación horizontal a la posición más cercana
+        behavior: "smooth",
+        block: "center",
+        inline: "nearest"
       });
     }
   };
@@ -156,24 +151,24 @@ function DonacionPasarela({
     if (element) {
       const y =
         element.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
 
   const handleMetodoDonacion = () => {
-    const offset = 105; // Ajusta este valor según tus necesidades
+    const offset = 105;
     const element = metodoPagoRef?.current;
     if (element) {
       const y =
         element.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
 
   return (
     <>
       {actualPost ? (
-        <section className="mt-20 text-gray-600 body-font">
+        <section className="mt-20 text-gray-600">
           <div className="container flex flex-col px-5 py-24 mx-auto">
             <div className="mx-auto lg:w-4/6">
               <div className="h-64 overflow-hidden rounded-lg">
@@ -186,12 +181,12 @@ function DonacionPasarela({
               <div className="flex flex-col justify-center mt-10 sm:flex-row">
                 <div className="text-center sm:w-1/3 sm:pr-8 sm:py-8">
                   <div className="flex flex-col items-center justify-center text-center">
-                    <h2 className="mt-4 text-lg font-medium text-gray-900 title-font ">
+                    <h2 className="mt-4 text-lg font-medium text-gray-900 ">
                       {actualPost.nombre}
                     </h2>
                     <div className="w-12 h-1 mt-2 mb-4 rounded bg-main"></div>
                     <p className="text-base">
-                      Tu donativo tendrá como beneficiario/a a{' '}
+                      Tu donativo tendrá como beneficiario/a a{" "}
                       <span className="font-medium">{actualPost.creador}</span>
                     </p>
                   </div>
@@ -209,10 +204,9 @@ function DonacionPasarela({
 
                   <ul className="mt-4 mb-10 ml-4 space-y-2 text-sm list-disc marker:text-main">
                     <li>
-                      Elige el monto de tu donación{' '}
+                      Elige el monto de tu donación{" "}
                       <a
                         className="font-medium cursor-pointer text-main"
-                        // href={"#validar-donacion"}
                         onClick={handleMontoScroll}
                       >
                         aquí
@@ -220,10 +214,9 @@ function DonacionPasarela({
                     </li>
 
                     <li>
-                      Escoge el metodo de pago, yape/plin o transferencia,{' '}
+                      Escoge el metodo de pago, yape/plin o transferencia,{" "}
                       <a
                         className="font-medium cursor-pointer text-main"
-                        // href={"#validar-donacion"}
                         onClick={handleMetodoDonacion}
                       >
                         aquí
@@ -231,10 +224,9 @@ function DonacionPasarela({
                     </li>
                     <li>
                       Una vez realizada la donación, ayudanos a validarlo
-                      rellenando el siguiente{' '}
+                      rellenando el siguiente{" "}
                       <a
                         className="font-medium cursor-pointer text-main"
-                        // href={"#validar-donacion"}
                         onClick={handleValidationScroll}
                       >
                         formulario
@@ -253,7 +245,7 @@ function DonacionPasarela({
                           handleButtonValue(value);
                         }}
                         value={5}
-                        text={'S/.5'}
+                        text={"S/.5"}
                       />
                     </li>
                     <li>
@@ -267,7 +259,7 @@ function DonacionPasarela({
                           handleButtonValue(value);
                         }}
                         value={10}
-                        text={'S/.10'}
+                        text={"S/.10"}
                       />
                     </li>
                     <li>
@@ -281,7 +273,7 @@ function DonacionPasarela({
                           handleButtonValue(value);
                         }}
                         value={20}
-                        text={'S/.20'}
+                        text={"S/.20"}
                       />
                     </li>
                     <li>
@@ -295,7 +287,7 @@ function DonacionPasarela({
                           handleButtonValue(value);
                         }}
                         value={50}
-                        text={'S/.50'}
+                        text={"S/.50"}
                       />
                     </li>
                     <li>
@@ -309,7 +301,7 @@ function DonacionPasarela({
                           handleButtonValue(value);
                         }}
                         value={100}
-                        text={'S/.100'}
+                        text={"S/.100"}
                       />
                     </li>
                   </ul>
@@ -321,7 +313,7 @@ function DonacionPasarela({
                       </span>
                       <input
                         id="monto"
-                        {...register('monto', {
+                        {...register("monto", {
                           onChange: event => {
                             const value = event.target.value;
                             if (/^\d*\.?\d*$/.test(value)) {
@@ -339,9 +331,7 @@ function DonacionPasarela({
                       </span>
                     </div>
                     {errors.monto ? (
-                      <p className="text-sm font-medium text-red-500">
-                        {errors.monto.message}
-                      </p>
+                      <FormErrors message={errors.monto.message} />
                     ) : (
                       <p className="text-sm font-medium text-main">
                         Aporte mínimo S/. 4
@@ -349,7 +339,7 @@ function DonacionPasarela({
                     )}
                   </div>
                   <div className="mt-10 mb-10">
-                    <h3 className="font-medium text-gray-900 title-font">
+                    <h3 className="font-medium text-gray-900 ">
                       Aportación voluntaria a los servicios de Kuzi
                     </h3>
                     <p className="mt-2 text-base">
@@ -359,14 +349,14 @@ function DonacionPasarela({
                   </div>
                   <h3
                     ref={metodoPagoRef}
-                    className="font-medium leading-6 text-gray-900 title-font"
+                    className="font-medium leading-6 text-gray-900 "
                   >
                     Metodo de Pago
                   </h3>
                   <SelectPayment />
                   <div className="mt-2 sr-only">
                     <input
-                      {...register('id_campana')}
+                      {...register("id_campana")}
                       id="id_campana"
                       name="id_campana"
                       defaultValue={actualPost.campañaId}
@@ -378,7 +368,7 @@ function DonacionPasarela({
                     id="validar-donacion"
                     className="mt-6 "
                   >
-                    <h3 className="font-medium leading-6 text-gray-900 title-font scroll-mt-11">
+                    <h3 className="font-medium leading-6 text-gray-900 scroll-mt-11">
                       ¿Hiciste tu donación con Yape, Plin o Transferencia?
                     </h3>
                     <p>Ayúdanos a validar tu donación. </p>
@@ -396,11 +386,14 @@ function DonacionPasarela({
                               </label>
                               <div className="mt-2">
                                 <input
-                                  {...register('nombre')}
+                                  {...register("nombre")}
                                   id="nombre"
                                   name="nombre"
                                   className="block w-full px-3 py-4 text-gray-900 border-0 shadow-sm rounded-xl ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
                                 />
+                                {errors.nombre && (
+                                  <FormErrors message={errors.nombre.message} />
+                                )}
                               </div>
                             </div>
                             <div className="col-span-3 px-10 sm:pr-10 sm:pl-0 ">
@@ -412,202 +405,67 @@ function DonacionPasarela({
                               </label>
                               <div className="mt-2">
                                 <input
-                                  {...register('mail')}
+                                  {...register("mail")}
                                   id="mail"
                                   name="mail"
                                   className="block w-full px-3 py-4 text-gray-900 border-0 shadow-sm rounded-xl ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
                                 />
+                                {errors.mail && (
+                                  <FormErrors message={errors.mail.message} />
+                                )}
                               </div>
                             </div>
                             <div className="col-span-3 px-10 sm:col-span-full">
-                              <div className="relative ">
-                                <label
-                                  htmlFor="mail"
-                                  className="block text-sm font-medium leading-6 text-gray-900"
-                                >
+                              <div className="relative">
+                                <label className="block text-sm font-medium leading-6 text-gray-900">
                                   N° de Operación
                                 </label>
                                 <div className="absolute top-0 right-0 group">
-                                  <Info className="" color="#cccccc" />
+                                  <Info color="#cccccc" />
                                   <div className="p-5 bg-[#f2f2f2] absolute right-0 top-0 translate-x-10 rounded-xl hidden  z-10 group-hover:flex w-[300px] translate-y-10">
                                     <img
                                       width={300}
                                       height={300}
                                       className="object-cover object-center"
                                       src="/Images/comprovante.jpg"
-                                      alt=""
+                                      alt="ejemplo-comprobante"
                                     />
                                   </div>
                                 </div>
                               </div>
                               <div className="mt-2">
                                 <input
-                                  {...register('operacion')}
-                                  onChange={e => {
-                                    const value = parseInt(e.target.value);
-                                    setNumberOperation(value);
-                                  }}
-                                  id="operacion"
-                                  name="operacion"
+                                  id="donation"
+                                  {...register("donation", {
+                                    onChange: event => {
+                                      const value = event.target.value;
+                                      if (/^\d*\.?\d*$/.test(value)) {
+                                        setNumberOperation(value);
+                                      }
+                                    }
+                                  })}
+                                  name="donation"
+                                  value={numberOperation}
                                   className="block w-full px-3 py-4 text-gray-900 border-0 shadow-sm rounded-xl ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
                                 />
-                                {errors.operacion && (
-                                  <p>{errors.operacion.message}</p>
+                                {errors.donation && (
+                                  <FormErrors
+                                    message={errors.donation.message}
+                                  />
                                 )}
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-
-                      {/* <div className="">
-                        <div className="flex items-center p-6 gap-x-3 ">
-                          <input
-                            onChange={(e) => {
-                              SetInputValue(e.target.value);
-                            }}
-                            value="credito-debito"
-                            id="credito-debito"
-                            name="Metodo-pago"
-                            type="radio"
-                            className="w-4 h-4 border-gray-300 text-main focus:ring-main"
-                          />
-                          <label
-                            htmlFor="credito-debito"
-                            className="flex items-center gap-4 text-sm font-medium leading-6 text-gray-900"
-                          >
-                            <CreditCard strokeWidth={1} /> Crédito o Débito
-                          </label>
-                        </div>
-                        {inputValue === "credito-debito" && (
-                          <div className="px-10">
-                            <div className="space-y-6">
-                              <div className="pb-6 border-b border-gray-900/10">
-                                <div className="grid grid-cols-1 mt-3 gap-x-3 gap-y-4 sm:grid-cols-6">
-                                  <div className="col-span-3 sm:col-span-full">
-                                    <label
-                                      htmlFor="mail"
-                                      className="block text-sm font-medium leading-6 text-gray-900"
-                                    >
-                                      Correo
-                                    </label>
-                                    <div className="mt-2">
-                                      <input
-                                        {...register("email")}
-                                        id="mail"
-                                        name="mail"
-                                        defaultValue={stateProfile.email}
-                                        className="block w-full px-3 py-4 text-gray-900 border-0 shadow-sm rounded-xl ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="col-span-3 sm:col-span-full">
-                                    <label
-                                      htmlFor="nombres"
-                                      className="block text-sm font-medium leading-6 text-gray-900"
-                                    >
-                                      Nombres
-                                    </label>
-                                    <div className="mt-2">
-                                      <input
-                                        {...register("nombres")}
-                                        id="nombres"
-                                        name="nombres"
-                                        className="block w-full px-3 py-4 text-gray-900 border-0 shadow-sm rounded-xl ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div className="pb-12 ">
-                                <div className="grid grid-cols-1 gap-x-3 gap-y-4 sm:grid-cols-6">
-                                  <div className="col-span-3 sm:col-span-full ">
-                                    <label
-                                      htmlFor="tarjeta"
-                                      className="block text-sm font-medium leading-6 text-gray-900 sr-only"
-                                    >
-                                      Número de Tarjeta
-                                    </label>
-                                    <div className="mt-2">
-                                      <input
-                                        {...register("tarjeta")}
-                                        type="text"
-                                        name="tarjeta"
-                                        id="tarjeta"
-                                        placeholder="Número de Tarjeta"
-                                        autoComplete="given-name"
-                                        className="block w-full px-3 py-4 text-gray-900 border-0 shadow-sm rounded-xl ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="col-span-3">
-                                    <label
-                                      htmlFor="vencimiento"
-                                      className="block text-sm font-medium leading-6 text-gray-900 sr-only"
-                                    >
-                                      vencimiento
-                                    </label>
-                                    <div className="mt-2">
-                                      <input
-                                        id="vencimiento"
-                                        name="vencimiento"
-                                        placeholder="MM / AA"
-                                        className="block w-full px-3 py-4 text-gray-900 border-0 shadow-sm rounded-xl ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="col-span-3">
-                                    <label
-                                      htmlFor="codigo-acceso"
-                                      className="block text-sm font-medium leading-6 text-gray-900 sr-only"
-                                    >
-                                      codigo-acceso
-                                    </label>
-                                    <div className="mt-2">
-                                      <input
-                                        id="codigo-acceso"
-                                        name="codigo-acceso"
-                                        placeholder="CVV"
-                                        className="block w-full px-3 py-4 text-gray-900 border-0 shadow-sm rounded-xl ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </div> */}
                     </div>
                   </fieldset>
                   <div className="mt-10 text-gray-500">
-                    {/* <h3 className="font-medium text-gray-900 title-font">
-                      Tu donación
-                    </h3>
-                    <div className="flex py-2 mt-3">
-                      <span className="text-gray-500">Tu donativo</span>
-                      <span className="ml-auto ">S/. {initialDonation}.00</span>
-                    </div> */}
-                    {/* <div className="flex py-2">
-                      <span className="text-gray-500">
-                        Aportación para Smile
-                      </span>
-                      <span className="ml-auto ">S/. {smileTip}</span>
-                    </div> */}
-                    {/* <div className="flex py-2 border-t border-gray-200">
-                      <span className="text-gray-500 ">Aportación Total</span>
-                      <span className="ml-auto ">S/. {totalDonation}</span>
-                    </div> */}
-                    {/* {inputValue === "credito-debito" && (
-                        <Button type="submit">Donar Ahora</Button>
-                      )} */}
                     <div className="w-full mt-3">
                       <Button type="submit" isLoading={isLoading}>
                         Validar Donación
                       </Button>
                     </div>
-
                     <p className="mt-5 text-sm text-gray-500">
                       Al elegir el método de pago anterior, aceptas los Términos
                       de Servicio de Kuzi y declaras tu conformidad con la
@@ -617,15 +475,7 @@ function DonacionPasarela({
                   <div className="flex items-start gap-4 py-2 mt-10 border-t border-gray-200 text-main">
                     <ShieldCheck strokeWidth={1} size={30} />
                     <div className="text-gray-900">
-                      <h3 className="font-medium title-font">
-                        Kuzi protege tu donativo
-                      </h3>
-                      {/* <p className="mt-2 text-sm text-gray-500">
-                        Te garantizamos un reembolso completo de tu donativo
-                        durante un año en el caso poco probable de que se
-                        produzca algún tipo fraude. Consulta la Garantía de
-                        Smile.
-                      </p> */}
+                      <h3 className="font-medium">Kuzi protege tu donativo</h3>
                     </div>
                   </div>
                 </form>

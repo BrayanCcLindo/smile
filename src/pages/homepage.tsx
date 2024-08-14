@@ -17,7 +17,7 @@ function Homepage() {
     <section className="py-24 mt-32 bg-white sm:py-10 scroll-smooth">
       <div className="px-6 mx-auto max-w-7xl lg:px-8">
         <div className="flex flex-col items-center max-w-2xl mx-auto lg:text-center">
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 font-mont sm:text-4xl">
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Kuzi
           </h1>
           {/* <CheckOutMercadoPago /> */}

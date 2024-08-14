@@ -8,7 +8,7 @@ export default {
         alternative: "#02A95C"
       },
       fontFamily: {
-        mont: ["Montserrat"]
+        nunito: ["Nunito", "sans-serif"]
       }
     }
   },
