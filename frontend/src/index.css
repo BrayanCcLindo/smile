@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.light {
+  --main_bg: 255, 255, 255;
+  --main: 0, 121, 254;
+  --alternative: 80, 200, 120;
+  --content_text: 75, 85, 99;
+  --heading: 8, 8, 17;
+  --border_gray: 230, 231, 235;
+  --footer_bg: 242, 242, 242;
+  --second_bg: 224, 231, 255;
+  --input_bg: 255, 255, 255;
+  /* --subheading: ; */
+}
+.dark {
+  --main_bg: 2, 3, 18;
+  --main: 0, 191, 255;
+  --alternative: 105, 250, 139;
+  --content_text: 156, 163, 175;
+  --heading: 255, 255, 255;
+  --border_gray: 75, 85, 99;
+  --footer_bg: 0, 0, 0;
+  --second_bg: 30, 41, 59;
+  --input_bg: 30, 41, 59;
+
+  /* --subheading: ; */
+}
+
+:root {
+  scroll-behavior: smooth;
+}
+body {
+  @apply font-nunito;
+}
