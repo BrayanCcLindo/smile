@@ -2,10 +2,8 @@ import { Link, NavLink } from "react-router-dom";
 import { routes } from "../constants/routes";
 import { useSmileContext } from "../Api/userContext";
 import { useState } from "react";
-// import { Heart } from "lucide-react";
 import MainLinkButton from "./mainLinkButton";
 import SwitchToogle from "./switchToogle";
-// import NavMenu from "./navMenu";
 
 function Header() {
   const { stateProfile } = useSmileContext();
@@ -15,22 +13,17 @@ function Header() {
     window.scrollTo(0, 0);
   };
 
-  // useEffect(() => {
-  //   if (stateProfile) {
-  //     navigate("/perfil");
-  //   }
-  // }, [stateProfile]);
   return (
     <header
       className={
-        "bg-main_bg fixed top-0 shadow-sm right-0 left-0 z-50 shadow-card_border text-heading"
+        "bg-main_bg sticky top-0 shadow-sm right-0 left-0 z-50 shadow-card_border text-heading "
       }
     >
       <nav
-        className="flex items-center justify-between p-4 mx-auto max-w-7xl lg:px-8"
+        className="flex items-center justify-between p-4 mx-auto max-w-7xl lg:px-8 "
         aria-label="Global"
       >
-        <div className="flex lg:flex-1">
+        <div className="flex">
           <Link to="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Smile</span>
             <img
@@ -87,48 +80,42 @@ function Header() {
                 </li>
               );
             })}
-            {/* <NavMenu /> */}
           </ul>
-        </div>
 
-        <div className="items-center hidden gap-4 lg:flex lg:flex-1 lg:justify-end">
-          {!stateProfile ? (
-            <>
-              {" "}
-              <Link
-                onClick={scrollToTop}
-                className="text-heading hover:text-main"
-                to="/log-in"
-              >
-                Iniciar Sesión <span aria-hidden="true">&rarr;</span>
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link
-                onClick={scrollToTop}
-                className="rounded-full "
-                to={"/perfil"}
-              >
-                <img
-                  width={50}
-                  height={50}
-                  className="object-cover object-center rounded-full"
-                  src="/Images/defaultuser.jpg"
-                  alt="default-user-photo"
-                />
-              </Link>
-            </>
-
-            //   <Link
-            //   to="/log-in"
-            //   className="text-sm font-semibold leading-6 text-heading"
-            // >
-            //   Iniciar Sesión <span aria-hidden="true">&rarr;</span>
-            // </Link>
-          )}
-          <MainLinkButton link={"/nueva-campaña"}>Crear Campaña</MainLinkButton>
-          <SwitchToogle />
+          <div className="items-center hidden gap-4 lg:flex lg:justify-end">
+            {!stateProfile ? (
+              <>
+                {" "}
+                <Link
+                  onClick={scrollToTop}
+                  className="text-heading hover:text-main"
+                  to="/log-in"
+                >
+                  Iniciar Sesión <span aria-hidden="true">&rarr;</span>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  onClick={scrollToTop}
+                  className="rounded-full "
+                  to={"/perfil"}
+                >
+                  <img
+                    width={50}
+                    height={50}
+                    className="object-cover object-center rounded-full"
+                    src="/Images/defaultuser.jpg"
+                    alt="default-user-photo"
+                  />
+                </Link>
+              </>
+            )}
+            <MainLinkButton link={"/nueva-campaña"}>
+              Crear Campaña
+            </MainLinkButton>
+            <SwitchToogle />
+          </div>
         </div>
       </nav>
       <div
@@ -189,9 +176,7 @@ function Header() {
                           window.scrollTo(0, 0);
                         }}
                         className={({ isActive }) => {
-                          return isActive
-                            ? "text-main"
-                            : "text-heading dark:text-white dark:hover:text-gray-400 hover:text-main";
+                          return isActive ? "text-main" : "text-heading";
                         }}
                         to={route.to}
                       >

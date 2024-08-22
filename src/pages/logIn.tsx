@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "../components/mainLinkButton";
 import { auth } from "../firebase/firebase";
+import { toast } from "sonner";
 import { useSmileContext } from "../Api/userContext";
 
 type LoginType = {
@@ -21,8 +22,15 @@ function LogIn() {
     try {
       await logInGoogle();
       navigate(-1);
+      toast.success("Sesión iniciada exitosamente", {
+        duration: 2000,
+        position: "top-right"
+      });
     } catch (error) {
-      console.log(error);
+      toast.error("No se pudo iniciar la sesión", {
+        duration: 2000,
+        position: "top-right"
+      });
     }
   };
 
@@ -46,15 +54,22 @@ function LogIn() {
       .then(user => {
         // @ts-expect-error need to push
         updateUser(user.user);
-        navigate("/perfil");
+        toast.success("Sesión iniciada exitosamente", {
+          duration: 2000,
+          position: "top-right"
+        });
       })
       .catch(() => {
         setErrorExist(true);
+        toast.error("No se pudo iniciar la sesión", {
+          duration: 2000,
+          position: "top-right"
+        });
       });
   };
 
   return (
-    <div className="flex flex-col justify-center px-6 py-12 mt-10 sm:mt-20 bg-main_bg lg:px-8">
+    <div className="flex flex-col justify-center px-6 py-12 bg-main_bg lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           className="w-auto h-10 mx-auto"

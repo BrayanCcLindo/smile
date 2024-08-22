@@ -5,26 +5,28 @@ import { twMerge } from "tailwind-merge";
 import ProgressBar from "./progressBar";
 import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
+import { motion } from "framer-motion";
 
 function Card({
-  campaña
-}: // photo,
-{
+  campaña,
+  index
+}: {
   campaña: CampañaGiftSmileType;
-  // photo?: string | undefined;
+  index: number;
 }) {
-  // const { stateProfile } = useSmileContext();
+  const variants = {
+    hidden: {
+      opacity: 0
+    },
+    visible: ({ delay }: { delay: number }) => ({
+      opacity: 1,
+      transition: {
+        duration: 1,
+        delay
+      }
+    })
+  };
 
-  // const campaignIndex = data?.findIndex((campaign) => campaign?.slug === slug);
-  // const actualPost = data[campaignIndex];
-
-  // const aprovedDonations = actualPost?.donaciones?.filter(
-  //   (donations) => donations.validation === true
-  // );
-  // const activeDonations = aprovedDonations
-  //   ?.map((donations) => parseInt(donations.montoDonacion))
-  //   .reduce((acc, actual) => acc + actual, 0)
-  //   .toFixed(2);
   const aprovedDonations = campaña.donaciones.filter(
     donations => donations.validation === true
   );
@@ -34,7 +36,13 @@ function Card({
     .toFixed(2);
 
   return (
-    <article
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+      custom={{ delay: (index + 1) * 0.2 }}
+      variants={variants}
+      layoutId={campaña.campañaId}
       className={twMerge(
         "group flex max-w-xl flex-col items-start justify-between relative border border-card_border shadow duration-150 hover:duration-150 rounded-xl hover:shadow-md  text-content_text group overflow-hidden",
         campaña.tipo === SmileType.Fundaciones &&
@@ -80,7 +88,7 @@ function Card({
           width={300}
           height={300}
           src={campaña.imagenCampaña}
-          alt=""
+          alt="imagen-campaña"
         />
         <span
           className={twMerge(
@@ -141,21 +149,8 @@ function Card({
             <span className="font-bold"> S/. {campaña.meta} </span>
           </p>
         </div>
-        {/* <div className="relative flex items-center pt-2 mt-4 border-t gap-x-4 border-t-gray-200">
-          <img
-            src={"/Images/defaultuser.jpg"}
-            alt="imagen-de-campaña"
-            className="object-cover w-10 h-10 rounded-full bg-gray-50"
-          />
-          <div className="text-sm leading-6 ">
-            <p className="font-semibold text-gray-900">
-              <span className="absolute inset-0"></span>
-              {campaña.creador}
-            </p>
-          </div>
-        </div> */}
       </div>
-    </article>
+    </motion.div>
   );
 }
 export default Card;

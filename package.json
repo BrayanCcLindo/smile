@@ -27,6 +27,7 @@
     "dotenv": "^16.4.5",
     "firebase": "^10.11.1",
     "firebase-tools": "^13.8.0",
+    "framer-motion": "^11.3.28",
     "lucide-react": "^0.376.0",
     "react": "^18.2.0",
     "react-day-picker": "8.10.1",

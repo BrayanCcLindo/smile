@@ -4,7 +4,7 @@ import { useSmileContext } from "../Api/userContext";
 function NuevaCampaña() {
   const { stateProfile } = useSmileContext();
   return (
-    <section className="mt-10 text-content_text body-font bg-main_bg">
+    <section className="text-content_text body-font bg-main_bg">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-col">
           <div className="flex flex-col flex-wrap py-6 mb-12 sm:flex-row">
@@ -161,16 +161,6 @@ function NuevaCampaña() {
             </div>
           </div>
         </div>
-        {/* <div className="flex flex-col items-center justify-center gap-4 mt-7">
-          <h4 className="text-xl font-medium title-font">
-            ¿Quiere crear su primera camapaña?
-          </h4>
-          <MainLinkButton
-            link={stateProfile ? "/formulario-campaña" : "/sign-in"}
-          >
-            Comenzar
-          </MainLinkButton>
-        </div> */}
       </div>
     </section>
   );
