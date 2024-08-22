@@ -1,10 +1,24 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import MainLinkButton from "./mainLinkButton";
+import { useRef } from "react";
+import { useInView } from "framer-motion";
 
 function CallToAction() {
+  const callRef = useRef(null);
+  const isInView = useInView(callRef, { once: true });
+
   return (
     <div className="pb-10 bg-main_bg">
-      <div className="py-24 mx-auto max-w-7xl sm:px-6 sm:py-10 lg:px-8">
+      <motion.div
+        ref={callRef}
+        style={{
+          transform: isInView ? "none" : "translateX(-200px)",
+          opacity: isInView ? 1 : 0,
+          transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s"
+        }}
+        className="py-24 mx-auto max-w-7xl sm:px-6 sm:py-10 lg:px-8"
+      >
         <div className="relative px-6 pt-16 overflow-hidden shadow-2xl bg-second_bg isolate sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
           <div className="max-w-md mx-auto text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
             <h2 className="text-3xl font-bold tracking-tight text-main sm:text-4xl">
@@ -38,7 +52,7 @@ function CallToAction() {
             />
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

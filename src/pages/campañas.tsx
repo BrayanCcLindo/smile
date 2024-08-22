@@ -12,7 +12,7 @@ function Campañas() {
 
   return (
     <div className="bg-main_bg">
-      <section className="mx-auto mt-10 sm:mt-20 body-font max-w-7xl">
+      <section className="mx-auto body-font max-w-7xl">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap w-full mb-20">
             <div className="w-full mb-6 lg:w-1/2 lg:mb-0">
@@ -35,7 +35,7 @@ function Campañas() {
           <div className="grid max-w-2xl grid-cols-1 pt-10 mx-auto mt-10 gap-x-8 gap-y-16 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {data.length > 0 ? (
               data.map((campaña, index) => (
-                <Card key={index} campaña={campaña} />
+                <Card key={index} campaña={campaña} index={index} />
               ))
             ) : (
               <div className="flex items-center justify-center col-span-3">

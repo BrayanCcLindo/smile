@@ -142,12 +142,11 @@ function DonacionPasarela({
 
   const handleValidationScroll = () => {
     const element = validarDonacionRef?.current;
+    const offset = 105; // Ajusta este valor según tus necesidades
     if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-        inline: "nearest"
-      });
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
 
@@ -174,7 +173,7 @@ function DonacionPasarela({
   return (
     <>
       {actualPost ? (
-        <section className="mt-10 sm:mt-20 text-content_text bg-main_bg">
+        <section className=" text-content_text bg-main_bg">
           <div className="container flex flex-col px-5 py-24 mx-auto">
             <div className="mx-auto lg:w-4/6">
               <div className="h-64 overflow-hidden rounded-lg">
@@ -208,7 +207,7 @@ function DonacionPasarela({
                     Realiza tu donación siguiendo estos sencillos pasos:
                   </h3>
 
-                  <ul className="mt-4 mb-10 ml-4 space-y-2 text-sm text-left list-disc lg:text-center marker:text-main">
+                  <ul className="mt-4 mb-10 ml-4 space-y-2 text-sm text-left list-disc marker:text-main">
                     <li>
                       Elige el monto de tu donación{" "}
                       <a

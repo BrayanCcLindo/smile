@@ -9,6 +9,7 @@ import { auth, db } from "../firebase/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { FormData } from "../type/types";
 import { Button } from "../components/mainLinkButton";
+import { toast } from "sonner";
 import { useSmileContext } from "../Api/userContext";
 
 function SignIn() {
@@ -57,13 +58,6 @@ function SignIn() {
         data.email,
         data.password
       );
-      // const user: UserType = res.user;
-      // const newUser = {
-      //   email: res.user.email,
-      //   name: data.nombre,
-      //   id: res.user.uid,
-      //   userPhoto: "/Images/defaultuser.jpg",
-      // };
       await addDoc(collection(db, "usuarios"), {
         name: data.nombre,
         email: data.email,
@@ -73,18 +67,23 @@ function SignIn() {
       const actualuser = { ...res.user, displayName: data.nombre };
 
       // @ts-expect-error need to push
-
       updateUser(actualuser);
-
-      navigate("/perfil");
+      toast.success("Cuenta creada exitosamente", {
+        duration: 2000,
+        position: "top-right"
+      });
+      navigate("/");
     } catch (error) {
-      console.log(error);
+      toast.error("Error al crear la cuenta", {
+        duration: 2000,
+        position: "top-right"
+      });
       setErrorExist(true);
     }
   };
 
   return (
-    <div className="px-6 py-12 mt-10 sm:mt-20 isolate bg-main_bg sm:py-12 lg:px-8">
+    <div className="px-6 py-12 isolate bg-main_bg sm:py-12 lg:px-8">
       <div className="max-w-2xl mx-auto text-center">
         <h1 className="text-3xl font-bold tracking-tight text-heading sm:text-4xl">
           Crea tu cuenta Kuzi

@@ -13,7 +13,7 @@ import MainLinkButton from "../components/mainLinkButton";
 function ComoFunciona() {
   return (
     <section>
-      <div className="mt-10 text-base sm:mt-20 text-content_text bg-gradient-to-b from-second_bg to-main_bg via-second_bg">
+      <div className="text-base text-content_text bg-gradient-to-b from-second_bg to-main_bg via-second_bg">
         <div className="container flex flex-wrap px-5 py-24 mx-auto">
           <div className="flex flex-wrap justify-between w-full">
             <div className="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6">

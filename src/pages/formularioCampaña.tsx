@@ -21,7 +21,6 @@ import { DatePickerWithRange } from "../components/calendarPicker";
 type FormCampaign = {
   name: string;
   description: string;
-  // date: string;
   file: FileList;
   meta: string;
   type: string;
@@ -35,14 +34,12 @@ function FormularioCamapaña() {
     to: addDays(new Date(), 30)
   });
 
-  // const [userPhoto, setUserPhoto] = useState("/Images/defaultuser.jpg");
   const navigate = useNavigate();
   const { user } = useGetUserData();
-
   const { data } = useGetCampaigns();
-
   const { stateProfile } = useSmileContext();
 
+  const MAX_FILE_SIZE = 1048487;
   const mySchema: ZodType<FormCampaign> = z.object({
     name: z
       .string()
@@ -53,8 +50,13 @@ function FormularioCamapaña() {
       .max(350, {
         message: "El campo debe contener como maximo 350 caracteres"
       }),
-    // date: z.string().date(),
-    file: z.instanceof(FileList),
+    file: z
+      .instanceof(FileList)
+      .refine(files => files.length > 0, "La imagen es requerida")
+      .refine(
+        files => files[0]?.size <= MAX_FILE_SIZE,
+        `El tamaño máximo aceptado es 1MB`
+      ),
     meta: z.string().min(1, { message: "El campo es obligatorio" }),
     type: z.string()
   });
@@ -71,7 +73,6 @@ function FormularioCamapaña() {
   const submitCampaign = async (values: FormCampaign) => {
     const title = values.name.trim();
     const slug = title.replace(/[\s'-]+/g, "-").toLowerCase();
-    // const result = format(new Date(), "yyyy-M-d");
     const campaignExist = data.some(
       campaign => campaign.nombre === values.name.trim()
     );
@@ -98,18 +99,19 @@ function FormularioCamapaña() {
         });
         navigate("/campañas");
         toast.success("¡Campaña creada exitosamente!", {
-          duration: 3000,
+          duration: 2000,
           position: "top-right"
         });
       } else {
         toast.error("¡La campaña ya existe!", {
-          duration: 3000,
+          duration: 2000,
           position: "top-right"
         });
       }
     } catch (error) {
+      console.log(error);
       toast.error("¡Error al crear la campaña. Inténtalo de nuevo.!", {
-        duration: 3000,
+        duration: 2000,
         position: "top-right"
       });
     }
@@ -118,7 +120,7 @@ function FormularioCamapaña() {
   return (
     <>
       {stateProfile ? (
-        <div className="pt-48 pb-16 bg-main_bg">
+        <div className="px-5 py-24 bg-main_bg">
           <form
             method="POST"
             onSubmit={handleSubmit(submitCampaign)}
@@ -283,16 +285,16 @@ function FormularioCamapaña() {
                             <span>{image ? "Cambiar" : "Subir"} Imagen</span>
                             <input
                               {...register("file", {
-                                // required: "Tu foto es importante",
                                 onChange: event => {
                                   const mainImage = event.target.files[0];
-
-                                  const reader = new FileReader();
-                                  reader.addEventListener("load", () => {
-                                    setImage(reader.result as string);
-                                  });
                                   if (mainImage) {
-                                    reader.readAsDataURL(mainImage);
+                                    if (mainImage.size < MAX_FILE_SIZE) {
+                                      const reader = new FileReader();
+                                      reader.addEventListener("load", () => {
+                                        setImage(reader.result as string);
+                                      });
+                                      reader.readAsDataURL(mainImage);
+                                    }
                                   }
                                 }
                               })}
@@ -310,102 +312,16 @@ function FormularioCamapaña() {
                         </p>
                       </div>
                     </div>
+
+                    {errors.file && (
+                      <span className="text-red-500 ">
+                        {errors.file?.message}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
-            {/* <div className="pb-12 pt-11">
-          <h2 className="text-base font-semibold leading-7 text-heading">
-            Información Personal
-          </h2>
-          <p className="mt-1 text-sm leading-6 text-gray-600">
-            Use a permanent address where you can receive mail.
-          </p>
-          <div className="grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div className="col-span-full">
-              <p className="block text-sm font-medium leading-6 text-heading">
-                Photo
-              </p>
-
-              <div className="flex items-center mt-2 gap-x-3">
-                <img
-                  className="object-cover"
-                  width={50}
-                  height={50}
-                  src={userPhoto}
-                  alt=""
-                />
-                <div className="flex items-center text-sm leading-6 text-gray-600 ">
-                  <label
-                    htmlFor="userPhoto"
-                    className="relative cursor-pointer rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-heading ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                  >
-                    <span>cambiar</span>
-                    <input
-                      {...register("userPhoto", {
-                        // required: "Tu foto es importante",
-                        onChange: (event) => {
-                          const mainImage = event.target.files[0];
-
-                          const reader = new FileReader();
-                          reader.addEventListener("load", () => {
-                            setUserPhoto(reader.result as string);
-                          });
-                          if (mainImage) {
-                            reader.readAsDataURL(mainImage);
-                          }
-                        },
-                      })}
-                      accept="image/png image/jpg imgage/jpeg"
-                      id="userPhoto"
-                      name="userPhoto"
-                      type="file"
-                      className="sr-only"
-                    />
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div className="sm:col-span-3">
-              <label
-                htmlFor="creador"
-                className="block text-sm font-medium leading-6 text-heading"
-              >
-                Autor Campaña
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="creador"
-                  defaultValue={user?.name}
-                  readOnly
-                  id="creador"
-                  autoComplete="given-name"
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-heading ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div className="sm:col-span-3">
-              <label
-                htmlFor="role"
-                className="block text-sm font-medium leading-6 text-heading"
-              >
-                Cargo
-              </label>
-              <div className="mt-2">
-                <input
-                  {...register("role")}
-                  type="text"
-                  name="role"
-                  id="role"
-                  className="block w-full rounded-md border-0 py-1.5 px-2 text-heading ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-main sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-          </div>
-        </div> */}
-
             <div className="flex items-center justify-end gap-x-6">
               <Button type="submit">Crear Campaña</Button>
             </div>
