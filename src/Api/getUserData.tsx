@@ -22,22 +22,21 @@ export const useGetUserData = () => {
 
         const uniqueUser = await getDocs(actualUser);
 
-        const index = uniqueUser.docs.findIndex(
-          user => user.data().uid === stateProfile.uid
+        const userDoc = uniqueUser.docs.find(
+          doc => doc.data().uid === stateProfile.uid
         );
 
-        if (uniqueUser.docs[index]) {
-          const userData = uniqueUser.docs[index].data() as UserData;
-
+        if (userDoc) {
+          const userData = userDoc.data() as UserData;
           setUser(userData);
+        } else {
+          setUser(null);
         }
         // setUser(userData);
       }
     };
-    return () => {
-      FetchUserData();
-    };
-  }, [stateProfile]);
+    FetchUserData();
+  }, [stateProfile.uid]);
 
   return { user };
 };

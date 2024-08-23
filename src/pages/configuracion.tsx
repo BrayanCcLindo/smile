@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodType } from "zod";
 import { useSmileContext } from "../Api/userContext";
+import { useGetUserData } from "../Api/getUserData";
 
 type UpdateUserType = {
   userPhoto: FileList;
@@ -16,7 +17,8 @@ type UpdateUserType = {
 
 function Configuracion() {
   // const { user } = useGetUserData();
-  const { stateProfile } = useSmileContext();
+  const { stateProfile, updateUser } = useSmileContext();
+  const { user } = useGetUserData();
 
   const navigate = useNavigate();
   const [userPhoto, setUserPhoto] = useState("/Images/defaultuser.jpg");
@@ -24,7 +26,7 @@ function Configuracion() {
   async function handleSignOut() {
     try {
       await signOut(auth);
-      // updateUser(null);
+      updateUser(null);
       window.localStorage.clear();
 
       navigate("/");
@@ -33,31 +35,31 @@ function Configuracion() {
     }
   }
   const mySchema: ZodType<UpdateUserType> = z.object({
-    userPhoto: z.instanceof(FileList),
+    userPhoto: z.instanceof(FileList)
   });
   const {
-    register,
+    register
     // handleSubmit,
     // formState: { errors },
   } = useForm<UpdateUserType>({
     resolver: zodResolver(mySchema),
-    mode: "all",
+    mode: "all"
   });
 
   return (
     <>
       {stateProfile ? (
-        <section className="text-gray-600 body-font mt-10">
-          <div className="container px-5 py-24 mx-auto flex flex-col">
-            <div className="lg:w-4/6 mx-auto">
-              <div className="flex flex-col sm:flex-row mt-10">
-                <div className="sm:w-1/3  sm:pr-8 sm:py-8">
-                  <ul className=" font-medium flex flex-col  gap-4">
+        <section className="text-content_text bg-main_bg">
+          <div className="container flex flex-col px-5 py-24 mx-auto">
+            <div className="mx-auto lg:w-4/6">
+              <div className="flex flex-col mt-10 sm:flex-row">
+                <div className="sm:w-1/3 sm:pr-8 sm:py-8">
+                  <ul className="flex flex-col gap-4 font-medium ">
                     {profileRoutes.map((route, index) => {
                       return (
                         <li className="text" key={index}>
                           <Link
-                            className="text-indigo-500  hover:underline"
+                            className="text-main hover:underline"
                             to={route.to}
                           >
                             {route.text}
@@ -66,99 +68,97 @@ function Configuracion() {
                       );
                     })}
                   </ul>
-                  <div className=" flex items-center justify-start gap-x-6 mt-4">
+                  <div className="flex items-center justify-start mt-4 gap-x-6">
                     <button
                       onClick={() => {
                         handleSignOut();
                       }}
-                      className="font-medium text-indigo-500 flex items-center justify-end gap-2"
+                      className="flex items-center justify-end gap-2 font-medium text-main"
                     >
                       Cerrar Sesión <span aria-hidden="true">&rarr;</span>
                     </button>
                   </div>
                 </div>
-                <div className="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-                  <div className=" text-center">
-                    <div className="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
-                      <img
-                        className="rounded-full object-cover object-center"
-                        src={userPhoto}
-                        alt="foto-perfil"
-                      />
-                    </div>
-                    <div className="flex flex-col items-center text-center justify-center">
-                      <div className="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4"></div>
-                      <div className="flex items-center justify-center relative">
-                        <Button type="button">Actualizar Imagen</Button>
-                        <label
-                          htmlFor="userPhoto"
-                          className="absolute inset-0 cursor-pointer"
-                        >
-                          <input
-                            {...register("userPhoto", {
-                              // required: "Tu foto es importante",
-                              onChange: (event) => {
-                                const mainImage = event.target.files[0];
+                <div className="pt-4 mt-4 text-center border-t border-card_border sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l sm:border-t-0 sm:mt-0">
+                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full">
+                    <img
+                      className="object-cover object-center rounded-full"
+                      src={userPhoto}
+                      alt="foto-perfil"
+                    />
+                  </div>
+                  <div className="flex flex-col items-center justify-center text-center">
+                    <div className="w-12 h-1 mt-2 mb-4 rounded bg-main"></div>
+                    <div className="relative flex items-center justify-center">
+                      <Button type="button">Actualizar Imagen</Button>
+                      <label
+                        htmlFor="userPhoto"
+                        className="absolute inset-0 cursor-pointer"
+                      >
+                        <input
+                          {...register("userPhoto", {
+                            // required: "Tu foto es importante",
+                            onChange: event => {
+                              const mainImage = event.target.files[0];
 
-                                const reader = new FileReader();
-                                reader.addEventListener("load", () => {
-                                  setUserPhoto(reader.result as string);
-                                });
-                                if (mainImage) {
-                                  reader.readAsDataURL(mainImage);
-                                }
-                              },
-                            })}
-                            accept="image/png image/jpg imgage/jpeg"
-                            id="userPhoto"
-                            name="userPhoto"
-                            className="sr-only"
-                            type="file"
-                          />
-                        </label>
-                      </div>
+                              const reader = new FileReader();
+                              reader.addEventListener("load", () => {
+                                setUserPhoto(reader.result as string);
+                              });
+                              if (mainImage) {
+                                reader.readAsDataURL(mainImage);
+                              }
+                            }
+                          })}
+                          accept="image/png image/jpg imgage/jpeg"
+                          id="userPhoto"
+                          name="userPhoto"
+                          className="sr-only"
+                          type="file"
+                        />
+                      </label>
                     </div>
                   </div>
                   <form method="POST">
-                    <div className="space-y-12">
-                      <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                        <div className="col-span-full">
-                          <label
-                            htmlFor="nombres"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            Nombre y Apellidos
-                          </label>
-                          <div className="mt-2">
-                            <input
-                              id="nombres"
-                              name="nombres"
-                              readOnly
-                              defaultValue={stateProfile.displayName}
-                              className="block w-full  border-0 py-1.5 px-2 text-gray-900 border-b border-b-gray-900 placeholder:text-gray-400 outline-none  sm:text-sm sm:leading-6 trim"
-                            />
-                          </div>
+                    <div className="grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6">
+                      <div className="col-span-full">
+                        <label
+                          htmlFor="nombres"
+                          className="block text-sm font-medium leading-6 text-heading sm:text-left"
+                        >
+                          Nombre y Apellidos
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            id="nombres"
+                            name="nombres"
+                            readOnly
+                            defaultValue={
+                              user?.name ?? stateProfile.displayName
+                            }
+                            className="block w-full py-1.5 px-2 text-heading  rounded-md outline-none bg-input_bg sm:text-sm sm:leading-6 trim"
+                          />
                         </div>
-                        <div className="col-span-full">
-                          <label
-                            htmlFor="correo"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            Correo
-                          </label>
-                          <div className="mt-2">
-                            <input
-                              id="correo"
-                              name="correo"
-                              defaultValue={stateProfile.email}
-                              type="email"
-                              readOnly
-                              className="block w-full  border-0 py-1.5 px-2 text-gray-900 border-b border-b-gray-900 placeholder:text-gray-400 outline-none  sm:text-sm sm:leading-6 trim"
-                            />
-                          </div>
-                          <div className=" flex items-center justify-end gap-x-6 mt-10">
-                            <Button type="submit">Actualizar</Button>
-                          </div>
+                      </div>
+                      <div className="col-span-full sm:text-left">
+                        <label
+                          htmlFor="correo"
+                          className="block text-sm font-medium leading-6 text-heading"
+                        >
+                          Correo
+                        </label>
+                        <div className="mt-2 ">
+                          <input
+                            id="correo"
+                            name="correo"
+                            defaultValue={stateProfile.email}
+                            type="email"
+                            readOnly
+                            className="block w-full py-1.5 px-2 text-heading  rounded-md outline-none bg-input_bg sm:text-sm sm:leading-6 trim"
+                          />
+                        </div>
+                        <div className="flex items-center justify-end mt-10 gap-x-6">
+                          <Button type="submit">Actualizar</Button>
                         </div>
                       </div>
                     </div>
