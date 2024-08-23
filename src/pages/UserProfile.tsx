@@ -19,11 +19,11 @@ function UserProfile() {
   return (
     <>
       {stateProfile ? (
-        <div className="relative py-24 overflow-hidden isolate sm:py-32">
-          <div className="relative py-20 mx-auto text-white bg-gray-900 lg:mx-0">
+        <div className="relative bg-main_bg">
+          <div className="relative py-20 mx-auto text-content_text bg-gradient-to-b from-main_bg to-main_bg via-second_bg lg:mx-0">
             <div className="px-6 mx-auto max-w-7xl lg:px-8">
               <div className="flex flex-col items-center justify-between gap-8 sm:flex-row">
-                <h2 className="text-3xl font-bold tracking-tight text-center sm:text-6xl sm:text-left">
+                <h2 className="text-3xl font-bold tracking-tight text-center text-heading sm:text-6xl sm:text-left">
                   Bienvenido a Smile
                   <br /> {user?.name ?? stateProfile.displayName}
                 </h2>
@@ -41,8 +41,8 @@ function UserProfile() {
                   </MainLinkButton>
                 </div>
               </div>
-              <p className="mt-6 text-lg leading-8 text-gray-300">
-                <span className="font-medium text-white">
+              <p className="mt-6 text-lg leading-8">
+                <span className="font-medium text-heading">
                   Cambia vidas hoy:
                 </span>{" "}
                 Descubre campañas inspiradoras y dona para crear un impacto Real
@@ -54,7 +54,7 @@ function UserProfile() {
 
                 <Link
                   to="/como-funciona"
-                  className="text-sm font-semibold leading-6 text-white"
+                  className="text-sm font-semibold leading-6 text-main"
                 >
                   Ver cómo funciona Smile <span aria-hidden="true">→</span>
                 </Link>
@@ -62,9 +62,9 @@ function UserProfile() {
             </div>
           </div>
 
-          <div className="px-6 mx-auto text-gray-900 max-w-7xl lg:px-8">
+          <div className="px-6 mx-auto text-content_text max-w-7xl lg:px-8">
             <div className="mx-auto mt-10 lg:mx-0 lg:max-w-none">
-              <h3 className="mb-2 text-2xl font-medium text-center text-gray-900 sm:text-3xl title-font">
+              <h3 className="mb-2 text-2xl font-medium text-center text-heading sm:text-3xl title-font">
                 Tus Campañas Smile
               </h3>
               <p className="mt-6 text-sm leading-8 text-center">
@@ -75,14 +75,14 @@ function UserProfile() {
                   ? `tienes ${userCampaigns.length} campañas creadas`
                   : "aún no has creado ninguna campaña."}
               </p>
-              <div className="grid grid-cols-1 pt-10 mx-auto mt-10 border-t border-gray-200 gap-x-8 gap-y-16 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+              <div className="grid grid-cols-1 pt-10 mx-auto mt-10 border-t border-card_border gap-x-8 gap-y-16 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                 {userCampaigns.length > 0 ? (
                   userCampaigns.map((campaña, index) => (
                     <Card key={index} campaña={campaña} index={index} />
                   ))
                 ) : (
                   <div className="flex flex-col items-center justify-center col-span-3 gap-4 mt-7">
-                    <h4 className="text-xl font-medium title-font">
+                    <h4 className="text-xl font-medium text-heading">
                       ¿Listo para crear tu campaña Smile?
                     </h4>
 
