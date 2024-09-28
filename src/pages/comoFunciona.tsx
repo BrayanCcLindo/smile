@@ -181,53 +181,6 @@ function ComoFunciona() {
               </Link>
             </p>
           </div>
-
-          {/* <div className="relative content-start mt-6 mb-10 rounded-lg sm:w-1/3 sm:m-0 sm:pr-10 ">
-            <img
-              className="object-cover object-center w-full h-full shadow-2xl lg:-rotate-12"
-              src="/Images/statsSmile.jpg"
-              alt="stats"
-            />
-            <img
-              className="absolute bottom-0 left-0 hidden object-cover object-center w-1/2 translate-y-20 shadow-2xl h-1/2 rotate-12 lg:block"
-              src="/Images/decorationImg.jpg"
-              alt="stats"
-            />
-          </div>
-          <div className="flex flex-wrap pt-16 mt-auto mb-auto sm:w-2/3">
-            <div className="w-full px-4 mb-6 sm:p-4">
-              <h2 className="mb-2 text-3xl font-medium text-heading title-font">
-                Puedes escoger la prioridad de tu impacto.
-              </h2>
-              <div className="leading-relaxed text-content_text">
-                Los Kuzis, al estar en línea, disfrutan de una cobertura
-                ampliada, permitiéndoles recibir aportes desde cualquier rincón
-                del Perú. Esta conectividad abre un mundo de posibilidades,
-                asegurando que cada contribución, sin importar su origen,
-                impulse tu proyecto hacia el éxito.
-              </div>
-            </div>
-            <div className="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
-              <h2 className="text-3xl font-medium title-font text-main">
-                2.7K
-              </h2>
-              <p className="leading-relaxed">Usuarios</p>
-            </div>
-            <div className="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
-              <h2 className="text-3xl font-medium title-font text-main">
-                1.8K
-              </h2>
-              <p className="leading-relaxed">Campañas Activas</p>
-            </div>
-            <div className="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
-              <h2 className="text-3xl font-medium title-font text-main">35</h2>
-              <p className="leading-relaxed">Donaciones</p>
-            </div>
-            <div className="w-1/2 p-4 sm:w-1/2 lg:w-1/4">
-              <h2 className="text-3xl font-medium title-font text-main">4</h2>
-              <p className="leading-relaxed">Productos</p>
-            </div>
-          </div> */}
         </div>
       </div>
 

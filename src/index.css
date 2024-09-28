@@ -14,6 +14,7 @@
   --footer_bg: 242, 242, 242;
   --second_bg: 224, 231, 255;
   --input_bg: 255, 255, 255;
+  --entrepreneur: 255, 152, 0;
   /* --subheading: ; */
 }
 .dark {
@@ -26,6 +27,7 @@
   --footer_bg: 0, 0, 0;
   --second_bg: 30, 41, 59;
   --input_bg: 30, 41, 59;
+  --entrepreneur: 255, 193, 75;
 
   /* --subheading: ; */
 }

@@ -13,7 +13,7 @@ export default {
         card_border: "rgba(var(--border_gray))",
         second_bg: "rgba(var(--second_bg))",
         input_bg: "rgba(var(--input_bg))",
-
+        entrepreneur: "rgba(var(--entrepreneur))",
         footer: "rgba(var(--footer_bg))"
       },
       fontFamily: {

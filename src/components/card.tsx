@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 import { CampañaGiftSmileType, SmileType } from "../type/types";
-import { Clock, HandHeart, HeartHandshake, Rocket } from "lucide-react";
+import {
+  Clock,
+  HandHeart,
+  HeartHandshake,
+  Lightbulb,
+  Rocket
+} from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import ProgressBar from "./progressBar";
 import { formatDistanceToNow } from "date-fns";
@@ -48,7 +54,9 @@ function Card({
         campaña.tipo === SmileType.Fundaciones &&
           "hover:shadow-main hover:shadow-lg",
         campaña.tipo === SmileType.Social &&
-          "hover:shadow-alternative  hover:shadow-lg"
+          "hover:shadow-alternative  hover:shadow-lg",
+        campaña.tipo === SmileType.Emprendedores &&
+          "hover:shadow-entrepreneur  hover:shadow-lg"
       )}
     >
       <Link
@@ -62,12 +70,18 @@ function Card({
         className={twMerge(
           "flex p-3 items-center text-heading justify-between gap-3 ",
           campaña.tipo === SmileType.Fundaciones && "group-hover:text-main",
-          campaña.tipo === SmileType.Social && "group-hover:text-alternative"
+          campaña.tipo === SmileType.Social && "group-hover:text-alternative",
+          campaña.tipo === SmileType.Emprendedores &&
+            "group-hover:text-entrepreneur"
         )}
       >
-        {campaña.tipo === SmileType.Fundaciones ? (
+        {campaña.tipo === SmileType.Fundaciones && (
           <Rocket className="min-w-[30px] h-[30px] " />
-        ) : (
+        )}
+        {campaña.tipo === SmileType.Emprendedores && (
+          <Lightbulb className="min-w-[30px] h-[30px] " />
+        )}
+        {campaña.tipo === SmileType.Social && (
           <HandHeart className="min-w-[30px] h-[30px] " />
         )}
 
@@ -75,7 +89,9 @@ function Card({
           className={twMerge(
             "mt-3 text-lg font-semibold leading-6 line-clamp-1 ",
             campaña.tipo === SmileType.Fundaciones && "group-hover:text-main",
-            campaña.tipo === SmileType.Social && "group-hover:text-alternative"
+            campaña.tipo === SmileType.Social && "group-hover:text-alternative",
+            campaña.tipo === SmileType.Emprendedores &&
+              "group-hover:text-entrepreneur"
           )}
         >
           {" "}
@@ -94,7 +110,9 @@ function Card({
           className={twMerge(
             `absolute z-[2] rounded-full top-2 right-2  px-3 py-1.5 font-medium `,
             campaña.tipo === SmileType.Social && "bg-alternative text-main_bg",
-            campaña.tipo === SmileType.Fundaciones && "bg-main text-main_bg"
+            campaña.tipo === SmileType.Fundaciones && "bg-main text-main_bg",
+            campaña.tipo === SmileType.Emprendedores &&
+              "bg-entrepreneur text-main_bg"
           )}
         >
           {campaña.tipo}
@@ -106,7 +124,8 @@ function Card({
             className={twMerge(
               "flex items-center gap-2 font-medium",
               campaña.tipo === SmileType.Social && " text-alternative",
-              campaña.tipo === SmileType.Fundaciones && " text-main"
+              campaña.tipo === SmileType.Fundaciones && "text-main",
+              campaña.tipo === SmileType.Emprendedores && "text-entrepreneur"
             )}
           >
             <HeartHandshake />
@@ -116,8 +135,9 @@ function Card({
           <p
             className={twMerge(
               "flex items-center gap-1 ",
-              campaña.tipo === SmileType.Social && " text-alternative",
-              campaña.tipo === SmileType.Fundaciones && " text-main"
+              campaña.tipo === SmileType.Social && "text-alternative",
+              campaña.tipo === SmileType.Fundaciones && "text-main",
+              campaña.tipo === SmileType.Emprendedores && "text-entrepreneur"
             )}
           >
             <Clock />
@@ -137,6 +157,7 @@ function Card({
         </div>
         <div className="mt-5">
           <ProgressBar
+            type={campaña.tipo}
             progress={parseInt(activeDonations)}
             total={parseInt(campaña.meta)}
           />

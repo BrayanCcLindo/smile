@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Button } from "../components/mainLinkButton";
+import { MainButton } from "../components/mainLinkButton";
 import { auth } from "../firebase/firebase";
 import { toast } from "sonner";
 import { useSmileContext } from "../Api/userContext";
@@ -149,7 +149,7 @@ function LogIn() {
           </div>
 
           <div className="flex items-center justify-center flex-1 w-full">
-            <Button type="submit">Continuar</Button>
+            <MainButton type="submit">Continuar</MainButton>
           </div>
         </form>
 

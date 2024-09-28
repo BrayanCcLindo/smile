@@ -8,7 +8,7 @@ import { useState } from "react";
 import { auth, db } from "../firebase/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { FormData } from "../type/types";
-import { Button } from "../components/mainLinkButton";
+import { MainButton } from "../components/mainLinkButton";
 import { toast } from "sonner";
 import { useSmileContext } from "../Api/userContext";
 
@@ -208,7 +208,7 @@ function SignIn() {
           </div> */}
         </div>
         <div className="mt-10">
-          <Button type="submit">Registrarme</Button>
+          <MainButton type="submit">Registrarme</MainButton>
           {errorExist && (
             <div className="flex items-center justify-center gap-2 mt-3">
               <p className="text-center text-red-500 ">

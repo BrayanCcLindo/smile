@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodType } from "zod";
 import { useGetCampaigns } from "../Api/getCampaigns";
 import Loader from "../components/loader";
-import { Button } from "../components/mainLinkButton";
+import { MainButton } from "../components/mainLinkButton";
 import { format } from "date-fns";
 import { db } from "../firebase/firebase";
 import { doc, updateDoc } from "firebase/firestore";
@@ -184,7 +184,7 @@ function DonacionPasarela({
                 />
               </div>
               <div className="flex flex-col justify-center mt-10 sm:flex-row">
-                <div className="text-center sm:w-1/3 sm:pr-8 sm:py-8">
+                <div className="text-center md:W-1/3 sm:w-1/2 sm:pr-8 sm:py-8">
                   <div className="flex flex-col items-center justify-center text-center">
                     <h2 className="mt-4 text-lg font-medium text-heading ">
                       {actualPost.nombre}
@@ -295,7 +295,7 @@ function DonacionPasarela({
                         text={"S/.50"}
                       />
                     </li>
-                    <li>
+                    <li className="hidden lg:flex">
                       <ButtonDonations
                         onclick={(
                           event: React.MouseEvent<HTMLInputElement>
@@ -467,9 +467,9 @@ function DonacionPasarela({
                   </fieldset>
                   <div className="mt-10 text-content_text">
                     <div className="w-full mt-3">
-                      <Button type="submit" isLoading={isLoading}>
+                      <MainButton type="submit" isLoading={isLoading}>
                         Validar Donación
-                      </Button>
+                      </MainButton>
                     </div>
                     <p className="mt-5 text-sm">
                       Al elegir el método de pago anterior, aceptas los Términos

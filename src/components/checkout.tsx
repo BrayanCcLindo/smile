@@ -1,42 +1,53 @@
-import { useState } from "react";
-import { Wallet } from "@mercadopago/sdk-react";
-
+// Inicializa MercadoPago con tu clave pública
 // initMercadoPago("TEST-2a6a3c6c-6df2-4dcb-b46d-ecb5280c2cec");
+import { useState, useEffect } from "react";
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
-const Payment = () => {
+const MercadoPagoCheckout = () => {
   const [preferenceId, setPreferenceId] = useState(null);
 
-  const createPreference = async () => {
-    try {
-      const response = await fetch("http://localhost:3001/create_preference", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          title: "My product",
-          price: 100,
-          quantity: 1
-        })
-      });
+  useEffect(() => {
+    // Inicializar MercadoPago
+    initMercadoPago("TEST-2a6a3c6c-6df2-4dcb-b46d-ecb5280c2cec");
 
-      const data = await response.json();
-      if (data.id) {
+    // Función para crear la preferencia directamente en el frontend
+    const createPreference = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:3001/create_preference",
+          {
+            method: "POST",
+            headers: {
+              Authorization:
+                "Bearer TEST-3042054221475233-072601-07360d81f11ca843a6dd94b9c6eecc65-834410747",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              title: "Mi Producto",
+              price: 50,
+              quantity: 2
+            })
+          }
+        );
+
+        const data = await response.json();
         setPreferenceId(data.id);
-      } else {
-        console.error("Unexpected response:", data);
+      } catch (error) {
+        console.error("Error al crear la preferencia:", error);
       }
-    } catch (error) {
-      console.error("Error creating preference:", error);
-    }
-  };
+    };
+
+    createPreference();
+  }, []);
 
   return (
     <div>
-      <button onClick={createPreference}>Pay with Mercado Pago</button>
-      {preferenceId && <Wallet initialization={{ preferenceId }} />}
+      <h2>Finalizar compra</h2>
+      {preferenceId && (
+        <Wallet initialization={{ preferenceId: preferenceId }} />
+      )}
     </div>
   );
 };
 
-export default Payment;
+export default MercadoPagoCheckout;

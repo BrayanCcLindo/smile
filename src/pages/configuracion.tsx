@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/loader";
-import { Button } from "../components/mainLinkButton";
+import { MainButton } from "../components/mainLinkButton";
 import { profileRoutes } from "../constants/routes";
 import { auth } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
@@ -90,7 +90,7 @@ function Configuracion() {
                   <div className="flex flex-col items-center justify-center text-center">
                     <div className="w-12 h-1 mt-2 mb-4 rounded bg-main"></div>
                     <div className="relative flex items-center justify-center">
-                      <Button type="button">Actualizar Imagen</Button>
+                      <MainButton type="button">Actualizar Imagen</MainButton>
                       <label
                         htmlFor="userPhoto"
                         className="absolute inset-0 cursor-pointer"
@@ -158,7 +158,7 @@ function Configuracion() {
                           />
                         </div>
                         <div className="flex items-center justify-end mt-10 gap-x-6">
-                          <Button type="submit">Actualizar</Button>
+                          <MainButton type="submit">Actualizar</MainButton>
                         </div>
                       </div>
                     </div>

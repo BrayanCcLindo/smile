@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSmileContext } from "../Api/userContext";
+import { SmileForm } from "../type/types";
 
 function NuevaCampaña() {
   const { stateProfile } = useSmileContext();
@@ -28,7 +29,11 @@ function NuevaCampaña() {
                 window.scrollTo(0, 0);
               }}
               className="absolute inset-0"
-              to={stateProfile ? "/formulario-campaña" : "/sign-in"}
+              to={
+                stateProfile
+                  ? `/nueva-campaña/${SmileForm.Albergue}`
+                  : "/sign-in"
+              }
             ></Link>
             <div className="h-full overflow-hidden border rounded-lg cursor-pointer border-card_border group border-opacity-60 hover:shadow-lg ">
               <img
@@ -74,7 +79,11 @@ function NuevaCampaña() {
                 window.scrollTo(0, 0);
               }}
               className="absolute inset-0"
-              to={stateProfile ? "/formulario-campaña" : "/sign-in"}
+              to={
+                stateProfile
+                  ? `/nueva-campaña/${SmileForm.Emprendedores}`
+                  : "/sign-in"
+              }
             ></Link>
             <div className="h-full overflow-hidden border rounded-lg cursor-pointer border-card_border group border-opacity-60 hover:shadow-lg ">
               <img
@@ -120,7 +129,9 @@ function NuevaCampaña() {
                 window.scrollTo(0, 0);
               }}
               className="absolute inset-0"
-              to={stateProfile ? "/formulario-campaña" : "/sign-in"}
+              to={
+                stateProfile ? `/nueva-campaña/${SmileForm.Social}` : "/sign-in"
+              }
             ></Link>
             <div className="h-full overflow-hidden border rounded-lg cursor-pointer border-card_border border-opacity-60 hover:shadow-lg">
               <img

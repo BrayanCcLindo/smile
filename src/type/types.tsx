@@ -77,6 +77,11 @@ export enum SmileType {
   Fundaciones = "Albergues, fundaciones y ONG",
   Emprendedores = "Emprendedores"
 }
+export enum SmileForm {
+  Social = "social",
+  Albergue = "albergue",
+  Emprendedores = "emprendedores"
+}
 
 //Themes
 export type ToogleTheme = "dark" | "light" | "system";

@@ -4,34 +4,32 @@ import { useGetCampaigns } from "../Api/getCampaigns";
 import Card from "../components/card";
 import { Link } from "react-router-dom";
 import CallToAction from "../components/callToAction";
-import Loader from "../components/loader";
 import LogoSection from "../components/logoSection";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
+import SkeletonCardLoader from "../components/skeletonCard";
+import MercadoPagoCheckout from "../components/checkout";
 
 // import { useSmileContext } from "../Api/userContext";
 
 function Homepage() {
   const { data } = useGetCampaigns();
-  const firstThreeCampaigns = data.slice(0, 3);
+  // const { data: ruc } = useRucData("20");
+  // console.log(ruc, "ruc");
+
+  const firstThreeCampaigns = [...data].slice(0, 3);
 
   return (
     <section className="py-24 bg-main_bg sm:py-10">
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        transition={{
-          duration: 2,
-          delay: 0.5,
-          ease: "easeInOut",
-          type: "spring"
-        }}
         className="px-6 py-10 mx-auto max-w-7xl lg:px-8"
       >
         <div className="flex flex-col items-center max-w-2xl mx-auto lg:text-center">
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-heading sm:text-4xl">
             Kuzi
           </h1>
-
+          <MercadoPagoCheckout />
           <p className="my-6 text-lg leading-8 text-center text-content_text ">
             ¡Descubre proyectos que te apasionan y hazlos realidad! Apoya causas
             sociales, impulsa emprendimientos innovadores y genera un impacto
@@ -67,17 +65,13 @@ function Homepage() {
             </div>
           </div>
           <div className="grid max-w-2xl grid-cols-1 pt-10 mx-auto mt-10 gap-x-8 gap-y-16 sm:mt-5 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-            <AnimatePresence>
-              {firstThreeCampaigns.length > 0 ? (
-                firstThreeCampaigns.map((campaña, index) => (
+            {firstThreeCampaigns.length >= 3
+              ? firstThreeCampaigns.map((campaña, index) => (
                   <Card key={index} campaña={campaña} index={index} />
                 ))
-              ) : (
-                <div className="col-span-full">
-                  <Loader />
-                </div>
-              )}
-            </AnimatePresence>
+              : Array(3)
+                  .fill(null)
+                  .map(() => <SkeletonCardLoader />)}
           </div>
           <div className="flex items-center justify-end">
             <Link

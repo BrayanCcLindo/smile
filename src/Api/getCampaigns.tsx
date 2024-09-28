@@ -9,16 +9,16 @@ export const useGetCampaigns = () => {
   useEffect(() => {
     const unsub = onSnapshot(
       collection(db, "campañas"),
-      (snapshot) => {
+      snapshot => {
         const campañas: CampañaGiftSmileType[] = [];
 
-        snapshot.docs.forEach((doc) => {
+        snapshot.docs.forEach(doc => {
           // @ts-expect-error need to push
           campañas.push({ id: doc.id, campañaId: doc.id, ...doc.data() });
         });
         setData(campañas);
       },
-      (error) => {
+      error => {
         console.log(error);
       }
     );

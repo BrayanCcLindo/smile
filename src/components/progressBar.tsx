@@ -1,21 +1,29 @@
 import * as Progress from "@radix-ui/react-progress";
+import { twMerge } from "tailwind-merge";
+import { SmileType } from "../type/types";
 
 type BarType = {
   progress: number;
   total: number;
+  type?: string;
 };
 
-function ProgressBar({ progress, total }: BarType) {
-  //   const prueba = 130;
-  //   const prueba2 = 1150;
+function ProgressBar({
+  progress,
+  total,
+  type = SmileType.Fundaciones
+}: BarType) {
   const dynamicPercent = Math.ceil((progress / total) * 100);
 
   return (
     <Progress.Root
-      className="relative h-5 overflow-hidden rounded-full bg-main "
+      className={twMerge(
+        "relative h-5 overflow-hidden rounded-full",
+        type === SmileType.Fundaciones && " bg-main",
+        type === SmileType.Emprendedores && " bg-entrepreneur",
+        type === SmileType.Social && " bg-alternative"
+      )}
       style={{
-        // Fix overflow clipping in Safari
-        // https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0
         transform: "translateZ(0)"
       }}
       value={progress}

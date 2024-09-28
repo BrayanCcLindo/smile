@@ -1,6 +1,6 @@
-import { Loader2 } from 'lucide-react';
-import { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import { Loader2 } from "lucide-react";
+import { ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 type ButtonLinkType = {
   link: string;
@@ -25,12 +25,12 @@ function MainLinkButton({ link, children }: ButtonLinkType) {
 export default MainLinkButton;
 
 type ButtonType = {
-  type: 'button' | 'submit' | 'reset';
+  type: "button" | "submit" | "reset";
   children: ReactNode;
   isLoading?: boolean;
 };
 
-export function Button({ type, children, isLoading }: ButtonType) {
+export function MainButton({ type, children, isLoading }: ButtonType) {
   return (
     <button
       type={type}
