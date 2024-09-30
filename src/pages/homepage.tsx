@@ -7,7 +7,6 @@ import CallToAction from "../components/callToAction";
 import LogoSection from "../components/logoSection";
 import { motion } from "framer-motion";
 import SkeletonCardLoader from "../components/skeletonCard";
-import MercadoPagoCheckout from "../components/checkout";
 
 // import { useSmileContext } from "../Api/userContext";
 
@@ -29,7 +28,6 @@ function Homepage() {
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-heading sm:text-4xl">
             Kuzi
           </h1>
-          <MercadoPagoCheckout />
           <p className="my-6 text-lg leading-8 text-center text-content_text ">
             ¡Descubre proyectos que te apasionan y hazlos realidad! Apoya causas
             sociales, impulsa emprendimientos innovadores y genera un impacto
@@ -38,10 +36,10 @@ function Homepage() {
             <br /> ¡Explora KUZI y encuentra proyectos que te emocionen!
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 mt-10 lg:justify-start">
-            <MainLinkButton link="/campañas">Donar Ahora</MainLinkButton>
+            <MainLinkButton link="/campaigns">Donar Ahora</MainLinkButton>
 
             <Link
-              to="/como-funciona"
+              to="/how-it-works"
               className="text-sm font-semibold leading-6 text-main "
             >
               ¿Cómo funciona? <span aria-hidden="true">→</span>
@@ -78,7 +76,7 @@ function Homepage() {
               onClick={() => {
                 window.scrollTo(0, 0);
               }}
-              to="/campañas"
+              to="/campaigns"
               className="mt-2 text-sm font-semibold leading-6 text-main"
             >
               Ver todas las campañas <span aria-hidden="true">→</span>

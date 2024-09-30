@@ -48,12 +48,12 @@ function UserProfile() {
                 Descubre campañas inspiradoras y dona para crear un impacto Real
               </p>
               <div className="flex flex-wrap items-center justify-center gap-6 mt-10 lg:justify-start">
-                <MainLinkButton link="/campañas">
+                <MainLinkButton link="/campaigns">
                   Ver campañas y Donar
                 </MainLinkButton>
 
                 <Link
-                  to="/como-funciona"
+                  to="/how-it-works"
                   className="text-sm font-semibold leading-6 text-main"
                 >
                   Ver cómo funciona Smile <span aria-hidden="true">→</span>
@@ -88,7 +88,7 @@ function UserProfile() {
 
                     <div className="flex flex-wrap items-center gap-7">
                       <MainLinkButton
-                        link={stateProfile ? "/nueva-campaña" : "/sign-in"}
+                        link={stateProfile ? "/new-campaign" : "/sign-in"}
                       >
                         Crear Campaña
                       </MainLinkButton>
@@ -96,7 +96,7 @@ function UserProfile() {
                         onClick={() => {
                           window.scrollTo(0, 0);
                         }}
-                        to="/campañas"
+                        to="/campaigns"
                         className="text-sm font-semibold leading-6 text-main"
                       >
                         Ver campañas activas <span aria-hidden="true">→</span>

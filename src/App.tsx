@@ -68,9 +68,9 @@ function App() {
   const SignIn = lazy(() => import("./pages/signIn"));
   const UserProfile = lazy(() => import("./pages/UserProfile"));
   const ComoFunciona = lazy(() => import("./pages/comoFunciona"));
-  const Campañas = lazy(() => import("./pages/campañas"));
-  const NuevaCampaña = lazy(() => import("./pages/iniciarCampaña"));
-  const PostCampaña = lazy(() => import("./pages/postCampaña"));
+  const Campaigns = lazy(() => import("./pages/campaigns"));
+  const StartCampaign = lazy(() => import("./pages/startCampaign"));
+  const PostCampaign = lazy(() => import("./pages/postCampaign"));
   const DonacionPasarela = lazy(() => import("./pages/donacionPasarela"));
   const Configuracion = lazy(() => import("./pages/configuracion"));
   const FormAlbergue = lazy(() => import("./pages/formAlbergue"));
@@ -123,19 +123,19 @@ function App() {
               }
             />
             <Route
-              path="/como-funciona"
+              path="/how-it-works"
               Component={() => <LazyComponent Component={ComoFunciona} />}
             />
             <Route
-              path="/campañas"
-              Component={() => <LazyComponent Component={Campañas} />}
+              path="/campaigns"
+              Component={() => <LazyComponent Component={Campaigns} />}
             />
             <Route
-              path="/nueva-campaña"
-              Component={() => <LazyComponent Component={NuevaCampaña} />}
+              path="/new-campaign"
+              Component={() => <LazyComponent Component={StartCampaign} />}
             />
             <Route
-              path={`/nueva-campaña/${SmileForm.Albergue}`}
+              path={`/new-campaign/${SmileForm.Albergue}`}
               element={
                 <RouteGoogleSign>
                   <LazyComponent Component={FormAlbergue} />
@@ -143,7 +143,7 @@ function App() {
               }
             />
             <Route
-              path={`/nueva-campaña/${SmileForm.Emprendedores}`}
+              path={`/new-campaign/${SmileForm.Emprendedores}`}
               element={
                 <RouteGoogleSign>
                   <LazyComponent Component={FormEmprendedor} />
@@ -151,7 +151,7 @@ function App() {
               }
             />
             <Route
-              path={`/nueva-campaña/${SmileForm.Social}`}
+              path={`/new-campaign/${SmileForm.Social}`}
               element={
                 <RouteGoogleSign>
                   <LazyComponent Component={FormSocial} />
@@ -167,7 +167,7 @@ function App() {
               }
             />
             <Route
-              path="/campañas/:slug/donar"
+              path="/campaigns/:slug/donar"
               element={
                 <DonacionPasarela
                   setIsloading={setIsloading}
@@ -175,7 +175,7 @@ function App() {
                 />
               }
             />
-            <Route path="/campañas/:slug" Component={PostCampaña} />
+            <Route path="/campaigns/:slug" Component={PostCampaign} />
             <Route
               path="/perfil"
               element={

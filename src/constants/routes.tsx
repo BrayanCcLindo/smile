@@ -2,19 +2,19 @@ export const routes = [
   {
     to: "/",
     text: "Inicio",
-    private: false,
+    private: false
   },
   {
-    to: "/como-funciona",
+    to: "/how-it-works",
     text: "¿Cómo funciona?",
-    private: false,
+    private: false
   },
 
   {
-    to: "/campañas",
+    to: "/campaigns",
     text: "Campañas",
-    private: false,
-  },
+    private: false
+  }
   // {
   //   to: "/nosotros",
   //   text: "Nosotros",
@@ -24,15 +24,15 @@ export const routes = [
 
 export const profileRoutes = [
   {
-    to: "/como-funciona",
-    text: "Nosotros",
+    to: "/how-it-works",
+    text: "Nosotros"
   },
   {
     to: "/",
-    text: "Términos y Condiciones",
+    text: "Términos y Condiciones"
   },
   {
     to: "/",
-    text: "Política de Privacidad",
-  },
+    text: "Política de Privacidad"
+  }
 ];

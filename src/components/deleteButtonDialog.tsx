@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function DeleteButtonDialog({
   text,
-  campaña,
+  campaña
 }: {
   text: string;
   campaña: CampañaGiftSmileType;
@@ -39,7 +39,7 @@ function DeleteButtonDialog({
               <button
                 onClick={() => {
                   handleDeleteCampaign(campaña.campañaId);
-                  navigate("/campañas");
+                  navigate("/campaigns");
                 }}
                 className="text-white bg-red-500 hover:bg-red-600 focus:shadow-red7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none outline-none focus:shadow-[0_0_0_2px]"
               >

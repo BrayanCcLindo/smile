@@ -111,7 +111,7 @@ function Header() {
                 </Link>
               </>
             )}
-            <MainLinkButton link={"/nueva-campaña"}>
+            <MainLinkButton link={"/new-campaign"}>
               Crear Campaña
             </MainLinkButton>
             <SwitchToogle />
@@ -162,7 +162,7 @@ function Header() {
           </div>
           <div className="flow-root mt-6">
             <div className="divide-y divide-gray-500/10">
-              <MainLinkButton link="/nueva-campaña">
+              <MainLinkButton link="/new-campaign">
                 Crear Campaña
               </MainLinkButton>
 

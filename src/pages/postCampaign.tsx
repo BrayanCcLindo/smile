@@ -11,7 +11,7 @@ import { es } from "date-fns/locale";
 import ProgressBar from "../components/progressBar";
 import { useRef } from "react";
 
-function PostCampaña() {
+function PostCampaign() {
   const { data } = useGetCampaigns();
   const { slug } = useParams();
   const { stateProfile } = useSmileContext();
@@ -99,7 +99,7 @@ function PostCampaña() {
                 </div>
 
                 <div className="mb-5">
-                  <MainLinkButton link={`/campañas/${actualPost?.slug}/donar`}>
+                  <MainLinkButton link={`/campaigns/${actualPost?.slug}/donar`}>
                     Donar
                   </MainLinkButton>
                 </div>
@@ -265,4 +265,4 @@ function PostCampaña() {
   );
 }
 
-export default PostCampaña;
+export default PostCampaign;

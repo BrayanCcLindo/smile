@@ -96,14 +96,14 @@ function FormAlbergue() {
           id: stateProfile.uid,
           imagenCampaña: image,
           meta: values.meta,
-          to: `/campañas/${slug}`,
+          to: `/campaigns/${slug}`,
           tipo: SmileType.Fundaciones,
           creador: user?.name ?? stateProfile.displayName,
           fechaInicio: startDate,
           fechaFinal: endDate,
           donaciones: []
         });
-        navigate("/campañas");
+        navigate("/campaigns");
         toast.success("¡Campaña creada exitosamente!", {
           duration: 2000,
           position: "top-right"

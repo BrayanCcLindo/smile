@@ -3,7 +3,7 @@ import { useGetCampaigns } from "../Api/getCampaigns";
 import CallToAction from "../components/callToAction";
 import SkeletonCardLoader from "../components/skeletonCard";
 
-function Campañas() {
+function Campaigns() {
   const { data } = useGetCampaigns();
 
   return (
@@ -44,4 +44,4 @@ function Campañas() {
   );
 }
 
-export default Campañas;
+export default Campaigns;

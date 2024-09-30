@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useSmileContext } from "../Api/userContext";
 import { SmileForm } from "../type/types";
 
-function NuevaCampaña() {
+function StartCampaign() {
   const { stateProfile } = useSmileContext();
   return (
     <section className="text-content_text body-font bg-main_bg">
@@ -31,7 +31,7 @@ function NuevaCampaña() {
               className="absolute inset-0"
               to={
                 stateProfile
-                  ? `/nueva-campaña/${SmileForm.Albergue}`
+                  ? `/new-campaign/${SmileForm.Albergue}`
                   : "/sign-in"
               }
             ></Link>
@@ -177,4 +177,4 @@ function NuevaCampaña() {
   );
 }
 
-export default NuevaCampaña;
+export default StartCampaign;

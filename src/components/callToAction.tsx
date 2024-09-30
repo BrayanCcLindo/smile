@@ -29,13 +29,13 @@ function CallToAction() {
               Kuzi. ¡Tu ayuda importa!
             </p>
             <div className="flex flex-wrap items-center justify-center gap-6 mt-10 lg:justify-start">
-              <MainLinkButton link="/campañas">Donar Ahora</MainLinkButton>
+              <MainLinkButton link="/campaigns">Donar Ahora</MainLinkButton>
 
               <Link
                 onClick={() => {
                   window.scrollTo(0, 0);
                 }}
-                to="/como-funciona"
+                to="/how-it-works"
                 className="text-sm font-semibold leading-6 text-main"
               >
                 ¿Cómo funciona? <span aria-hidden="true">→</span>

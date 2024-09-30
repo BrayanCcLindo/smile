@@ -31,7 +31,7 @@ function Footer() {
                 <br /> y apoyar proyectos que cambian el mundo.
               </p>
               <div className="flex max-w-md mt-6 gap-x-4">
-                <MainLinkButton link="/campañas">Donar Ahora</MainLinkButton>
+                <MainLinkButton link="/campaigns">Donar Ahora</MainLinkButton>
               </div>
             </div>
             <dl className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
@@ -51,7 +51,7 @@ function Footer() {
                     </Link>
                   </li>
                   <li className="hover:text-main text-content_text">
-                    <Link onClick={scrollToTop} to={"/campañas"}>
+                    <Link onClick={scrollToTop} to={"/campaigns"}>
                       Campañas
                     </Link>
                   </li>

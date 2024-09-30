@@ -73,7 +73,7 @@ function FormEmprendores() {
           id: stateProfile.uid,
           imagenCampaña: image,
           meta: values.meta,
-          to: `/campañas/${slug}`,
+          to: `/campaigns/${slug}`,
           tipo: values.type,
           creador: user?.name ?? stateProfile.displayName,
           // imagen: userPhoto,
@@ -81,7 +81,7 @@ function FormEmprendores() {
           fechaFinal: finalDate,
           donaciones: []
         });
-        navigate("/campañas");
+        navigate("/campaigns");
         toast.success("¡Campaña creada exitosamente!", {
           duration: 2000,
           position: "top-right"

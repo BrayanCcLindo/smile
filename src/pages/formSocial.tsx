@@ -99,7 +99,7 @@ function FormEmprendedor() {
           fechaFinal: endDate,
           donaciones: []
         });
-        navigate("/campañas");
+        navigate("/campaigns");
         toast.success("¡Campaña creada exitosamente!", {
           duration: 2000,
           position: "top-right"

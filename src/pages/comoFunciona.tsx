@@ -109,7 +109,7 @@ function ComoFunciona() {
                 <source src="/video/videoSmile.webm" type="video/webm"></source>
               </video>
               <div className="mt-10 ">
-                <MainLinkButton link="/campañas">Donar Ahora</MainLinkButton>
+                <MainLinkButton link="/campaigns">Donar Ahora</MainLinkButton>
               </div>
             </div>
           </div>
@@ -174,7 +174,7 @@ function ComoFunciona() {
               </span>{" "}
               ¿Qué esperas para unirte al #KuziPower 💪?{" "}
               <Link
-                to="/nueva-campaña"
+                to="/new-campaign"
                 className="text-lg font-semibold leading-6 t text-main"
               >
                 Crea tu Campaña <span aria-hidden="true">→</span>
