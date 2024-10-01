@@ -10,7 +10,7 @@ function StartCampaign() {
       <SEOComponent
         canonicalUrl="https://kuzifund.com/new-campaign"
         title="Ayúdanos a definir tu Kuzi"
-        description="Crea tu campaña en KUZI FUND y apoya emprendedores, fundaciones o causas sociales. Recauda fondos fácilmente y genera un impacto positivo en la comunidad."
+        description="Crea tu campaña en Kuzi Fund y apoya emprendedores, fundaciones o causas sociales. Recauda fondos fácilmente y genera un impacto positivo en la comunidad."
       />
       <section className="text-content_text body-font bg-main_bg">
         <div className="container px-5 py-24 mx-auto">

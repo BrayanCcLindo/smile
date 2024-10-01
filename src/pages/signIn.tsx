@@ -87,8 +87,8 @@ function SignIn() {
     <>
       <SEOComponent
         canonicalUrl="https://kuzifund.com/sign-in"
-        title="Regístrate en KUZI FUND - Crea tu Cuenta y Empieza a Recaudar Fondos"
-        description="Regístrate en KUZI FUND y comienza a crear campañas para emprendedores, fundaciones o causas sociales."
+        title="Regístrate en Kuzi Fund - Crea tu Cuenta y Empieza a Recaudar Fondos"
+        description="Regístrate en Kuzi Fund y comienza a crear campañas para emprendedores, fundaciones o causas sociales."
       />
       <div className="px-6 py-12 isolate bg-main_bg sm:py-12 lg:px-8">
         <div className="max-w-2xl mx-auto text-center">

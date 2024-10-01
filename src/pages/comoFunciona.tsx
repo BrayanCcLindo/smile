@@ -16,8 +16,8 @@ function ComoFunciona() {
     <>
       <SEOComponent
         canonicalUrl="https://kuzifund.com/how-it-works"
-        title="¿Cómo Funciona KUZI FUND? - Crea, Comparte y Recauda Fondos"
-        description="Descubre cómo funciona KUZI FUND. Crea una campaña, comparte tu causa y recauda fondos para emprendedores, fundaciones o causas sociales fácilmente y de forma segura."
+        title="¿Cómo Funciona Kuzi Fund? - Crea, Comparte y Recauda Fondos"
+        description="Descubre cómo funciona Kuzi Fund. Crea una campaña, comparte tu causa y recauda fondos para emprendedores, fundaciones o causas sociales fácilmente y de forma segura."
       />
       <section>
         <div className="text-base text-content_text bg-gradient-to-b from-second_bg to-main_bg via-second_bg">

@@ -7,6 +7,7 @@ import CallToAction from "../components/callToAction";
 import LogoSection from "../components/logoSection";
 import { motion } from "framer-motion";
 import SkeletonCardLoader from "../components/skeletonCard";
+import { SEOComponent } from "../assets/SEO";
 
 // import { useSmileContext } from "../Api/userContext";
 
@@ -19,6 +20,11 @@ function Homepage() {
 
   return (
     <section className="py-24 bg-main_bg sm:py-10">
+      <SEOComponent
+        canonicalUrl="https://kuzifund.com/"
+        title="Campañas en Kuzi fund - Apoya Emprendedores, Fundaciones y Causas Sociales"
+        description="Apoya causas sociales, emprendedores innovadores y fundaciones. Dona, apoya y contribuye a crear un impacto positivo en la comunidad."
+      />
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}

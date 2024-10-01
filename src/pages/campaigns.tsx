@@ -11,8 +11,8 @@ function Campaigns() {
     <>
       <SEOComponent
         canonicalUrl="https://kuzifund.com/campaigns"
-        title="Campañas en KUZI FUND - Apoya Emprendedores, Fundaciones y Causas Sociales"
-        description="Explora campañas en KUZI FUND y dona para apoyar a emprendedores, fundaciones y causas sociales. Contribuye a proyectos con impacto positivo y transparente."
+        title="Campañas en Kuzi Fund - Apoya Emprendedores, Fundaciones y Causas Sociales"
+        description="Explora campañas en Kuzi Fund y dona para apoyar a emprendedores, fundaciones y causas sociales. Contribuye a proyectos con impacto positivo y transparente."
       />
       <div className="bg-main_bg">
         <section className="mx-auto body-font max-w-7xl">

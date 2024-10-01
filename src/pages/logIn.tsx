@@ -73,8 +73,8 @@ function LogIn() {
     <>
       <SEOComponent
         canonicalUrl="https://kuzifund.com/log-in"
-        title="niciar Sesión en KUZI FUND - Accede a tu Cuenta y Gestiona tus Campañas"
-        description="Inicia sesión en KUZI FUND para crear, gestionar o donar a campañas. Conéctate y apoya proyectos que generen un impacto positivo en tu comunidad."
+        title="niciar Sesión en Kuzi Fund - Accede a tu Cuenta y Gestiona tus Campañas"
+        description="Inicia sesión en Kuzi Fund para crear, gestionar o donar a campañas. Conéctate y apoya proyectos que generen un impacto positivo en tu comunidad."
       />
       <div className="flex flex-col justify-center px-6 py-12 bg-main_bg lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
