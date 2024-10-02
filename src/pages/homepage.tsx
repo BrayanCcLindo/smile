@@ -7,7 +7,7 @@ import CallToAction from "../components/callToAction";
 import LogoSection from "../components/logoSection";
 import { motion } from "framer-motion";
 import SkeletonCardLoader from "../components/skeletonCard";
-import { SEOComponent } from "../assets/SEO";
+import { ROUTES } from "../constants/routes";
 
 // import { useSmileContext } from "../Api/userContext";
 
@@ -20,11 +20,6 @@ function Homepage() {
 
   return (
     <section className="py-24 bg-main_bg sm:py-10">
-      <SEOComponent
-        canonicalUrl="https://kuzifund.com/"
-        title="Campañas en Kuzi fund - Apoya Emprendedores, Fundaciones y Causas Sociales"
-        description="Apoya causas sociales, emprendedores innovadores y fundaciones. Dona, apoya y contribuye a crear un impacto positivo en la comunidad."
-      />
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -42,10 +37,10 @@ function Homepage() {
             <br /> ¡Explora KUZI y encuentra proyectos que te emocionen!
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 mt-10 lg:justify-start">
-            <MainLinkButton link="/campaigns">Donar Ahora</MainLinkButton>
+            <MainLinkButton link={ROUTES.CAMPANAS}>Donar Ahora</MainLinkButton>
 
             <Link
-              to="/how-it-works"
+              to={ROUTES.COMO_FUNCIONA}
               className="text-sm font-semibold leading-6 text-main "
             >
               ¿Cómo funciona? <span aria-hidden="true">→</span>
@@ -75,14 +70,14 @@ function Homepage() {
                 ))
               : Array(3)
                   .fill(null)
-                  .map(() => <SkeletonCardLoader />)}
+                  .map((_, index) => <SkeletonCardLoader key={index} />)}
           </div>
           <div className="flex items-center justify-end">
             <Link
               onClick={() => {
                 window.scrollTo(0, 0);
               }}
-              to="/campaigns"
+              to={ROUTES.CAMPANAS}
               className="mt-2 text-sm font-semibold leading-6 text-main"
             >
               Ver todas las campañas <span aria-hidden="true">→</span>

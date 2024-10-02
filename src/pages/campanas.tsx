@@ -42,7 +42,7 @@ function Campaigns() {
                   ))
                 : Array(3)
                     .fill(null)
-                    .map(() => <SkeletonCardLoader />)}
+                    .map((_, index) => <SkeletonCardLoader key={index} />)}
             </div>
           </div>
           <CallToAction />

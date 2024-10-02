@@ -12,6 +12,7 @@ import { MainButton } from "../components/mainLinkButton";
 import { toast } from "sonner";
 import { useSmileContext } from "../Api/userContext";
 import { SEOComponent } from "../assets/SEO";
+import { ROUTES } from "../constants/routes";
 
 function SignIn() {
   const navigate = useNavigate();
@@ -225,7 +226,7 @@ function SignIn() {
                 </p>
                 <Link
                   className="font-medium text-indigo-500 underline"
-                  to={"/log-in"}
+                  to={ROUTES.LOG_IN}
                 >
                   Inicie Sesión
                 </Link>

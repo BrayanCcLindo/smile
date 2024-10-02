@@ -1,17 +1,28 @@
+export const ROUTES = {
+  HOMEPAGE: "/",
+  CAMPANAS: "/campanas",
+  COMO_FUNCIONA: "/como-funciona",
+  SIGN_IN: "/registrese",
+  LOG_IN: "/iniciar-sesion",
+  CREAR_CAMPANA: "/crear-campana",
+  CONFIGURACION: "/configuracion",
+  PERFIL: "/perfil"
+};
+
 export const routes = [
   {
-    to: "/",
+    to: ROUTES.HOMEPAGE,
     text: "Inicio",
     private: false
   },
   {
-    to: "/how-it-works",
+    to: ROUTES.COMO_FUNCIONA,
     text: "¿Cómo funciona?",
     private: false
   },
 
   {
-    to: "/campaigns",
+    to: ROUTES.CAMPANAS,
     text: "Campañas",
     private: false
   }
@@ -24,15 +35,15 @@ export const routes = [
 
 export const profileRoutes = [
   {
-    to: "/how-it-works",
-    text: "Nosotros"
+    to: ROUTES.COMO_FUNCIONA,
+    text: "Como Funciona"
   },
   {
-    to: "/",
+    to: ROUTES.HOMEPAGE,
     text: "Términos y Condiciones"
   },
   {
-    to: "/",
+    to: ROUTES.HOMEPAGE,
     text: "Política de Privacidad"
   }
 ];

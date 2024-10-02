@@ -10,12 +10,13 @@ import CallToAction from "../components/callToAction";
 import { Link } from "react-router-dom";
 import MainLinkButton from "../components/mainLinkButton";
 import { SEOComponent } from "../assets/SEO";
+import { ROUTES } from "../constants/routes";
 
 function ComoFunciona() {
   return (
     <>
       <SEOComponent
-        canonicalUrl="https://kuzifund.com/how-it-works"
+        canonicalUrl="https://kuzifund.com/como-funciona"
         title="¿Cómo Funciona Kuzi Fund? - Crea, Comparte y Recauda Fondos"
         description="Descubre cómo funciona Kuzi Fund. Crea una campaña, comparte tu causa y recauda fondos para emprendedores, fundaciones o causas sociales fácilmente y de forma segura."
       />
@@ -123,7 +124,9 @@ function ComoFunciona() {
                   ></source>
                 </video>
                 <div className="mt-10 ">
-                  <MainLinkButton link="/campaigns">Donar Ahora</MainLinkButton>
+                  <MainLinkButton link={ROUTES.CAMPANAS}>
+                    Donar Ahora
+                  </MainLinkButton>
                 </div>
               </div>
             </div>
@@ -190,7 +193,7 @@ function ComoFunciona() {
                 </span>{" "}
                 ¿Qué esperas para unirte al #KuziPower 💪?{" "}
                 <Link
-                  to="/new-campaign"
+                  to={ROUTES.CREAR_CAMPANA}
                   className="text-lg font-semibold leading-6 t text-main"
                 >
                   Crea tu Campaña <span aria-hidden="true">→</span>

@@ -9,6 +9,7 @@ import { auth } from "../firebase/firebase";
 import { toast } from "sonner";
 import { useSmileContext } from "../Api/userContext";
 import { SEOComponent } from "../assets/SEO";
+import { ROUTES } from "../constants/routes";
 
 type LoginType = {
   email: string;
@@ -163,7 +164,7 @@ function LogIn() {
           <p className="mt-10 text-sm text-center text-gray-500 ">
             ¿No tiene cuenta Kuzi?
             <Link
-              to="/sign-in"
+              to={ROUTES.SIGN_IN}
               className="ml-1 font-semibold leading-6 text-main "
             >
               Regístrese

@@ -7,6 +7,7 @@ import CallToAction from "../components/callToAction";
 import { useGetCampaigns } from "../Api/getCampaigns";
 import { useSmileContext } from "../Api/userContext";
 import { Link } from "react-router-dom";
+import { ROUTES } from "../constants/routes";
 
 function UserProfile() {
   const { user } = useGetUserData();
@@ -35,7 +36,7 @@ function UserProfile() {
                     alt="foto-usuario"
                     className="object-cover object-center rounded-full"
                   />
-                  <MainLinkButton link="/configuracion">
+                  <MainLinkButton link={ROUTES.CONFIGURACION}>
                     <Settings2 />
                     Configurar
                   </MainLinkButton>
@@ -48,12 +49,12 @@ function UserProfile() {
                 Descubre campañas inspiradoras y dona para crear un impacto Real
               </p>
               <div className="flex flex-wrap items-center justify-center gap-6 mt-10 lg:justify-start">
-                <MainLinkButton link="/campaigns">
+                <MainLinkButton link={ROUTES.CAMPANAS}>
                   Ver campañas y Donar
                 </MainLinkButton>
 
                 <Link
-                  to="/how-it-works"
+                  to={ROUTES.COMO_FUNCIONA}
                   className="text-sm font-semibold leading-6 text-main"
                 >
                   Ver cómo funciona Smile <span aria-hidden="true">→</span>
@@ -88,7 +89,9 @@ function UserProfile() {
 
                     <div className="flex flex-wrap items-center gap-7">
                       <MainLinkButton
-                        link={stateProfile ? "/new-campaign" : "/sign-in"}
+                        link={
+                          stateProfile ? ROUTES.CREAR_CAMPANA : ROUTES.SIGN_IN
+                        }
                       >
                         Crear Campaña
                       </MainLinkButton>
@@ -96,7 +99,7 @@ function UserProfile() {
                         onClick={() => {
                           window.scrollTo(0, 0);
                         }}
-                        to="/campaigns"
+                        to={ROUTES.CAMPANAS}
                         className="text-sm font-semibold leading-6 text-main"
                       >
                         Ver campañas activas <span aria-hidden="true">→</span>

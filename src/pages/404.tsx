@@ -1,5 +1,5 @@
-import { Button } from "../components/ui/button";
-import { Link } from "react-router-dom";
+import { ROUTES } from "../constants/routes";
+import MainLinkButton from "../components/mainLinkButton";
 
 export default function NotFound() {
   return (
@@ -12,9 +12,7 @@ export default function NotFound() {
         Lo sentimos, la página que estás buscando no existe o ha sido movida.
       </p>
       <div className="space-x-4">
-        <Button className="border border-card_border" asChild>
-          <Link to="/">Volver al inicio</Link>
-        </Button>
+        <MainLinkButton link={ROUTES.HOMEPAGE}>Volver al inicio</MainLinkButton>
       </div>
     </div>
   );

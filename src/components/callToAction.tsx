@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import MainLinkButton from "./mainLinkButton";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
+import { ROUTES } from "../constants/routes";
 
 function CallToAction() {
   const callRef = useRef(null);
@@ -29,13 +30,15 @@ function CallToAction() {
               Kuzi. ¡Tu ayuda importa!
             </p>
             <div className="flex flex-wrap items-center justify-center gap-6 mt-10 lg:justify-start">
-              <MainLinkButton link="/campaigns">Donar Ahora</MainLinkButton>
+              <MainLinkButton link={ROUTES.CAMPANAS}>
+                Donar Ahora
+              </MainLinkButton>
 
               <Link
                 onClick={() => {
                   window.scrollTo(0, 0);
                 }}
-                to="/how-it-works"
+                to={ROUTES.COMO_FUNCIONA}
                 className="text-sm font-semibold leading-6 text-main"
               >
                 ¿Cómo funciona? <span aria-hidden="true">→</span>

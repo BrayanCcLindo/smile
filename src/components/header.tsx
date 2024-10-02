@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { routes } from "../constants/routes";
+import { ROUTES, routes } from "../constants/routes";
 import { useSmileContext } from "../Api/userContext";
 import { useState } from "react";
 import MainLinkButton from "./mainLinkButton";
@@ -24,7 +24,7 @@ function Header() {
         aria-label="Global"
       >
         <div className="flex">
-          <Link to="/" className="-m-1.5 p-1.5">
+          <Link to={ROUTES.HOMEPAGE} className="-m-1.5 p-1.5">
             <span className="sr-only">Smile</span>
             <img
               className="w-auto h-8"
@@ -89,7 +89,7 @@ function Header() {
                 <Link
                   onClick={scrollToTop}
                   className="text-heading hover:text-main"
-                  to="/log-in"
+                  to={ROUTES.LOG_IN}
                 >
                   Iniciar Sesión <span aria-hidden="true">&rarr;</span>
                 </Link>
@@ -99,7 +99,7 @@ function Header() {
                 <Link
                   onClick={scrollToTop}
                   className="rounded-full "
-                  to={"/perfil"}
+                  to={ROUTES.PERFIL}
                 >
                   <img
                     width={50}
@@ -111,7 +111,7 @@ function Header() {
                 </Link>
               </>
             )}
-            <MainLinkButton link={"/new-campaign"}>
+            <MainLinkButton link={ROUTES.CREAR_CAMPANA}>
               Crear Campaña
             </MainLinkButton>
             <SwitchToogle />
@@ -126,7 +126,7 @@ function Header() {
         <div className="fixed inset-0 z-10"></div>
         <div className="fixed inset-y-0 right-0 z-10 w-full px-6 py-6 overflow-y-auto bg-main_bg sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <Link to="/" className="-m-1.5 p-1.5">
+            <Link to={ROUTES.HOMEPAGE} className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img
                 className="w-auto h-8"
@@ -162,7 +162,7 @@ function Header() {
           </div>
           <div className="flow-root mt-6">
             <div className="divide-y divide-gray-500/10">
-              <MainLinkButton link="/new-campaign">
+              <MainLinkButton link={ROUTES.CREAR_CAMPANA}>
                 Crear Campaña
               </MainLinkButton>
 
@@ -194,7 +194,7 @@ function Header() {
                       window.scrollTo(0, 0);
                     }}
                     className="text-heading hover:text-main"
-                    to="/log-in"
+                    to={ROUTES.LOG_IN}
                   >
                     Iniciar Sesión <span aria-hidden="true">&rarr;</span>
                   </Link>
@@ -205,7 +205,7 @@ function Header() {
                       window.scrollTo(0, 0);
                     }}
                     className="text-heading hover:text-main"
-                    to="/perfil"
+                    to={ROUTES.PERFIL}
                   >
                     Perfíl <span aria-hidden="true">&rarr;</span>
                   </Link>

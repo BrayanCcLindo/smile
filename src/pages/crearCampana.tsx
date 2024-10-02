@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useSmileContext } from "../Api/userContext";
 import { SmileForm } from "../type/types";
 import { SEOComponent } from "../assets/SEO";
+import { ROUTES } from "../constants/routes";
 
 function StartCampaign() {
   const { stateProfile } = useSmileContext();
@@ -38,8 +39,8 @@ function StartCampaign() {
                 className="absolute inset-0"
                 to={
                   stateProfile
-                    ? `/new-campaign/${SmileForm.Albergue}`
-                    : "/sign-in"
+                    ? `${ROUTES.CREAR_CAMPANA}/${SmileForm.Albergue}`
+                    : ROUTES.SIGN_IN
                 }
               ></Link>
               <div className="h-full overflow-hidden border rounded-lg cursor-pointer border-card_border group border-opacity-60 hover:shadow-lg ">
@@ -88,8 +89,8 @@ function StartCampaign() {
                 className="absolute inset-0"
                 to={
                   stateProfile
-                    ? `/nueva-campaña/${SmileForm.Emprendedores}`
-                    : "/sign-in"
+                    ? `${ROUTES.CREAR_CAMPANA}/${SmileForm.Emprendedores}`
+                    : ROUTES.SIGN_IN
                 }
               ></Link>
               <div className="h-full overflow-hidden border rounded-lg cursor-pointer border-card_border group border-opacity-60 hover:shadow-lg ">
@@ -138,8 +139,8 @@ function StartCampaign() {
                 className="absolute inset-0"
                 to={
                   stateProfile
-                    ? `/nueva-campaña/${SmileForm.Social}`
-                    : "/sign-in"
+                    ? `${ROUTES.CREAR_CAMPANA}/${SmileForm.Social}`
+                    : ROUTES.SIGN_IN
                 }
               ></Link>
               <div className="h-full overflow-hidden border rounded-lg cursor-pointer border-card_border border-opacity-60 hover:shadow-lg">

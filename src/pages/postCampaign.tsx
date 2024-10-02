@@ -10,6 +10,7 @@ import { format, formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 import ProgressBar from "../components/progressBar";
 import { useRef } from "react";
+import { ROUTES } from "../constants/routes";
 
 function PostCampaign() {
   const { data } = useGetCampaigns();
@@ -99,7 +100,9 @@ function PostCampaign() {
                 </div>
 
                 <div className="mb-5">
-                  <MainLinkButton link={`/campaigns/${actualPost?.slug}/donar`}>
+                  <MainLinkButton
+                    link={`${ROUTES.CAMPANAS}/${actualPost?.slug}/donar`}
+                  >
                     Donar
                   </MainLinkButton>
                 </div>

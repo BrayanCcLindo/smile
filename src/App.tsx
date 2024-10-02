@@ -13,6 +13,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { SmileForm } from "./type/types";
 
 import Loader from "./components/loader";
+import { ROUTES } from "./constants/routes";
 
 function MainLayout() {
   return (
@@ -27,7 +28,7 @@ function MainLayout() {
 function RouteGoogleSign({ children }: { children: React.ReactNode }) {
   const { stateProfile } = useSmileContext();
   if (!stateProfile) {
-    return <Navigate to="/log-in" />;
+    return <Navigate to={ROUTES.LOG_IN} />;
   }
   return children;
 }
@@ -35,7 +36,7 @@ function RouteGoogleSign({ children }: { children: React.ReactNode }) {
 function RouteSignIn({ children }: { children: React.ReactNode }) {
   const { stateProfile } = useSmileContext();
   if (stateProfile) {
-    return <Navigate to={"/"} />;
+    return <Navigate to={ROUTES.HOMEPAGE} />;
   }
   return children;
 }
@@ -68,8 +69,8 @@ function App() {
   const SignIn = lazy(() => import("./pages/signIn"));
   const UserProfile = lazy(() => import("./pages/UserProfile"));
   const ComoFunciona = lazy(() => import("./pages/comoFunciona"));
-  const Campaigns = lazy(() => import("./pages/campaigns"));
-  const StartCampaign = lazy(() => import("./pages/startCampaign"));
+  const Campaigns = lazy(() => import("./pages/campanas"));
+  const StartCampaign = lazy(() => import("./pages/crearCampana"));
   const PostCampaign = lazy(() => import("./pages/postCampaign"));
   const DonacionPasarela = lazy(() => import("./pages/donacionPasarela"));
   const Configuracion = lazy(() => import("./pages/configuracion"));
@@ -91,7 +92,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
-            path="/"
+            path={ROUTES.HOMEPAGE}
             element={
               <Suspense fallback={<Loader />}>
                 <MainLayout />
@@ -99,7 +100,7 @@ function App() {
             }
           >
             <Route
-              path="/"
+              path={ROUTES.HOMEPAGE}
               Component={() => <LazyComponent Component={Homepage} />}
             />{" "}
             <Route
@@ -107,7 +108,7 @@ function App() {
               Component={() => <LazyComponent Component={Error404} />}
             />
             <Route
-              path="/log-in"
+              path={ROUTES.LOG_IN}
               element={
                 <RouteSignIn>
                   <LogIn />
@@ -115,7 +116,7 @@ function App() {
               }
             />
             <Route
-              path="/sign-in"
+              path={ROUTES.SIGN_IN}
               element={
                 <RouteSignIn>
                   <SignIn />
@@ -123,19 +124,19 @@ function App() {
               }
             />
             <Route
-              path="/how-it-works"
+              path={ROUTES.COMO_FUNCIONA}
               Component={() => <LazyComponent Component={ComoFunciona} />}
             />
             <Route
-              path="/campaigns"
+              path={ROUTES.CAMPANAS}
               Component={() => <LazyComponent Component={Campaigns} />}
             />
             <Route
-              path="/new-campaign"
+              path={ROUTES.CREAR_CAMPANA}
               Component={() => <LazyComponent Component={StartCampaign} />}
             />
             <Route
-              path={`/new-campaign/${SmileForm.Albergue}`}
+              path={`${ROUTES.CREAR_CAMPANA}/${SmileForm.Albergue}`}
               element={
                 <RouteGoogleSign>
                   <LazyComponent Component={FormAlbergue} />
@@ -143,7 +144,7 @@ function App() {
               }
             />
             <Route
-              path={`/new-campaign/${SmileForm.Emprendedores}`}
+              path={`${ROUTES.CREAR_CAMPANA}/${SmileForm.Emprendedores}`}
               element={
                 <RouteGoogleSign>
                   <LazyComponent Component={FormEmprendedor} />
@@ -151,7 +152,7 @@ function App() {
               }
             />
             <Route
-              path={`/new-campaign/${SmileForm.Social}`}
+              path={`${ROUTES.CREAR_CAMPANA}/${SmileForm.Social}`}
               element={
                 <RouteGoogleSign>
                   <LazyComponent Component={FormSocial} />
@@ -159,7 +160,7 @@ function App() {
               }
             />
             <Route
-              path="/configuracion"
+              path={ROUTES.CONFIGURACION}
               element={
                 <RouteGoogleSign>
                   <LazyComponent Component={Configuracion} />
@@ -167,7 +168,7 @@ function App() {
               }
             />
             <Route
-              path="/campaigns/:slug/donar"
+              path={`${ROUTES.CAMPANAS}/:slug/donar`}
               element={
                 <DonacionPasarela
                   setIsloading={setIsloading}
@@ -175,9 +176,9 @@ function App() {
                 />
               }
             />
-            <Route path="/campaigns/:slug" Component={PostCampaign} />
+            <Route path={`${ROUTES.CAMPANAS}/:slug`} Component={PostCampaign} />
             <Route
-              path="/perfil"
+              path={ROUTES.PERFIL}
               element={
                 <RouteGoogleSign>
                   <LazyComponent Component={UserProfile} />
