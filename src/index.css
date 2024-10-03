@@ -37,4 +37,5 @@
 }
 body {
   @apply font-nunito;
+  @apply bg-main_bg;
 }

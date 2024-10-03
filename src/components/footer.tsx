@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import MainLinkButton from "./mainLinkButton";
 import { routes, ROUTES } from "../constants/routes";
-import { Facebook, Instagram, Mail, Twitter } from "lucide-react";
+import { Facebook, Instagram, Mail } from "lucide-react";
 
 function Footer() {
   const scrollToTop = () => {
@@ -9,68 +8,6 @@ function Footer() {
   };
   return (
     <>
-      {/* <div className="relative py-8 isolate bg-gradient-to-b from-main_bg to-footer via-footer sm:py-12 lg:py-16 ">
-        <div className="px-6 mx-auto max-w-7xl lg:px-8 ">
-          <div className="grid max-w-2xl grid-cols-1 mx-auto gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
-            <div className="max-w-xs lg:max-w-lg">
-              <Link
-                onClick={scrollToTop}
-                to={ROUTES.HOMEPAGE}
-                className="flex items-center justify-center"
-              >
-                <img
-                  className="object-cover"
-                  width={300}
-                  height={300}
-                  src="/Images/smileOficilLogo (1).png"
-                  alt="logo-smile"
-                />
-              </Link>
-
-              <p className="mt-4 leading-8 text-content_text">
-                ¡Bienvenidos! Aquí, cada clic es una oportunidad para
-                transformar vidas
-                <br /> y apoyar proyectos que cambian el mundo.
-              </p>
-              <div className="flex max-w-md mt-6 gap-x-4">
-                <MainLinkButton link={ROUTES.CAMPANAS}>
-                  Donar Ahora
-                </MainLinkButton>
-              </div>
-            </div>
-            <dl className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
-              <div className="flex flex-col items-start">
-                <h3 className="mt-4 font-semibold text-heading">
-                  Enlaces Útiles
-                </h3>
-                <ul className="mt-2 leading-7 ">
-                  <li className="hover:text-main text-content_text">
-                    <Link onClick={scrollToTop} to={ROUTES.HOMEPAGE}>
-                      Inicio
-                    </Link>
-                  </li>
-                  <li className="hover:text-main text-content_text">
-                    <Link onClick={scrollToTop} to={ROUTES.COMO_FUNCIONA}>
-                      Como Funciona
-                    </Link>
-                  </li>
-                  <li className="hover:text-main text-content_text">
-                    <Link onClick={scrollToTop} to={ROUTES.CAMPANAS}>
-                      Campañas
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div className="max-w-xs py-2 text-lg leading-8 ">
-                <h3 className="font-medium title-font text-heading">
-                  Kuzi protege tu donativo
-                </h3>
-            
-              </div>
-            </dl>
-          </div>
-        </div>
-      </div> */}
       <footer className="py-12 bg-gradient-to-b from-main_bg to-footer via-footer text-content_text">
         <div className="container px-4 mx-auto">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -78,20 +15,19 @@ function Footer() {
               <Link
                 to={ROUTES.HOMEPAGE}
                 onClick={scrollToTop}
-                className="mb-2 text-2xl font-bold"
+                className="flex items-center justify-center w-full mb-2 text-2xl font-bold"
               >
                 <img
                   className="object-cover"
-                  width={300}
-                  height={300}
+                  width={200}
+                  height={200}
                   src="/Images/smileOficilLogo (1).png"
                   alt="logo-smile"
                 />
               </Link>
               <p className="mt-4 leading-8 text-content_text ">
                 ¡Bienvenidos! Aquí, cada clic es una oportunidad para
-                transformar vidas
-                <br /> y apoyar proyectos que cambian el mundo.
+                transformar vidas y apoyar proyectos que cambian el mundo.
               </p>
             </div>
 
@@ -113,23 +49,45 @@ function Footer() {
               </nav>
             </div>
 
-            {/* Social Media and Contact */}
             <div className="flex flex-col items-start">
               <h3 className="mb-4 text-lg font-semibold text-heading">
                 Conéctate con Nosotros
               </h3>
               <div className="flex mb-4 space-x-4">
-                <a href="#" className="transition-colors hover:text-main">
+                <a
+                  href="https://www.facebook.com/profile.php?id=61566558746032"
+                  target="_blank"
+                  className="transition-colors hover:text-main"
+                >
                   <Facebook size={24} />
                   <span className="sr-only">Facebook</span>
                 </a>
-                <a href="#" className="transition-colors hover:text-main">
-                  <Twitter size={24} />
+                <a
+                  href="https://www.instagram.com/kuzifund/"
+                  target="_blank"
+                  className="transition-colors hover:text-main"
+                >
+                  <Instagram size={24} />
                   <span className="sr-only">Twitter</span>
                 </a>
-                <a href="#" className="transition-colors hover:text-main">
-                  <Instagram size={24} />
-                  <span className="sr-only">Instagram</span>
+                <a
+                  href="https://www.tiktok.com/@kuzifund.com?lang=es"
+                  target="_blank"
+                  className="transition-colors hover:text-main"
+                >
+                  <svg
+                    stroke="currentColor"
+                    className="fill-current hover:text-main"
+                    fill="currentColor"
+                    strokeWidth="0"
+                    viewBox="0 0 256 256"
+                    height="1.6rem"
+                    width="1.6rem"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M224,72a48.05,48.05,0,0,1-48-48,8,8,0,0,0-8-8H128a8,8,0,0,0-8,8V156a20,20,0,1,1-28.57-18.08A8,8,0,0,0,96,130.69V88a8,8,0,0,0-9.4-7.88C50.91,86.48,24,119.1,24,156a76,76,0,0,0,152,0V116.29A103.25,103.25,0,0,0,224,128a8,8,0,0,0,8-8V80A8,8,0,0,0,224,72Zm-8,39.64a87.19,87.19,0,0,1-43.33-16.15A8,8,0,0,0,160,102v54a60,60,0,0,1-120,0c0-25.9,16.64-49.13,40-57.6v27.67A36,36,0,1,0,136,156V32h24.5A64.14,64.14,0,0,0,216,87.5Z"></path>
+                  </svg>
+                  <span className="sr-only">Tiktok</span>
                 </a>
               </div>
               <a
@@ -139,11 +97,6 @@ function Footer() {
                 <Mail size={20} className="mr-2" />
                 info@kuzifund.com
               </a>
-              <div className="flex max-w-md mt-2 gap-x-4">
-                <MainLinkButton link={ROUTES.CAMPANAS}>
-                  Donar Ahora
-                </MainLinkButton>
-              </div>
             </div>
           </div>
 
