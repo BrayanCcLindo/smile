@@ -116,7 +116,7 @@ function SignIn() {
             onClick={iniciar}
             type="button"
           >
-            <img src="/svg/google.svg" alt="" />
+            <img loading="lazy" src="/svg/google.svg" alt="" />
             Google
           </button>
           <div className="grid grid-cols-1 border-t border-card_border gap-y-6 pt-9 mt-9">

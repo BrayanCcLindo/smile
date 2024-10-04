@@ -206,6 +206,7 @@ function FormCampaign({
                   <div className="flex justify-center text-main">
                     {image ? (
                       <img
+                        loading="lazy"
                         className="object-cover"
                         width={150}
                         height={150}

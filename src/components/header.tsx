@@ -27,6 +27,7 @@ function Header() {
           <Link to={ROUTES.HOMEPAGE} className="-m-1.5 p-1.5">
             <span className="sr-only">Smile</span>
             <img
+              loading="lazy"
               className="w-auto h-8"
               src="/Images/smileOficilLogo (1).png"
               alt="smile-logo"
@@ -102,6 +103,7 @@ function Header() {
                   to={ROUTES.PERFIL}
                 >
                   <img
+                    loading="lazy"
                     width={50}
                     height={50}
                     className="object-cover object-center rounded-full"
@@ -129,6 +131,7 @@ function Header() {
             <Link to={ROUTES.HOMEPAGE} className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img
+                loading="lazy"
                 className="w-auto h-8"
                 src="/Images/smileOficilLogo (1).png"
                 alt="logo-smile"

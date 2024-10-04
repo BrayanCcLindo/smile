@@ -45,6 +45,7 @@ function StartCampaign() {
               ></Link>
               <div className="h-full overflow-hidden border rounded-lg cursor-pointer border-card_border group border-opacity-60 hover:shadow-lg ">
                 <img
+                  loading="lazy"
                   className="object-cover object-center w-full lg:h-48 md:h-36"
                   src="/Images/giftSmile.jpg"
                   alt="blog"
@@ -95,6 +96,7 @@ function StartCampaign() {
               ></Link>
               <div className="h-full overflow-hidden border rounded-lg cursor-pointer border-card_border group border-opacity-60 hover:shadow-lg ">
                 <img
+                  loading="lazy"
                   className="object-cover object-center w-full lg:h-48 md:h-36"
                   src="/Images/startSmile.jpg"
                   alt="blog"
@@ -145,6 +147,7 @@ function StartCampaign() {
               ></Link>
               <div className="h-full overflow-hidden border rounded-lg cursor-pointer border-card_border border-opacity-60 hover:shadow-lg">
                 <img
+                  loading="lazy"
                   className="object-cover object-center w-full lg:h-48 md:h-36"
                   src="/Images/socialSmile.jpg"
                   alt="blog"

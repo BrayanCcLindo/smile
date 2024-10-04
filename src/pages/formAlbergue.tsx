@@ -247,6 +247,7 @@ function FormAlbergue() {
                     >
                       {image && (
                         <img
+                          loading="lazy"
                           src={image}
                           alt=""
                           className="absolute inset-0 object-cover object-center opacity-50"

@@ -3,6 +3,7 @@ import { useGetCampaigns } from "../Api/getCampaigns";
 import CallToAction from "../components/callToAction";
 import SkeletonCardLoader from "../components/skeletonCard";
 import { SEOComponent } from "../assets/SEO";
+import { ROUTES } from "../constants/routes";
 
 function Campaigns() {
   const { data } = useGetCampaigns();
@@ -10,8 +11,8 @@ function Campaigns() {
   return (
     <>
       <SEOComponent
-        canonicalUrl="https://kuzifund.com/campaigns"
-        title="Campañas en Kuzi Fund - Apoya Emprendedores, Fundaciones y Causas Sociales"
+        canonicalUrl={`https://kuzifund.com/${ROUTES.CAMPANAS}`}
+        title="Campañas - Apoya Emprendedores, Fundaciones y Causas Sociales"
         description="Explora campañas en Kuzi Fund y dona para apoyar a emprendedores, fundaciones y causas sociales. Contribuye a proyectos con impacto positivo y transparente."
       />
       <div className="bg-main_bg">

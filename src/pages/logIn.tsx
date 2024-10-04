@@ -74,12 +74,13 @@ function LogIn() {
     <>
       <SEOComponent
         canonicalUrl="https://kuzifund.com/log-in"
-        title="niciar Sesión en Kuzi Fund - Accede a tu Cuenta y Gestiona tus Campañas"
+        title="Inicia Sesión en Kuzi Fund - Accede a tu Cuenta y Gestiona tus Campañas"
         description="Inicia sesión en Kuzi Fund para crear, gestionar o donar a campañas. Conéctate y apoya proyectos que generen un impacto positivo en tu comunidad."
       />
       <div className="flex flex-col justify-center px-6 py-12 bg-main_bg lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
+            loading="lazy"
             className="w-auto h-10 mx-auto"
             src="/Images/smileOficilLogo (1).png"
             alt="kuzi-logo"
@@ -101,7 +102,7 @@ function LogIn() {
               onClick={iniciar}
               type="button"
             >
-              <img src="/svg/google.svg" alt="" />
+              <img loading="lazy" src="/svg/google.svg" alt="" />
               Google
             </button>
             <div>

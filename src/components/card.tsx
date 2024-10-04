@@ -100,6 +100,7 @@ function Card({
       </div>
       <div className="relative h-[300px] overflow-hidden">
         <img
+          loading="lazy"
           className="object-cover w-full duration-300 aspect-square group-hover:scale-105 hover:duration-300"
           width={300}
           height={300}

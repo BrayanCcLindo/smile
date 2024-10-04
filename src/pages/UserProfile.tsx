@@ -30,6 +30,7 @@ function UserProfile() {
                 </h2>
                 <div className="flex flex-col items-center justify-center gap-4">
                   <img
+                    loading="lazy"
                     src={user?.userPhoto ?? "/Images/defaultuser.jpg"}
                     height={150}
                     width={150}

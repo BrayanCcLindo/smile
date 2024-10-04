@@ -1,11 +1,21 @@
 type LogoType = {
   name: string;
   icon: string;
+  href: string;
 }[];
 
 function LogoSection() {
   const logos: LogoType = [
-    { name: "Wichay UC", icon: "/Images/logo wichay IS (1).png" }
+    {
+      name: "Wichay UC",
+      icon: "/Images/logo wichay IS (1).png",
+      href: "https://wichay.pe/"
+    },
+    {
+      name: "Start Up UNI",
+      icon: "/Images/uni-oficial-logo.png",
+      href: "https://startup.uni.edu.pe/"
+    }
   ];
 
   return (
@@ -25,12 +35,14 @@ function LogoSection() {
             key={logo.name}
             className="relative flex flex-col items-center group"
           >
-            <a
-              className="object-cover"
-              href="https://wichay.pe/"
-              target="_blank"
-            >
-              <img className="" alt={logo.name} src={logo.icon} />
+            <a className="object-cover" href={logo.href} target="_blank">
+              <img
+                loading="lazy"
+                width={150}
+                height={150}
+                alt={logo.name}
+                src={logo.icon}
+              />
             </a>
             <span className="absolute hidden px-3 py-2 mt-2 text-sm font-medium text-white duration-500 rounded-lg -bottom-11 bg-main group-hover:block group-hover:duration-500">
               {logo.name}

@@ -82,6 +82,7 @@ function Configuracion() {
                 <div className="pt-4 mt-4 text-center border-t border-card_border sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l sm:border-t-0 sm:mt-0">
                   <div className="inline-flex items-center justify-center w-20 h-20 rounded-full">
                     <img
+                      loading="lazy"
                       className="object-cover object-center rounded-full"
                       src={userPhoto}
                       alt="foto-perfil"

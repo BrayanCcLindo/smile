@@ -18,6 +18,7 @@ function Footer() {
                 className="flex items-center justify-center w-full mb-2 text-2xl font-bold"
               >
                 <img
+                  loading="lazy"
                   className="object-cover"
                   width={200}
                   height={200}

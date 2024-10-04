@@ -178,6 +178,7 @@ function DonacionPasarela({
             <div className="mx-auto lg:w-4/6">
               <div className="h-64 overflow-hidden rounded-lg">
                 <img
+                  loading="lazy"
                   alt="content"
                   className="object-cover object-center w-full h-full"
                   src={actualPost.imagenCampaña}
@@ -429,6 +430,7 @@ function DonacionPasarela({
                                   <Info color="#cccccc" />
                                   <div className="p-5 bg-input_bg absolute right-0 top-0 translate-x-10 rounded-xl hidden  z-10 group-hover:flex w-[300px] translate-y-10">
                                     <img
+                                      loading="lazy"
                                       width={300}
                                       height={300}
                                       className="object-cover object-center"

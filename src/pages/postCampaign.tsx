@@ -57,6 +57,7 @@ function PostCampaign() {
                     <ButtonDialog campaña={actualPost} />
                   )}
               <img
+                loading="lazy"
                 alt="ecommerce"
                 className="object-cover object-center w-full h-64 rounded-lg lg:w-1/2 aspect-square lg:h-auto"
                 src={actualPost?.imagenCampaña}

@@ -47,6 +47,7 @@ function SelectPayment() {
               htmlFor="Paypal"
             >
               <img
+                loading="lazy"
                 width={40}
                 height={40}
                 src="/Images/logo-paypal.jpg"
@@ -135,6 +136,7 @@ function SelectPayment() {
               <h3 className="font-medium leading-6 ">Banco</h3>
               <div className="flex items-center gap-4">
                 <img
+                  loading="lazy"
                   className="object-cover object-center rounded-lg"
                   width={40}
                   height={40}

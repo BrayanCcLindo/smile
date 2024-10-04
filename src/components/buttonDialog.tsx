@@ -32,18 +32,18 @@ function ButtonDialog({ campaña }: { campaña: CampañaGiftSmileType }) {
       .string()
       .min(25, { message: "El campo debe contener al menos 25 caracteres" })
       .max(350, {
-        message: "El campo debe contener como maximo 350 caracteres",
+        message: "El campo debe contener como maximo 350 caracteres"
       }),
     date: z.string().date(),
     file: z.instanceof(FileList),
-    meta: z.string(),
+    meta: z.string()
   });
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<UpdateCampaignType>({
-    resolver: zodResolver(mySchema),
+    resolver: zodResolver(mySchema)
   });
 
   const submitCampaignChanges = async (data: UpdateCampaignType) => {
@@ -53,7 +53,7 @@ function ButtonDialog({ campaña }: { campaña: CampañaGiftSmileType }) {
       descripcion: data.description,
       fechaInicio: data.date,
       meta: data.meta,
-      imagenCampaña: image,
+      imagenCampaña: image
     };
 
     try {
@@ -68,7 +68,7 @@ function ButtonDialog({ campaña }: { campaña: CampañaGiftSmileType }) {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <button className="absolute text-main right-0 top-0 flex gap-3 ml-auto  bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded-tr-lg ">
+        <button className="absolute top-0 right-0 flex gap-3 px-6 py-2 ml-auto bg-gray-100 border-0 rounded-tr-lg text-main focus:outline-none hover:bg-gray-200 ">
           <SquarePen />
           Editar
         </button>
@@ -173,10 +173,11 @@ function ButtonDialog({ campaña }: { campaña: CampañaGiftSmileType }) {
                 >
                   Imagen de Campaña
                 </label>
-                <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-2">
+                <div className="flex justify-center px-6 py-2 mt-2 border border-dashed rounded-lg border-gray-900/25">
                   <div className="text-center text-gray-600">
                     <div className="flex justify-center">
                       <img
+                        loading="lazy"
                         width={120}
                         height={120}
                         className="object-cover"
@@ -185,16 +186,16 @@ function ButtonDialog({ campaña }: { campaña: CampañaGiftSmileType }) {
                       />
                     </div>
 
-                    <div className="mt-4 flex text-sm justify-center  leading-6 text-gray-600">
+                    <div className="flex justify-center mt-4 text-sm leading-6 text-gray-600">
                       <label
                         htmlFor="file"
-                        className="relative cursor-pointer text-center rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                        className="relative font-semibold text-center text-indigo-600 bg-white rounded-md cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                       >
                         <span>Cambiar imagen</span>
                         <input
                           {...register("file", {
                             // required: "Tu foto es importante",
-                            onChange: (event) => {
+                            onChange: event => {
                               const mainImage = event.target.files[0];
 
                               const reader = new FileReader();
@@ -204,7 +205,7 @@ function ButtonDialog({ campaña }: { campaña: CampañaGiftSmileType }) {
                               if (mainImage) {
                                 reader.readAsDataURL(mainImage);
                               }
-                            },
+                            }
                           })}
                           accept="image/png image/jpg imgage/jpeg"
                           id="file"
@@ -225,7 +226,7 @@ function ButtonDialog({ campaña }: { campaña: CampañaGiftSmileType }) {
             <div className="mt-[25px] flex gap-4 ">
               <button
                 type="submit"
-                className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6  hover:bg-indigo-600 rounded  "
+                className="flex px-6 py-2 ml-auto text-white bg-indigo-500 border-0 rounded hover:bg-indigo-600 "
               >
                 Guardar
               </button>

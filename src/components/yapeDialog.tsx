@@ -43,6 +43,7 @@ function YapeDialog({ type }: { type: "transferencia" | "yape" }) {
           {type === "yape" && (
             <div className="flex flex-col items-center justify-center">
               <img
+                loading="lazy"
                 className="object-cover object-center w-2/5 h-w-2/5"
                 src="/Images/YapeCesar.jpeg"
                 alt="yape-donar"
