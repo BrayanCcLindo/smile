@@ -40,6 +40,7 @@ function Footer() {
               <nav className="flex flex-col space-y-2">
                 {routes.map(routes => (
                   <Link
+                    key={routes.to}
                     onClick={scrollToTop}
                     to={routes.to}
                     className="transition-colors hover:text-main"
