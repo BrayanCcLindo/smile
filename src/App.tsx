@@ -79,17 +79,17 @@ function App() {
   const FormSocial = lazy(() => import("./pages/formSocial"));
   const Error404 = lazy(() => import("./pages/404"));
   return (
-    <SmileProvider defaultTheme="dark">
-      <Toaster
-        richColors
-        theme="light"
-        // toastOptions={{
-        //   unstyled: true,
-        //   classNames: { toast: "bg-red-500", title: "text-red-500" },
-        // }}
-        position="top-right"
-      />
-      <BrowserRouter>
+    <BrowserRouter>
+      <SmileProvider defaultTheme="dark">
+        <Toaster
+          richColors
+          theme="light"
+          // toastOptions={{
+          //   unstyled: true,
+          //   classNames: { toast: "bg-red-500", title: "text-red-500" },
+          // }}
+          position="top-right"
+        />
         <Routes>
           <Route
             path={ROUTES.HOMEPAGE}
@@ -187,8 +187,8 @@ function App() {
             />
           </Route>
         </Routes>
-      </BrowserRouter>
-    </SmileProvider>
+      </SmileProvider>
+    </BrowserRouter>
   );
 }
 

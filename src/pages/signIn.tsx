@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-// import { useSmileContext } from "../Api/userContext";
 import { useState } from "react";
 import { auth, db } from "../firebase/firebase";
 import { addDoc, collection } from "firebase/firestore";
@@ -74,7 +73,7 @@ function SignIn() {
         duration: 2000,
         position: "top-right"
       });
-      navigate("/");
+      navigate(-1);
     } catch (error) {
       toast.error("Error al crear la cuenta", {
         duration: 2000,

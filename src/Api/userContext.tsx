@@ -17,6 +17,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
 import { useGetUsuarios } from "./getUserData";
 import { ToogleTheme } from "../type/types";
+import { useNavigate } from "react-router-dom";
 
 export const SmileContext = createContext<SmileContextType>(
   {} as SmileContextType
@@ -45,6 +46,8 @@ export function SmileProvider({
   defaultTheme: ToogleTheme;
   children: ReactNode;
 }) {
+  const navigate = useNavigate();
+
   const { usuarios } = useGetUsuarios();
   const [theme, setTheme] = useState<ToogleTheme>(
     () => (localStorage.getItem("theme") as ToogleTheme) || "system"
@@ -91,6 +94,7 @@ export function SmileProvider({
     try {
       const provider = new GoogleAuthProvider();
       const res = await signInWithPopup(auth, provider);
+      navigate(-1);
       // @ts-expect-error need to push
 
       updateUser(res.user);
@@ -119,6 +123,7 @@ export function SmileProvider({
       // @ts-expect-error need to push
 
       updateUser(res.user);
+      navigate(-1);
     } catch (error) {
       console.log(error, "error al iniciar con google");
     }
