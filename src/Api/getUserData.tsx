@@ -12,17 +12,27 @@ import { UserData } from "../type/types";
 
 export const useGetUserData = () => {
   const { stateProfile } = useSmileContext();
-
   const [user, setUser] = useState<UserData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const FetchUserData = async () => {
-      if (stateProfile.uid) {
-        const actualUser = query(collection(db, "usuarios"));
+    const fetchUserData = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
 
-        const uniqueUser = await getDocs(actualUser);
+        // Verificar si stateProfile y uid existen
+        if (!stateProfile?.uid) {
+          setUser(null);
+          return;
+        }
 
-        const userDoc = uniqueUser.docs.find(
+        const usersRef = collection(db, "usuarios");
+        const usersQuery = query(usersRef);
+        const querySnapshot = await getDocs(usersQuery);
+
+        const userDoc = querySnapshot.docs.find(
           doc => doc.data().uid === stateProfile.uid
         );
 
@@ -31,14 +41,24 @@ export const useGetUserData = () => {
           setUser(userData);
         } else {
           setUser(null);
+          setError("Usuario no encontrado");
         }
-        // setUser(userData);
+      } catch (err) {
+        setError(
+          err instanceof Error
+            ? err.message
+            : "Error al obtener datos del usuario"
+        );
+        setUser(null);
+      } finally {
+        setIsLoading(false);
       }
     };
-    FetchUserData();
-  }, [stateProfile.uid]);
 
-  return { user };
+    fetchUserData();
+  }, [stateProfile?.uid]); // Dependencia segura
+
+  return { user, isLoading, error };
 };
 
 export const useGetUsuarios = () => {

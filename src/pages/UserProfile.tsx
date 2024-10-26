@@ -8,6 +8,7 @@ import { useGetCampaigns } from "../Api/getCampaigns";
 import { useSmileContext } from "../Api/userContext";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../constants/routes";
+import Avatar from "../components/avatar";
 
 function UserProfile() {
   const { user } = useGetUserData();
@@ -29,13 +30,17 @@ function UserProfile() {
                   <br /> {user?.name ?? stateProfile.displayName}
                 </h2>
                 <div className="flex flex-col items-center justify-center gap-4">
-                  <img
+                  {/* <img
                     loading="lazy"
                     src={user?.userPhoto ?? "/Images/defaultuser.jpg"}
                     height={150}
                     width={150}
                     alt="foto-usuario"
                     className="object-cover object-center rounded-full"
+                  /> */}
+                  <Avatar
+                    size="2xl"
+                    username={user?.name ?? stateProfile.displayName}
                   />
                   <MainLinkButton link={ROUTES.CONFIGURACION}>
                     <Settings2 />
@@ -43,7 +48,7 @@ function UserProfile() {
                   </MainLinkButton>
                 </div>
               </div>
-              <p className="mt-6 text-lg leading-8">
+              <p className="mt-6 text-lg leading-8 text-">
                 <span className="font-medium text-heading">
                   Cambia vidas hoy:
                 </span>{" "}

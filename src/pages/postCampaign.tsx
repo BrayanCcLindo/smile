@@ -18,9 +18,7 @@ function PostCampaign() {
   const { stateProfile } = useSmileContext();
   const locationRef = useRef<HTMLIFrameElement>(null);
 
-  const campaignIndex = [...data]?.findIndex(
-    campaign => campaign?.slug === slug
-  );
+  const campaignIndex = [...data].findIndex(campaign => campaign.slug === slug);
   const actualPost = [...data][campaignIndex];
 
   const aprovedDonations = actualPost?.donaciones?.filter(
@@ -29,8 +27,7 @@ function PostCampaign() {
 
   const activeDonations = aprovedDonations
     ?.map(donations => parseInt(donations.montoDonacion))
-    .reduce((acc, actual) => acc + actual, 0)
-    .toFixed(2);
+    .reduce((acc, actual) => acc + actual, 0);
 
   const currentURL = window.location.href;
   const wspURL = `https://api.whatsapp.com/send?text=${actualPost?.nombre} aportemos en su Kuzi 🚀 → ${currentURL}`;
@@ -60,14 +57,14 @@ function PostCampaign() {
                 loading="lazy"
                 alt="ecommerce"
                 className="object-cover object-center w-full h-64 rounded-lg lg:w-1/2 aspect-square lg:h-auto"
-                src={actualPost?.imagenCampaña}
+                src={actualPost.imagenCampaña}
               />
               <div className="w-full px-4 mt-6 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0 ">
                 <h2 className="text-sm tracking-widest text-gray-500 title-font">
                   NOMBRE DE CAMPAÑA
                 </h2>
                 <h1 className="mb-1 text-3xl font-medium text-heading title-font">
-                  {actualPost?.nombre}
+                  {actualPost.nombre}
                 </h1>
                 <div className="flex justify-between mb-4 text-sm text-main">
                   <span className="flex items-center gap-2 font-medium">
@@ -87,16 +84,26 @@ function PostCampaign() {
                 </p>
                 <div className="mt-5">
                   <ProgressBar
-                    progress={parseInt(activeDonations)}
-                    total={parseInt(actualPost?.meta)}
+                    progress={activeDonations}
+                    total={actualPost.meta}
                   />
                 </div>
                 <div className="flex justify-between pb-5 mt-4 mb-5 border-b-2 border-card_border">
                   <p className="flex items-center gap-2 text-lg sm:text-2xl">
                     Recaudado
-                    <span className="font-bold">S/. {activeDonations} </span>
+                    <span className="font-bold">
+                      {activeDonations.toLocaleString("es-PE", {
+                        currency: "PEN",
+                        style: "currency"
+                      })}
+                    </span>
                     de
-                    <span className="font-bold"> S/. {actualPost?.meta} </span>
+                    <span className="font-bold">
+                      {actualPost.meta.toLocaleString("es-PE", {
+                        currency: "PEN",
+                        style: "currency"
+                      })}
+                    </span>
                   </p>
                 </div>
 

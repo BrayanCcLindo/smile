@@ -38,8 +38,7 @@ function Card({
   );
   const activeDonations = aprovedDonations
     ?.map(donations => parseInt(donations.montoDonacion))
-    .reduce((acc, actual) => acc + actual, 0)
-    .toFixed(2);
+    .reduce((acc, actual) => acc + actual, 0);
 
   return (
     <motion.div
@@ -159,16 +158,26 @@ function Card({
         <div className="mt-5">
           <ProgressBar
             type={campaña.tipo}
-            progress={parseInt(activeDonations)}
-            total={parseInt(campaña.meta)}
+            progress={activeDonations}
+            total={campaña.meta}
           />
         </div>
         <div className="flex justify-between mt-6 ">
           <p className="flex items-center gap-2 ">
             Recaudó
-            <span className="font-bold">S/. {activeDonations} </span>
+            <span className="font-bold">
+              {activeDonations.toLocaleString("es-PE", {
+                currency: "PEN",
+                style: "currency"
+              })}{" "}
+            </span>
             de
-            <span className="font-bold"> S/. {campaña.meta} </span>
+            <span className="font-bold">
+              {campaña.meta.toLocaleString("es-PE", {
+                currency: "PEN",
+                style: "currency"
+              })}{" "}
+            </span>
           </p>
         </div>
       </div>

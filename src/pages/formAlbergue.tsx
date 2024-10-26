@@ -151,7 +151,7 @@ function FormAlbergue() {
                     placeholder="Ingresa un nombre de tu albergue/fundacion"
                   />
                   {errors.campaña && (
-                    <FormErrors message={errors.campaña.message} />
+                    <FormErrors>{errors.campaña.message} </FormErrors>
                   )}
                 </div>
                 <div className="sm:col-span-3 col-span-full">
@@ -172,7 +172,7 @@ function FormAlbergue() {
                     value={ruc}
                     placeholder="xxxxxxxxxxx"
                   />
-                  {errors.ruc && <FormErrors message={errors.ruc.message} />}
+                  {errors.ruc && <FormErrors>{errors.ruc.message} </FormErrors>}
                 </div>
                 <div className="col-span-full">
                   <Label htmlFor="description" className="text-sm font-medium">
@@ -185,7 +185,7 @@ function FormAlbergue() {
                     placeholder="Ingresa una descripcion de tu albergue/fundacion"
                   />
                   {errors.description && (
-                    <FormErrors message={errors.description.message} />
+                    <FormErrors>{errors.description.message} </FormErrors>
                   )}
                 </div>
                 <div className="col-span-full sm:col-span-3 ">
@@ -206,7 +206,9 @@ function FormAlbergue() {
                     value={meta}
                     placeholder="S./ "
                   />
-                  {errors.meta && <FormErrors message={errors.meta.message} />}
+                  {errors.meta && (
+                    <FormErrors>{errors.meta.message} </FormErrors>
+                  )}
                 </div>
                 <div className="sm:col-span-3 col-span-full">
                   <Label htmlFor="address" className="text-sm font-medium">
@@ -218,7 +220,7 @@ function FormAlbergue() {
                     placeholder="Dirección legal de albergue / fundación"
                   />
                   {errors.address && (
-                    <FormErrors message={errors.address.message} />
+                    <FormErrors>{errors.address.message} </FormErrors>
                   )}
                 </div>
                 <div className="pb-8 border-b col-span-full border-card_border">
@@ -280,7 +282,9 @@ function FormAlbergue() {
                     </div>
                   </Label>
 
-                  {errors.file && <FormErrors message={errors.file.message} />}
+                  {errors.file && (
+                    <FormErrors>{errors.file.message} </FormErrors>
+                  )}
                 </div>
                 <div className=" sm:col-span-3 col-span-full">
                   <Label htmlFor="proxy" className="text-sm font-medium">
@@ -292,7 +296,7 @@ function FormAlbergue() {
                     placeholder="Representante legal de albergue / fundación"
                   />
                   {errors.proxy && (
-                    <FormErrors message={errors.proxy.message} />
+                    <FormErrors>{errors.proxy.message} </FormErrors>
                   )}
                 </div>
                 <div className=" sm:col-span-3 col-span-full">
@@ -312,7 +316,7 @@ function FormAlbergue() {
                     placeholder="xxxxxxx"
                     value={dni}
                   />
-                  {errors.dni && <FormErrors message={errors.dni.message} />}
+                  {errors.dni && <FormErrors>{errors.dni.message} </FormErrors>}
                 </div>
                 <div className="col-span-full">
                   <MainButton type="submit">Crear Campaña</MainButton>

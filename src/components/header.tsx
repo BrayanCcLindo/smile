@@ -4,9 +4,12 @@ import { useSmileContext } from "../Api/userContext";
 import { useState } from "react";
 import MainLinkButton from "./mainLinkButton";
 import SwitchToogle from "./switchToogle";
+import Avatar from "./avatar";
+import { useGetUserData } from "../Api/getUserData";
 
 function Header() {
   const { stateProfile } = useSmileContext();
+  const { user } = useGetUserData();
 
   const [showMenu, setShowMenu] = useState(true);
   const scrollToTop = () => {
@@ -102,13 +105,9 @@ function Header() {
                   className="rounded-full "
                   to={ROUTES.PERFIL}
                 >
-                  <img
-                    loading="lazy"
-                    width={50}
-                    height={50}
-                    className="object-cover object-center rounded-full"
-                    src="/Images/defaultuser.jpg"
-                    alt="default-user-photo"
+                  <Avatar
+                    size="lg"
+                    username={stateProfile.displayName ?? user?.name}
                   />
                 </Link>
               </>

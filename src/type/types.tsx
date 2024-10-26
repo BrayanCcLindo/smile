@@ -47,7 +47,7 @@ export type CampañaGiftSmileType = {
   to: string;
   slug: string;
   imagenCampaña: string;
-  meta: string;
+  meta: number;
   id: string;
   fechaFinal: string;
   campañaId: string;
@@ -82,6 +82,30 @@ export enum SmileForm {
   Albergue = "albergue",
   Emprendedores = "emprendedores"
 }
+
+export enum PAYMENT_METHODS {
+  "YAPE O PLIN" = "Yape o Plin",
+  PAYPAL = "Paypal",
+  TRANSFERENCIA = "Transferencia",
+  TARJETA = "Tarjeta"
+}
+
+export type FormPayment = {
+  paymentMethod: string;
+  amount: string;
+  userName?: string;
+  userMail?: string;
+  cvv?: string;
+  expiry?: string;
+  cardNumber?: string;
+  cardMail?: string;
+  cardName?: string;
+  idType: string;
+  idNumber: string;
+  //
+  campana_id: string;
+  campana_name: string;
+};
 
 //Themes
 export type ToogleTheme = "dark" | "light" | "system";

@@ -33,7 +33,7 @@ function Footer() {
             </div>
 
             {/* Site Links */}
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col itexms-start">
               <h3 className="mb-4 text-lg font-semibold text-heading">
                 Enlaces Rápidos
               </h3>

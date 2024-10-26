@@ -1,19 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/loader";
-import { MainButton } from "../components/mainLinkButton";
 import { profileRoutes } from "../constants/routes";
 import { auth } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z, ZodType } from "zod";
 import { useSmileContext } from "../Api/userContext";
 import { useGetUserData } from "../Api/getUserData";
-
-type UpdateUserType = {
-  userPhoto: FileList;
-};
+import Avatar from "../components/avatar";
 
 function Configuracion() {
   // const { user } = useGetUserData();
@@ -21,7 +13,7 @@ function Configuracion() {
   const { user } = useGetUserData();
 
   const navigate = useNavigate();
-  const [userPhoto, setUserPhoto] = useState("/Images/defaultuser.jpg");
+  // const [userPhoto, setUserPhoto] = useState("/Images/defaultuser.jpg");
 
   async function handleSignOut() {
     try {
@@ -34,17 +26,17 @@ function Configuracion() {
       console.log(error);
     }
   }
-  const mySchema: ZodType<UpdateUserType> = z.object({
-    userPhoto: z.instanceof(FileList)
-  });
-  const {
-    register
-    // handleSubmit,
-    // formState: { errors },
-  } = useForm<UpdateUserType>({
-    resolver: zodResolver(mySchema),
-    mode: "all"
-  });
+  // const mySchema: ZodType<UpdateUserType> = z.object({
+  //   userPhoto: z.instanceof(FileList)
+  // });
+  // const {
+  //   register
+  //   // handleSubmit,
+  //   // formState: { errors },
+  // } = useForm<UpdateUserType>({
+  //   resolver: zodResolver(mySchema),
+  //   mode: "all"
+  // });
 
   return (
     <>
@@ -81,36 +73,34 @@ function Configuracion() {
                 </div>
                 <div className="pt-4 mt-4 text-center border-t border-card_border sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l sm:border-t-0 sm:mt-0">
                   <div className="inline-flex items-center justify-center w-20 h-20 rounded-full">
-                    <img
-                      loading="lazy"
-                      className="object-cover object-center rounded-full"
-                      src={userPhoto}
-                      alt="foto-perfil"
+                    <Avatar
+                      size="xl"
+                      username={stateProfile.displayName ?? user?.name}
                     />
                   </div>
                   <div className="flex flex-col items-center justify-center text-center">
                     <div className="w-12 h-1 mt-2 mb-4 rounded bg-main"></div>
-                    <div className="relative flex items-center justify-center">
+                    {/* <div className="relative flex items-center justify-center">
                       <MainButton type="button">Actualizar Imagen</MainButton>
                       <label
                         htmlFor="userPhoto"
                         className="absolute inset-0 cursor-pointer"
                       >
                         <input
-                          {...register("userPhoto", {
-                            // required: "Tu foto es importante",
-                            onChange: event => {
-                              const mainImage = event.target.files[0];
+                          // {...register("userPhoto", {
+                          //   // required: "Tu foto es importante",
+                          //   onChange: event => {
+                          //     const mainImage = event.target.files[0];
 
-                              const reader = new FileReader();
-                              reader.addEventListener("load", () => {
-                                setUserPhoto(reader.result as string);
-                              });
-                              if (mainImage) {
-                                reader.readAsDataURL(mainImage);
-                              }
-                            }
-                          })}
+                          //     const reader = new FileReader();
+                          //     reader.addEventListener("load", () => {
+                          //       // setUserPhoto(reader.result as string);
+                          //     });
+                          //     if (mainImage) {
+                          //       reader.readAsDataURL(mainImage);
+                          //     }
+                          //   }
+                          // })}
                           accept="image/png image/jpg imgage/jpeg"
                           id="userPhoto"
                           name="userPhoto"
@@ -118,7 +108,7 @@ function Configuracion() {
                           type="file"
                         />
                       </label>
-                    </div>
+                    </div> */}
                   </div>
                   <form method="POST">
                     <div className="grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -137,7 +127,7 @@ function Configuracion() {
                             defaultValue={
                               user?.name ?? stateProfile.displayName
                             }
-                            className="block w-full py-1.5 px-2 text-heading  rounded-md outline-none bg-input_bg sm:text-sm sm:leading-6 trim"
+                            className="block w-full py-1.5 px-2 text-heading rounded-md outline-none bg-third_bg sm:text-sm sm:leading-6 trim"
                           />
                         </div>
                       </div>
@@ -148,19 +138,19 @@ function Configuracion() {
                         >
                           Correo
                         </label>
-                        <div className="mt-2 ">
+                        <div className="mt-2">
                           <input
                             id="correo"
                             name="correo"
                             defaultValue={stateProfile.email}
                             type="email"
                             readOnly
-                            className="block w-full py-1.5 px-2 text-heading  rounded-md outline-none bg-input_bg sm:text-sm sm:leading-6 trim"
+                            className="block w-full py-1.5 px-2 text-heading rounded-md outline-none bg-third_bg sm:text-sm sm:leading-6 trim"
                           />
                         </div>
-                        <div className="flex items-center justify-end mt-10 gap-x-6">
+                        {/* <div className="flex items-center justify-end mt-10 gap-x-6">
                           <MainButton type="submit">Actualizar</MainButton>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </form>

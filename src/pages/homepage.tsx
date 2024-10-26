@@ -14,8 +14,8 @@ import { SEOComponent } from "../assets/SEO";
 
 function Homepage() {
   const { data } = useGetCampaigns();
+
   // const { data: ruc } = useRucData("20");
-  // console.log(ruc, "ruc");
 
   const firstThreeCampaigns = [...data].slice(0, 3);
 
@@ -54,7 +54,6 @@ function Homepage() {
           </div>
         </div>
       </motion.div>
-
       <div className="mx-auto body-font max-w-7xl">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap w-full ">

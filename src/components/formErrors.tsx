@@ -1,7 +1,9 @@
-function FormErrors({ message }: { message?: string }) {
+import { ReactNode } from "react";
+
+function FormErrors({ children }: { children: ReactNode }) {
   return (
     <div className="text-sm text-red-500">
-      <p>{message}</p>
+      <p>{children}</p>
     </div>
   );
 }

@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormErrors from "../components/formErrors";
 import { SmileType } from "../type/types";
+import { ROUTES } from "../constants/routes";
 
 type FormCampaign = {
   campaña: string;
@@ -70,8 +71,7 @@ function FormEmprendedor() {
     handleSubmit,
     formState: { errors }
   } = useForm<FormCampaign>({
-    resolver: zodResolver(mySchema),
-    mode: "all"
+    resolver: zodResolver(mySchema)
   });
   const submitCampaign = async (values: FormCampaign) => {
     const startDate = format(new Date(), "yyyy-M-d");
@@ -99,7 +99,7 @@ function FormEmprendedor() {
           fechaFinal: endDate,
           donaciones: []
         });
-        navigate("/campaigns");
+        navigate(ROUTES.CAMPANAS);
         toast.success("¡Campaña creada exitosamente!", {
           duration: 2000,
           position: "top-right"
@@ -147,7 +147,7 @@ function FormEmprendedor() {
                     placeholder="Ingresa un nombre de tu Emprendimiento"
                   />
                   {errors.campaña && (
-                    <FormErrors message={errors.campaña.message} />
+                    <FormErrors>{errors.campaña.message}</FormErrors>
                   )}
                 </div>
                 <div className="sm:col-span-3 col-span-full">
@@ -161,7 +161,7 @@ function FormEmprendedor() {
                     placeholder="educación, salud, medio ambiente, etc..."
                   />
                   {errors.category && (
-                    <FormErrors message={errors.category.message} />
+                    <FormErrors>{errors.category.message}</FormErrors>
                   )}
                 </div>
                 <div className="col-span-full">
@@ -175,7 +175,7 @@ function FormEmprendedor() {
                     placeholder="Ingresa una descripcion de tu Emprendimiento"
                   />
                   {errors.description && (
-                    <FormErrors message={errors.description.message} />
+                    <FormErrors>{errors.description.message}</FormErrors>
                   )}
                 </div>
                 <div className="col-span-full sm:col-span-3 ">
@@ -196,7 +196,9 @@ function FormEmprendedor() {
                     value={meta}
                     placeholder="S./ "
                   />
-                  {errors.meta && <FormErrors message={errors.meta.message} />}
+                  {errors.meta && (
+                    <FormErrors>{errors.meta.message}</FormErrors>
+                  )}
                 </div>
                 <div className="sm:col-span-3 col-span-full">
                   <Label htmlFor="address" className="text-sm font-medium">
@@ -208,7 +210,7 @@ function FormEmprendedor() {
                     placeholder="Dirección legal de Emprendimiento"
                   />
                   {errors.address && (
-                    <FormErrors message={errors.address.message} />
+                    <FormErrors>{errors.address.message}</FormErrors>
                   )}
                 </div>
                 <div className="pb-8 border-b col-span-full border-card_border">
@@ -270,7 +272,9 @@ function FormEmprendedor() {
                     </div>
                   </Label>
 
-                  {errors.file && <FormErrors message={errors.file.message} />}
+                  {errors.file && (
+                    <FormErrors>{errors.file.message}</FormErrors>
+                  )}
                 </div>
                 <div className=" sm:col-span-3 col-span-full">
                   <Label htmlFor="proxy" className="text-sm font-medium">
@@ -282,7 +286,7 @@ function FormEmprendedor() {
                     placeholder="Representante legal de Emprendimiento"
                   />
                   {errors.proxy && (
-                    <FormErrors message={errors.proxy.message} />
+                    <FormErrors>{errors.proxy.message}</FormErrors>
                   )}
                 </div>
                 <div className=" sm:col-span-3 col-span-full">
@@ -302,7 +306,7 @@ function FormEmprendedor() {
                     placeholder="xxxxxxx"
                     value={dni}
                   />
-                  {errors.dni && <FormErrors message={errors.dni.message} />}
+                  {errors.dni && <FormErrors>{errors.dni.message}</FormErrors>}
                 </div>
                 <div className="col-span-full">
                   <MainButton type="submit">Crear Campaña</MainButton>

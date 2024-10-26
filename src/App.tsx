@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import { SmileProvider, useSmileContext } from "./Api/userContext";
 import { Toaster } from "sonner";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense } from "react";
 import { SmileForm } from "./type/types";
 
 import Loader from "./components/loader";
@@ -53,17 +53,6 @@ const LazyComponent = ({
 );
 
 function App() {
-  const [isLoading, setIsloading] = useState<boolean>(false);
-  useEffect(() => {
-    if (isLoading) {
-      const timer = setTimeout(() => {
-        setIsloading(false);
-      }, 5000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [isLoading]);
-
   const Homepage = lazy(() => import("./pages/homepage"));
   const LogIn = lazy(() => import("./pages/logIn"));
   const SignIn = lazy(() => import("./pages/signIn"));
@@ -169,12 +158,7 @@ function App() {
             />
             <Route
               path={`${ROUTES.CAMPANAS}/:slug/donar`}
-              element={
-                <DonacionPasarela
-                  setIsloading={setIsloading}
-                  isLoading={isLoading}
-                />
-              }
+              element={<DonacionPasarela />}
             />
             <Route path={`${ROUTES.CAMPANAS}/:slug`} Component={PostCampaign} />
             <Route

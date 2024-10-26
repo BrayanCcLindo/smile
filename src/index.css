@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"); */
 
 @tailwind base;
 @tailwind components;
@@ -15,6 +15,7 @@
   --second_bg: 224, 231, 255;
   --input_bg: 255, 255, 255;
   --entrepreneur: 255, 152, 0;
+  --third_bg: 243, 244, 246;
   /* --subheading: ; */
 }
 .dark {
@@ -28,6 +29,7 @@
   --second_bg: 30, 41, 59;
   --input_bg: 30, 41, 59;
   --entrepreneur: 255, 193, 75;
+  --third_bg: 30, 41, 59;
 
   /* --subheading: ; */
 }
