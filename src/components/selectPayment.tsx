@@ -28,7 +28,11 @@ import {
 import FormErrors from "./formErrors";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { CampañaGiftSmileType, FormPayment } from "../type/types";
+import {
+  CampañaGiftSmileType,
+  FormPayment,
+  SmilePaymentMethod
+} from "../type/types";
 import { ClipboardCopy } from "lucide-react";
 import { sendEmailConfirmation } from "../assets/donationMessages";
 import { processPayment } from "../assets/mercadoPagoApi";
@@ -59,7 +63,9 @@ export default function SelectPaymentForm({
 }: {
   actualPost: CampañaGiftSmileType;
 }) {
-  const [paymentMethod, setPaymentMethod] = useState("yape");
+  const [paymentMethod, setPaymentMethod] = useState<SmilePaymentMethod>(
+    SmilePaymentMethod.Yape
+  );
   const [mercadopago, setMercadopago] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -111,7 +117,7 @@ export default function SelectPaymentForm({
   } = useForm<FormPayment>({
     defaultValues: {
       amount: "",
-      paymentMethod: "yape",
+      paymentMethod: SmilePaymentMethod.Yape,
       userName: "",
       userMail: "",
       cardNumber: "",
@@ -129,11 +135,11 @@ export default function SelectPaymentForm({
   const watchPaymentMethod = watch("paymentMethod");
 
   const showConfirmationForm =
-    paymentMethod === "yape" || paymentMethod === "transfer";
+    paymentMethod === SmilePaymentMethod.Yape ||
+    paymentMethod === SmilePaymentMethod.Transferencia;
 
   const submitData = async (data: FormPayment) => {
     setIsLoading(true);
-
     try {
       await sendEmailConfirmation(formRef);
       await updateFirebaseDonations(data, actualPost);
@@ -141,7 +147,7 @@ export default function SelectPaymentForm({
         duration: 3000,
         position: "top-center"
       });
-      if (data.paymentMethod === "card") {
+      if (data.paymentMethod === SmilePaymentMethod.Tarjeta) {
         await handleCardPayment(data);
       }
     } catch (error) {
@@ -344,31 +350,31 @@ export default function SelectPaymentForm({
                 defaultValue={paymentMethod}
                 onValueChange={value => {
                   field.onChange(value);
-                  setPaymentMethod(value);
+                  setPaymentMethod(value as SmilePaymentMethod);
                 }}
                 className="mt-3"
               >
                 <TabsList className="grid w-full grid-cols-3 gap-4 p-1 rounded-lg bg-third_bg">
                   <TabsTrigger
-                    value="yape"
+                    value={SmilePaymentMethod.Yape}
                     className="data-[state=active]:bg-main_bg data-[state=active]:text-heading rounded-lg"
                   >
                     Yape
                   </TabsTrigger>
                   <TabsTrigger
-                    value="transfer"
+                    value={SmilePaymentMethod.Transferencia}
                     className="data-[state=active]:bg-main_bg data-[state=active]:text-heading rounded-lg"
                   >
                     Transferencia
                   </TabsTrigger>
                   <TabsTrigger
-                    value="card"
+                    value={SmilePaymentMethod.Tarjeta}
                     className="data-[state=active]:bg-main_bg data-[state=active]:text-heading rounded-lg"
                   >
                     Tarjeta
                   </TabsTrigger>
                 </TabsList>
-                <TabsContent value="yape" className="mt-4">
+                <TabsContent value={SmilePaymentMethod.Yape} className="mt-4">
                   <div className="space-y-2 text-center">
                     <img
                       loading="lazy"
@@ -427,7 +433,10 @@ export default function SelectPaymentForm({
                     </AccordionItem>
                   </Accordion>
                 </TabsContent>
-                <TabsContent value="transfer" className="mt-4">
+                <TabsContent
+                  value={SmilePaymentMethod.Transferencia}
+                  className="mt-4"
+                >
                   <div className="space-y-4">
                     <div className="p-6 rounded-lg shadow-md bg-third_bg">
                       <h3 className="mb-4 text-xl font-semibold text-main">
@@ -548,7 +557,10 @@ export default function SelectPaymentForm({
                     </Accordion>
                   </div>
                 </TabsContent>
-                <TabsContent value="card" className="mt-4">
+                <TabsContent
+                  value={SmilePaymentMethod.Tarjeta}
+                  className="mt-4"
+                >
                   <div className="p-6 space-y-4 text-left rounded-lg shadow-md bg-third_bg">
                     <Label htmlFor="cardNumber" className="text-left">
                       Número de Tarjeta
@@ -558,7 +570,7 @@ export default function SelectPaymentForm({
                       control={control}
                       rules={{
                         required:
-                          watchPaymentMethod === "card"
+                          watchPaymentMethod === SmilePaymentMethod.Tarjeta
                             ? "El número de tarjeta es requerido"
                             : false,
                         validate: value =>
@@ -589,13 +601,13 @@ export default function SelectPaymentForm({
                       <FormErrors>{errors.cardNumber.message}</FormErrors>
                     )}
                     <div>
-                      <Label htmlFor="card-name">Nombre del Titular</Label>
+                      <Label htmlFor="cardName">Nombre del Titular</Label>
                       <Controller
                         name="cardName"
                         control={control}
                         rules={{
                           required:
-                            watchPaymentMethod === "card"
+                            watchPaymentMethod === SmilePaymentMethod.Tarjeta
                               ? "El nombre es requerido"
                               : false
                         }}
@@ -621,7 +633,7 @@ export default function SelectPaymentForm({
                         control={control}
                         rules={{
                           required:
-                            watchPaymentMethod === "card"
+                            watchPaymentMethod === SmilePaymentMethod.Tarjeta
                               ? "El correo electrónico es requerido"
                               : false,
                           validate: value =>
@@ -650,7 +662,7 @@ export default function SelectPaymentForm({
                           control={control}
                           rules={{
                             required:
-                              watchPaymentMethod === "card"
+                              watchPaymentMethod === SmilePaymentMethod.Tarjeta
                                 ? "el CVV es requerido"
                                 : false,
                             validate: value =>
@@ -690,7 +702,7 @@ export default function SelectPaymentForm({
                           control={control}
                           rules={{
                             required:
-                              watchPaymentMethod === "card"
+                              watchPaymentMethod === SmilePaymentMethod.Tarjeta
                                 ? "La fecha de expiración es requerida"
                                 : false,
                             validate: value =>
@@ -726,7 +738,7 @@ export default function SelectPaymentForm({
                         control={control}
                         rules={{
                           required:
-                            watchPaymentMethod === "card"
+                            watchPaymentMethod === SmilePaymentMethod.Tarjeta
                               ? "El tipo de documento es requerido"
                               : false
                         }}
@@ -751,7 +763,7 @@ export default function SelectPaymentForm({
                         control={control}
                         rules={{
                           required:
-                            watchPaymentMethod === "card"
+                            watchPaymentMethod === SmilePaymentMethod.Tarjeta
                               ? "El número de documento es requerido"
                               : false
                         }}

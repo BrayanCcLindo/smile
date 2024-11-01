@@ -10,8 +10,8 @@ export const updateFirebaseDonations = async (
   const result = format(new Date(), "d 'de' MMMM yyyy");
   const donationYapeInfo = {
     donadorNombre: data.userName || data.cardName,
-    montoDonacion: data.amount,
-    donationType: data.paymentMethod,
+    montoDonacion: Number(data.amount),
+    donationType: "ago",
     donadorCorreo: data.cardMail || data.userMail,
     fechaDonacionYape: result,
     validation: false

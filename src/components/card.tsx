@@ -37,7 +37,7 @@ function Card({
     donations => donations.validation === true
   );
   const activeDonations = aprovedDonations
-    ?.map(donations => parseInt(donations.montoDonacion))
+    ?.map(donations => donations.montoDonacion)
     .reduce((acc, actual) => acc + actual, 0);
 
   return (

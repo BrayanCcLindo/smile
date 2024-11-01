@@ -25,7 +25,7 @@ export type UserType = {
 
 export type UserData = {
   email: string;
-  id: string;
+  uid: string;
   name: string;
   userPhoto: string;
 };
@@ -58,10 +58,11 @@ export type CampañaGiftSmileType = {
   imagen: string;
   historia: string;
   donaciones: {
-    donadorYapeNombre: string;
+    donadorNombre: string;
+    donationType: SmilePaymentMethod;
     fechaDonacionYape: string;
-    montoDonacion: string;
-    donadorYapeCorreo: string;
+    montoDonacion: number;
+    donadorCorreo: string;
     validation: boolean;
   }[];
   ubicación: string;
@@ -83,6 +84,12 @@ export enum SmileForm {
   Emprendedores = "emprendedores"
 }
 
+export enum SmilePaymentMethod {
+  Yape = "Yape",
+  Transferencia = "Transferencia",
+  Tarjeta = "Tarjeta"
+}
+
 export enum PAYMENT_METHODS {
   "YAPE O PLIN" = "Yape o Plin",
   PAYPAL = "Paypal",
@@ -91,7 +98,7 @@ export enum PAYMENT_METHODS {
 }
 
 export type FormPayment = {
-  paymentMethod: string;
+  paymentMethod: SmilePaymentMethod;
   amount: string;
   userName?: string;
   userMail?: string;

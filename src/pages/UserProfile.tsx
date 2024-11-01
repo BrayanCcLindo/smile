@@ -12,9 +12,7 @@ import Avatar from "../components/avatar";
 
 function UserProfile() {
   const { user } = useGetUserData();
-
   const { stateProfile } = useSmileContext();
-
   const { data } = useGetCampaigns();
   const userCampaigns = data.filter(campaña => campaña.id === stateProfile.uid);
 
@@ -30,14 +28,6 @@ function UserProfile() {
                   <br /> {user?.name ?? stateProfile.displayName}
                 </h2>
                 <div className="flex flex-col items-center justify-center gap-4">
-                  {/* <img
-                    loading="lazy"
-                    src={user?.userPhoto ?? "/Images/defaultuser.jpg"}
-                    height={150}
-                    width={150}
-                    alt="foto-usuario"
-                    className="object-cover object-center rounded-full"
-                  /> */}
                   <Avatar
                     size="2xl"
                     username={user?.name ?? stateProfile.displayName}

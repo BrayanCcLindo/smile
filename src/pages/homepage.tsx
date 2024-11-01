@@ -9,13 +9,14 @@ import { motion } from "framer-motion";
 import SkeletonCardLoader from "../components/skeletonCard";
 import { ROUTES } from "../constants/routes";
 import { SEOComponent } from "../assets/SEO";
+import { useSmileContext } from "../Api/userContext";
 
 // import { useSmileContext } from "../Api/userContext";
 
 function Homepage() {
   const { data } = useGetCampaigns();
-
-  // const { data: ruc } = useRucData("20");
+  const { stateProfile } = useSmileContext();
+  console.log(stateProfile, "stateprofile");
 
   const firstThreeCampaigns = [...data].slice(0, 3);
 
@@ -26,6 +27,7 @@ function Homepage() {
         title="Kuzi Fund - Impulsa Causas, Transforma Comunidades"
         description="Apoya causas sociales, emprendedores innovadores y fundaciones. Dona, apoya y contribuye a crear un impacto positivo en la comunidad."
       />
+
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -35,6 +37,7 @@ function Homepage() {
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-heading sm:text-4xl">
             Kuzi
           </h1>
+
           <p className="my-6 text-lg leading-8 text-center text-content_text ">
             ¡Descubre proyectos que te apasionan y hazlos realidad! Apoya causas
             sociales, impulsa emprendimientos innovadores y genera un impacto

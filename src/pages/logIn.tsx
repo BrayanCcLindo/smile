@@ -60,6 +60,7 @@ function LogIn() {
           duration: 2000,
           position: "top-right"
         });
+        navigate(ROUTES.PERFIL);
       })
       .catch(() => {
         setErrorExist(true);
@@ -130,14 +131,6 @@ function LogIn() {
                 <label className="block text-sm font-medium leading-6 text-heading">
                   Contraseña
                 </label>
-                {/* <div className="text-sm">
-                <a
-                  href="#"
-                  className="font-semibold text-indigo-600 hover:text-indigo-500"
-                >
-                  ¿Ha olvidado la contraseña?
-                </a>
-              </div> */}
               </div>
               <div className="mt-2">
                 <input

@@ -8,36 +8,20 @@ import { useGetUserData } from "../Api/getUserData";
 import Avatar from "../components/avatar";
 
 function Configuracion() {
-  // const { user } = useGetUserData();
   const { stateProfile, updateUser } = useSmileContext();
   const { user } = useGetUserData();
-
   const navigate = useNavigate();
-  // const [userPhoto, setUserPhoto] = useState("/Images/defaultuser.jpg");
 
   async function handleSignOut() {
     try {
       await signOut(auth);
       updateUser(null);
       window.localStorage.clear();
-
       navigate("/");
     } catch (error) {
       console.log(error);
     }
   }
-  // const mySchema: ZodType<UpdateUserType> = z.object({
-  //   userPhoto: z.instanceof(FileList)
-  // });
-  // const {
-  //   register
-  //   // handleSubmit,
-  //   // formState: { errors },
-  // } = useForm<UpdateUserType>({
-  //   resolver: zodResolver(mySchema),
-  //   mode: "all"
-  // });
-
   return (
     <>
       {stateProfile ? (

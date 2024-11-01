@@ -26,7 +26,7 @@ function PostCampaign() {
   );
 
   const activeDonations = aprovedDonations
-    ?.map(donations => parseInt(donations.montoDonacion))
+    ?.map(donations => donations.montoDonacion)
     .reduce((acc, actual) => acc + actual, 0);
 
   const currentURL = window.location.href;
@@ -41,6 +41,7 @@ function PostCampaign() {
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
+  console.log(aprovedDonations, "aprovedDonations");
 
   return (
     <>
@@ -234,11 +235,16 @@ function PostCampaign() {
                                 className="px-4 py-3 border-b-2 border-card_border"
                               >
                                 <td className="px-4 py-3">
-                                  {donation.donadorYapeNombre}
+                                  {donation.donadorNombre}
                                 </td>
                                 <td className="px-4 py-3">
-                                  S/.{" "}
-                                  {parseInt(donation.montoDonacion).toFixed(2)}
+                                  {donation.montoDonacion.toLocaleString(
+                                    "es-PE",
+                                    {
+                                      currency: "PEN",
+                                      style: "currency"
+                                    }
+                                  )}
                                 </td>
                               </tr>
                             );
