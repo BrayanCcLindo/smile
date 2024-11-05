@@ -1,13 +1,11 @@
 import { Loader } from "lucide-react";
 import { useSmileContext } from "../Api/userContext";
 import { z, ZodType } from "zod";
-import { useNavigate } from "react-router-dom";
 import { useGetUserData } from "../Api/getUserData";
 import { useGetCampaigns } from "../Api/getCampaigns";
+import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { add, format } from "date-fns";
 import { useState } from "react";
-import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
@@ -17,6 +15,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormErrors from "../components/formErrors";
 import { SmileType } from "../type/types";
+import { ROUTES } from "../constants/routes";
+import { createSubmitHandler } from "../Api/createCampaignForm";
 
 type FormCampaign = {
   campaña: string;
@@ -31,14 +31,11 @@ type FormCampaign = {
 
 function FormEmprendedor() {
   const { stateProfile } = useSmileContext();
-  const navigate = useNavigate();
   const { user } = useGetUserData();
   const { data } = useGetCampaigns();
+  const [isDragging, setIsDragging] = useState(false);
 
   const [image, setImage] = useState("");
-  const [dni, setDni] = useState("");
-  const [meta, setMeta] = useState("");
-
   const MAX_FILE_SIZE = 770000;
 
   const mySchema: ZodType<FormCampaign> = z.object({
@@ -68,55 +65,104 @@ function FormEmprendedor() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors }
   } = useForm<FormCampaign>({
-    resolver: zodResolver(mySchema),
-    mode: "all"
+    resolver: zodResolver(mySchema)
+  });
+  //   const endDate = format(add(startDate, { days: 30 }), "yyyy-M-d");
+  //   const title = values.campaña.trim();
+  //   const slug = title.replace(/[\s'-]+/g, "-").toLowerCase();
+  //   const campaignExist = data.some(
+  //     campaign => campaign.nombre === values.campaña.trim()
+  //   );
+
+  //   try {
+  //     if (!campaignExist && stateProfile.uid) {
+  //       await addDoc(collection(db, "campañas"), {
+  //         nombre: title,
+  //         descripcion: values.description,
+  //         slug: slug,
+  //         categoria: values.category,
+  //         id: stateProfile.uid,
+  //         imagenCampaña: image,
+  //         meta: values.meta,
+  //         to: `/campañas/${slug}`,
+  //         tipo: SmileType.Emprendedores,
+  //         creador: user?.name ?? stateProfile.displayName,
+  //         fechaInicio: startDate,
+  //         fechaFinal: endDate,
+  //         donaciones: []
+  //       });
+  //       navigate("/campaigns");
+  //       toast.success("¡Campaña creada exitosamente!", {
+  //         duration: 2000,
+  //         position: "top-right"
+  //       });
+  //     }
+  //     if (campaignExist) {
+  //       toast.error("La campaña ya existe!", {
+  //         duration: 2000,
+  //         position: "top-right"
+  //       });
+  //     }
+  //   } catch (error) {
+  //     toast.error("¡Error al crear la campaña. Inténtalo de nuevo.!", {
+  //       duration: 2000,
+  //       position: "top-right"
+  //     });
+  //   }
+  // };
+
+  const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      if (file.size < MAX_FILE_SIZE) {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+          setImage(reader.result as string);
+        });
+        reader.readAsDataURL(file);
+      } else {
+        toast.error("El archivo es demasiado grande. El tamaño máximo es 5MB", {
+          duration: 2000,
+          position: "top-right"
+        });
+      }
+    }
+  };
+
+  const EmprendedorData = createSubmitHandler({
+    db,
+    collectionName: "campañas",
+    data,
+    stateProfile,
+    user,
+    image,
+    redirectPath: ROUTES.CAMPANAS
   });
   const submitCampaign = async (values: FormCampaign) => {
-    const startDate = format(new Date(), "yyyy-M-d");
-    const endDate = format(add(startDate, { days: 30 }), "yyyy-M-d");
-    const title = values.campaña.trim();
-    const slug = title.replace(/[\s'-]+/g, "-").toLowerCase();
-    const campaignExist = data.some(
-      campaign => campaign.nombre === values.campaña.trim()
-    );
-
-    try {
-      if (!campaignExist && stateProfile.uid) {
-        await addDoc(collection(db, "campañas"), {
-          nombre: title,
-          descripcion: values.description,
-          slug: slug,
-          categoria: values.category,
-          id: stateProfile.uid,
-          imagenCampaña: image,
-          meta: values.meta,
-          to: `/campañas/${slug}`,
-          tipo: SmileType.Emprendedores,
-          creador: user?.name ?? stateProfile.displayName,
-          fechaInicio: startDate,
-          fechaFinal: endDate,
-          donaciones: []
-        });
-        navigate("/campaigns");
-        toast.success("¡Campaña creada exitosamente!", {
-          duration: 2000,
-          position: "top-right"
-        });
-      }
-      if (campaignExist) {
-        toast.error("La campaña ya existe!", {
-          duration: 2000,
-          position: "top-right"
-        });
-      }
-    } catch (error) {
-      toast.error("¡Error al crear la campaña. Inténtalo de nuevo.!", {
-        duration: 2000,
-        position: "top-right"
-      });
-    }
+    EmprendedorData(values, SmileType.Emprendedores);
   };
 
   return (
@@ -187,13 +233,12 @@ function FormEmprendedor() {
                       onChange: event => {
                         const value = event.target.value;
                         if (/^\d*\.?\d*$/.test(value)) {
-                          setMeta(value);
+                          setValue("meta", value);
                         }
                       }
                     })}
                     id="meta"
                     name="meta"
-                    value={meta}
                     placeholder="S./ "
                   />
                   {errors.meta && (
@@ -216,34 +261,29 @@ function FormEmprendedor() {
                 <div className="pb-8 border-b col-span-full border-card_border">
                   <Label htmlFor="file" className="text-sm font-medium">
                     Imagen de Campaña
-                    <div
-                      className="relative flex items-center justify-center w-full h-32 overflow-hidden border-2 border-dashed rounded-md cursor-pointer border-card_border bg-input_bg"
-                      onDragOver={e => {
-                        e.preventDefault();
-                        e.stopPropagation();
+                    <motion.div
+                      animate={{
+                        scale: isDragging ? 1.05 : 1,
+                        borderColor: isDragging ? "#3B82F6" : "#D1D5DB"
                       }}
-                      onDrop={e => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const file = e.dataTransfer.files[0];
-                        if (file) {
-                          if (file.size < MAX_FILE_SIZE) {
-                            const reader = new FileReader();
-                            reader.addEventListener("load", () => {
-                              setImage(reader.result as string);
-                            });
-                            reader.readAsDataURL(file);
-                          }
-                        }
-                      }}
+                      className={`relative flex items-center justify-center w-full h-32 overflow-hidden border-2 border-dashed rounded-md cursor-pointer border-card_border  ${
+                        isDragging && "border-main"
+                      }`}
+                      transition={{ duration: 0.3 }}
+                      onDragEnter={handleDragEnter}
+                      onDragLeave={handleDragLeave}
+                      onDragOver={handleDragOver}
+                      onDrop={handleDrop}
                     >
                       {image && (
-                        <img
-                          loading="lazy"
-                          src={image}
-                          alt=""
-                          className="absolute inset-0 object-cover object-center opacity-50"
-                        />
+                        <div className="flex items-center justify-center p-10 ">
+                          <img
+                            loading="lazy"
+                            src={image}
+                            alt=""
+                            className="object-contain object-center opacity-50"
+                          />
+                        </div>
                       )}
 
                       <input
@@ -266,10 +306,12 @@ function FormEmprendedor() {
                         })}
                       />
 
-                      <span className="z-10 text-center text-content_text">
-                        Drag and drop your image here, or click to upload
-                      </span>
-                    </div>
+                      {!image && (
+                        <span className="z-10 text-center opacity-50 text-content_text">
+                          Drag and drop your image here, or click to upload
+                        </span>
+                      )}
+                    </motion.div>
                   </Label>
 
                   {errors.file && (
@@ -298,13 +340,12 @@ function FormEmprendedor() {
                       onChange: e => {
                         const value = e.target.value;
                         if (/^\d*\.?\d*$/.test(value) && value.length < 12) {
-                          setDni(value);
+                          setValue("dni", value);
                         }
                       }
                     })}
                     id="dni"
                     placeholder="xxxxxxx"
-                    value={dni}
                   />
                   {errors.dni && <FormErrors>{errors.dni.message}</FormErrors>}
                 </div>

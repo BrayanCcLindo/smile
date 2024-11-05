@@ -21,7 +21,8 @@ import { ROUTES } from "../constants/routes";
 export type FormCampaign = {
   campaña: string;
   description: string;
-  ruc: string;
+  ruc?: string;
+  category?: string;
   address: string;
   meta: string;
   file: FileList;
@@ -73,7 +74,6 @@ function FormAlbergue() {
   } = useForm<FormCampaign>({
     resolver: zodResolver(mySchema)
   });
-  // const submitCampaign = async (values: FormCampaign) => {
   //   const startDate = format(new Date(), "yyyy-M-d");
   //   const endDate = format(add(startDate, { days: 30 }), "yyyy-M-d");
   //   const title = values.campaña.trim();
@@ -117,7 +117,7 @@ function FormAlbergue() {
   //     });
   //   }
   // };
-  const handleSubmit2 = createSubmitHandler({
+  const fundacionData = createSubmitHandler({
     db,
     collectionName: "campañas",
     data,
@@ -125,10 +125,9 @@ function FormAlbergue() {
     user,
     image,
     redirectPath: ROUTES.CAMPANAS
-    // Opcionalmente puedes agregar campos adicionales
   });
   const submitCampaign = async (values: FormCampaign) => {
-    handleSubmit2(values, SmileType.Fundaciones);
+    fundacionData(values, SmileType.Fundaciones);
   };
 
   const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {

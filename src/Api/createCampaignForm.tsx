@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { SmileType, UserData } from "../type/types";
 import { FormCampaign } from "../pages/formAlbergue";
+import { ROUTES } from "../constants/routes";
 
 interface SubmitHandlerConfig {
   db: any; // Tipo de Firestore
@@ -50,8 +51,9 @@ export const createSubmitHandler = (config: SubmitHandlerConfig) => {
           id: config.stateProfile.uid,
           imagenCampaña: config.image,
           meta: Number(values.meta),
-          to: `/campanas/${slug}`,
+          to: `${ROUTES.CAMPANAS}/${slug}`,
           tipo,
+          category: values.category ?? "NO EXISTE",
           creador: config.user?.name ?? config.stateProfile.displayName,
           fechaInicio: startDate,
           fechaFinal: endDate,

@@ -90,7 +90,7 @@ function Card({
             campaña.tipo === SmileType.Fundaciones && "group-hover:text-main",
             campaña.tipo === SmileType.Social && "group-hover:text-alternative",
             campaña.tipo === SmileType.Emprendedores &&
-              "group-hover:text-entrepreneur"
+              "group-hover:text-entrepreneur  "
           )}
         >
           {" "}
@@ -112,7 +112,7 @@ function Card({
             campaña.tipo === SmileType.Social && "bg-alternative text-main_bg",
             campaña.tipo === SmileType.Fundaciones && "bg-main text-main_bg",
             campaña.tipo === SmileType.Emprendedores &&
-              "bg-entrepreneur text-main_bg"
+              "bg-entrepreneur text-main_bg text-white"
           )}
         >
           {campaña.tipo}

@@ -41,7 +41,6 @@ function PostCampaign() {
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
-  console.log(aprovedDonations, "aprovedDonations");
 
   return (
     <>

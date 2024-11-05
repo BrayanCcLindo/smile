@@ -9,14 +9,11 @@ import { motion } from "framer-motion";
 import SkeletonCardLoader from "../components/skeletonCard";
 import { ROUTES } from "../constants/routes";
 import { SEOComponent } from "../assets/SEO";
-import { useSmileContext } from "../Api/userContext";
 
 // import { useSmileContext } from "../Api/userContext";
 
 function Homepage() {
   const { data } = useGetCampaigns();
-  const { stateProfile } = useSmileContext();
-  console.log(stateProfile, "stateprofile");
 
   const firstThreeCampaigns = [...data].slice(0, 3);
 
@@ -47,7 +44,6 @@ function Homepage() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 mt-10 lg:justify-start">
             <MainLinkButton link={ROUTES.CAMPANAS}>Donar Ahora</MainLinkButton>
-
             <Link
               to={ROUTES.COMO_FUNCIONA}
               className="text-sm font-semibold leading-6 text-main "
