@@ -16,7 +16,7 @@ interface SubmitHandlerConfig {
     displayName: string;
   };
   user?: UserData | null;
-  image?: string;
+  image: string | null;
   additionalFields?: Record<string, any>;
   onSuccess?: () => void;
   redirectPath?: string;
@@ -24,7 +24,11 @@ interface SubmitHandlerConfig {
 
 export const createSubmitHandler = (config: SubmitHandlerConfig) => {
   const navigate = useNavigate();
-  return async (values: FormCampaign, tipo: SmileType) => {
+  return async (
+    values: FormCampaign,
+    tipo: SmileType,
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+  ) => {
     const startDate = format(new Date(), "yyyy-M-d");
     const endDate = format(add(new Date(startDate), { days: 30 }), "yyyy-M-d");
     const title = values.campaña.trim();
@@ -43,6 +47,7 @@ export const createSubmitHandler = (config: SubmitHandlerConfig) => {
     }
 
     try {
+      setIsLoading(true);
       if (!campaignExist && config.stateProfile.uid) {
         const baseDocument = {
           nombre: title,
@@ -53,7 +58,7 @@ export const createSubmitHandler = (config: SubmitHandlerConfig) => {
           meta: Number(values.meta),
           to: `${ROUTES.CAMPANAS}/${slug}`,
           tipo,
-          category: values.category ?? "NO EXISTE",
+          category: values.category ?? null,
           creador: config.user?.name ?? config.stateProfile.displayName,
           fechaInicio: startDate,
           fechaFinal: endDate,
@@ -66,10 +71,6 @@ export const createSubmitHandler = (config: SubmitHandlerConfig) => {
           baseDocument
         );
 
-        if (config.redirectPath) {
-          navigate(config.redirectPath);
-        }
-
         toast.success("¡Campaña creada exitosamente!", {
           duration: 2000,
           position: "top-right"
@@ -80,6 +81,9 @@ export const createSubmitHandler = (config: SubmitHandlerConfig) => {
         duration: 2000,
         position: "top-right"
       });
+    } finally {
+      setIsLoading(false);
+      navigate(ROUTES.CAMPANAS);
     }
   };
 };

@@ -16,7 +16,7 @@ import { ROUTES } from "../constants/routes";
 function SignIn() {
   const navigate = useNavigate();
   const { updateUser } = useSmileContext();
-
+  const [isLoading, setIsLoading] = useState(false);
   const { googleSignIn } = useSmileContext();
   const [errorExist, setErrorExist] = useState(false);
   const iniciar = async () => {
@@ -54,6 +54,7 @@ function SignIn() {
 
   const submitData = async (data: FormData) => {
     try {
+      setIsLoading(true);
       const res = await createUserWithEmailAndPassword(
         auth,
         data.email,
@@ -73,13 +74,15 @@ function SignIn() {
         duration: 2000,
         position: "top-right"
       });
-      navigate(-1);
     } catch (error) {
       toast.error("Error al crear la cuenta", {
         duration: 2000,
         position: "top-right"
       });
       setErrorExist(true);
+    } finally {
+      setIsLoading(false);
+      navigate(-1);
     }
   };
 
@@ -217,7 +220,9 @@ function SignIn() {
           </div> */}
           </div>
           <div className="mt-10">
-            <MainButton type="submit">Registrarme</MainButton>
+            <MainButton isLoading={isLoading} type="submit">
+              Registrarme
+            </MainButton>
             {errorExist && (
               <div className="flex items-center justify-center gap-2 mt-3">
                 <p className="text-center text-red-500 ">

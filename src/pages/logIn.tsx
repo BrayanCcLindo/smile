@@ -18,6 +18,7 @@ type LoginType = {
 
 function LogIn() {
   const [errorExist, setErrorExist] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { updateUser, logInGoogle } = useSmileContext();
   const navigate = useNavigate();
   const iniciar = async () => {
@@ -54,13 +55,13 @@ function LogIn() {
   const submitUserLogIn = (data: LoginType) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then(user => {
+        setIsLoading(true);
         // @ts-expect-error need to push
         updateUser(user.user);
         toast.success("Sesión iniciada exitosamente", {
           duration: 2000,
           position: "top-right"
         });
-        navigate(ROUTES.PERFIL);
       })
       .catch(() => {
         setErrorExist(true);
@@ -68,6 +69,10 @@ function LogIn() {
           duration: 2000,
           position: "top-right"
         });
+      })
+      .finally(() => {
+        setIsLoading(false);
+        navigate(ROUTES.PERFIL);
       });
   };
 
@@ -151,7 +156,9 @@ function LogIn() {
             </div>
 
             <div className="flex items-center justify-center flex-1 w-full">
-              <MainButton type="submit">Continuar</MainButton>
+              <MainButton isLoading={isLoading} type="submit">
+                Continuar
+              </MainButton>
             </div>
           </form>
 

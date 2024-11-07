@@ -75,25 +75,24 @@ function Card({
         )}
       >
         {campaña.tipo === SmileType.Fundaciones && (
-          <Rocket className="min-w-[30px] h-[30px] " />
+          <Rocket className="min-w-[30px] h-[30px]" />
         )}
         {campaña.tipo === SmileType.Emprendedores && (
-          <Lightbulb className="min-w-[30px] h-[30px] " />
+          <Lightbulb className="min-w-[30px] h-[30px]" />
         )}
         {campaña.tipo === SmileType.Social && (
-          <HandHeart className="min-w-[30px] h-[30px] " />
+          <HandHeart className="min-w-[30px] h-[30px]" />
         )}
 
         <h2
           className={twMerge(
-            "mt-3 text-lg font-semibold leading-6 line-clamp-1 ",
+            "mt-3 text-lg font-semibold leading-6 line-clamp-1",
             campaña.tipo === SmileType.Fundaciones && "group-hover:text-main",
             campaña.tipo === SmileType.Social && "group-hover:text-alternative",
             campaña.tipo === SmileType.Emprendedores &&
-              "group-hover:text-entrepreneur  "
+              "group-hover:text-entrepreneur"
           )}
         >
-          {" "}
           {campaña.nombre}
         </h2>
       </div>
@@ -108,7 +107,7 @@ function Card({
         />
         <span
           className={twMerge(
-            `absolute z-[2] rounded-full top-2 right-2  px-3 py-1.5 font-medium `,
+            `absolute z-[2] rounded-full top-2 right-2 px-3 py-1.5 font-medium`,
             campaña.tipo === SmileType.Social && "bg-alternative text-main_bg",
             campaña.tipo === SmileType.Fundaciones && "bg-main text-main_bg",
             campaña.tipo === SmileType.Emprendedores &&

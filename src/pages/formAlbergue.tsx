@@ -1,18 +1,16 @@
 import { Loader } from "lucide-react";
 import { useSmileContext } from "../Api/userContext";
-import { z, ZodType } from "zod";
 import { useGetUserData } from "../Api/getUserData";
 import { useGetCampaigns } from "../Api/getCampaigns";
 import { toast } from "sonner";
-import { useState } from "react";
+import { DragEvent, useState } from "react";
 import { db } from "../firebase/firebase";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { motion } from "framer-motion";
 import { Textarea } from "../components/ui/textarea";
 import { MainButton } from "../components/mainLinkButton";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
 import FormErrors from "../components/formErrors";
 import { SmileType } from "../type/types";
 import { createSubmitHandler } from "../Api/createCampaignForm";
@@ -31,92 +29,31 @@ export type FormCampaign = {
 };
 
 function FormAlbergue() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [image, setImage] = useState<string | null>(null);
   const { stateProfile } = useSmileContext();
   const { user } = useGetUserData();
   const { data } = useGetCampaigns();
-  const [isDragging, setIsDragging] = useState(false);
-  const [image, setImage] = useState("");
 
   const MAX_FILE_SIZE = 770000;
 
-  const mySchema: ZodType<FormCampaign> = z.object({
-    campaña: z
-      .string()
-      .min(3, { message: "El campo debe contener al menos 3 caracteres" }),
-    description: z
-      .string()
-      .min(25, { message: "El campo debe contener al menos 25 caracteres" })
-      .max(350, {
-        message: "El campo debe contener como maximo 350 caracteres"
-      }),
-    file: z
-      .instanceof(FileList)
-      .refine(files => files.length > 0, "La imagen es requerida")
-      .refine(files => {
-        return (
-          files[0]?.size <= MAX_FILE_SIZE, `El tamaño máximo aceptado es 1MB`
-        );
-      }),
-    meta: z.string().min(1, { message: "El campo es obligatorio" }),
-    ruc: z
-      .string()
-      .min(1, { message: "Este Campo es requerido" })
-      .startsWith("20", { message: "Debe iniciar con 20" }),
-    dni: z.string().min(1, { message: "Este Campo es requerido" }),
-    address: z.string().min(1, { message: "Este Campo es requerido" }),
-    proxy: z.string().min(1, { message: "Este Campo es requerido" })
-  });
   const {
-    register,
     handleSubmit,
-    setValue,
+    control,
     formState: { errors }
   } = useForm<FormCampaign>({
-    resolver: zodResolver(mySchema)
+    defaultValues: {
+      campaña: "",
+      description: "",
+      ruc: "",
+      address: "",
+      meta: "",
+      file: undefined,
+      proxy: "",
+      dni: ""
+    }
   });
-  //   const startDate = format(new Date(), "yyyy-M-d");
-  //   const endDate = format(add(startDate, { days: 30 }), "yyyy-M-d");
-  //   const title = values.campaña.trim();
-  //   const slug = title.replace(/[\s'-]+/g, "-").toLowerCase();
-  //   const campaignExist = data.some(
-  //     campaign => campaign.nombre === values.campaña.trim()
-  //   );
-
-  //   try {
-  //     if (!campaignExist && stateProfile.uid) {
-  //       await addDoc(collection(db, "campañas"), {
-  //         nombre: title,
-  //         descripcion: values.description,
-  //         slug: slug,
-  //         id: stateProfile.uid,
-  //         imagenCampaña: image,
-  //         meta: values.meta,
-  //         to: `/campaigns/${slug}`,
-  //         tipo: SmileType.Fundaciones,
-  //         creador: user?.name ?? stateProfile.displayName,
-  //         fechaInicio: startDate,
-  //         fechaFinal: endDate,
-  //         donaciones: []
-  //       });
-  //       navigate("/campaigns");
-  //       toast.success("¡Campaña creada exitosamente!", {
-  //         duration: 2000,
-  //         position: "top-right"
-  //       });
-  //     }
-  //     if (campaignExist) {
-  //       toast.error("La campaña ya existe!", {
-  //         duration: 2000,
-  //         position: "top-right"
-  //       });
-  //     }
-  //   } catch (error) {
-  //     toast.error("¡Error al crear la campaña. Inténtalo de nuevo.!", {
-  //       duration: 2000,
-  //       position: "top-right"
-  //     });
-  //   }
-  // };
   const fundacionData = createSubmitHandler({
     db,
     collectionName: "campañas",
@@ -127,27 +64,25 @@ function FormAlbergue() {
     redirectPath: ROUTES.CAMPANAS
   });
   const submitCampaign = async (values: FormCampaign) => {
-    fundacionData(values, SmileType.Fundaciones);
+    fundacionData(values, SmileType.Fundaciones, setIsLoading);
   };
 
-  const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleDrag = (e: DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
     e.stopPropagation();
+  };
+
+  const handleDragEnter = (e: DragEvent<HTMLLabelElement>) => {
+    handleDrag(e);
     setIsDragging(true);
   };
 
-  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleDragLeave = (e: DragEvent<HTMLLabelElement>) => {
+    handleDrag(e);
     setIsDragging(false);
   };
 
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleDrop = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
     e.stopPropagation();
     setIsDragging(false);
@@ -190,10 +125,19 @@ function FormAlbergue() {
                   <Label htmlFor="campaña" className="text-sm font-medium">
                     Nombre
                   </Label>
-                  <Input
-                    {...register("campaña")}
-                    id="campaña"
-                    placeholder="Ingresa un nombre de tu albergue/fundacion"
+                  <Controller
+                    name="campaña"
+                    control={control}
+                    rules={{
+                      required: "El campo es requerido"
+                    }}
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        id="campaña"
+                        placeholder="Ingresa un nombre de tu Albergue o Fundación"
+                      />
+                    )}
                   />
                   {errors.campaña && (
                     <FormErrors>{errors.campaña.message} </FormErrors>
@@ -203,30 +147,62 @@ function FormAlbergue() {
                   <Label htmlFor="ruc" className="text-sm font-medium">
                     RUC
                   </Label>
-                  <Input
-                    {...register("ruc", {
-                      onChange: e => {
-                        const value = e.target.value;
-                        if (/^\d*\.?\d*$/.test(value) && value.length < 12) {
-                          setValue("ruc", value);
-                        }
-                      }
-                    })}
-                    id="ruc"
+                  <Controller
                     name="ruc"
-                    placeholder="xxxxxxxxxxx"
+                    control={control}
+                    rules={{
+                      required: "El RUC es requerido",
+                      pattern: {
+                        value: /^[0-9]{11}$/,
+                        message:
+                          "Debe ingresar como máximo 11 dígitos numéricos"
+                      }
+                    }}
+                    render={({ field: { onChange, value } }) => (
+                      <Input
+                        onChange={e => {
+                          const value = e.target.value
+                            .replace(/\D/g, "")
+                            .slice(0, 11);
+                          onChange(value);
+                        }}
+                        value={value}
+                        id="ruc"
+                        maxLength={11}
+                        name="ruc"
+                        placeholder="xxxxxxxxxxx"
+                      />
+                    )}
                   />
+
                   {errors.ruc && <FormErrors>{errors.ruc.message} </FormErrors>}
                 </div>
                 <div className="col-span-full">
                   <Label htmlFor="description" className="text-sm font-medium">
                     Descripción
                   </Label>
-                  <Textarea
-                    {...register("description")}
-                    id="description"
-                    rows={3}
-                    placeholder="Ingresa una descripcion de tu albergue/fundacion"
+                  <Controller
+                    name="description"
+                    rules={{
+                      required: "El campo es requerido",
+                      minLength: {
+                        value: 25,
+                        message: "Debe contener como mínimo 25 caracteres"
+                      },
+                      maxLength: {
+                        value: 250,
+                        message: "Debe contener como máximo 250 caracteres"
+                      }
+                    }}
+                    control={control}
+                    render={({ field }) => (
+                      <Textarea
+                        {...field}
+                        id="description"
+                        rows={3}
+                        placeholder="Ingresa una descripcion de tu Emprendimiento"
+                      />
+                    )}
                   />
                   {errors.description && (
                     <FormErrors>{errors.description.message} </FormErrors>
@@ -236,19 +212,42 @@ function FormAlbergue() {
                   <Label htmlFor="meta" className="text-sm font-medium">
                     Monto a Recaudar
                   </Label>
-                  <Input
-                    {...register("meta", {
-                      onChange: event => {
-                        const value = event.target.value;
-                        if (/^\d*\.?\d*$/.test(value)) {
-                          setValue("meta", value);
+                  <div className="relative">
+                    <span className="px-4 text-sm py-1 absolute left-[2px] top-1/2 -translate-y-1/2 text-content_text">
+                      S/.
+                    </span>
+                    <Controller
+                      name="meta"
+                      control={control}
+                      rules={{
+                        required: "El monto es requerido",
+                        validate: value => {
+                          const numValue = parseFloat(value);
+                          if (isNaN(numValue)) {
+                            return "Por favor, ingrese un número válido";
+                          }
+                          if (numValue % 1 !== 0) {
+                            return "Por favor, ingrese un monto sin céntimos";
+                          }
+                          return true;
                         }
-                      }
-                    })}
-                    id="meta"
-                    name="meta"
-                    placeholder="S./ "
-                  />
+                      }}
+                      render={({ field: { onChange, value } }) => (
+                        <Input
+                          onChange={e => {
+                            const value = e.target.value;
+                            if (/^\d*\.?\d*$/.test(value)) {
+                              onChange(value);
+                            }
+                          }}
+                          className="pl-10"
+                          value={value}
+                          id="meta"
+                          name="meta"
+                        />
+                      )}
+                    />
+                  </div>
                   {errors.meta && (
                     <FormErrors>{errors.meta.message} </FormErrors>
                   )}
@@ -257,83 +256,140 @@ function FormAlbergue() {
                   <Label htmlFor="address" className="text-sm font-medium">
                     Dirección Legal
                   </Label>
-                  <Input
-                    {...register("address")}
-                    id="address"
-                    placeholder="Dirección legal de albergue / fundación"
+                  <Controller
+                    control={control}
+                    name="address"
+                    rules={{ required: "El campo es requerido" }}
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        id="address"
+                        placeholder="Dirección legal de Emprendimiento"
+                      />
+                    )}
                   />
                   {errors.address && (
                     <FormErrors>{errors.address.message} </FormErrors>
                   )}
                 </div>
-                <div className="pb-8 border-b col-span-full border-card_border">
-                  <Label htmlFor="file" className="text-sm font-medium">
+                <div className="pb-8 border-b col-span-full">
+                  <span className="text-sm font-medium text-heading">
                     Imagen de Campaña
-                    <motion.div
-                      animate={{
-                        scale: isDragging ? 1.05 : 1,
-                        borderColor: isDragging ? "#3B82F6" : "#D1D5DB"
-                      }}
-                      className={`relative flex items-center justify-center w-full h-32 overflow-hidden border-2 border-dashed rounded-md cursor-pointer border-card_border  ${
-                        isDragging && "border-main"
-                      }`}
-                      transition={{ duration: 0.3 }}
-                      onDragEnter={handleDragEnter}
-                      onDragLeave={handleDragLeave}
-                      onDragOver={handleDragOver}
-                      onDrop={handleDrop}
-                    >
-                      {image && (
-                        <div className="flex items-center justify-center p-10 ">
-                          <img
-                            loading="lazy"
-                            src={image}
-                            alt=""
-                            className="object-contain object-center opacity-50"
-                          />
-                        </div>
-                      )}
-
-                      <input
-                        id="file"
-                        type="file"
-                        className="hidden"
-                        {...register("file", {
-                          onChange: event => {
-                            const mainImage = event.target.files[0];
-                            if (mainImage) {
-                              if (mainImage.size < MAX_FILE_SIZE) {
-                                const reader = new FileReader();
-                                reader.addEventListener("load", () => {
-                                  setImage(reader.result as string);
-                                });
-                                reader.readAsDataURL(mainImage);
-                              }
-                            }
+                  </span>
+                  <Controller
+                    name="file"
+                    control={control}
+                    rules={{
+                      required: "La imagen de campaña es requerida",
+                      validate: {
+                        fileSize: file => {
+                          if (!file?.[0]) return "Se requiere una imagen";
+                          if (file[0].size >= MAX_FILE_SIZE) {
+                            return "El archivo no debe exceder los 1MB";
                           }
-                        })}
-                      />
-
-                      {!image && (
-                        <span className="z-10 text-center opacity-50 text-content_text">
-                          Drag and drop your image here, or click to upload
-                        </span>
-                      )}
-                    </motion.div>
-                  </Label>
-
+                          return true;
+                        },
+                        fileType: file => {
+                          if (!file?.[0]) return true;
+                          const validTypes = ["image/jpeg", "image/png"];
+                          if (!validTypes.includes(file[0].type)) {
+                            return "Solo se permiten archivos de imagen (JPG, PNG)";
+                          }
+                          return true;
+                        }
+                      }
+                    }}
+                    render={({ field: { onChange } }) => (
+                      <motion.label
+                        animate={{
+                          scale: isDragging ? 1.05 : 1
+                        }}
+                        transition={{ duration: 0.3 }}
+                        htmlFor="file-input"
+                        className={`border-2 border-dashed rounded-lg text-center h-28 bg-input_bg flex justify-center items-center cursor-pointer transition-colors overflow-hidden ${
+                          isDragging
+                            ? "border-main bg-main/15"
+                            : "border-card_border hover:border-heading"
+                        } focus-within:ring-2 focus-within:ring-content_text`}
+                        onDragEnter={handleDragEnter}
+                        onDragOver={handleDrag}
+                        onDragLeave={handleDragLeave}
+                        onDrop={e => {
+                          e.preventDefault();
+                          handleDrop(e);
+                          const file = e.dataTransfer.files[0];
+                          if (file && file.size) {
+                            const reader = new FileReader();
+                            reader.addEventListener("load", () => {
+                              setImage(reader.result as string);
+                              onChange(e.dataTransfer.files);
+                            });
+                            reader.readAsDataURL(file);
+                          } else {
+                            setImage("");
+                            onChange(null);
+                          }
+                        }}
+                      >
+                        <input
+                          id="file-input"
+                          type="file"
+                          className="sr-only"
+                          accept="image/jpeg, image/jpg, image/png"
+                          onChange={event => {
+                            const file = event.target.files?.[0];
+                            if (file && file.size) {
+                              const reader = new FileReader();
+                              reader.addEventListener("load", () => {
+                                setImage(reader.result as string);
+                                onChange(event.target.files);
+                              });
+                              reader.readAsDataURL(file);
+                            } else {
+                              setImage("");
+                              onChange(null);
+                            }
+                          }}
+                        />
+                        {!image && (
+                          <span className="z-10 text-center opacity-50 text-content_text">
+                            Drag and drop your image here, or click to upload
+                          </span>
+                        )}
+                        {image && (
+                          <div className="flex items-center justify-center p-10">
+                            <img
+                              loading="lazy"
+                              src={image}
+                              alt=""
+                              className="object-contain object-center opacity-50"
+                            />
+                          </div>
+                        )}
+                      </motion.label>
+                    )}
+                  />
                   {errors.file && (
-                    <FormErrors>{errors.file.message} </FormErrors>
+                    <FormErrors>{errors.file.message}</FormErrors>
                   )}
                 </div>
                 <div className=" sm:col-span-3 col-span-full">
                   <Label htmlFor="proxy" className="text-sm font-medium">
                     Representante Legal
                   </Label>
-                  <Input
-                    {...register("proxy")}
-                    id="proxy"
-                    placeholder="Representante legal de albergue / fundación"
+                  <Controller
+                    control={control}
+                    name="proxy"
+                    rules={{
+                      required: "El campo es requerido"
+                    }}
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        id="proxy"
+                        placeholder="Representante legal de Emprendimiento"
+                      />
+                    )}
                   />
                   {errors.proxy && (
                     <FormErrors>{errors.proxy.message} </FormErrors>
@@ -343,22 +399,38 @@ function FormAlbergue() {
                   <Label htmlFor="dni" className="text-sm font-medium">
                     DNI
                   </Label>
-                  <Input
-                    {...register("dni", {
-                      onChange: e => {
-                        const value = e.target.value;
-                        if (/^\d*\.?\d*$/.test(value) && value.length < 12) {
-                          setValue("dni", value);
-                        }
+                  <Controller
+                    name="dni"
+                    control={control}
+                    rules={{
+                      required: "El DNI es requerido",
+                      pattern: {
+                        value: /^[0-9]{8}$/,
+                        message: "Debe ingresar exactamente 8 dígitos numéricos"
                       }
-                    })}
-                    id="dni"
-                    placeholder="xxxxxxx"
+                    }}
+                    render={({ field: { onChange, value } }) => (
+                      <Input
+                        onChange={e => {
+                          const value = e.target.value
+                            .replace(/\D/g, "")
+                            .slice(0, 8);
+                          onChange(value);
+                        }}
+                        value={value}
+                        id="dni"
+                        maxLength={8}
+                        name="dni"
+                        placeholder="xxxxxxx"
+                      />
+                    )}
                   />
                   {errors.dni && <FormErrors>{errors.dni.message} </FormErrors>}
                 </div>
                 <div className="col-span-full">
-                  <MainButton type="submit">Crear Campaña</MainButton>
+                  <MainButton type="submit" isLoading={isLoading}>
+                    Crear Campaña
+                  </MainButton>
                 </div>
               </form>
             </div>

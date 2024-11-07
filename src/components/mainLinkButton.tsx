@@ -27,7 +27,7 @@ export default MainLinkButton;
 type ButtonType = {
   type: "button" | "submit" | "reset";
   children: ReactNode;
-  isLoading?: boolean;
+  isLoading: boolean;
 };
 
 export function MainButton({ type, children, isLoading }: ButtonType) {
