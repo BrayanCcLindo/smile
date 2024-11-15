@@ -216,12 +216,12 @@ function PostCampaign() {
                     </div>
                     <div className="md:flex-grow">
                       <table className="w-full text-left whitespace-no-wrap table-auto">
-                        <thead>
+                        <thead className="bg-third_bg">
                           <tr>
-                            <th className="px-4 py-3 text-sm font-medium tracking-wider bg-gray-100 dark:bg-[#1e293b] rounded-tl rounded-bl text-heading title-font">
+                            <th className="px-4 py-3 text-sm font-medium tracking-wider rounded-tl rounded-bl text-heading title-font">
                               Nombre
                             </th>
-                            <th className="px-4 py-3 text-sm font-medium tracking-wider bg-gray-100 dark:bg-[#1e293b]  text-heading title-font">
+                            <th className="px-4 py-3 text-sm font-medium tracking-wider text-heading title-font">
                               Monto
                             </th>
                           </tr>
