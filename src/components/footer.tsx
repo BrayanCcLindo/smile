@@ -8,10 +8,10 @@ function Footer() {
   };
   return (
     <>
-      <footer className="py-12 bg-gradient-to-b from-main_bg to-footer via-footer text-content_text">
-        <div className="container px-4 mx-auto">
+      <footer className="py-12 bg-gradient-to-b from-main_bg to-footer via-footer text-content_text ">
+        <div className="container px-4 mx-auto max-w-7xl">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            <div className="flex flex-col items-center md:items-start">
+            <div className="flex flex-col items-start md:items-center">
               <Link
                 to={ROUTES.HOMEPAGE}
                 onClick={scrollToTop}
@@ -26,14 +26,15 @@ function Footer() {
                   alt="logo-smile"
                 />
               </Link>
-              <p className="mt-4 leading-8 text-content_text ">
-                ¡Bienvenidos! Aquí, cada clic es una oportunidad para
-                transformar vidas y apoyar proyectos que cambian el mundo.
+              <p className="mt-4 leading-8 text-left md:text-center text-content_text">
+                ¡Bienvenidos! Aquí, cada clic es una
+                <br /> oportunidad para transformar vidas y apoyar proyectos que
+                cambian el mundo.
               </p>
             </div>
 
             {/* Site Links */}
-            <div className="flex flex-col itexms-start">
+            <div className="flex flex-col items-start md:items-center">
               <h3 className="mb-4 text-lg font-semibold text-heading">
                 Enlaces Rápidos
               </h3>
@@ -51,7 +52,7 @@ function Footer() {
               </nav>
             </div>
 
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col items-start md:items-center">
               <h3 className="mb-4 text-lg font-semibold text-heading">
                 Conéctate con Nosotros
               </h3>

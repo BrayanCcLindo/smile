@@ -23,8 +23,8 @@ function ComoFunciona() {
       />
       <section>
         <div className="text-base text-content_text bg-gradient-to-b from-second_bg to-main_bg via-second_bg">
-          <div className="container flex flex-wrap px-5 py-24 mx-auto">
-            <div className="flex flex-wrap justify-between">
+          <div className="container flex flex-wrap mx-auto max-w-7xl">
+            <div className="flex flex-wrap justify-between p-5">
               <div className="lg:w-1/2 md:w-1/2 md:pr-10 md:py-6">
                 <h1 className="mb-4 text-3xl font-medium title-font text-main">
                   ¿Cómo funcionan las donaciones en Kuzi?
@@ -112,7 +112,7 @@ function ComoFunciona() {
                   </div>
                 </div>
               </div>
-              <div className="mt-10 md:mt-0 md:py-6 lg:w-1/2 md:w-1/2 h-1/2">
+              <div className="mt-10 md:mt-0 md:py-6 lg:w-1/2 md:w-1/2">
                 <CustomVideoPlayer
                   src="/video/kuzi-video.webm"
                   coverImage="/Images/kuzi-video-cover.jpg"
@@ -122,8 +122,8 @@ function ComoFunciona() {
           </div>
         </div>
 
-        <div className="text-content_text body-font bg-main_bg">
-          <div className="flex flex-wrap justify-center px-5 mx-auto max-w-7xl lg:w-2/3">
+        <div className="text-content_text body-font">
+          <div className="flex flex-wrap justify-center p-5 mx-auto max-w-7xl lg:w-2/3">
             <div className="flex flex-col mb-20 space-y-4">
               <h2 className="mb-4 text-2xl font-medium sm:text-3xl title-font text-main">
                 ¿Cómo funcionan las campañas en Kuzi?
