@@ -3,7 +3,6 @@ import { ArrowRightLeft, CreditCard, QrCode } from "lucide-react";
 
 import SelectPaymentForm from "../components/selectPayment";
 
-// import Card from "../components/card";
 import {
   Card,
   CardContent,
@@ -11,15 +10,23 @@ import {
   CardTitle
 } from "../components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "../components/ui/alert";
-import Loader from "../components/loader";
+import Loader from "../components/ui/loaders/loader";
 import { useGetCampaigns } from "../Api/getCampaigns";
+import { SmilePaymentMethod } from "../type/types";
+import { useState } from "react";
 
 function DonacionPasarela() {
   const { slug } = useParams();
-
+  const [paymentMethod, setPaymentMethod] = useState<SmilePaymentMethod>(
+    SmilePaymentMethod.Yape
+  );
   const { data } = useGetCampaigns();
   const campaignIndex = data.findIndex(campaign => campaign.slug === slug);
   const actualPost = data[campaignIndex];
+
+  const handleTabls = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setPaymentMethod((e.target as HTMLInputElement).id as SmilePaymentMethod);
+  };
 
   return (
     <>
@@ -44,7 +51,12 @@ function DonacionPasarela() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="p-0 space-y-6">
-                      <div className="p-6 text-sm rounded-lg shadow-md bg-third_bg lg:flex">
+                      <div className="relative p-6 text-sm rounded-lg shadow-md bg-third_bg lg:flex">
+                        <button
+                          onClick={handleTabls}
+                          className="absolute inset-0"
+                          id={SmilePaymentMethod.Yape}
+                        ></button>
                         <div className="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-4 text-white rounded-full bg-main">
                           <QrCode />
                         </div>
@@ -59,7 +71,12 @@ function DonacionPasarela() {
                           </p>
                         </div>
                       </div>
-                      <div className="p-6 text-sm rounded-lg shadow-md bg-third_bg lg:flex">
+                      <div className="relative p-6 text-sm rounded-lg shadow-md bg-third_bg lg:flex">
+                        <button
+                          onClick={handleTabls}
+                          className="absolute inset-0"
+                          id={SmilePaymentMethod.Transferencia}
+                        ></button>
                         <div className="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-4 text-white rounded-full bg-main">
                           <ArrowRightLeft />
                         </div>
@@ -74,7 +91,14 @@ function DonacionPasarela() {
                           </p>
                         </div>
                       </div>
-                      <div className="p-6 text-sm rounded-lg shadow-md bg-third_bg lg:flex">
+                      <div className="relative p-6 text-sm rounded-lg shadow-md bg-third_bg lg:flex">
+                        <button
+                          onClick={() => {
+                            setPaymentMethod(SmilePaymentMethod.Tarjeta);
+                          }}
+                          className="absolute inset-0"
+                          id={SmilePaymentMethod.Tarjeta}
+                        ></button>
                         <div className="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-4 text-white rounded-full bg-main">
                           <CreditCard />
                         </div>
@@ -123,7 +147,11 @@ function DonacionPasarela() {
                   </Card>
                 </div>
                 <div className="w-full text-center sm:w-1/2 border-card_border sm:py-8 sm:border-t-0 sm:mt-0">
-                  <SelectPaymentForm actualPost={actualPost} />
+                  <SelectPaymentForm
+                    setPaymentMethod={setPaymentMethod}
+                    paymentMethod={paymentMethod}
+                    actualPost={actualPost}
+                  />
                 </div>
               </div>
             </div>

@@ -1,10 +1,10 @@
-import { Loader } from "lucide-react";
+import { ChevronDown, ChevronUp, Loader } from "lucide-react";
 import { useSmileContext } from "../Api/userContext";
 import { useGetUserData } from "../Api/getUserData";
 import { useGetCampaigns } from "../Api/getCampaigns";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
-import { DragEvent, useState } from "react";
+import { DragEvent, useCallback, useState, useEffect } from "react";
 import { db } from "../firebase/firebase";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
@@ -13,6 +13,8 @@ import { MainButton } from "../components/mainLinkButton";
 import { useForm, Controller } from "react-hook-form";
 import FormErrors from "../components/formErrors";
 import { createSubmitHandler } from "../Api/createCampaignForm";
+import { debounce } from "../utils/debounce";
+
 import {
   Select,
   SelectContent,
@@ -22,6 +24,7 @@ import {
   SelectValue
 } from "../components/ui/select";
 import { SmileType } from "../type/types";
+import { Button } from "../components/ui/button";
 
 type FormCampaign = {
   campaña: string;
@@ -34,13 +37,36 @@ type FormCampaign = {
   dni: string;
 };
 
+const LoadingDots = () => {
+  return (
+    <div className="flex items-center justify-center py-4 space-x-1">
+      <div
+        className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"
+        style={{ animationDelay: "0s" }}
+      ></div>
+      <div
+        className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"
+        style={{ animationDelay: "0.2s" }}
+      ></div>
+      <div
+        className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"
+        style={{ animationDelay: "0.4s" }}
+      ></div>
+    </div>
+  );
+};
+
 function FormSocial() {
   const [isLoading, setIsLoading] = useState(false);
+  const [targetAmount, setTargetAmount] = useState("");
   const [isDragging, setIsDragging] = useState(false);
   const [image, setImage] = useState<string | null>(null);
   const { stateProfile } = useSmileContext();
   const { user } = useGetUserData();
   const { data } = useGetCampaigns();
+  const [donationAmount, setDonationAmount] = useState(20);
+  const [showResults, setShowResults] = useState(false);
+  const [donationsNeeded, setDonationsNeeded] = useState(0);
 
   const MAX_FILE_SIZE = 770000;
   const categories = [
@@ -116,13 +142,50 @@ function FormSocial() {
   const submitCampaign = async (values: FormCampaign) => {
     socialData(values, SmileType.Social, setIsLoading);
   };
+  const calculateDonations = useCallback(() => {
+    if (targetAmount) {
+      console.log(targetAmount, "targetAmount");
+      setIsLoading(true);
+      setShowResults(false);
+      setTimeout(() => {
+        const target = parseInt(targetAmount);
+        const donation = donationAmount || 1;
+        setDonationsNeeded(Math.ceil(target / donation));
+        setIsLoading(false);
+        setShowResults(true);
+      }, 1500);
+    } else {
+      setShowResults(false);
+    }
+  }, [targetAmount, donationAmount]);
+
+  const debouncedCalculate = useCallback(
+    debounce(calculateDonations, 1000), // 3 seconds debounce
+    [calculateDonations]
+  );
+
+  useEffect(() => {
+    debouncedCalculate();
+    return () => {
+      debouncedCalculate.cancel();
+    };
+  }, [targetAmount, debouncedCalculate]);
+  const adjustValue = (amount: number) => {
+    setDonationAmount(prev => Math.min(Math.max(prev + amount, 20), 200));
+  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseInt(e.target.value, 10);
+    if (!isNaN(newValue)) {
+      setDonationAmount(Math.min(Math.max(newValue, 20), 200));
+    }
+  };
 
   return (
     <>
       {stateProfile ? (
         <div className="px-5 py-24 bg-main_bg">
           <div className="flex items-center justify-center ">
-            <div className="w-full max-w-3xl p-6 border rounded-lg border-card_border sm:p-8 md:p-10 ">
+            <div className="w-full max-w-3xl p-6 border rounded-lg border-card_border sm:p-8 md:p-10">
               <h1 className="text-xl font-semibold leading-7 text-main">
                 Crea tu Campaña
               </h1>
@@ -224,47 +287,113 @@ function FormSocial() {
                   <Label htmlFor="meta" className="text-sm font-medium">
                     Monto a Recaudar
                   </Label>
-                  <div className="relative">
-                    <span className="px-4 text-sm py-1 absolute left-[2px] top-1/2 -translate-y-1/2 text-content_text">
-                      S/.
-                    </span>
-                    <Controller
-                      name="meta"
-                      control={control}
-                      rules={{
-                        required: "El monto es requerido",
-                        validate: value => {
-                          const numValue = parseFloat(value);
-                          if (isNaN(numValue)) {
-                            return "Por favor, ingrese un número válido";
-                          }
-                          if (numValue % 1 !== 0) {
-                            return "Por favor, ingrese un monto sin céntimos";
-                          }
-                          return true;
-                        }
-                      }}
-                      render={({ field: { onChange, value } }) => (
-                        <Input
-                          onChange={e => {
-                            const value = e.target.value;
-                            if (/^\d*\.?\d*$/.test(value)) {
-                              onChange(value);
+                  <div>
+                    <div className="relative">
+                      <span className="px-4 text-sm py-1 absolute left-[2px] top-1/2 -translate-y-1/2 text-content_text">
+                        S/.
+                      </span>
+                      <Controller
+                        name="meta"
+                        control={control}
+                        rules={{
+                          required: "El monto es requerido",
+                          validate: value => {
+                            const numValue = parseFloat(value);
+                            if (isNaN(numValue)) {
+                              return "Por favor, ingrese un número válido";
                             }
-                          }}
-                          className="pl-10"
-                          value={value}
-                          id="meta"
-                          name="meta"
-                        />
-                      )}
-                    />
+                            if (numValue % 1 !== 0) {
+                              return "Por favor, ingrese un monto sin céntimos";
+                            }
+                            return true;
+                          }
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                          <Input
+                            id="meta"
+                            name="meta"
+                            onChange={e => {
+                              const value = e.target.value;
+                              if (/^\d*\.?\d*$/.test(value)) {
+                                onChange(value);
+                                setTargetAmount(value);
+                              }
+                            }}
+                            className="pl-10"
+                            value={value}
+                            type="text"
+                          />
+                        )}
+                      />
+                    </div>
+
+                    {showResults && (
+                      <div className="grid grid-cols-1 gap-4 py-2 sm:grid-cols-2 animate-fade-in">
+                        <div>
+                          <Label
+                            htmlFor="donationAmount"
+                            className="text-sm font-medium"
+                          >
+                            Monto de donación
+                          </Label>
+
+                          <div className="relative w-full">
+                            <Input
+                              type="text"
+                              id="donationAmount"
+                              value={`$${donationAmount}`}
+                              onChange={handleChange}
+                              className="text-center"
+                            />
+
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon"
+                              className="absolute inset-y-0 right-0 h-full border-l rounded-l-none border-card_border text-content_text"
+                              onClick={() => adjustValue(20)}
+                              disabled={donationAmount >= 200}
+                            >
+                              <ChevronUp className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon"
+                              className="absolute inset-y-0 left-0 h-full border-r rounded-r-none text-content_text border-card_border"
+                              onClick={() => adjustValue(-20)}
+                              disabled={donationAmount <= 20}
+                            >
+                              <ChevronDown className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        </div>
+                        <div>
+                          <Label
+                            htmlFor="donationsNeeded"
+                            className="text-sm font-medium"
+                          >
+                            Donaciones necesarias
+                          </Label>
+                          <Input
+                            id="donationsNeeded"
+                            type="text"
+                            readOnly
+                            value={donationsNeeded}
+                            className="w-full text-center"
+                            aria-describedby="donationsNeededDescription"
+                          />
+                        </div>
+                      </div>
+                    )}
+                    {isLoading && <LoadingDots />}
                   </div>
 
                   {errors.meta && (
                     <FormErrors>{errors.meta.message}</FormErrors>
                   )}
                 </div>
+
                 <div className="sm:col-span-3 col-span-full">
                   <Label htmlFor="address" className="text-sm font-medium">
                     Dirección Legal

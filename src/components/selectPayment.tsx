@@ -59,13 +59,14 @@ const ButtonDonations = ({ value, text, onclick }: ButtonDontationType) => {
 };
 
 export default function SelectPaymentForm({
-  actualPost
+  actualPost,
+  setPaymentMethod,
+  paymentMethod
 }: {
   actualPost: CampañaGiftSmileType;
+  setPaymentMethod: React.Dispatch<React.SetStateAction<SmilePaymentMethod>>;
+  paymentMethod: SmilePaymentMethod;
 }) {
-  const [paymentMethod, setPaymentMethod] = useState<SmilePaymentMethod>(
-    SmilePaymentMethod.Yape
-  );
   const [mercadopago, setMercadopago] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -352,6 +353,7 @@ export default function SelectPaymentForm({
                   field.onChange(value);
                   setPaymentMethod(value as SmilePaymentMethod);
                 }}
+                value={paymentMethod}
                 className="mt-3"
               >
                 <TabsList className="grid w-full grid-cols-3 gap-4 p-1 rounded-lg bg-third_bg">

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import CallToAction from "../components/callToAction";
 import LogoSection from "../components/logoSection";
 import { motion } from "framer-motion";
-import SkeletonCardLoader from "../components/skeletonCard";
+import SkeletonCardLoader from "../components/ui/loaders/skeletonCard";
 import { ROUTES } from "../constants/routes";
 import { SEOComponent } from "../assets/SEO";
 

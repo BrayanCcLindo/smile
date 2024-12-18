@@ -1,7 +1,7 @@
 import Card from "../components/card";
 import { useGetCampaigns } from "../Api/getCampaigns";
 import CallToAction from "../components/callToAction";
-import SkeletonCardLoader from "../components/skeletonCard";
+import SkeletonCardLoader from "../components/ui/loaders/skeletonCard";
 import { SEOComponent } from "../assets/SEO";
 import { ROUTES } from "../constants/routes";
 

@@ -3,7 +3,7 @@ import { Link2, HeartHandshake, MapPin } from "lucide-react";
 import { useSmileContext } from "../Api/userContext";
 import ButtonDialog from "../components/buttonDialog";
 import { useGetCampaigns } from "../Api/getCampaigns";
-import Loader from "../components/loader";
+import Loader from "../components/ui/loaders/loader";
 import MainLinkButton from "../components/mainLinkButton";
 import { handleShareURL } from "../Api/socialShare";
 import { format, formatDistanceToNow } from "date-fns";
@@ -89,7 +89,7 @@ function PostCampaign() {
                   />
                 </div>
                 <div className="flex justify-between pb-5 mt-4 mb-5 border-b-2 border-card_border">
-                  <p className="flex items-center gap-2 text-lg sm:text-2xl">
+                  <p className="flex flex-wrap items-center gap-2 text-lg sm:text-2xl">
                     Recaudado
                     <span className="font-bold">
                       {activeDonations.toLocaleString("es-PE", {

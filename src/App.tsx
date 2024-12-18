@@ -12,7 +12,7 @@ import { Toaster } from "sonner";
 import { lazy, Suspense } from "react";
 import { SmileForm } from "./type/types";
 
-import Loader from "./components/loader";
+import Loader from "./components/ui/loaders/loader";
 import { ROUTES } from "./constants/routes";
 
 function MainLayout() {

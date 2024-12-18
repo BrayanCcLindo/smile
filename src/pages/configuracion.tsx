@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import Loader from "../components/loader";
+import Loader from "../components/ui/loaders/loader";
 import { profileRoutes } from "../constants/routes";
 import { auth } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
