@@ -1,157 +1,152 @@
-function Nosotros() {
+import { Card, CardContent } from "../components/ui/card";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Textarea } from "../components/ui/textarea";
+import { Users, Heart, Target, Mail, Phone, MapPin } from "lucide-react";
+
+export default function NosotrosPage() {
   return (
-    <section className="text-gray-600 body-font mt-20">
+    <div className="mx-auto  bg-background body-font max-w-7xl">
       <div className="container px-5 py-24 mx-auto">
-        <div className="flex flex-col text-center w-full mb-20">
-          <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-            Nuestro Equipo
-          </h1>
-          <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-            Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
-            gentrify, subway tile poke farm-to-table. Franzen you probably
-            haven't heard of them.
-          </p>
-        </div>
-        <div className="flex flex-wrap -m-2">
-          <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-            <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img
-                alt="team"
-                className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                src="https://dummyimage.com/80x80"
-              />
-              <div className="flex-grow">
-                <h2 className="text-gray-900 title-font font-medium">
-                  Holden Caulfield
-                </h2>
-                <p className="text-gray-500">UI Designer</p>
-              </div>
-            </div>
+        <div className="flex flex-wrap w-full mb-20">
+          <div className="w-full mb-6 lg:w-1/2 lg:mb-0">
+            <h1 className="mb-2 text-2xl font-medium text-heading sm:text-3xl title-font">
+              Poder de la Transformación
+            </h1>
+            <div className="w-20 h-1 rounded bg-main"></div>
           </div>
-          <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-            <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img
-                alt="team"
-                className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                src="https://dummyimage.com/84x84"
-              />
-              <div className="flex-grow">
-                <h2 className="text-gray-900 title-font font-medium">
-                  Henry Letham
-                </h2>
-                <p className="text-gray-500">CTO</p>
-              </div>
-            </div>
-          </div>
-          <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-            <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img
-                alt="team"
-                className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                src="https://dummyimage.com/88x88"
-              />
-              <div className="flex-grow">
-                <h2 className="text-gray-900 title-font font-medium">
-                  Oskar Blinde
-                </h2>
-                <p className="text-gray-500">Founder</p>
-              </div>
-            </div>
-          </div>
-          <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-            <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img
-                alt="team"
-                className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                src="https://dummyimage.com/90x90"
-              />
-              <div className="flex-grow">
-                <h2 className="text-gray-900 title-font font-medium">
-                  John Doe
-                </h2>
-                <p className="text-gray-500">DevOps</p>
-              </div>
-            </div>
-          </div>
-          <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-            <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img
-                alt="team"
-                className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                src="https://dummyimage.com/94x94"
-              />
-              <div className="flex-grow">
-                <h2 className="text-gray-900 title-font font-medium">
-                  Martin Eden
-                </h2>
-                <p className="text-gray-500">Software Engineer</p>
-              </div>
-            </div>
-          </div>
-          <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-            <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img
-                alt="team"
-                className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                src="https://dummyimage.com/98x98"
-              />
-              <div className="flex-grow">
-                <h2 className="text-gray-900 title-font font-medium">
-                  Boris Kitua
-                </h2>
-                <p className="text-gray-500">UX Researcher</p>
-              </div>
-            </div>
-          </div>
-          <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-            <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img
-                alt="team"
-                className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                src="https://dummyimage.com/100x90"
-              />
-              <div className="flex-grow">
-                <h2 className="text-gray-900 title-font font-medium">
-                  Atticus Finch
-                </h2>
-                <p className="text-gray-500">QA Engineer</p>
-              </div>
-            </div>
-          </div>
-          <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-            <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img
-                alt="team"
-                className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                src="https://dummyimage.com/104x94"
-              />
-              <div className="flex-grow">
-                <h2 className="text-gray-900 title-font font-medium">
-                  Alper Kamu
-                </h2>
-                <p className="text-gray-500">System</p>
-              </div>
-            </div>
-          </div>
-          <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
-            <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-              <img
-                alt="team"
-                className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                src="https://dummyimage.com/108x98"
-              />
-              <div className="flex-grow">
-                <h2 className="text-gray-900 title-font font-medium">
-                  Rodrigo Monchi
-                </h2>
-                <p className="text-gray-500">Product Manager</p>
-              </div>
-            </div>
+          <div className="flex flex-col items-start justify-center w-full gap-6 leading-relaxed text-content_text lg:w-1/2">
+            <p>
+              <span className="font-bold">
+                Impulsamos causas sociales, emprendimientos y fundaciones
+              </span>
+              a través de una plataforma transparente y segura. ¡Juntos, hacemos
+              la diferencia!
+            </p>
           </div>
         </div>
+
+        {/* Our Team Section */}
+        <section className="py-16 bg-muted">
+          <div className="mx-auto max-w-7xl">
+            <h2 className="mb-8 text-3xl font-bold text-center text-main">
+              Nuestro Equipo
+            </h2>
+            <div className="grid gap-8 grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
+              {[
+                {
+                  name: "Cesar Cervantes",
+                  role: "CEO",
+                  image: "/placeholder.svg?height=300&width=300",
+                  linkedIn: "https://www.linkedin.com/in/cesarcervantes/"
+                },
+                {
+                  name: "Brayan Ccari",
+                  role: "CTO",
+                  image: "/placeholder.svg?height=300&width=300",
+                  linkedIn: "https://www.linkedin.com/in/brayanccari/"
+                }
+              ].map(member => (
+                <Card key={member.name} className="relative overflow-hidden">
+                  <a
+                    href={member.linkedIn}
+                    className="absolute inset-0 z-10 cursor-pointer"
+                  ></a>
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    width={300}
+                    height={300}
+                    className="object-cover w-full h-64"
+                  />
+                  <CardContent className="p-4">
+                    <h3 className="text-xl font-semibold">{member.name}</h3>
+                    <p className="text-muted-foreground">{member.role}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+        <section className="py-16 mx-auto max-w-7xl">
+          <h2 className="mb-8 text-3xl font-bold text-center text-main">
+            Nuestros Valores
+          </h2>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            {[
+              {
+                icon: <Users className="w-12 h-12 mb-4 text-main" />,
+                title: "Trabajo en Equipo",
+                description:
+                  "Creemos en el poder de la colaboración y el apoyo mutuo."
+              },
+              {
+                icon: <Heart className="w-12 h-12 mb-4 text-main" />,
+                title: "Pasión",
+                description:
+                  "Amamos lo que hacemos y lo reflejamos en cada proyecto."
+              },
+              {
+                icon: <Target className="w-12 h-12 mb-4 text-main" />,
+                title: "Excelencia",
+                description:
+                  "Nos esforzamos por alcanzar los más altos estándares en todo lo que hacemos."
+              }
+            ].map(value => (
+              <Card
+                key={value.title}
+                className="flex flex-col items-center p-6 text-center"
+              >
+                {value.icon}
+                <h3 className="mb-2 text-xl font-semibold">{value.title}</h3>
+                <p className="text-muted-foreground">{value.description}</p>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Contact Us Section */}
+        <section className="py-16 bg-muted">
+          <div className="mx-auto max-w-7xl">
+            <h2 className="mb-8 text-3xl font-bold text-center">Contáctanos</h2>
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              <Card className="p-6">
+                <h3 className="mb-4 text-xl font-semibold">
+                  Información de Contacto
+                </h3>
+                <div className="space-y-4">
+                  <a
+                    href="mailto:brayancclindo@gmail.com"
+                    className="flex items-center"
+                  >
+                    <Mail className="w-5 h-5 mr-2" />
+                    <span>info@empresa.com</span>
+                  </a>
+                  <div className="flex items-center">
+                    <Phone className="w-5 h-5 mr-2" />
+                    <span>+34 123 456 789</span>
+                  </div>
+                  <div className="flex items-center">
+                    <MapPin className="w-5 h-5 mr-2" />
+                    <span>Calle Principal 123, Madrid, España</span>
+                  </div>
+                </div>
+              </Card>
+              <Card className="p-6">
+                <h3 className="mb-4 text-xl font-semibold">
+                  Envíanos un Mensaje
+                </h3>
+                <form className="space-y-4">
+                  <Input placeholder="Nombre" />
+                  <Input placeholder="Email" type="email" />
+                  <Textarea placeholder="Mensaje" />
+                  <Button className="w-full">Enviar Mensaje</Button>
+                </form>
+              </Card>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
+    </div>
   );
 }
-
-export default Nosotros;

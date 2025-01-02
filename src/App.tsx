@@ -67,6 +67,7 @@ function App() {
   const FormEmprendedor = lazy(() => import("./pages/formEmprendedor"));
   const FormSocial = lazy(() => import("./pages/formSocial"));
   const Error404 = lazy(() => import("./pages/404"));
+  const Nosotros = lazy(() => import("./pages/nosotros"));
   return (
     <BrowserRouter>
       <SmileProvider defaultTheme="dark">
@@ -125,6 +126,10 @@ function App() {
               Component={() => <LazyComponent Component={StartCampaign} />}
             />
             <Route
+              path={ROUTES.NOSOTROS}
+              element={<LazyComponent Component={Nosotros} />}
+            />
+            <Route
               path={`${ROUTES.CREAR_CAMPANA}/${SmileForm.Albergue}`}
               element={
                 <RouteGoogleSign>
@@ -139,7 +144,7 @@ function App() {
                   <LazyComponent Component={FormEmprendedor} />
                 </RouteGoogleSign>
               }
-            />
+            />{" "}
             <Route
               path={`${ROUTES.CREAR_CAMPANA}/${SmileForm.Social}`}
               element={

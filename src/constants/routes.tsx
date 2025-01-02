@@ -6,7 +6,8 @@ export const ROUTES = {
   LOG_IN: "/iniciar-sesion",
   CREAR_CAMPANA: "/crear-campana",
   CONFIGURACION: "/configuracion",
-  PERFIL: "/perfil"
+  PERFIL: "/perfil",
+  NOSOTROS: "/nosotros"
 };
 
 export const routes = [
@@ -25,12 +26,12 @@ export const routes = [
     to: ROUTES.CAMPANAS,
     text: "Campañas",
     private: false
+  },
+  {
+    to: ROUTES.NOSOTROS,
+    text: "Nosotros",
+    private: false
   }
-  // {
-  //   to: "/nosotros",
-  //   text: "Nosotros",
-  //   private: false,
-  // },
 ];
 
 export const profileRoutes = [

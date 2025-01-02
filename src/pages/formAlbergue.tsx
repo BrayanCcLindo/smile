@@ -1,4 +1,4 @@
-import { Loader } from "lucide-react";
+import { Brain, Loader } from "lucide-react";
 import { useSmileContext } from "../Api/userContext";
 import { useGetUserData } from "../Api/getUserData";
 import { useGetCampaigns } from "../Api/getCampaigns";
@@ -15,6 +15,8 @@ import FormErrors from "../components/formErrors";
 import { SmileType } from "../type/types";
 import { createSubmitHandler } from "../Api/createCampaignForm";
 import { ROUTES } from "../constants/routes";
+import { Button } from "../components/ui/button";
+import { optimizeCampaign } from "../services/googleAI";
 
 export type FormCampaign = {
   campaña: string;
@@ -32,6 +34,8 @@ function FormAlbergue() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [image, setImage] = useState<string | null>(null);
+  const [suggestions, setSuggestions] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
   const { stateProfile } = useSmileContext();
   const { user } = useGetUserData();
   const { data } = useGetCampaigns();
@@ -41,6 +45,9 @@ function FormAlbergue() {
   const {
     handleSubmit,
     control,
+    setValue,
+    getValues,
+    trigger,
     formState: { errors }
   } = useForm<FormCampaign>({
     defaultValues: {
@@ -103,6 +110,31 @@ function FormAlbergue() {
     }
   };
 
+  const handleOptimize = async () => {
+    const isValid = await trigger(["campaña", "description"]);
+    if (isValid) {
+      const { campaña, description } = getValues();
+      setLoading(true);
+      try {
+        const result = await optimizeCampaign(campaña, description);
+        setSuggestions(result);
+      } catch (error) {
+        console.error(error);
+      }
+      setLoading(false);
+    }
+  };
+
+  const handleSuggestionsTitle = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setValue("campaña", e.currentTarget.value);
+  };
+
+  const handleSuggestionsDescription = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    setValue("description", e.currentTarget.value);
+  };
+
   return (
     <>
       {stateProfile ? (
@@ -139,6 +171,19 @@ function FormAlbergue() {
                       />
                     )}
                   />
+                  {suggestions?.title &&
+                    suggestions.title.map((t: string, i: number) => (
+                      <Button
+                        type="button"
+                        onClick={handleSuggestionsTitle}
+                        variant="secondar"
+                        key={i}
+                        className="p-2 my-1"
+                        value={t}
+                      >
+                        {t}
+                      </Button>
+                    ))}
                   {errors.campaña && (
                     <FormErrors>{errors.campaña.message} </FormErrors>
                   )}
@@ -204,9 +249,30 @@ function FormAlbergue() {
                       />
                     )}
                   />
+                  {suggestions?.description &&
+                    suggestions.description.map((d: string, i: number) => (
+                      <Button
+                        type="button"
+                        onClick={handleSuggestionsDescription}
+                        variant="secondar"
+                        key={i}
+                        className="p-2 my-1"
+                        value={d}
+                      >
+                        {d}
+                      </Button>
+                    ))}
                   {errors.description && (
                     <FormErrors>{errors.description.message} </FormErrors>
                   )}
+                  <Button
+                    type="button"
+                    className="flex items-center gap-3 px-4 py-2 space-x-2 font-semibold text-white transition-all duration-300 ease-in-out transform rounded-lg shadow-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 hover:scale-105"
+                    onClick={handleOptimize}
+                  >
+                    <Brain className="w-5 h-5" />
+                    {loading ? "Optimizando..." : "Optimizar texto con IA"}
+                  </Button>
                 </div>
                 <div className="col-span-full sm:col-span-3 ">
                   <Label htmlFor="meta" className="text-sm font-medium">
