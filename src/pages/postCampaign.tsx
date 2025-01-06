@@ -1,5 +1,11 @@
 import { useParams } from "react-router-dom";
-import { Link2, HeartHandshake, MapPin } from "lucide-react";
+import {
+  Link2,
+  HeartHandshake,
+  MapPin,
+  ChevronLeft,
+  ChevronRight
+} from "lucide-react";
 import { useSmileContext } from "../Api/userContext";
 import ButtonDialog from "../components/buttonDialog";
 import { useGetCampaigns } from "../Api/getCampaigns";
@@ -9,13 +15,15 @@ import { handleShareURL } from "../Api/socialShare";
 import { format, formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 import ProgressBar from "../components/progressBar";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ROUTES } from "../constants/routes";
 
 function PostCampaign() {
   const { data } = useGetCampaigns();
   const { slug } = useParams();
   const { stateProfile } = useSmileContext();
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const locationRef = useRef<HTMLIFrameElement>(null);
 
   const campaignIndex = [...data].findIndex(campaign => campaign.slug === slug);
@@ -42,6 +50,29 @@ function PostCampaign() {
     }
   };
 
+  const nextSlide = () => {
+    if (actualPost?.imagenesCampaña) {
+      setCurrentIndex(
+        prevIndex => (prevIndex + 1) % actualPost.imagenesCampaña.length
+      );
+    }
+  };
+
+  const prevSlide = () => {
+    if (actualPost?.imagenesCampaña) {
+      setCurrentIndex(
+        prevIndex =>
+          (prevIndex - 1 + actualPost.imagenesCampaña.length) %
+          actualPost.imagenesCampaña.length
+      );
+    }
+  };
+
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 5000); // Auto-advance every 5 seconds
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       {actualPost ? (
@@ -53,12 +84,55 @@ function PostCampaign() {
                 : stateProfile.uid === actualPost.id && (
                     <ButtonDialog campaña={actualPost} />
                   )}
-              <img
-                loading="lazy"
-                alt="ecommerce"
-                className="object-cover object-center w-full h-64 rounded-lg lg:w-1/2 aspect-square lg:h-auto"
-                src={actualPost.imagenCampaña}
-              />
+
+              {actualPost.imagenesCampaña ? (
+                <div className="relative flex flex-1 w-full h-64 rounded-lg lg:w-1/2 lg:h-auto">
+                  <div className="flex flex-1 h-auto overflow-hidden rounded-lg shadow-lg">
+                    <div
+                      className="flex transition-transform duration-500 ease-out"
+                      style={{
+                        transform: `translateX(-${currentIndex * 100}%)`
+                      }}
+                    >
+                      {actualPost.imagenesCampaña.map((src, index) => (
+                        <img
+                          key={index}
+                          src={src}
+                          className="object-cover object-center w-full h-auto rounded-lg"
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={prevSlide}
+                    className="absolute p-2 text-gray-800 transition-colors duration-300 -translate-y-1/2 rounded-full shadow left-2 top-1/2 bg-white/80 hover:bg-white/90"
+                    aria-label="Previous slide"
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </button>
+
+                  <button
+                    onClick={nextSlide}
+                    className="absolute p-2 text-gray-800 transition-colors duration-300 -translate-y-1/2 rounded-full shadow right-2 top-1/2 bg-white/80 hover:bg-white/90"
+                    aria-label="Next slide"
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </button>
+
+                  <div className="absolute px-2 py-1 text-sm text-white -translate-x-1/2 rounded-full bottom-4 left-1/2 bg-black/50">
+                    {currentIndex + 1} / {actualPost.imagenesCampaña.length}
+                  </div>
+                </div>
+              ) : (
+                <img
+                  loading="lazy"
+                  alt="ecommerce"
+                  className="object-cover object-center w-full h-64 rounded-lg lg:w-1/2 aspect-square lg:h-auto"
+                  src={actualPost.imagenCampaña}
+                />
+              )}
+
               <div className="w-full px-4 mt-6 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0 ">
                 <h2 className="text-sm tracking-widest text-gray-500 title-font">
                   NOMBRE DE CAMPAÑA

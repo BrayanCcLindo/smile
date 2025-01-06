@@ -6,7 +6,7 @@ import { Users, Heart, Target, Mail, Phone, MapPin } from "lucide-react";
 
 export default function NosotrosPage() {
   return (
-    <div className="mx-auto  bg-background body-font max-w-7xl">
+    <div className="mx-auto bg-background body-font max-w-7xl">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap w-full mb-20">
           <div className="w-full mb-6 lg:w-1/2 lg:mb-0">
@@ -37,31 +37,33 @@ export default function NosotrosPage() {
                 {
                   name: "Cesar Cervantes",
                   role: "CEO",
-                  image: "/placeholder.svg?height=300&width=300",
-                  linkedIn: "https://www.linkedin.com/in/cesarcervantes/"
+                  image: "/Images/cesarpicture.jpeg",
+                  linkedIn:
+                    "https://www.linkedin.com/in/cesar-cervantes-esponda-9086a2235/"
                 },
                 {
                   name: "Brayan Ccari",
                   role: "CTO",
-                  image: "/placeholder.svg?height=300&width=300",
-                  linkedIn: "https://www.linkedin.com/in/brayanccari/"
+                  image: "/Images/mypicture.jpeg",
+                  linkedIn: "https://www.linkedin.com/in/brayan-ccari/"
                 }
               ].map(member => (
-                <Card key={member.name} className="relative overflow-hidden">
-                  <a
-                    href={member.linkedIn}
-                    className="absolute inset-0 z-10 cursor-pointer"
-                  ></a>
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    width={300}
-                    height={300}
-                    className="object-cover w-full h-64"
-                  />
-                  <CardContent className="p-4">
-                    <h3 className="text-xl font-semibold">{member.name}</h3>
-                    <p className="text-muted-foreground">{member.role}</p>
+                <Card className="relative w-full max-w-sm mx-auto">
+                  <a className="absolute inset-0" href={member.linkedIn}></a>
+                  <CardContent className="flex flex-col items-center p-6">
+                    <div className="w-24 h-24 mb-4 overflow-hidden rounded-full">
+                      <img
+                        src={member.image}
+                        // alt={member.name}
+                        width={96}
+                        height={96}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+                    <h3 className="text-lg font-semibold">{member.name}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {member.role}
+                    </p>
                   </CardContent>
                 </Card>
               ))}
