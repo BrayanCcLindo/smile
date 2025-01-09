@@ -1,8 +1,6 @@
 import { Card, CardContent } from "../components/ui/card";
 import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Textarea } from "../components/ui/textarea";
-import { Users, Heart, Target, Mail, Phone, MapPin } from "lucide-react";
+import { Users, Heart, Target, Mail } from "lucide-react";
 
 export default function NosotrosPage() {
   return (
@@ -49,12 +47,16 @@ export default function NosotrosPage() {
                 }
               ].map(member => (
                 <Card className="relative w-full max-w-sm mx-auto">
-                  <a className="absolute inset-0" href={member.linkedIn}></a>
+                  <a
+                    className="absolute inset-0"
+                    href={member.linkedIn}
+                    target="_blank"
+                  ></a>
                   <CardContent className="flex flex-col items-center p-6">
                     <div className="w-24 h-24 mb-4 overflow-hidden rounded-full">
                       <img
                         src={member.image}
-                        // alt={member.name}
+                        alt={member.name}
                         width={96}
                         height={96}
                         className="object-cover w-full h-full"
@@ -118,32 +120,39 @@ export default function NosotrosPage() {
                 </h3>
                 <div className="space-y-4">
                   <a
-                    href="mailto:brayancclindo@gmail.com"
+                    href="mailto:info@kuzifund.com"
                     className="flex items-center"
                   >
                     <Mail className="w-5 h-5 mr-2" />
-                    <span>info@empresa.com</span>
+                    <span>info@kuzifund.com</span>
                   </a>
-                  <div className="flex items-center">
+                  {/* <div className="flex items-center">
                     <Phone className="w-5 h-5 mr-2" />
                     <span>+34 123 456 789</span>
                   </div>
                   <div className="flex items-center">
                     <MapPin className="w-5 h-5 mr-2" />
                     <span>Calle Principal 123, Madrid, España</span>
-                  </div>
+                  </div> */}
                 </div>
               </Card>
               <Card className="p-6">
                 <h3 className="mb-4 text-xl font-semibold">
-                  Envíanos un Mensaje
+                  Tienes consultas o sugerencias?
                 </h3>
-                <form className="space-y-4">
-                  <Input placeholder="Nombre" />
-                  <Input placeholder="Email" type="email" />
-                  <Textarea placeholder="Mensaje" />
-                  <Button className="w-full">Enviar Mensaje</Button>
-                </form>
+                <p className="">
+                  Agenda tu reunión en segundos: elige tu horario, confirma con
+                  un clic y recibe asesoría personalizada. ¡Estamos aquí para
+                  ti!
+                </p>
+                <Button className="relative mt-4">
+                  <a
+                    className="absolute inset-0"
+                    href="https://calendly.com/cervantesespondacesar/30-minute-meeting?month=2025-01"
+                    target="_blank"
+                  ></a>
+                  Agendar
+                </Button>
               </Card>
             </div>
           </div>

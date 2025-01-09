@@ -267,7 +267,7 @@ function FormAlbergue() {
                   )}
                   <Button
                     type="button"
-                    className="flex items-center gap-3 px-4 py-2 space-x-2 font-semibold text-white transition-all duration-300 ease-in-out transform rounded-lg shadow-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 hover:scale-105"
+                    className="flex items-center gap-3 px-4 py-2 mt-2 space-x-2 font-semibold text-white transition-all duration-300 ease-in-out transform rounded-lg shadow-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 hover:scale-105"
                     onClick={handleOptimize}
                   >
                     <Brain className="w-5 h-5" />
