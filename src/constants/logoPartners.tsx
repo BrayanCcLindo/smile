@@ -32,17 +32,17 @@ export const logos: LogoType = [
   },
   {
     name: "EmpreLatam",
-    icon: "/public/Images/partners/emprelatam.png",
+    icon: "/Images/partners/emprelatam.png",
     href: "https://emprelatam.com/"
   },
   {
     name: "PinUp",
-    icon: "/public/Images/partners/pinUp.png",
+    icon: "/Images/partners/pinUp.png",
     href: "https://pinup.global/"
   },
   {
     name: "Cobox",
-    icon: "/public/Images/partners/cobox.png",
+    icon: "/Images/partners/cobox.png",
     href: "https://www.coboxlogistic.com/"
   }
 ];
