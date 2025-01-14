@@ -17,14 +17,32 @@ export const logos: LogoType = [
   },
   {
     name: "Legal Ventures",
-    icon: "/Images/partners/legalventures.png"
+    icon: "/Images/partners/legalventures.png",
+    href: "https://legal-ventures.com/"
   },
   {
     name: "Mercado Pago",
-    icon: "/Images/partners/mercadopago.png"
+    icon: "/Images/partners/mercadopago.png",
+    href: "https://www.mercadopago.com.pe/"
   },
   {
     name: "CFO StartUp",
-    icon: "/Images/partners/cfostartup.png"
+    icon: "/Images/partners/cfostartup.png",
+    href: "https://cfostartup.la/"
+  },
+  {
+    name: "EmpreLatam",
+    icon: "/public/Images/partners/emprelatam.png",
+    href: "https://emprelatam.com/"
+  },
+  {
+    name: "PinUp",
+    icon: "/public/Images/partners/pinUp.png",
+    href: "https://pinup.global/"
+  },
+  {
+    name: "Cobox",
+    icon: "/public/Images/partners/cobox.png",
+    href: "https://www.coboxlogistic.com/"
   }
 ];

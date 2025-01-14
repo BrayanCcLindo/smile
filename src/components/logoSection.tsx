@@ -12,7 +12,7 @@ function LogoSection() {
         </h2>
         <div className="w-20 h-1 rounded bg-main"></div>
       </div>
-      <div className="grid items-center grid-cols-1 gap-4 sm:grid-cols-6">
+      <div className="grid items-center grid-cols-1 gap-4 sm:grid-cols-4">
         {logos.map(logo => (
           <div
             key={logo.name}
@@ -27,7 +27,7 @@ function LogoSection() {
                 src={logo.icon}
               />
             </a>
-            <span className="absolute hidden px-3 py-2 mt-2 text-sm font-medium text-white duration-500 rounded-lg -bottom-11 bg-main group-hover:block group-hover:duration-500">
+            <span className="absolute z-10 hidden px-3 py-2 mt-2 text-sm font-medium text-white duration-500 rounded-lg -bottom-11 bg-main group-hover:block group-hover:duration-500">
               {logo.name}
             </span>
           </div>

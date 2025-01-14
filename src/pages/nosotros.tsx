@@ -50,9 +50,6 @@ export default function NosotrosPage() {
                       />
                     </div>
                     <h3 className="text-lg font-semibold">{member.name}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {member.role}
-                    </p>
                   </CardContent>
                 </Card>
               ))}

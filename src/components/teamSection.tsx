@@ -12,7 +12,7 @@ export default function CompanyTeam() {
         </h2>
         <div className="w-20 h-1 rounded bg-main"></div>
       </div>
-      <div className="grid items-center grid-cols-1 gap-8 sm:grid-cols-3">
+      <div className="grid items-center grid-cols-1 gap-8 sm:grid-cols-4">
         {members.map(member => (
           <div
             key={member.name}
@@ -36,7 +36,6 @@ export default function CompanyTeam() {
             <h3 className="mt-4 text-xl font-semibold text-heading">
               {member.name}
             </h3>
-            <p className="text-content_text">{member.role}</p>
           </div>
         ))}
       </div>
