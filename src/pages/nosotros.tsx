@@ -1,6 +1,7 @@
 import { Card, CardContent } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Users, Heart, Target, Mail } from "lucide-react";
+import { members } from "../constants/nosotros";
 
 export default function NosotrosPage() {
   return (
@@ -24,28 +25,13 @@ export default function NosotrosPage() {
           </div>
         </div>
 
-        {/* Our Team Section */}
         <section className="py-16 bg-muted">
           <div className="mx-auto max-w-7xl">
             <h2 className="mb-8 text-3xl font-bold text-center text-main">
               Nuestro Equipo
             </h2>
             <div className="grid gap-8 grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
-              {[
-                {
-                  name: "Cesar Cervantes",
-                  role: "CEO",
-                  image: "/Images/cesarpicture.jpeg",
-                  linkedIn:
-                    "https://www.linkedin.com/in/cesar-cervantes-esponda-9086a2235/"
-                },
-                {
-                  name: "Brayan Ccari",
-                  role: "CTO",
-                  image: "/Images/mypicture.jpeg",
-                  linkedIn: "https://www.linkedin.com/in/brayan-ccari/"
-                }
-              ].map(member => (
+              {members.map(member => (
                 <Card className="relative w-full max-w-sm mx-auto">
                   <a
                     className="absolute inset-0"
@@ -55,6 +41,7 @@ export default function NosotrosPage() {
                   <CardContent className="flex flex-col items-center p-6">
                     <div className="w-24 h-24 mb-4 overflow-hidden rounded-full">
                       <img
+                        loading="lazy"
                         src={member.image}
                         alt={member.name}
                         width={96}

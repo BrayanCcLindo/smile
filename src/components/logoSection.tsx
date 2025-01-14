@@ -1,23 +1,6 @@
-type LogoType = {
-  name: string;
-  icon: string;
-  href: string;
-}[];
+import { logos } from "../constants/logoPartners";
 
 function LogoSection() {
-  const logos: LogoType = [
-    {
-      name: "Wichay UC",
-      icon: "/Images/logo wichay IS (1).png",
-      href: "https://wichay.pe/"
-    },
-    {
-      name: "Start Up UNI",
-      icon: "/Images/uni-oficial-logo.png",
-      href: "https://startup.uni.edu.pe/"
-    }
-  ];
-
   return (
     <div className="p-8 rounded-lg shadow-lg bg-gradient-to-r from-white to-second_bg">
       <div className="w-full mb-6 lg:w-1/2 lg:mb-10">
@@ -29,7 +12,7 @@ function LogoSection() {
         </h2>
         <div className="w-20 h-1 rounded bg-main"></div>
       </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-6">
+      <div className="grid items-center grid-cols-1 gap-4 sm:grid-cols-6">
         {logos.map(logo => (
           <div
             key={logo.name}

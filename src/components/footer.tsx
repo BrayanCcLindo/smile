@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
-import { routes, ROUTES } from "../constants/routes";
+import { ROUTES } from "../constants/routes";
 import { Facebook, Instagram, Mail } from "lucide-react";
+import { useSmileContext } from "../Api/userContext";
+import { useTranslation } from "react-i18next";
 
 function Footer() {
+  const { routes } = useSmileContext();
+  const { t } = useTranslation("global");
+
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
@@ -27,16 +32,13 @@ function Footer() {
                 />
               </Link>
               <p className="mt-4 leading-8 text-left md:text-center text-content_text">
-                ¡Bienvenidos! Aquí, cada clic es una
-                <br /> oportunidad para transformar vidas y apoyar proyectos que
-                cambian el mundo.
+                {t("footer.description1")}
+                <br /> {t("footer.description2")}
               </p>
             </div>
-
-            {/* Site Links */}
             <div className="flex flex-col items-start md:items-center">
               <h3 className="mb-4 text-lg font-semibold text-heading">
-                Enlaces Rápidos
+                {t("footer.links")}
               </h3>
               <nav className="flex flex-col space-y-2">
                 {routes.map(routes => (
@@ -54,7 +56,7 @@ function Footer() {
 
             <div className="flex flex-col items-start md:items-center">
               <h3 className="mb-4 text-lg font-semibold text-heading">
-                Conéctate con Nosotros
+                {t("footer.contact")}
               </h3>
               <div className="flex mb-4 space-x-4">
                 <a

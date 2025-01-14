@@ -1,0 +1,44 @@
+{
+  "menu": {
+    "home": "Home",
+    "about": "How it works?",
+    "projects": "Campaign",
+    "contact": "About Us",
+    "login": "Log In"
+  },
+  "cta": {
+    "primary": "Donate Now",
+    "secondary": "How it works?",
+    "tertiary": "Create Campaign",
+    "quaternary": "View all campaigns →",
+    "quinary": "Create campaigns"
+  },
+  "footer": {
+    "description1": "Welcome! Here, every click is",
+    "description2": "an opportunity to transform lives and support world-changing projects.",
+    "links": "Quick Links",
+    "contact": "Connect with Us"
+  },
+  "home": {
+    "hero1": "Discover projects you're passionate about and make them a reality! Support social causes, boost innovative ventures, and generate a positive impact in your community. Donate or make pre-purchases in campaigns that inspire you.",
+    "hero2": "Explore KUZI and find projects that excite you!",
+    "campaignTitle": "Find causes that matter to you and donate to make a difference",
+    "attributes": {
+      "title": "Fundraising on Kuzi is easy, effective, and reliable",
+      "transparency": {
+        "title": "Transparency",
+        "description": "Clear and real-time reports. Your 'Kuzis' can see the total raised and receive detailed updates on the use of resources."
+      },
+      "security": {
+        "title": "Security",
+        "description": "Each 'Kuzi' is verified by our team and system to protect all users. Additionally, each contribution undergoes rigorous security filters."
+      },
+      "agility": {
+        "title": "Agility",
+        "description": "Create your Kuzi in seconds and start receiving contributions immediately. Your 'Kuzis' can collaborate using their preferred payment method."
+      }
+    },
+    "partners": "We work hand in hand with:",
+    "team": "Meet our team"
+  }
+}

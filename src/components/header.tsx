@@ -1,15 +1,18 @@
 import { Link, NavLink } from "react-router-dom";
-import { ROUTES, routes } from "../constants/routes";
+import { ROUTES } from "../constants/routes";
 import { useSmileContext } from "../Api/userContext";
 import { useState } from "react";
 import MainLinkButton from "./mainLinkButton";
 import SwitchToogle from "./switchToogle";
 import Avatar from "./avatar";
 import { useGetUserData } from "../Api/getUserData";
+import { LanguageSelector } from "./languageSelector";
+import { useTranslation } from "react-i18next";
 
 function Header() {
-  const { stateProfile } = useSmileContext();
+  const { stateProfile, routes } = useSmileContext();
   const { user } = useGetUserData();
+  const { t } = useTranslation("global");
 
   const [showMenu, setShowMenu] = useState(true);
   const scrollToTop = () => {
@@ -19,7 +22,7 @@ function Header() {
   return (
     <header
       className={
-        "bg-main_bg sticky top-0 shadow-sm right-0 left-0 z-50 shadow-card_border text-heading "
+        "bg-main_bg sticky top-0 shadow-sm right-0 left-0 z-40 shadow-card_border text-heading "
       }
     >
       <nav
@@ -28,7 +31,7 @@ function Header() {
       >
         <div className="flex">
           <Link to={ROUTES.HOMEPAGE} className="-m-1.5 p-1.5">
-            <span className="sr-only">Smile</span>
+            <span className="sr-only">Kuzi</span>
             <img
               loading="lazy"
               className="w-auto h-8"
@@ -95,7 +98,7 @@ function Header() {
                   className="text-heading hover:text-main"
                   to={ROUTES.LOG_IN}
                 >
-                  Iniciar Sesión <span aria-hidden="true">&rarr;</span>
+                  {t("menu.login")} <span aria-hidden="true">&rarr;</span>
                 </Link>
               </>
             ) : (
@@ -113,9 +116,10 @@ function Header() {
               </>
             )}
             <MainLinkButton link={ROUTES.CREAR_CAMPANA}>
-              Crear Campaña
+              {t("cta.quinary")}
             </MainLinkButton>
             <SwitchToogle />
+            <LanguageSelector />
           </div>
         </div>
       </nav>

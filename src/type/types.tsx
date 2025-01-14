@@ -37,6 +37,8 @@ export type SmileContextType = {
   googleSignIn: () => void;
   logOut: () => void;
   toogleValue: { theme: ToogleTheme; setTheme: (theme: ToogleTheme) => void };
+  switchLang: (newLang: lang) => void;
+  routes: { to: string; text: string }[];
   // stateFavorites: CampañaGiftSmileType[] | undefined;
   // addCampaignToFavorite: (campaña: CampañaGiftSmileType) => void;
 };
@@ -54,7 +56,7 @@ export type CampañaGiftSmileType = {
   fechaInicio: string;
   tipo: string;
   creador: string;
-  imagenesCampaña: string[];
+  imagenesCampaña: { type: "image" | "video"; link: string }[];
   cargo: string;
   imagen: string;
   historia: string;
@@ -117,3 +119,5 @@ export type FormPayment = {
 
 //Themes
 export type ToogleTheme = "dark" | "light" | "system";
+//languages
+export type lang = "en" | "es";

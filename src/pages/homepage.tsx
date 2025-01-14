@@ -9,12 +9,14 @@ import { motion } from "framer-motion";
 import SkeletonCardLoader from "../components/ui/loaders/skeletonCard";
 import { ROUTES } from "../constants/routes";
 import { SEOComponent } from "../assets/SEO";
+import CompanyTeam from "../components/teamSection";
+import { useTranslation } from "react-i18next";
 
 // import { useSmileContext } from "../Api/userContext";
 
 function Homepage() {
   const { data } = useGetCampaigns();
-
+  const { t } = useTranslation("global");
   const firstThreeCampaigns = [...data].slice(0, 3);
 
   return (
@@ -24,7 +26,6 @@ function Homepage() {
         title="Kuzi Fund - Impulsa Causas, Transforma Comunidades"
         description="Apoya causas sociales, emprendedores innovadores y fundaciones. Dona, apoya y contribuye a crear un impacto positivo en la comunidad."
       />
-
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -34,21 +35,20 @@ function Homepage() {
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-heading sm:text-4xl">
             Kuzi
           </h1>
-
           <p className="my-6 text-lg leading-8 text-center text-content_text ">
-            ¡Descubre proyectos que te apasionan y hazlos realidad! Apoya causas
-            sociales, impulsa emprendimientos innovadores y genera un impacto
-            positivo en tu comunidad. Dona o realiza precompras en campañas que
-            te inspiren.
-            <br /> ¡Explora KUZI y encuentra proyectos que te emocionen!
+            {t("home.hero1")}
+            <br />
+            {t("home.hero2")}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 mt-10 lg:justify-start">
-            <MainLinkButton link={ROUTES.CAMPANAS}>Donar Ahora</MainLinkButton>
+            <MainLinkButton link={ROUTES.CAMPANAS}>
+              {t("cta.primary")}
+            </MainLinkButton>
             <Link
               to={ROUTES.COMO_FUNCIONA}
               className="text-sm font-semibold leading-6 text-main "
             >
-              ¿Cómo funciona? <span aria-hidden="true">→</span>
+              {t("cta.secondary")} <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>
@@ -61,8 +61,7 @@ function Homepage() {
                 id="campañasTop"
                 className="mb-2 text-2xl font-medium text-heading sm:text-3xl title-font"
               >
-                Encuentra causas que te importan y dona para marcar la
-                diferencia
+                {t("home.campaignTitle")}
               </h1>
               <div className="w-20 h-1 rounded bg-main"></div>
             </div>
@@ -84,7 +83,7 @@ function Homepage() {
               to={ROUTES.CAMPANAS}
               className="mt-2 text-sm font-semibold leading-6 text-main"
             >
-              Ver todas las campañas <span aria-hidden="true">→</span>
+              {t("cta.quaternary")}
             </Link>
           </div>
         </div>
@@ -96,7 +95,7 @@ function Homepage() {
             id="campañasTop"
             className="mb-2 text-2xl font-medium text-heading sm:text-3xl title-font"
           >
-            Recaudar fondos en Kuzi es fácil, eficaz y fiable
+            {t("home.attributes.title")}
           </h1>
           <div className="w-20 h-1 rounded bg-main"></div>
         </div>
@@ -107,12 +106,10 @@ function Homepage() {
                 <Eye size={50} />
               </div>
               <h2 className="mb-2 text-lg font-medium text-center title-font">
-                Transparencia
+                {t("home.attributes.transparency.title")}
               </h2>
               <p className="text-base leading-relaxed text-center">
-                Reportes claros y en tiempo Real. Tus 'Kuzis' podrán ver el
-                total recaudado y recibir actualizaciones detalladas sobre el
-                uso de los recursos
+                {t("home.attributes.transparency.description")}
               </p>
             </div>
           </div>
@@ -122,12 +119,10 @@ function Homepage() {
                 <LockKeyhole size={50} />
               </div>
               <h2 className="mb-2 text-lg font-medium text-center title-font">
-                Seguridad
+                {t("home.attributes.security.title")}
               </h2>
               <p className="text-base leading-relaxed text-center">
-                Cada 'Kuzi' es verificado por nuestro equipo y sistema para
-                proteger a todos los usuarios. Además, cada contribución se
-                somete a rigurosos filtros de seguridad
+                {t("home.attributes.security.description")}
               </p>
             </div>
           </div>
@@ -137,18 +132,19 @@ function Homepage() {
                 <Rocket size={50} />
               </div>
               <h2 className="mb-2 text-lg font-medium text-center title-font">
-                Agilidad
+                {t("home.attributes.agility.title")}
               </h2>
               <p className="text-base leading-relaxed text-center">
-                Crea tu Kuzi en cuestión de segundos y comienza a recibir
-                contribuciones de inmediato. Tus 'Kuzis' podrán colaborar
-                utilizando su método de pago preferido
+                {t("home.attributes.agility.description")}
               </p>
             </div>
           </div>
         </div>
         <div className="my-20">
           <LogoSection />
+        </div>
+        <div className="my-20">
+          <CompanyTeam />
         </div>
       </div>
 

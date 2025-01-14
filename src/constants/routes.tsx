@@ -10,30 +10,6 @@ export const ROUTES = {
   NOSOTROS: "/nosotros"
 };
 
-export const routes = [
-  {
-    to: ROUTES.HOMEPAGE,
-    text: "Inicio",
-    private: false
-  },
-  {
-    to: ROUTES.COMO_FUNCIONA,
-    text: "¿Cómo funciona?",
-    private: false
-  },
-
-  {
-    to: ROUTES.CAMPANAS,
-    text: "Campañas",
-    private: false
-  },
-  {
-    to: ROUTES.NOSOTROS,
-    text: "Nosotros",
-    private: false
-  }
-];
-
 export const profileRoutes = [
   {
     to: ROUTES.COMO_FUNCIONA,

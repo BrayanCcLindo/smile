@@ -6,7 +6,7 @@ import {
   useReducer,
   useState
 } from "react";
-import { SmileContextType, UserData, UserType } from "../type/types";
+import { lang, SmileContextType, UserData, UserType } from "../type/types";
 import {
   GoogleAuthProvider,
   signOut,
@@ -18,12 +18,15 @@ import { auth, db } from "../firebase/firebase";
 import { useGetUsuarios } from "./getUserData";
 import { ToogleTheme } from "../type/types";
 import { useNavigate } from "react-router-dom";
+import i18next from "i18next";
+import { ROUTES } from "../constants/routes";
+import { useTranslation } from "react-i18next";
 
 export const SmileContext = createContext<SmileContextType>(
   {} as SmileContextType
 );
 
-let initialProfile: UserType | null;
+let initialProfile: UserType | null = null;
 
 // @ts-expect-error need to push
 
@@ -47,11 +50,38 @@ export function SmileProvider({
   children: ReactNode;
 }) {
   const navigate = useNavigate();
-
   const { usuarios } = useGetUsuarios();
+  const { t } = useTranslation("global");
+
   const [theme, setTheme] = useState<ToogleTheme>(
     () => (localStorage.getItem("theme") as ToogleTheme) || "system"
   );
+  const routes = [
+    {
+      to: ROUTES.HOMEPAGE,
+      text: t("menu.home"),
+      private: false
+    },
+    {
+      to: ROUTES.COMO_FUNCIONA,
+      text: t("menu.about"),
+
+      private: false
+    },
+
+    {
+      to: ROUTES.CAMPANAS,
+      text: t("menu.projects"),
+
+      private: false
+    },
+    {
+      to: ROUTES.NOSOTROS,
+      text: t("menu.contact"),
+
+      private: false
+    }
+  ];
 
   const [stateProfile, dispatchProfile] = useReducer(
     profileReducer,
@@ -136,6 +166,12 @@ export function SmileProvider({
       setTheme(theme);
     }
   };
+  function switchLang(newLang: lang) {
+    i18next.changeLanguage(newLang, err => {
+      if (err) return console.log("Error al cambiar el idioma", err);
+      localStorage.setItem("language", newLang);
+    });
+  }
 
   return (
     <SmileContext.Provider
@@ -145,7 +181,9 @@ export function SmileProvider({
         logInGoogle,
         googleSignIn,
         logOut,
-        toogleValue
+        toogleValue,
+        switchLang,
+        routes
       }}
     >
       {children}

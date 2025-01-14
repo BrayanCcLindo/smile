@@ -33,7 +33,7 @@ import {
   FormPayment,
   SmilePaymentMethod
 } from "../type/types";
-import { ClipboardCopy } from "lucide-react";
+import { Copy } from "lucide-react";
 import { sendEmailConfirmation } from "../assets/donationMessages";
 import { processPayment } from "../assets/mercadoPagoApi";
 import { updateFirebaseDonations } from "../assets/firebase/updateDonations";
@@ -413,11 +413,21 @@ export default function SelectPaymentForm({
                         }}
                         className="ml-2 text-white bg-main"
                       >
-                        <ClipboardCopy className="w-5 h-5" />
+                        <Copy className="w-5 h-5" />
                         <span className="sr-only">Copiar número de Yape</span>
                       </Button>
                     </div>
+                    <div className="mt-4">
+                      <Label htmlFor="accountHolder">Titular</Label>
+                      <Input
+                        id="accountHolder"
+                        defaultValue="Julio Cervantes Esponda"
+                        readOnly
+                        className="mt-1 "
+                      />
+                    </div>
                   </div>
+
                   <Accordion type="single" collapsible className="mt-4">
                     <AccordionItem value="yape-guide">
                       <AccordionTrigger className="text-main">
@@ -490,7 +500,7 @@ export default function SelectPaymentForm({
                               }}
                               className="ml-2 text-white bg-main"
                             >
-                              <ClipboardCopy className="w-5 h-5" />
+                              <Copy className="w-5 h-5" />
                               <span className="sr-only">
                                 Copiar número de cuenta
                               </span>
@@ -523,7 +533,7 @@ export default function SelectPaymentForm({
                               }}
                               className="ml-2 text-white bg-main"
                             >
-                              <ClipboardCopy className="w-5 h-5" />
+                              <Copy className="w-5 h-5" />
                               <span className="sr-only">
                                 Copiar número de cuenta interbancaria
                               </span>

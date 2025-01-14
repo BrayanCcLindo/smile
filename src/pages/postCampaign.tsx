@@ -17,6 +17,7 @@ import { es } from "date-fns/locale";
 import ProgressBar from "../components/progressBar";
 import { useEffect, useRef, useState } from "react";
 import { ROUTES } from "../constants/routes";
+import VideoPlayer from "../components/videoMediaPlayer";
 
 function PostCampaign() {
   const { data } = useGetCampaigns();
@@ -94,12 +95,17 @@ function PostCampaign() {
                         transform: `translateX(-${currentIndex * 100}%)`
                       }}
                     >
-                      {actualPost.imagenesCampaña.map((src, index) => (
-                        <img
-                          key={index}
-                          src={src}
-                          className="object-cover object-center w-full h-auto rounded-lg"
-                        />
+                      {actualPost.imagenesCampaña.map(item => (
+                        <>
+                          {item.type === "image" ? (
+                            <img
+                              src={item.link}
+                              className="object-cover object-center w-full h-auto rounded-lg"
+                            />
+                          ) : (
+                            <VideoPlayer videoUrl={item.link} />
+                          )}
+                        </>
                       ))}
                     </div>
                   </div>
