@@ -16,7 +16,7 @@ export const members = [
   },
   {
     name: "Jürgen Guerra",
-    image: "/public/Images/nosotros/jurgenPicture.jpg",
+    image: "/Images/nosotros/jurgenPicture.jpg",
     linkedIn: "https://www.linkedin.com/in/jurgen-guerra/"
   }
 ];
