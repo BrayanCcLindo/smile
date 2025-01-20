@@ -11,13 +11,18 @@
     "secondary": "How it works?",
     "tertiary": "Create Campaign",
     "quaternary": "View all campaigns →",
-    "quinary": "Create campaigns"
+    "senary": "Donate"
   },
   "footer": {
     "description1": "Welcome! Here, every click is",
     "description2": "an opportunity to transform lives and support world-changing projects.",
     "links": "Quick Links",
-    "contact": "Connect with Us"
+    "contact": "Connect with Us",
+    "rights": "All rights reserved."
+  },
+  "banner": {
+    "title": "Ready to get started?",
+    "description": "Join the thousands like you who are making a difference with Kuzi. Your help matters!"
   },
   "home": {
     "hero1": "Discover projects you're passionate about and make them a reality! Support social causes, boost innovative ventures, and generate a positive impact in your community. Donate or make pre-purchases in campaigns that inspire you.",
@@ -40,5 +45,209 @@
     },
     "partners": "We work hand in hand with:",
     "team": "Meet our team"
+  },
+
+  "howItWorks": {
+    "title": "How do donations work in Kuzi?",
+    "sections": {
+      "why_donate": {
+        "title": "Why Donate?",
+        "make_difference": {
+          "title": "Your Donation Makes a Difference",
+          "content": "Join, donate and transform lives with your valuable contribution. Your participation is essential to make a difference."
+        }
+      },
+      "campaigns": {
+        "title": "Discover Our Campaigns",
+        "inspiring_stories": {
+          "title": "Inspiring Stories",
+          "content": "Explore a sea of opportunities: Discover our campaigns, ready to be explored and supported by you"
+        }
+      },
+      "how_it_works": {
+        "title": "How It Works",
+        "donation_action": {
+          "title": "Your Donation in Action",
+          "content": "Make a donation and watch how it transforms lives in real time. Join and be part of the change right now!"
+        }
+      },
+      "join_us": {
+        "title": "Join Us",
+        "make_difference": {
+          "title": "Make a Difference Today",
+          "content": "Join now and be part of the change. Your contribution is crucial. Don't wait any longer to make a difference!"
+        }
+      }
+    },
+    "campaigns": {
+      "how_they_work": {
+        "title": "How do campaigns work in Kuzi?",
+        "types": "You can create a Kuzi for various projects such as:",
+        "categories": {
+          "foundation": "Foundation Support",
+          "entrepreneurs": "Entrepreneurs",
+          "social": "Social Support"
+        },
+        "requirements": "You only need lots of enthusiasm, dedication, and the help of your community, who will provide financial contributions and spread your campaign to reach many hearts and achieve your goal."
+      },
+      "who_can_create": {
+        "title": "Who can create a Kuzi?",
+        "main_message": "Everyone can create a Kuzi!",
+        "description": "If you have a dream, a project, a social initiative, or a business idea, Kuzi is for you. It doesn't matter if you're a single person or a community united by the same ideal.",
+        "target_audience": "🚀 Kuzi is open to students, innovators, foundations, activists, youth, adults, entrepreneurs... for EVERYONE!",
+        "call_to_action": "What are you waiting for to join #KuziPower 💪?"
+      }
+    }
+  },
+  "campaigns": {
+    "title": "Your donation can change lives",
+    "description": "Join our campaigns and make a difference today. Your donation will help many people, every contribution counts.",
+    "boldDescription": "Donate today from 4 soles and be part of these stories of hope and solidarity!"
+  },
+  "postCampaign": {
+    "donations": "Donations",
+    "name": "CAMPAIGN NAME",
+    "collected": "Collected",
+    "from": "from",
+    "share": "Help us by sharing it with your family and friends",
+    "lasts": "Duration",
+    "history": "HISTORY",
+    "donnors": "KUZI DONORS",
+    "location": "LOCATION",
+    "nameDonators": "Name",
+    "amountDonators": "Amount",
+    "ends": "Ends in",
+    "endsIn": "Ends in"
+  },
+  "campaignDonation": {
+    "title": "How Our Donation Form Works",
+    "sections": {
+      "yape": {
+        "title": "Yape",
+        "description": "Scan the QR code or use the provided Yape number to make your donation quickly and securely."
+      },
+      "transfer": {
+        "title": "Transfer",
+        "description": "Make a direct bank transfer to our account using the details provided in the form."
+      },
+      "card": {
+        "title": "Card",
+        "description": "Use your credit or debit card to make a secure donation through our payment platform."
+      },
+      "important": {
+        "title": "Important",
+        "description": "Remember our donation validation process will take between 15 to 45 minutes."
+      }
+    },
+    "donate": {
+      "title": "Support Our Project",
+      "subtitle": "Every contribution brings us closer to our goal",
+      "donationAmount": {
+        "label": "Donation Amount",
+        "placeholder": "Set the amount"
+      },
+      "paymentMethod": {
+        "label": "Payment Method",
+        "yape": "Yape",
+        "transfer": "Transfer",
+        "card": "Card"
+      },
+      "yapeSection": {
+        "instructions": "Scan the QR code or copy the number to proceed easily and quickly",
+        "label": "Yape Number",
+        "owner": "Owner",
+        "title": "How to Yape",
+        "steps": {
+          "step1": "Open your Yape app",
+          "step2": "Select the \"Pay with QR\" option",
+          "step3": "Scan the QR code shown above",
+          "step4": "Enter the amount to donate",
+          "step5": "Confirm your payment"
+        }
+      },
+      "transferSection": {
+        "title": "Account Details",
+        "bank": "Bank",
+        "accountNumber": "Account Number",
+        "label": "Interbank Account Number",
+        "owner": "Account Owner",
+        "howTo": {
+          "title": "How to make the transfer",
+          "steps": {
+            "step1": "Log in to your online banking",
+            "step2": "Select \"Transfer to another account\"",
+            "step3": "Enter our account details",
+            "step4": "Enter the donation amount",
+            "step5": "Confirm and complete the transfer"
+          }
+        }
+      },
+      "cardSection": {
+        "cardNumber": "Card Number",
+        "cardholderName": "Cardholder Name",
+        "email": "Email",
+        "expirationDate": "Expiration Date",
+        "cvv": "CVV",
+        "documentType": "Document Type",
+        "documentNumber": "Document Number"
+      },
+      "confirmationForm": {
+        "title": "Confirm Your Donation",
+        "fullName": "Full Name",
+        "email": "Email"
+      }
+    }
+  },
+  "aboutPage": {
+    "title": "Power of Transformation",
+    "description1": "We drive social causes, entrepreneurships, and foundations",
+    "description2": "through a transparent and secure platform. Together, we make a difference!",
+    "ourTeam": "Our Team",
+
+    "values": {
+      "title": "Our Values",
+      "title1": "Teamwork",
+      "description1": "We believe in the power of collaboration and mutual support.",
+      "title2": "Passion",
+      "description2": "We love what we do and reflect it in every project.",
+      "title3": "Excellence",
+      "description3": "We strive to achieve the highest standards in everything we do."
+    },
+    "contact": {
+      "title": "Contact Us",
+
+      "contactUs": "Contact Information",
+
+      "meeting": {
+        "title": "Have questions or suggestions?",
+        "description": "Schedule your meeting in seconds: choose your time, confirm with a click, and receive personalized advice. We're here for you!",
+        "buttonText": "Schedule"
+      }
+    }
+  },
+  "createCampaign": {
+    "hero": {
+      "title": "Help us define your Kuzi",
+      "subtitle": "Make your dreams come true and create impact!",
+      "description1": "Want to fund your project or cause but don't know where to start? You're in the right place!",
+      "description2": "offers you three campaign options to choose the one that best fits your needs:"
+    },
+    "categories": {
+      "ngo": {
+        "type": "CATEGORY",
+        "title": "Shelters, Foundations and NGOs",
+        "description": "Get donations for your social cause and continue generating a positive impact in your community. Share your story and mobilize your followers to support you."
+      },
+      "entrepreneurs": {
+        "type": "CATEGORY",
+        "title": "Entrepreneurs",
+        "description": "Launch your innovative project with our \"All or Nothing\" model. Raise funds through the advance purchase of your products or services and reach your financial goals."
+      },
+      "socialImpact": {
+        "type": "CATEGORY",
+        "title": "Social Impact",
+        "description": "Fund projects that promote education, health, equality, sustainability and more. Contribute to a better world and mobilize others to join your cause!"
+      }
+    }
   }
 }

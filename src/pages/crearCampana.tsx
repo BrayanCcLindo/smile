@@ -3,9 +3,12 @@ import { useSmileContext } from "../Api/userContext";
 import { SmileForm } from "../type/types";
 import { SEOComponent } from "../assets/SEO";
 import { ROUTES } from "../constants/routes";
+import { useTranslation } from "react-i18next";
 
 function StartCampaign() {
   const { stateProfile } = useSmileContext();
+  const { t } = useTranslation("global");
+
   return (
     <>
       <SEOComponent
@@ -18,15 +21,12 @@ function StartCampaign() {
           <div className="flex flex-col">
             <div className="flex flex-col flex-wrap py-6 mb-12 sm:flex-row">
               <h1 className="mb-2 text-2xl font-medium text-heading sm:w-2/5 title-font sm:mb-0">
-                Ayúdanos a definir tu Kuzi
+                {t("createCampaign.hero.title")}
               </h1>
               <p className="pl-0 text-base leading-relaxed text-content_text sm:w-3/5 sm:pl-10">
-                ¡Haz realidad tus sueños y genera impacto! ¿Quieres financiar tu
-                proyecto o causa pero no sabes por dónde empezar? ¡Estás en el
-                lugar correcto!
-                <span className="font-bold text-main"> KUZI</span> te ofrece
-                tres opciones de campañas para que elijas la que mejor se adapte
-                a tus necesidades:
+                {t("createCampaign.hero.description1")}
+                <span className="font-bold text-main"> KUZI</span>{" "}
+                {t("createCampaign.hero.description2")}
               </p>
             </div>
           </div>
@@ -52,19 +52,17 @@ function StartCampaign() {
                 />
                 <div className="p-6">
                   <h3 className="mb-1 text-xs font-medium tracking-widest text-content_text title-font">
-                    CATEGORIA
+                    {t("createCampaign.categories.ngo.type")}
                   </h3>
                   <h2 className="mb-3 text-lg font-medium text-heading title-font group-hover:text-main">
-                    Albergues, fundaciones y ONG
+                    {t("createCampaign.categories.ngo.title")}
                   </h2>
                   <p className="mb-3 leading-relaxed text-content_text">
-                    Consigue donaciones para tu causa social y sigue generando
-                    un impacto positivo en tu comunidad. Comparte tu historia y
-                    moviliza a tus seguidores para que te apoyen.
+                    {t("createCampaign.categories.ngo.description")}
                   </p>
                   <div className="flex flex-wrap items-center ">
                     <p className="inline-flex items-center font-semibold text-main md:mb-2 lg:mb-0">
-                      Crear Campaña
+                      {t("cta.tertiary")}
                       <svg
                         className="w-4 h-4 ml-2"
                         viewBox="0 0 24 24"
@@ -103,19 +101,17 @@ function StartCampaign() {
                 />
                 <div className="p-6">
                   <h2 className="mb-1 text-xs font-medium tracking-widest text-content_text title-font">
-                    CATEGORIA
+                    {t("createCampaign.categories.entrepreneurs.type")}
                   </h2>
                   <h1 className="mb-3 text-lg font-medium text-heading title-font group-hover:text-main">
-                    Emprendedores
+                    {t("createCampaign.categories.entrepreneurs.title")}
                   </h1>
                   <p className="mb-3 leading-relaxed text-content_text">
-                    Lanza tu proyecto innovador con nuestro modelo "Todo o
-                    Nada". Recauda fondos a través de la compra anticipada de
-                    tus productos o servicios y alcanza tus metas financieras.
+                    {t("createCampaign.categories.entrepreneurs.description")}
                   </p>
                   <div className="flex flex-wrap items-center ">
                     <p className="inline-flex items-center font-semibold text-main md:mb-2 lg:mb-0">
-                      Crear Campaña
+                      {t("cta.tertiary")}
                       <svg
                         className="w-4 h-4 ml-2"
                         viewBox="0 0 24 24"
@@ -154,19 +150,17 @@ function StartCampaign() {
                 />
                 <div className="p-6">
                   <h3 className="mb-1 text-xs font-medium tracking-widest text-content_text title-font">
-                    CATEGORIA
+                    {t("createCampaign.categories.socialImpact.type")}
                   </h3>
                   <h2 className="mb-3 text-lg font-medium text-heading title-font group-hover:text-main">
-                    Impacto Social
+                    {t("createCampaign.categories.socialImpact.title")}
                   </h2>
                   <p className="mb-3 leading-relaxed text-content_text">
-                    Financia proyectos que promuevan la educación, la salud, la
-                    igualdad, la sostenibilidad y más. ¡Contribuye a un mundo
-                    mejor y moviliza a otros para que se sumen a tu causa!
+                    {t("createCampaign.categories.socialImpact.description")}
                   </p>
                   <div className="flex flex-wrap items-center ">
                     <p className="inline-flex items-center font-semibold text-main md:mb-2 lg:mb-0">
-                      Crear Campaña
+                      {t("cta.tertiary")}
                       <svg
                         className="w-4 h-4 ml-2"
                         viewBox="0 0 24 24"

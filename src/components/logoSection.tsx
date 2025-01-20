@@ -4,8 +4,6 @@ import { logos } from "../constants/logoPartners";
 export default function LogoSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  console.log(currentIndex, "currentIndex");
-
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex(
@@ -17,8 +15,6 @@ export default function LogoSlider() {
   }, []);
 
   const visibleLogos = logos.slice(currentIndex * 4, currentIndex * 4 + 4);
-
-  console.log(visibleLogos, "visibleLogos");
 
   return (
     <div className="p-8 rounded-lg shadow-lg bg-gradient-to-r from-white to-second_bg">

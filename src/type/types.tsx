@@ -45,7 +45,9 @@ export type SmileContextType = {
 
 export type CampañaGiftSmileType = {
   nombre: string;
+  nombre_en: string;
   descripcion: string;
+  descripcion_en: string;
   to: string;
   slug: string;
   imagenCampaña: string;
@@ -55,11 +57,13 @@ export type CampañaGiftSmileType = {
   campañaId: string;
   fechaInicio: string;
   tipo: string;
+  tipo_en: string;
   creador: string;
   imagenesCampaña: { type: "image" | "video"; link: string }[];
   cargo: string;
   imagen: string;
   historia: string;
+  historia_en: string;
   donaciones: {
     donadorNombre: string;
     donationType: SmilePaymentMethod;
@@ -69,6 +73,7 @@ export type CampañaGiftSmileType = {
     validation: boolean;
   }[];
   ubicación: string;
+  [key: string]: any;
 };
 export type FormData = {
   nombre: string;

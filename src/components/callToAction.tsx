@@ -4,9 +4,12 @@ import MainLinkButton from "./mainLinkButton";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
 import { ROUTES } from "../constants/routes";
+import { useTranslation } from "react-i18next";
 
 function CallToAction() {
   const callRef = useRef(null);
+  const { t } = useTranslation("global");
+
   const isInView = useInView(callRef, { once: true });
 
   return (
@@ -23,15 +26,14 @@ function CallToAction() {
         <div className="relative px-6 pt-16 overflow-hidden shadow-2xl bg-second_bg isolate sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
           <div className="max-w-md mx-auto text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
             <h2 className="text-3xl font-bold tracking-tight text-main sm:text-4xl">
-              ¿Listo para empezar?
+              {t("banner.title")}
             </h2>
             <p className="mt-6 text-lg leading-8 text-content_text">
-              Únete a los miles como tú que están marcando la diferencia con
-              Kuzi. ¡Tu ayuda importa!
+              {t("banner.description")}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-6 mt-10 lg:justify-start">
               <MainLinkButton link={ROUTES.CAMPANAS}>
-                Donar Ahora
+                {t("cta.primary")}
               </MainLinkButton>
 
               <Link
@@ -41,7 +43,7 @@ function CallToAction() {
                 to={ROUTES.COMO_FUNCIONA}
                 className="text-sm font-semibold leading-6 text-main"
               >
-                ¿Cómo funciona? <span aria-hidden="true">→</span>
+                {t("cta.secondary")} <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>

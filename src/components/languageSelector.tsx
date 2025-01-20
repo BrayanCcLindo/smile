@@ -5,7 +5,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from "../components/ui/dropdown-menu";
-import { ChevronDown, Globe } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { useSmileContext } from "../Api/userContext";
 import { useTranslation } from "react-i18next";
 
@@ -25,18 +25,16 @@ export function LanguageSelector() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="flex items-center gap-2">
-          <Globe className="w-4 h-4" />
+        <Button variant="secondar" className="flex items-center gap-2">
+          <span>{languages[styleLang as Language]?.flag || "🌐"}</span>
           <span className="hidden sm:inline">
             {languages[styleLang as Language]?.name}
           </span>
-          <span className="sm:hidden">
-            {languages[styleLang as Language]?.flag}
-          </span>
+
           <ChevronDown className="w-4 h-4 opacity-50" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[150px]">
+      <DropdownMenuContent align="end">
         {(Object.keys(languages) as Language[]).map(lang => (
           <DropdownMenuItem
             key={lang}

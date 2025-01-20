@@ -2,25 +2,25 @@ import { Card, CardContent } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Users, Heart, Target, Mail } from "lucide-react";
 import { members } from "../constants/nosotros";
+import { useTranslation } from "react-i18next";
 
 export default function NosotrosPage() {
+  const { t } = useTranslation("global");
+
   return (
     <div className="mx-auto bg-background body-font max-w-7xl">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap w-full mb-20">
           <div className="w-full mb-6 lg:w-1/2 lg:mb-0">
             <h1 className="mb-2 text-2xl font-medium text-heading sm:text-3xl title-font">
-              Poder de la Transformación
+              {t("aboutPage.title")}
             </h1>
             <div className="w-20 h-1 rounded bg-main"></div>
           </div>
           <div className="flex flex-col items-start justify-center w-full gap-6 leading-relaxed text-content_text lg:w-1/2">
             <p>
-              <span className="font-bold">
-                Impulsamos causas sociales, emprendimientos y fundaciones
-              </span>
-              a través de una plataforma transparente y segura. ¡Juntos, hacemos
-              la diferencia!
+              <span className="font-bold">{t("aboutPage.description1")}</span>{" "}
+              {t("aboutPage.description2")}
             </p>
           </div>
         </div>
@@ -28,9 +28,9 @@ export default function NosotrosPage() {
         <section className="py-16 bg-muted">
           <div className="mx-auto max-w-7xl">
             <h2 className="mb-8 text-3xl font-bold text-center text-main">
-              Nuestro Equipo
+              {t("aboutPage.ourTeam")}
             </h2>
-            <div className="grid gap-8 grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
+            <div className="grid items-center grid-cols-1 gap-8 sm:grid-cols-4">
               {members.map(member => (
                 <Card className="relative w-full max-w-sm mx-auto">
                   <a
@@ -58,27 +58,24 @@ export default function NosotrosPage() {
         </section>
         <section className="py-16 mx-auto max-w-7xl">
           <h2 className="mb-8 text-3xl font-bold text-center text-main">
-            Nuestros Valores
+            {t("aboutPage.values.title")}
           </h2>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {[
               {
                 icon: <Users className="w-12 h-12 mb-4 text-main" />,
-                title: "Trabajo en Equipo",
-                description:
-                  "Creemos en el poder de la colaboración y el apoyo mutuo."
+                title: t("aboutPage.values.title1"),
+                description: t("aboutPage.values.description1")
               },
               {
                 icon: <Heart className="w-12 h-12 mb-4 text-main" />,
-                title: "Pasión",
-                description:
-                  "Amamos lo que hacemos y lo reflejamos en cada proyecto."
+                title: t("aboutPage.values.title2"),
+                description: t("aboutPage.values.description2")
               },
               {
                 icon: <Target className="w-12 h-12 mb-4 text-main" />,
-                title: "Excelencia",
-                description:
-                  "Nos esforzamos por alcanzar los más altos estándares en todo lo que hacemos."
+                title: t("aboutPage.values.title3"),
+                description: t("aboutPage.values.description3")
               }
             ].map(value => (
               <Card
@@ -93,14 +90,15 @@ export default function NosotrosPage() {
           </div>
         </section>
 
-        {/* Contact Us Section */}
         <section className="py-16 bg-muted">
           <div className="mx-auto max-w-7xl">
-            <h2 className="mb-8 text-3xl font-bold text-center">Contáctanos</h2>
+            <h2 className="mb-8 text-3xl font-bold text-center text-main">
+              {t("aboutPage.contact.title")}
+            </h2>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               <Card className="p-6">
                 <h3 className="mb-4 text-xl font-semibold">
-                  Información de Contacto
+                  {t("aboutPage.contact.contactUs")}
                 </h3>
                 <div className="space-y-4">
                   <a
@@ -122,20 +120,16 @@ export default function NosotrosPage() {
               </Card>
               <Card className="p-6">
                 <h3 className="mb-4 text-xl font-semibold">
-                  Tienes consultas o sugerencias?
+                  {t("aboutPage.contact.meeting.title")}
                 </h3>
-                <p className="">
-                  Agenda tu reunión en segundos: elige tu horario, confirma con
-                  un clic y recibe asesoría personalizada. ¡Estamos aquí para
-                  ti!
-                </p>
-                <Button className="relative mt-4">
+                <p className="">{t("aboutPage.contact.meeting.description")}</p>
+                <Button className="relative mt-4" variant="secondar">
                   <a
                     className="absolute inset-0"
                     href="https://calendly.com/cervantesespondacesar/30-minute-meeting?month=2025-01"
                     target="_blank"
                   ></a>
-                  Agendar
+                  {t("aboutPage.contact.meeting.buttonText")}
                 </Button>
               </Card>
             </div>

@@ -107,8 +107,7 @@ function Footer() {
 
           {/* Copyright */}
           <div className="pt-8 mt-8 text-sm text-center border-t text-content_text border-card_border">
-            © {new Date().getFullYear()} KuziFund. Todos los derechos
-            reservados.
+            © {new Date().getFullYear()} KuziFund. {t("footer.rights")}
           </div>
         </div>
       </footer>

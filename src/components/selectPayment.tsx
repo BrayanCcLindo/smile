@@ -38,6 +38,7 @@ import { sendEmailConfirmation } from "../assets/donationMessages";
 import { processPayment } from "../assets/mercadoPagoApi";
 import { updateFirebaseDonations } from "../assets/firebase/updateDonations";
 import { MainButton } from "./mainLinkButton";
+import { useTranslation } from "react-i18next";
 
 type ButtonDontationType = {
   value: number;
@@ -71,6 +72,7 @@ export default function SelectPaymentForm({
   const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
+  const { t } = useTranslation("global");
 
   const isValidCardNumber = (value: string) => {
     const cleanValue = value.replace(/\s/g, "");
@@ -237,15 +239,17 @@ export default function SelectPaymentForm({
       <Card>
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold text-main">
-            Apoya Nuestro Proyecto
+            {t("campaignDonation.donate.title")}
           </CardTitle>
           <CardDescription className="text-lg">
-            Cada contribución nos acerca a nuestra meta
+            {t("campaignDonation.donate.subtitle")}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="mb-6 space-y-2 text-left">
-            <Label htmlFor="amount">Monto a donar</Label>
+            <Label htmlFor="amount">
+              {t("campaignDonation.donate.donationAmount.label")}
+            </Label>
             <ul className="flex flex-wrap items-center justify-between gap-2 mt-3">
               <li>
                 <ButtonDonations
@@ -329,7 +333,9 @@ export default function SelectPaymentForm({
                         setValue("amount", value);
                       }
                     }}
-                    placeholder="Ingrese el monto"
+                    placeholder={t(
+                      "campaignDonation.donate.donationAmount.placeholder"
+                    )}
                     className="pl-10 "
                   />
                 )}
@@ -361,19 +367,19 @@ export default function SelectPaymentForm({
                     value={SmilePaymentMethod.Yape}
                     className="data-[state=active]:bg-main_bg data-[state=active]:text-heading rounded-lg"
                   >
-                    Yape
+                    {t("campaignDonation.donate.paymentMethod.yape")}
                   </TabsTrigger>
                   <TabsTrigger
                     value={SmilePaymentMethod.Transferencia}
                     className="data-[state=active]:bg-main_bg data-[state=active]:text-heading rounded-lg"
                   >
-                    Transferencia
+                    {t("campaignDonation.donate.paymentMethod.transfer")}
                   </TabsTrigger>
                   <TabsTrigger
                     value={SmilePaymentMethod.Tarjeta}
                     className="data-[state=active]:bg-main_bg data-[state=active]:text-heading rounded-lg"
                   >
-                    Tarjeta
+                    {t("campaignDonation.donate.paymentMethod.card")}
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value={SmilePaymentMethod.Yape} className="mt-4">
@@ -386,12 +392,13 @@ export default function SelectPaymentForm({
                     />
 
                     <p className="mt-4 text-content_text">
-                      Escanea el código QR o copia el número para continuar de
-                      manera fácil y rápida
+                      {t("campaignDonation.donate.yapeSection.instructions")}
                     </p>
                   </div>
                   <div className="p-4 text-left rounded-lg bg-third_bg">
-                    <Label htmlFor="yapeNumber">Número de Yape</Label>
+                    <Label htmlFor="yapeNumber">
+                      {t("campaignDonation.donate.yapeSection.label")}
+                    </Label>
                     <div className="flex mt-1">
                       <Input
                         id="yapeNumber"
@@ -418,7 +425,9 @@ export default function SelectPaymentForm({
                       </Button>
                     </div>
                     <div className="mt-4">
-                      <Label htmlFor="accountHolder">Titular</Label>
+                      <Label htmlFor="accountHolder">
+                        {t("campaignDonation.donate.yapeSection.owner")}
+                      </Label>
                       <Input
                         id="accountHolder"
                         defaultValue="Julio Cervantes Esponda"
@@ -431,15 +440,35 @@ export default function SelectPaymentForm({
                   <Accordion type="single" collapsible className="mt-4">
                     <AccordionItem value="yape-guide">
                       <AccordionTrigger className="text-main">
-                        Cómo Yapear
+                        {t("campaignDonation.donate.yapeSection.title")}
                       </AccordionTrigger>
                       <AccordionContent>
                         <ol className="space-y-2 text-left list-decimal list-inside text-heading">
-                          <li>Abre tu app de Yape</li>
-                          <li>Selecciona la opción "Pagar con QR"</li>
-                          <li>Escanea el código QR mostrado arriba</li>
-                          <li>Ingresa el monto a donar</li>
-                          <li>Confirma tu pago</li>
+                          <li>
+                            {t(
+                              "campaignDonation.donate.yapeSection.steps.step1"
+                            )}
+                          </li>
+                          <li>
+                            {t(
+                              "campaignDonation.donate.yapeSection.steps.step2"
+                            )}
+                          </li>
+                          <li>
+                            {t(
+                              "campaignDonation.donate.yapeSection.steps.step3"
+                            )}
+                          </li>
+                          <li>
+                            {t(
+                              "campaignDonation.donate.yapeSection.steps.step4"
+                            )}
+                          </li>
+                          <li>
+                            {t(
+                              "campaignDonation.donate.yapeSection.steps.step5"
+                            )}
+                          </li>
                         </ol>
                       </AccordionContent>
                     </AccordionItem>
@@ -452,11 +481,13 @@ export default function SelectPaymentForm({
                   <div className="space-y-4">
                     <div className="p-6 rounded-lg shadow-md bg-third_bg">
                       <h3 className="mb-4 text-xl font-semibold text-main">
-                        Datos de la cuenta
+                        {t("campaignDonation.donate.transferSection.title")}
                       </h3>
                       <div className="space-y-4 text-left">
                         <div>
-                          <Label htmlFor="bankName">Banco</Label>
+                          <Label htmlFor="bankName">
+                            {t("campaignDonation.donate.transferSection.bank")}
+                          </Label>
                           <div className="flex">
                             <div className="flex items-center justify-center p-1 mr-2 bg-[#02bf4f] rounded-lg">
                               <img
@@ -477,7 +508,7 @@ export default function SelectPaymentForm({
                         </div>
                         <div>
                           <Label htmlFor="accountNumber">
-                            Número de Cuenta
+                            {t("campaignDonation.donate.transferSection.label")}
                           </Label>
                           <div className="flex mt-1">
                             <Input
@@ -509,7 +540,9 @@ export default function SelectPaymentForm({
                         </div>
                         <div>
                           <Label htmlFor="accountNumberInter">
-                            Número de Cuenta Interbancaria
+                            {t(
+                              "campaignDonation.donate.transferSection.accountNumber"
+                            )}
                           </Label>
                           <div className="flex mt-1">
                             <Input
@@ -529,7 +562,6 @@ export default function SelectPaymentForm({
                                       position: "top-right"
                                     });
                                   });
-                                // Aquí puedes agregar una notificación de "Copiado" si lo deseas
                               }}
                               className="ml-2 text-white bg-main"
                             >
@@ -541,7 +573,9 @@ export default function SelectPaymentForm({
                           </div>
                         </div>
                         <div>
-                          <Label htmlFor="accountHolder">Titular</Label>
+                          <Label htmlFor="accountHolder">
+                            {t("campaignDonation.donate.transferSection.owner")}
+                          </Label>
                           <Input
                             id="accountHolder"
                             defaultValue="Julio Cervantes Esponda"
@@ -554,15 +588,37 @@ export default function SelectPaymentForm({
                     <Accordion type="single" collapsible>
                       <AccordionItem value="transfer-guide">
                         <AccordionTrigger className="text-main">
-                          Cómo hacer la transferencia
+                          {t(
+                            "campaignDonation.donate.transferSection.howTo.title"
+                          )}
                         </AccordionTrigger>
                         <AccordionContent>
                           <ol className="space-y-2 text-left list-decimal list-inside text-heading">
-                            <li>Ingresa a tu banca en línea</li>
-                            <li>Selecciona "Transferir a otra cuenta"</li>
-                            <li>Ingresa los datos de nuestra cuenta</li>
-                            <li>Ingresa el monto a donar</li>
-                            <li>Confirma y realiza la transferencia</li>
+                            <li>
+                              {t(
+                                "campaignDonation.donate.transferSection.howTo.steps.step1"
+                              )}
+                            </li>
+                            <li>
+                              {t(
+                                "campaignDonation.donate.transferSection.howTo.steps.step2"
+                              )}
+                            </li>
+                            <li>
+                              {t(
+                                "campaignDonation.donate.transferSection.howTo.steps.step3"
+                              )}
+                            </li>
+                            <li>
+                              {t(
+                                "campaignDonation.donate.transferSection.howTo.steps.step4"
+                              )}
+                            </li>
+                            <li>
+                              {t(
+                                "campaignDonation.donate.transferSection.howTo.steps.step5"
+                              )}
+                            </li>
                           </ol>
                         </AccordionContent>
                       </AccordionItem>
@@ -575,7 +631,7 @@ export default function SelectPaymentForm({
                 >
                   <div className="p-6 space-y-4 text-left rounded-lg shadow-md bg-third_bg">
                     <Label htmlFor="cardNumber" className="text-left">
-                      Número de Tarjeta
+                      {t("campaignDonation.donate.cardSection.cardNumber")}
                     </Label>
                     <Controller
                       name="cardNumber"
@@ -613,7 +669,11 @@ export default function SelectPaymentForm({
                       <FormErrors>{errors.cardNumber.message}</FormErrors>
                     )}
                     <div>
-                      <Label htmlFor="cardName">Nombre del Titular</Label>
+                      <Label htmlFor="cardName">
+                        {t(
+                          "campaignDonation.donate.cardSection.cardholderName"
+                        )}
+                      </Label>
                       <Controller
                         name="cardName"
                         control={control}
@@ -639,7 +699,9 @@ export default function SelectPaymentForm({
                     )}
 
                     <div>
-                      <Label htmlFor="cardMail">Correo</Label>
+                      <Label htmlFor="cardMail">
+                        {t("campaignDonation.donate.cardSection.email")}
+                      </Label>
                       <Controller
                         name="cardMail"
                         control={control}
@@ -668,7 +730,11 @@ export default function SelectPaymentForm({
                     )}
                     <div className="grid gap-4 lg:grid-cols-2">
                       <div>
-                        <Label htmlFor="expiry">Fecha de Expiración</Label>
+                        <Label htmlFor="expiry">
+                          {t(
+                            "campaignDonation.donate.cardSection.expirationDate"
+                          )}
+                        </Label>
                         <Controller
                           name="expiry"
                           control={control}
@@ -708,7 +774,9 @@ export default function SelectPaymentForm({
                         )}
                       </div>
                       <div>
-                        <Label htmlFor="cvv">CVV</Label>
+                        <Label htmlFor="cvv">
+                          {t("campaignDonation.donate.cardSection.cvv")}
+                        </Label>
                         <Controller
                           name="cvv"
                           control={control}
@@ -744,7 +812,9 @@ export default function SelectPaymentForm({
                       </div>
                     </div>
                     <div className="text-left">
-                      <Label htmlFor="idType">Tipo de Documento</Label>
+                      <Label htmlFor="idType">
+                        {t("campaignDonation.donate.cardSection.documentType")}
+                      </Label>
                       <Controller
                         name="idType"
                         control={control}
@@ -769,7 +839,11 @@ export default function SelectPaymentForm({
                       )}
                     </div>
                     <div>
-                      <Label htmlFor="idNumber">Número de Documento</Label>
+                      <Label htmlFor="idNumber">
+                        {t(
+                          "campaignDonation.donate.cardSection.documentNumber"
+                        )}
+                      </Label>
                       <Controller
                         name="idNumber"
                         control={control}
@@ -809,11 +883,13 @@ export default function SelectPaymentForm({
                 className="p-4 mt-6 rounded-lg shadow-md bg-third_bg"
               >
                 <h3 className="mb-4 font-semibold text-main">
-                  Confirma tu donación
+                  {t("campaignDonation.donate.confirmationForm.title")}
                 </h3>
                 <div className="space-y-4 text-left">
                   <div>
-                    <Label htmlFor="userName">Nombre completo</Label>
+                    <Label htmlFor="userName">
+                      {t("campaignDonation.donate.confirmationForm.fullName")}
+                    </Label>
                     <Controller
                       name="userName"
                       control={control}
@@ -836,7 +912,9 @@ export default function SelectPaymentForm({
                     )}
                   </div>
                   <div>
-                    <Label htmlFor="userMail">Correo electrónico</Label>
+                    <Label htmlFor="userMail">
+                      {t("campaignDonation.donate.confirmationForm.email")}
+                    </Label>
                     <Controller
                       name="userMail"
                       control={control}

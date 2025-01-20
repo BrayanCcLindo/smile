@@ -12,6 +12,7 @@ import ProgressBar from "./progressBar";
 import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 function Card({
   campaña,
@@ -20,6 +21,8 @@ function Card({
   campaña: CampañaGiftSmileType;
   index: number;
 }) {
+  const { i18n, t } = useTranslation("global");
+  const styleLang = i18n.resolvedLanguage || "es";
   const variants = {
     hidden: {
       opacity: 0
@@ -93,7 +96,7 @@ function Card({
               "group-hover:text-entrepreneur"
           )}
         >
-          {campaña.nombre}
+          {campaña[styleLang].nombre}
         </h2>
       </div>
       <div className="relative h-[300px] overflow-hidden">
@@ -114,7 +117,7 @@ function Card({
               "bg-entrepreneur text-main_bg text-white"
           )}
         >
-          {campaña.tipo}
+          {campaña[styleLang].tipo}
         </span>
       </div>
       <div className="px-3 py-1">
@@ -128,7 +131,7 @@ function Card({
             )}
           >
             <HeartHandshake />
-            {aprovedDonations.length} Donaciones
+            {aprovedDonations.length} {t("postCampaign.donations")}
           </span>
 
           <p
@@ -140,18 +143,18 @@ function Card({
             )}
           >
             <Clock />
-            Quedan:
+            {t("postCampaign.endsIn")}:
             <span className="font-medium">
               {" "}
               {formatDistanceToNow(new Date(campaña.fechaFinal), {
-                locale: es
+                locale: styleLang === "es" ? es : undefined
               })}
             </span>
           </p>
         </div>
         <div className="relative group">
           <p className="mt-5 text-sm leading-relaxed text-content_text line-clamp-3 ">
-            {campaña.descripcion}
+            {campaña[styleLang].descripcion}
           </p>
         </div>
         <div className="mt-5">
@@ -163,14 +166,14 @@ function Card({
         </div>
         <div className="flex justify-between mt-6 ">
           <p className="flex items-center gap-2 ">
-            Recaudó
+            {t("postCampaign.collected")}
             <span className="font-bold">
               {activeDonations.toLocaleString("es-PE", {
                 currency: "PEN",
                 style: "currency"
               })}{" "}
             </span>
-            de
+            {t("postCampaign.from")}
             <span className="font-bold">
               {campaña.meta.toLocaleString("es-PE", {
                 currency: "PEN",

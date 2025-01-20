@@ -13,8 +13,31 @@ export const useGetCampaigns = () => {
         const campañas: CampañaGiftSmileType[] = [];
 
         snapshot.docs.forEach(doc => {
-          // @ts-expect-error need to push
-          campañas.push({ id: doc.id, campañaId: doc.id, ...doc.data() });
+          const rawData = doc.data() as CampañaGiftSmileType;
+
+          // Transformamos los datos para incluir el contenido multilingüe
+          const campaña = {
+            ...rawData,
+            id: doc.id,
+            campañaId: doc.id,
+
+            es: {
+              creator: rawData.creador,
+              descripcion: rawData.descripcion,
+              nombre: rawData.nombre,
+              historia: rawData.historia,
+              tipo: rawData.tipo
+            },
+            en: {
+              creator: rawData.creador,
+              descripcion: rawData.descripcion_en,
+              nombre: rawData.nombre_en,
+              historia: rawData.historia_en,
+              tipo: rawData.tipo_en
+            }
+          };
+
+          campañas.push(campaña);
         });
         setData(campañas);
       },

@@ -90,6 +90,8 @@ function Header() {
           </ul>
 
           <div className="items-center hidden gap-4 lg:flex lg:justify-end">
+            <LanguageSelector />
+
             {!stateProfile ? (
               <>
                 {" "}
@@ -108,18 +110,14 @@ function Header() {
                   className="rounded-full "
                   to={ROUTES.PERFIL}
                 >
-                  <Avatar
-                    size="lg"
-                    username={stateProfile.displayName ?? user?.name}
-                  />
+                  <Avatar username={stateProfile.displayName ?? user?.name} />
                 </Link>
               </>
             )}
             <MainLinkButton link={ROUTES.CREAR_CAMPANA}>
-              {t("cta.quinary")}
+              {t("cta.tertiary")}
             </MainLinkButton>
             <SwitchToogle />
-            <LanguageSelector />
           </div>
         </div>
       </nav>
@@ -218,6 +216,7 @@ function Header() {
                 )}
                 <SwitchToogle />
               </div>
+              <LanguageSelector />
             </div>
           </div>
         </div>

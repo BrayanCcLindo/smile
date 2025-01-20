@@ -18,11 +18,16 @@ import ProgressBar from "../components/progressBar";
 import { useEffect, useRef, useState } from "react";
 import { ROUTES } from "../constants/routes";
 import VideoPlayer from "../components/videoMediaPlayer";
+import { useTranslation } from "react-i18next";
 
 function PostCampaign() {
   const { data } = useGetCampaigns();
   const { slug } = useParams();
   const { stateProfile } = useSmileContext();
+  const { i18n } = useTranslation("global");
+  const styleLang = i18n.resolvedLanguage || "es";
+  const { t } = useTranslation("global");
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const locationRef = useRef<HTMLIFrameElement>(null);
@@ -141,26 +146,26 @@ function PostCampaign() {
 
               <div className="w-full px-4 mt-6 lg:w-1/2 lg:pl-10 lg:py-6 lg:mt-0 ">
                 <h2 className="text-sm tracking-widest text-gray-500 title-font">
-                  NOMBRE DE CAMPAÑA
+                  {t("postCampaign.name")}
                 </h2>
                 <h1 className="mb-1 text-3xl font-medium text-heading title-font">
-                  {actualPost.nombre}
+                  {actualPost[styleLang].nombre}
                 </h1>
                 <div className="flex justify-between mb-4 text-sm text-main">
                   <span className="flex items-center gap-2 font-medium">
                     <HeartHandshake />
-                    {aprovedDonations.length} Donaciones
+                    {aprovedDonations.length} {t("postCampaign.donations")}
                   </span>
-                  <span className="">
-                    Termina en{" "}
+                  <span>
+                    {t("postCampaign.ends")}{" "}
                     {formatDistanceToNow(new Date(actualPost.fechaFinal), {
-                      locale: es
+                      locale: styleLang === "es" ? es : undefined
                     })}
                   </span>
                 </div>
 
                 <p className="leading-relaxed break-words">
-                  {actualPost?.descripcion}
+                  {actualPost[styleLang].descripcion}
                 </p>
                 <div className="mt-5">
                   <ProgressBar
@@ -170,14 +175,14 @@ function PostCampaign() {
                 </div>
                 <div className="flex justify-between pb-5 mt-4 mb-5 border-b-2 border-card_border">
                   <p className="flex flex-wrap items-center gap-2 text-lg sm:text-2xl">
-                    Recaudado
+                    {t("postCampaign.collected")}
                     <span className="font-bold">
                       {activeDonations.toLocaleString("es-PE", {
                         currency: "PEN",
                         style: "currency"
                       })}
                     </span>
-                    de
+                    {t("postCampaign.from")}
                     <span className="font-bold">
                       {actualPost.meta.toLocaleString("es-PE", {
                         currency: "PEN",
@@ -191,12 +196,10 @@ function PostCampaign() {
                   <MainLinkButton
                     link={`${ROUTES.CAMPANAS}/${actualPost?.slug}/donar`}
                   >
-                    Donar
+                    {t("cta.senary")}
                   </MainLinkButton>
                 </div>
-                <span className="font-medium ">
-                  Ayúdanos compartiendolo con tus familiares y amigos
-                </span>
+                <span className="font-medium ">{t("postCampaign.share")}</span>
                 <div className="flex items-center justify-between gap-4 pt-3">
                   <div className="flex flex-wrap justify-between flex-1 px-4 border-r-2 border-card_border">
                     <button
@@ -235,26 +238,18 @@ function PostCampaign() {
                   </div>
                   <div className="flex flex-1 ">
                     <div className="flex flex-wrap gap-2 text-left ">
-                      Duracion:
+                      {t("postCampaign.lasts")}
                       <p className="flex flex-wrap gap-4 font-semibold">
                         <span>
-                          {format(
-                            new Date(actualPost.fechaInicio),
-                            "d 'de' MMMM",
-                            {
-                              locale: es
-                            }
-                          )}
+                          {format(new Date(actualPost.fechaInicio), "d MMMM", {
+                            locale: styleLang === "es" ? es : undefined
+                          })}
                         </span>{" "}
                         -{" "}
                         <span>
-                          {format(
-                            new Date(actualPost.fechaFinal),
-                            "d 'de' MMMM",
-                            {
-                              locale: es
-                            }
-                          )}
+                          {format(new Date(actualPost.fechaFinal), "d MMMM", {
+                            locale: styleLang === "es" ? es : undefined
+                          })}
                         </span>
                       </p>
                     </div>
@@ -269,21 +264,21 @@ function PostCampaign() {
                 <div className="flex flex-wrap py-8 md:flex-nowrap">
                   <div className="flex flex-col flex-shrink-0 mb-6 md:w-64 md:mb-0">
                     <span className="font-semibold text-heading title-font">
-                      HISTORIA
+                      {t("postCampaign.history")}
                     </span>
                     <span className="mt-1 text-sm text-content_text">
                       {format(
                         new Date(actualPost.fechaInicio),
                         "d 'de' MMMM yyyy",
-                        { locale: es }
+                        { locale: styleLang === "es" ? es : undefined }
                       )}
                     </span>
                   </div>
                   <div className="md:flex-grow">
                     <p className="leading-relaxed">
-                      {actualPost.historia
-                        ? actualPost.historia
-                        : actualPost.descripcion}
+                      {actualPost[styleLang].historia
+                        ? actualPost[styleLang].historia
+                        : actualPost[styleLang].description}
                     </p>
                   </div>
                 </div>
@@ -291,7 +286,7 @@ function PostCampaign() {
                   <div className="flex flex-col flex-wrap py-8 md:flex-nowrap md:flex-row">
                     <div className="flex flex-col flex-shrink-0 mb-6 md:w-64 md:mb-0">
                       <span className="font-semibold text-heading title-font">
-                        DONADORES KUZI
+                        {t("postCampaign.donnors")}
                       </span>
                     </div>
                     <div className="md:flex-grow">
@@ -299,10 +294,10 @@ function PostCampaign() {
                         <thead className="bg-third_bg">
                           <tr>
                             <th className="px-4 py-3 text-sm font-medium tracking-wider rounded-tl rounded-bl text-heading title-font">
-                              Nombre
+                              {t("postCampaign.nameDonators")}
                             </th>
                             <th className="px-4 py-3 text-sm font-medium tracking-wider text-heading title-font">
-                              Monto
+                              {t("postCampaign.amountDonators")}
                             </th>
                           </tr>
                         </thead>
@@ -337,7 +332,7 @@ function PostCampaign() {
                   <div className="flex flex-col flex-wrap py-8 md:flex-nowrap md:flex-row">
                     <div className="flex flex-col flex-shrink-0 mb-6 md:w-64 md:mb-0">
                       <span className="font-semibold text-heading title-font">
-                        UBICACIÓN
+                        {t("postCampaign.location")}
                       </span>
                     </div>
                     <div className="md:flex-grow">

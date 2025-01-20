@@ -28,10 +28,7 @@ function UserProfile() {
                   <br /> {user?.name ?? stateProfile.displayName}
                 </h2>
                 <div className="flex flex-col items-center justify-center gap-4">
-                  <Avatar
-                    size="2xl"
-                    username={user?.name ?? stateProfile.displayName}
-                  />
+                  <Avatar username={user?.name ?? stateProfile.displayName} />
                   <MainLinkButton link={ROUTES.CONFIGURACION}>
                     <Settings2 />
                     Configurar

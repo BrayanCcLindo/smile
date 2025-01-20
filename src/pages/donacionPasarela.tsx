@@ -14,9 +14,12 @@ import Loader from "../components/ui/loaders/loader";
 import { useGetCampaigns } from "../Api/getCampaigns";
 import { SmilePaymentMethod } from "../type/types";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function DonacionPasarela() {
   const { slug } = useParams();
+  const { t } = useTranslation("global");
+
   const [paymentMethod, setPaymentMethod] = useState<SmilePaymentMethod>(
     SmilePaymentMethod.Yape
   );
@@ -47,7 +50,7 @@ function DonacionPasarela() {
                   <Card className="p-0 border-none">
                     <CardHeader className="p-0 py-6">
                       <CardTitle className="text-2xl font-bold text-center text-main">
-                        Cómo Funciona Nuestro Formulario de Donación
+                        {t("campaignDonation.title")}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="p-0 space-y-6">
@@ -62,12 +65,10 @@ function DonacionPasarela() {
                         </div>
                         <div className="flex-grow ttext-center lg:text-left lg:pl-3">
                           <h2 className="mb-2 text-lg font-medium text-heading title-font">
-                            Yape
+                            {t("campaignDonation.sections.yape.title")}
                           </h2>
                           <p className="leading-relaxed text-content_text">
-                            Escanea el código QR o usa el número de Yape
-                            proporcionado para hacer tu donación de forma rápida
-                            y segura.
+                            {t("campaignDonation.sections.yape.description")}
                           </p>
                         </div>
                       </div>
@@ -82,12 +83,12 @@ function DonacionPasarela() {
                         </div>
                         <div className="flex-grow text-center lg:text-left lg:pl-3">
                           <h2 className="mb-2 text-lg font-medium text-heading title-font">
-                            Transferencia
+                            {t("campaignDonation.sections.transfer.title")}
                           </h2>
                           <p className="leading-relaxed text-content_text">
-                            Realiza una transferencia bancaria directa a nuestra
-                            cuenta utilizando los datos proporcionados en el
-                            formulario.
+                            {t(
+                              "campaignDonation.sections.transfer.description"
+                            )}
                           </p>
                         </div>
                       </div>
@@ -104,12 +105,10 @@ function DonacionPasarela() {
                         </div>
                         <div className="flex-grow text-center lg:text-left lg:pl-3">
                           <h2 className="mb-2 text-lg font-medium text-heading title-font">
-                            Tarjeta
+                            {t("campaignDonation.sections.card.title")}
                           </h2>
                           <p className="leading-relaxed text-content_text">
-                            Usa tu tarjeta de crédito o débito para hacer una
-                            donación segura a través de nuestra plataforma de
-                            pago.
+                            {t("campaignDonation.sections.card.description")}
                           </p>
                         </div>
                       </div>
@@ -135,11 +134,12 @@ function DonacionPasarela() {
                         </div>
                         <div>
                           <AlertTitle className="text-heading">
-                            Importante
+                            {t("campaignDonation.sections.important.title")}
                           </AlertTitle>
                           <AlertDescription className="flex items-center">
-                            Recordar nuestro proceso de validación de su
-                            donación será entre 15 a 45 minutos
+                            {t(
+                              "campaignDonation.sections.important.description"
+                            )}
                           </AlertDescription>
                         </div>
                       </Alert>

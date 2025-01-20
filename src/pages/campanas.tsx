@@ -4,9 +4,11 @@ import CallToAction from "../components/callToAction";
 import SkeletonCardLoader from "../components/ui/loaders/skeletonCard";
 import { SEOComponent } from "../assets/SEO";
 import { ROUTES } from "../constants/routes";
+import { useTranslation } from "react-i18next";
 
 function Campaigns() {
   const { data } = useGetCampaigns();
+  const { t } = useTranslation("global");
 
   return (
     <>
@@ -21,17 +23,15 @@ function Campaigns() {
             <div className="flex flex-wrap w-full mb-20">
               <div className="w-full mb-6 lg:w-1/2 lg:mb-0">
                 <h1 className="mb-2 text-2xl font-medium text-heading sm:text-3xl title-font">
-                  Tu donación puede cambiar vidas
+                  {t("campaigns.title")}
                 </h1>
                 <div className="w-20 h-1 rounded bg-main"></div>
               </div>
               <div className="flex flex-col items-start justify-center w-full gap-6 leading-relaxed text-content_text lg:w-1/2">
                 <p>
-                  Únete a nuestras campañas y marca la diferencia hoy. Tu
-                  donación ayudará a muchas personas, cada aporte cuenta.{" "}
+                  {t("campaigns.description")}{" "}
                   <span className="font-semibold">
-                    ¡Dona hoy desde 4 soles y sé parte de estas historias de
-                    esperanza y solidaridad!
+                    {t("campaigns.boldDescription")}
                   </span>
                 </p>
               </div>

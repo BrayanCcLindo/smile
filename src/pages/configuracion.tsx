@@ -57,10 +57,7 @@ function Configuracion() {
                 </div>
                 <div className="pt-4 mt-4 text-center border-t border-card_border sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l sm:border-t-0 sm:mt-0">
                   <div className="inline-flex items-center justify-center w-20 h-20 rounded-full">
-                    <Avatar
-                      size="xl"
-                      username={stateProfile.displayName ?? user?.name}
-                    />
+                    <Avatar username={stateProfile.displayName ?? user?.name} />
                   </div>
                   <div className="flex flex-col items-center justify-center text-center">
                     <div className="w-12 h-1 mt-2 mb-4 rounded bg-main"></div>

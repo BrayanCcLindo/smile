@@ -12,8 +12,11 @@ import { Link } from "react-router-dom";
 import { SEOComponent } from "../assets/SEO";
 import { ROUTES } from "../constants/routes";
 import CustomVideoPlayer from "../components/customVideoPlayer";
+import { useTranslation } from "react-i18next";
 
 function ComoFunciona() {
+  const { t } = useTranslation("global");
+
   return (
     <>
       <SEOComponent
@@ -27,7 +30,7 @@ function ComoFunciona() {
             <div className="flex flex-wrap justify-between p-5">
               <div className="lg:w-1/2 md:w-1/2 md:pr-10 md:py-6">
                 <h1 className="mb-4 text-3xl font-medium title-font text-main">
-                  ¿Cómo funcionan las donaciones en Kuzi?
+                  {t("howItWorks.title")}
                 </h1>
                 <div className="relative flex pb-12">
                   <div className="absolute inset-0 flex items-center justify-center w-10 h-full">
@@ -38,15 +41,18 @@ function ComoFunciona() {
                   </div>
                   <div className="flex-grow pl-4 ">
                     <h2 className="mb-1 font-medium tracking-wider text-heading">
-                      ¿Por Qué Donar?
+                      {t("howItWorks.sections.why_donate.title")}
                     </h2>
                     <p className="leading-relaxed text-content_text">
                       <span className="font-semibold">
-                        Tu Donación Marca la Diferencia
+                        {t(
+                          "howItWorks.sections.why_donate.make_difference.title"
+                        )}
                       </span>{" "}
                       <br />
-                      Únete, dona y transforma vidas con tu valioso aporte. Tu
-                      participación es fundamental para hacer la diferencia.
+                      {t(
+                        "howItWorks.sections.why_donate.make_difference.content"
+                      )}
                     </p>
                   </div>
                 </div>
@@ -59,15 +65,18 @@ function ComoFunciona() {
                   </div>
                   <div className="flex-grow pl-4">
                     <h2 className="mb-1 font-medium tracking-wider text-heading">
-                      Descubre Nuestras Campañas
+                      {t("howItWorks.sections.campaigns.title")}
                     </h2>
                     <p className="leading-relaxed text-content_text">
                       <span className="font-semibold">
-                        Historias que Inspiran
+                        {t(
+                          "howItWorks.sections.campaigns.inspiring_stories.title"
+                        )}
                       </span>{" "}
                       <br />
-                      Explora un mar de oportunidades: Descubre nuestras
-                      campañas, listas para ser exploradas y apoyadas por ti
+                      {t(
+                        "howItWorks.sections.campaigns.inspiring_stories.content"
+                      )}
                     </p>
                   </div>
                 </div>
@@ -81,15 +90,18 @@ function ComoFunciona() {
                   </div>
                   <div className="flex-grow pl-4">
                     <h2 className="mb-1 font-medium tracking-wider text-heading">
-                      Cómo Funciona
+                      {t("howItWorks.sections.campaigns.title")}
                     </h2>
                     <p className="leading-relaxed text-content_text">
                       <span className="font-semibold">
-                        Tu Donación en Acción
+                        {t(
+                          "howItWorks.sections.campaigns.donation_action.title"
+                        )}
                       </span>{" "}
                       <br />
-                      Realiza donación y observa cómo transforma vidas en tiempo
-                      real. ¡Únete y sé parte del cambio ahora mismo!
+                      {t(
+                        "howItWorks.sections.campaigns.donation_action.content"
+                      )}
                     </p>
                   </div>
                 </div>
@@ -99,15 +111,14 @@ function ComoFunciona() {
                   </div>
                   <div className="flex-grow pl-4">
                     <h2 className="mb-1 font-medium tracking-wider text-heading">
-                      Únete a Nosotros
+                      {t("howItWorks.sections.join_us.title")}
                     </h2>
                     <p className="leading-relaxed text-content_text">
                       <span className="font-semibold">
-                        Haz la Diferencia Hoy
+                        {t("howItWorks.sections.join_us.make_difference.title")}
                       </span>{" "}
                       <br />
-                      Únete ya y sé parte del cambio. Tu contribución es
-                      crucial. ¡No esperes más para marcar la diferencia!
+                      {t("howItWorks.sections.join_us.make_difference.content")}
                     </p>
                   </div>
                 </div>
@@ -126,66 +137,72 @@ function ComoFunciona() {
           <div className="flex flex-wrap justify-center p-5 mx-auto max-w-7xl lg:w-2/3">
             <div className="flex flex-col mb-20 space-y-4">
               <h2 className="mb-4 text-2xl font-medium sm:text-3xl title-font text-main">
-                ¿Cómo funcionan las campañas en Kuzi?
+                {t("howItWorks.campaigns.how_they_work.title")}
               </h2>
               <p className="text-base leading-relaxed">
-                Puedes crear un Kuzi para diversos proyectos como:
+                {t("howItWorks.campaigns.how_they_work.types")}
               </p>
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div className="w-full p-4 text-center md:w-1/4 sm:w-1/2">
                   <div className="px-4 py-6 border rounded-lg border-card_border ">
                     <Handshake className="inline-block w-12 h-12 mb-3 text-main" />
 
-                    <p className="leading-relaxed">Apoyo a Fundaciones</p>
+                    <p className="leading-relaxed">
+                      {t(
+                        "howItWorks.campaigns.how_they_work.categories.foundation"
+                      )}
+                    </p>
                   </div>
                 </div>
                 <div className="w-full p-4 text-center md:w-1/4 sm:w-1/2">
                   <div className="px-4 py-6 border rounded-lg border-card_border ">
                     <TrendingUp className="inline-block w-12 h-12 mb-3 text-main" />
 
-                    <p className="leading-relaxed">Emprendedores</p>
+                    <p className="leading-relaxed">
+                      {t(
+                        "howItWorks.campaigns.how_they_work.categories.entrepreneurs"
+                      )}
+                    </p>
                   </div>
                 </div>
                 <div className="w-full p-4 text-center md:w-1/4 sm:w-1/2">
                   <div className="px-4 py-6 border rounded-lg border-card_border ">
                     <HandHeart className="inline-block w-12 h-12 mb-3 text-main" />
 
-                    <p className="leading-relaxed">Apoyo Social</p>
+                    <p className="leading-relaxed">
+                      {t(
+                        "howItWorks.campaigns.how_they_work.categories.social"
+                      )}
+                    </p>
                   </div>
                 </div>
               </div>
 
               <p className="mx-auto text-base leading-relaxed ">
-                Solo necesitas mucho entusiasmo, dedicación y la ayuda de tu
-                comunidad, quienes realizarán los aportes financieros y la
-                difusión de tu campaña para que llegue a muchos corazones y
-                logres tu meta.
+                {t("howItWorks.campaigns.how_they_work.requirements")}
               </p>
             </div>
             <div className="flex flex-col w-full mb-20 space-y-4">
               <h2 className="mb-4 text-2xl font-medium sm:text-3xl title-font text-main">
-                ¿Quiénes pueden crear una Kuzi?
+                {t("howItWorks.campaigns.who_can_create.title")}
               </h2>
               <p className="mx-auto text-base leading-relaxed ">
                 <span className="font-medium">
-                  ¡Todos pueden crear un Kuzi!
+                  {t("howItWorks.campaigns.who_can_create.main_message")}
                 </span>{" "}
-                Si tienes un sueño, un proyecto, una iniciativa social o una
-                idea de negocio, Kuzi es para ti. No importa si eres una sola
-                persona o una comunidad unida por el mismo ideal.
+                {t("howItWorks.campaigns.who_can_create.description")}
               </p>
 
               <p className="leading-relaxed ">
                 <span className="font-medium">
-                  🚀 Kuzi está abierta a estudiantes, innovadores, fundaciones,
-                  activistas, jóvenes, adultos, emprendedores… ¡para TODOS!
+                  {t("howItWorks.campaigns.who_can_create.target_audience")}
                 </span>{" "}
-                ¿Qué esperas para unirte al #KuziPower 💪?{" "}
+                {t("howItWorks.campaigns.who_can_create.call_to_action")}{" "}
                 <Link
                   to={ROUTES.CREAR_CAMPANA}
                   className="text-lg font-semibold leading-6 t text-main"
                 >
-                  Crea tu Campaña <span aria-hidden="true">→</span>
+                  {t("cta.tertiary")} <span aria-hidden="true">→</span>
                 </Link>
               </p>
             </div>

@@ -63,7 +63,7 @@ const DropdownMenuContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        "z-50 min-w-[8rem] overflow-hidden rounded-md border border-slate-200 bg-white p-1 text-slate-950 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50",
+        "z-50 min-w-[8rem] overflow-hidden rounded-md bg-third_bg px-4 p-2 text-content_text shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
         className
       )}
       {...props}
@@ -81,8 +81,7 @@ const DropdownMenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "yrelative yflex ycursor-default yselect-none yitems-center ygap-2 yrounded-sm ypx-2 ypy-1.5 ytext-sm youtline-none ytransition-colors focus:ybg-slate-100 focus:ytext-slate-900 data-[disabled]:ypointer-events-none data-[disabled]:yopacity-50 [&_svg]:ypointer-events-none [&_svg]:ysize-4 [&_svg]:yshrink-0 dark:focus:ybg-slate-800 dark:focus:ytext-slate-50",
-      inset && "ypl-8",
+      "text-content_text bg-third_bg hover:bg-card_border",
       className
     )}
     {...props}
@@ -105,7 +104,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <Check className="yh-4 yw-4" />
+        <Check className="w-4 h-4" />
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
     {children}
