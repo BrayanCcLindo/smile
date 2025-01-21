@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { Play } from "lucide-react";
 import MainLinkButton from "./mainLinkButton";
 import { ROUTES } from "../constants/routes";
+import { useTranslation } from "react-i18next";
 
 interface CustomVideoPlayerProps {
   src: string;
@@ -12,6 +13,7 @@ export default function CustomVideoPlayer({
   src,
   coverImage
 }: CustomVideoPlayerProps) {
+  const { t } = useTranslation("global");
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -64,7 +66,9 @@ export default function CustomVideoPlayer({
         </div>
       )}
       <div className="mt-4">
-        <MainLinkButton link={ROUTES.CAMPANAS}>Donar Ahora</MainLinkButton>
+        <MainLinkButton link={ROUTES.CAMPANAS}>
+          {t("cta.primary")}
+        </MainLinkButton>
       </div>
     </div>
   );

@@ -90,17 +90,17 @@ function ComoFunciona() {
                   </div>
                   <div className="flex-grow pl-4">
                     <h2 className="mb-1 font-medium tracking-wider text-heading">
-                      {t("howItWorks.sections.campaigns.title")}
+                      {t("howItWorks.sections.how_it_works.title")}
                     </h2>
                     <p className="leading-relaxed text-content_text">
                       <span className="font-semibold">
                         {t(
-                          "howItWorks.sections.campaigns.donation_action.title"
+                          "howItWorks.sections.how_it_works.donation_action.title"
                         )}
                       </span>{" "}
                       <br />
                       {t(
-                        "howItWorks.sections.campaigns.donation_action.content"
+                        "howItWorks.sections.how_it_works.donation_action.content"
                       )}
                     </p>
                   </div>

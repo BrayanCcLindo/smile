@@ -267,11 +267,9 @@ function PostCampaign() {
                       {t("postCampaign.history")}
                     </span>
                     <span className="mt-1 text-sm text-content_text">
-                      {format(
-                        new Date(actualPost.fechaInicio),
-                        "d 'de' MMMM yyyy",
-                        { locale: styleLang === "es" ? es : undefined }
-                      )}
+                      {format(new Date(actualPost.fechaInicio), "d MMMM yyyy", {
+                        locale: styleLang === "es" ? es : undefined
+                      })}
                     </span>
                   </div>
                   <div className="md:flex-grow">
