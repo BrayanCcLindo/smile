@@ -10,7 +10,7 @@ import { useSmileContext } from "../Api/userContext";
 import ButtonDialog from "../components/buttonDialog";
 import { useGetCampaigns } from "../Api/getCampaigns";
 import Loader from "../components/ui/loaders/loader";
-import MainLinkButton from "../components/mainLinkButton";
+import MainLinkButton from "../components/buttons/mainLinkButton";
 import { handleShareURL } from "../Api/socialShare";
 import { format, formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";

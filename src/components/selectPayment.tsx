@@ -15,7 +15,7 @@ import {
 } from "../components/ui/card";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
-import { Button } from "../components/ui/button";
+import { Button } from "./buttons/button";
 import { useForm, Controller } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -37,7 +37,7 @@ import { Copy } from "lucide-react";
 import { sendEmailConfirmation } from "../assets/donationMessages";
 import { processPayment } from "../assets/mercadoPagoApi";
 import { updateFirebaseDonations } from "../assets/firebase/updateDonations";
-import { MainButton } from "./mainLinkButton";
+import { MainButton } from "./buttons/mainLinkButton";
 import { useTranslation } from "react-i18next";
 
 type ButtonDontationType = {

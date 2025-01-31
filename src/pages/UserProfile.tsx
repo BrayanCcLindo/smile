@@ -1,7 +1,7 @@
 import { useGetUserData } from "../Api/getUserData";
 import Card from "../components/card";
 import Loader from "../components/ui/loaders/loader";
-import MainLinkButton from "../components/mainLinkButton";
+import MainLinkButton from "../components/buttons/mainLinkButton";
 import { Settings2 } from "lucide-react";
 import CallToAction from "../components/callToAction";
 import { useGetCampaigns } from "../Api/getCampaigns";

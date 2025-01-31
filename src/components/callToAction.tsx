@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import MainLinkButton from "./mainLinkButton";
+import MainLinkButton from "./buttons/mainLinkButton";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
 import { ROUTES } from "../constants/routes";

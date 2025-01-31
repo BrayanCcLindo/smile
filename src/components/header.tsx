@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { ROUTES } from "../constants/routes";
 import { useSmileContext } from "../Api/userContext";
 import { useState } from "react";
-import MainLinkButton from "./mainLinkButton";
+import MainLinkButton from "./buttons/mainLinkButton";
 import SwitchToogle from "./switchToogle";
 import Avatar from "./avatar";
 import { useGetUserData } from "../Api/getUserData";

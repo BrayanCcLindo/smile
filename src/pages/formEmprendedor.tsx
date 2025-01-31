@@ -1,15 +1,15 @@
-import { Brain, Loader } from "lucide-react";
+import { AlertCircle, Loader, Sparkles } from "lucide-react";
 import { useSmileContext } from "../Api/userContext";
 import { useGetUserData } from "../Api/getUserData";
 import { useGetCampaigns } from "../Api/getCampaigns";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
-import { DragEvent, useState } from "react";
+import { DragEvent, FormEvent, useState } from "react";
 import { db } from "../firebase/firebase";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
-import { MainButton } from "../components/mainLinkButton";
+import { MainButton } from "../components/buttons/mainLinkButton";
 import { useForm, Controller } from "react-hook-form";
 import FormErrors from "../components/formErrors";
 import { createSubmitHandler } from "../Api/createCampaignForm";
@@ -23,18 +23,22 @@ import {
 } from "../components/ui/select";
 import { SmileType } from "../type/types";
 import { optimizeCampaign } from "../services/googleAI";
-import { Button } from "../components/ui/button";
+import { Button } from "../components/buttons/button";
+import AIButton from "../components/buttons/iaButton";
+import FinancialFormSteps from "../components/assistanceIA/assistanceModalSteps";
+import { FormCampaign } from "./formAlbergue";
+import Tooltip from "../components/ui/tooltip";
 
-type FormCampaign = {
-  campaña: string;
-  description: string;
-  category: string;
-  address: string;
-  meta: string;
-  file: FileList;
-  proxy: string;
-  dni: string;
-};
+// type FormCampaign = {
+//   campaña: string;
+//   description: string;
+//   category: string;
+//   address: string;
+//   meta: string;
+//   file: FileList;
+//   proxy: string;
+//   dni: string;
+// };
 
 function FormEmprendedor() {
   const [isLoading, setIsLoading] = useState(false);
@@ -45,6 +49,10 @@ function FormEmprendedor() {
   const { stateProfile } = useSmileContext();
   const { user } = useGetUserData();
   const { data } = useGetCampaigns();
+  const [showOptions, setShowOptions] = useState({
+    title: true,
+    description: true
+  });
 
   const MAX_FILE_SIZE = 770000;
   const categories = [
@@ -57,7 +65,7 @@ function FormEmprendedor() {
   ];
 
   const {
-    handleSubmit,
+    handleSubmit: handleMainForm,
     control,
     trigger,
     getValues,
@@ -120,8 +128,13 @@ function FormEmprendedor() {
     user,
     image
   });
-  const submitCampaign = async (values: FormCampaign) => {
-    socialData(values, SmileType.Emprendedores, setIsLoading);
+  const submitCampaign = (e: FormEvent) => {
+    if ((e.target as HTMLFormElement).id === "mainForm") {
+      e.preventDefault();
+      handleMainForm(values => {
+        socialData(values, SmileType.Emprendedores, setIsLoading);
+      })(e);
+    }
   };
 
   const handleOptimize = async () => {
@@ -141,12 +154,14 @@ function FormEmprendedor() {
 
   const handleSuggestionsTitle = (e: React.MouseEvent<HTMLButtonElement>) => {
     setValue("campaña", e.currentTarget.value);
+    setShowOptions({ ...showOptions, title: false });
   };
 
   const handleSuggestionsDescription = (
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
     setValue("description", e.currentTarget.value);
+    setShowOptions({ ...showOptions, description: false });
   };
 
   return (
@@ -164,7 +179,8 @@ function FormEmprendedor() {
                 guiaremos paso a paso para crear tu primera campaña exitosa.
               </p>
               <form
-                onSubmit={handleSubmit(submitCampaign)}
+                id="mainForm"
+                onSubmit={submitCampaign}
                 className="grid grid-cols-1 gap-6 py-6 sm:grid-cols-6 sm:py-8 md:py-10"
               >
                 <div className="sm:col-span-3 col-span-full">
@@ -179,13 +195,22 @@ function FormEmprendedor() {
                     }}
                     render={({ field }) => (
                       <Input
+                        onClick={() => {
+                          if (suggestions?.title) {
+                            setShowOptions({
+                              ...showOptions,
+                              title: !showOptions.title
+                            });
+                          }
+                        }}
                         {...field}
                         id="campaña"
                         placeholder="Ingresa un nombre de tu Emprendimiento"
                       />
                     )}
                   />
-                  {suggestions?.title &&
+                  {showOptions.title &&
+                    suggestions?.title &&
                     suggestions.title.map((t: string, i: number) => (
                       <Button
                         type="button"
@@ -245,15 +270,19 @@ function FormEmprendedor() {
                       minLength: {
                         value: 25,
                         message: "Debe contener como mínimo 25 caracteres"
-                      },
-                      maxLength: {
-                        value: 250,
-                        message: "Debe contener como máximo 250 caracteres"
                       }
                     }}
                     control={control}
                     render={({ field }) => (
                       <Textarea
+                        onClick={() => {
+                          if (suggestions?.description) {
+                            setShowOptions({
+                              ...showOptions,
+                              description: !showOptions.description
+                            });
+                          }
+                        }}
                         {...field}
                         id="description"
                         rows={3}
@@ -261,7 +290,8 @@ function FormEmprendedor() {
                       />
                     )}
                   />
-                  {suggestions?.description &&
+                  {showOptions.description &&
+                    suggestions?.description &&
                     suggestions.description.map((d: string, i: number) => (
                       <Button
                         type="button"
@@ -277,14 +307,16 @@ function FormEmprendedor() {
                   {errors.description && (
                     <FormErrors>{errors.description.message}</FormErrors>
                   )}
-                  <Button
+                  <AIButton
+                    color="purple"
                     type="button"
-                    className="flex items-center gap-3 px-4 py-2 mt-2 space-x-2 font-semibold text-white transition-all duration-300 ease-in-out transform rounded-lg shadow-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 hover:scale-105"
                     onClick={handleOptimize}
                   >
-                    <Brain className="w-5 h-5" />
-                    {loading ? "Optimizando..." : "Optimizar texto con IA"}
-                  </Button>
+                    <Sparkles className="w-4 h-4 animate-pulse" />
+                    <span className="font-semibold">
+                      {loading ? "Optimizando..." : "Optimizar texto con IA"}
+                    </span>
+                  </AIButton>
                 </div>
                 <div className="col-span-full sm:col-span-3 ">
                   <Label htmlFor="meta" className="text-sm font-medium">
@@ -294,6 +326,11 @@ function FormEmprendedor() {
                     <span className="px-4 text-sm py-1 absolute left-[2px] top-1/2 -translate-y-1/2 text-content_text">
                       S/.
                     </span>
+                    <div className="px-4 text-sm py-1 absolute right-[2px] top-1/2 -translate-y-1/2 text-content_text">
+                      <Tooltip text="¿Dudas? Consulta al asistente financiero">
+                        <AlertCircle size={16} />
+                      </Tooltip>
+                    </div>
                     <Controller
                       name="meta"
                       control={control}
@@ -330,6 +367,7 @@ function FormEmprendedor() {
                   {errors.meta && (
                     <FormErrors>{errors.meta.message}</FormErrors>
                   )}
+                  <FinancialFormSteps setValue={setValue} />
                 </div>
                 <div className="sm:col-span-3 col-span-full">
                   <Label htmlFor="address" className="text-sm font-medium">

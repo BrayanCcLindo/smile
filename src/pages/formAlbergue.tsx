@@ -1,22 +1,25 @@
-import { Brain, Loader } from "lucide-react";
+import { AlertCircle, Loader, Sparkles } from "lucide-react";
 import { useSmileContext } from "../Api/userContext";
 import { useGetUserData } from "../Api/getUserData";
 import { useGetCampaigns } from "../Api/getCampaigns";
 import { toast } from "sonner";
-import { DragEvent, useState } from "react";
+import { DragEvent, FormEvent, useState } from "react";
 import { db } from "../firebase/firebase";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { motion } from "framer-motion";
 import { Textarea } from "../components/ui/textarea";
-import { MainButton } from "../components/mainLinkButton";
+import { MainButton } from "../components/buttons/mainLinkButton";
 import { Controller, useForm } from "react-hook-form";
 import FormErrors from "../components/formErrors";
 import { SmileType } from "../type/types";
 import { createSubmitHandler } from "../Api/createCampaignForm";
 import { ROUTES } from "../constants/routes";
-import { Button } from "../components/ui/button";
+import { Button } from "../components/buttons/button";
 import { optimizeCampaign } from "../services/googleAI";
+import FinancialFormSteps from "../components/assistanceIA/assistanceModalSteps";
+import Tooltip from "../components/ui/tooltip";
+import AIButton from "../components/buttons/iaButton";
 
 export type FormCampaign = {
   campaña: string;
@@ -39,16 +42,20 @@ function FormAlbergue() {
   const { stateProfile } = useSmileContext();
   const { user } = useGetUserData();
   const { data } = useGetCampaigns();
+  const [showOptions, setShowOptions] = useState({
+    title: true,
+    description: true
+  });
 
   const MAX_FILE_SIZE = 770000;
 
   const {
-    handleSubmit,
-    control,
+    handleSubmit: handleMainForm,
+    control: controlForm,
     setValue,
     getValues,
     trigger,
-    formState: { errors }
+    formState: { errors: mainErrors }
   } = useForm<FormCampaign>({
     defaultValues: {
       campaña: "",
@@ -70,8 +77,13 @@ function FormAlbergue() {
     image,
     redirectPath: ROUTES.CAMPANAS
   });
-  const submitCampaign = async (values: FormCampaign) => {
-    fundacionData(values, SmileType.Fundaciones, setIsLoading);
+  const submitCampaign = (e: FormEvent) => {
+    if ((e.target as HTMLFormElement).id === "mainForm") {
+      e.preventDefault();
+      handleMainForm(values => {
+        fundacionData(values, SmileType.Fundaciones, setIsLoading);
+      })(e);
+    }
   };
 
   const handleDrag = (e: DragEvent<HTMLLabelElement>) => {
@@ -127,12 +139,14 @@ function FormAlbergue() {
 
   const handleSuggestionsTitle = (e: React.MouseEvent<HTMLButtonElement>) => {
     setValue("campaña", e.currentTarget.value);
+    setShowOptions({ ...showOptions, title: false });
   };
 
   const handleSuggestionsDescription = (
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
     setValue("description", e.currentTarget.value);
+    setShowOptions({ ...showOptions, description: false });
   };
 
   return (
@@ -150,7 +164,8 @@ function FormAlbergue() {
                 guiaremos paso a paso para crear tu primera campaña exitosa.
               </p>
               <form
-                onSubmit={handleSubmit(submitCampaign)}
+                id="mainForm"
+                onSubmit={submitCampaign}
                 className="grid grid-cols-1 gap-6 py-6 sm:grid-cols-6 sm:py-8 md:py-10"
               >
                 <div className="sm:col-span-3 col-span-full">
@@ -159,19 +174,28 @@ function FormAlbergue() {
                   </Label>
                   <Controller
                     name="campaña"
-                    control={control}
+                    control={controlForm}
                     rules={{
-                      required: "El campo es requerido"
+                      required: "El nombre es requerido"
                     }}
                     render={({ field }) => (
                       <Input
+                        onClick={() => {
+                          if (suggestions?.title) {
+                            setShowOptions({
+                              ...showOptions,
+                              title: !showOptions.title
+                            });
+                          }
+                        }}
                         {...field}
                         id="campaña"
                         placeholder="Ingresa un nombre de tu Albergue o Fundación"
                       />
                     )}
                   />
-                  {suggestions?.title &&
+                  {showOptions.title &&
+                    suggestions?.title &&
                     suggestions.title.map((t: string, i: number) => (
                       <Button
                         type="button"
@@ -184,8 +208,8 @@ function FormAlbergue() {
                         {t}
                       </Button>
                     ))}
-                  {errors.campaña && (
-                    <FormErrors>{errors.campaña.message} </FormErrors>
+                  {mainErrors.campaña && (
+                    <FormErrors>{mainErrors.campaña.message} </FormErrors>
                   )}
                 </div>
                 <div className="sm:col-span-3 col-span-full">
@@ -194,7 +218,7 @@ function FormAlbergue() {
                   </Label>
                   <Controller
                     name="ruc"
-                    control={control}
+                    control={controlForm}
                     rules={{
                       required: "El RUC es requerido",
                       pattern: {
@@ -220,7 +244,9 @@ function FormAlbergue() {
                     )}
                   />
 
-                  {errors.ruc && <FormErrors>{errors.ruc.message} </FormErrors>}
+                  {mainErrors.ruc && (
+                    <FormErrors>{mainErrors.ruc.message} </FormErrors>
+                  )}
                 </div>
                 <div className="col-span-full">
                   <Label htmlFor="description" className="text-sm font-medium">
@@ -229,19 +255,23 @@ function FormAlbergue() {
                   <Controller
                     name="description"
                     rules={{
-                      required: "El campo es requerido",
+                      required: "La descripción es requerida",
                       minLength: {
                         value: 25,
                         message: "Debe contener como mínimo 25 caracteres"
-                      },
-                      maxLength: {
-                        value: 250,
-                        message: "Debe contener como máximo 250 caracteres"
                       }
                     }}
-                    control={control}
+                    control={controlForm}
                     render={({ field }) => (
                       <Textarea
+                        onClick={() => {
+                          if (suggestions?.description) {
+                            setShowOptions({
+                              ...showOptions,
+                              description: !showOptions.description
+                            });
+                          }
+                        }}
                         {...field}
                         id="description"
                         rows={3}
@@ -249,7 +279,8 @@ function FormAlbergue() {
                       />
                     )}
                   />
-                  {suggestions?.description &&
+                  {showOptions.description &&
+                    suggestions?.description &&
                     suggestions.description.map((d: string, i: number) => (
                       <Button
                         type="button"
@@ -262,17 +293,19 @@ function FormAlbergue() {
                         {d}
                       </Button>
                     ))}
-                  {errors.description && (
-                    <FormErrors>{errors.description.message} </FormErrors>
+                  {mainErrors.description && (
+                    <FormErrors>{mainErrors.description.message} </FormErrors>
                   )}
-                  <Button
+                  <AIButton
+                    color="purple"
                     type="button"
-                    className="flex items-center gap-3 px-4 py-2 mt-2 space-x-2 font-semibold text-white transition-all duration-300 ease-in-out transform rounded-lg shadow-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 hover:scale-105"
                     onClick={handleOptimize}
                   >
-                    <Brain className="w-5 h-5" />
-                    {loading ? "Optimizando..." : "Optimizar texto con IA"}
-                  </Button>
+                    <Sparkles className="w-4 h-4 animate-pulse" />
+                    <span className="font-semibold">
+                      {loading ? "Optimizando..." : "Optimizar texto con IA"}
+                    </span>
+                  </AIButton>
                 </div>
                 <div className="col-span-full sm:col-span-3 ">
                   <Label htmlFor="meta" className="text-sm font-medium">
@@ -282,9 +315,14 @@ function FormAlbergue() {
                     <span className="px-4 text-sm py-1 absolute left-[2px] top-1/2 -translate-y-1/2 text-content_text">
                       S/.
                     </span>
+                    <div className="px-4 text-sm py-1 absolute right-[2px] top-1/2 -translate-y-1/2 text-content_text">
+                      <Tooltip text="¿Dudas? Consulta al asistente financiero">
+                        <AlertCircle size={16} />
+                      </Tooltip>
+                    </div>
                     <Controller
                       name="meta"
-                      control={control}
+                      control={controlForm}
                       rules={{
                         required: "El monto es requerido",
                         validate: value => {
@@ -299,31 +337,34 @@ function FormAlbergue() {
                         }
                       }}
                       render={({ field: { onChange, value } }) => (
-                        <Input
-                          onChange={e => {
-                            const value = e.target.value;
-                            if (/^\d*\.?\d*$/.test(value)) {
-                              onChange(value);
-                            }
-                          }}
-                          className="pl-10"
-                          value={value}
-                          id="meta"
-                          name="meta"
-                        />
+                        <>
+                          <Input
+                            onChange={e => {
+                              const value = e.target.value;
+                              if (/^\d*\.?\d*$/.test(value)) {
+                                onChange(value);
+                              }
+                            }}
+                            className="pl-10"
+                            value={value}
+                            id="meta"
+                            name="meta"
+                          />
+                        </>
                       )}
                     />
                   </div>
-                  {errors.meta && (
-                    <FormErrors>{errors.meta.message} </FormErrors>
+                  {mainErrors.meta && (
+                    <FormErrors>{mainErrors.meta.message} </FormErrors>
                   )}
+                  <FinancialFormSteps setValue={setValue} />
                 </div>
                 <div className="sm:col-span-3 col-span-full">
                   <Label htmlFor="address" className="text-sm font-medium">
                     Dirección Legal
                   </Label>
                   <Controller
-                    control={control}
+                    control={controlForm}
                     name="address"
                     rules={{ required: "El campo es requerido" }}
                     render={({ field }) => (
@@ -334,8 +375,8 @@ function FormAlbergue() {
                       />
                     )}
                   />
-                  {errors.address && (
-                    <FormErrors>{errors.address.message} </FormErrors>
+                  {mainErrors.address && (
+                    <FormErrors>{mainErrors.address.message} </FormErrors>
                   )}
                 </div>
                 <div className="pb-8 border-b col-span-full">
@@ -344,7 +385,7 @@ function FormAlbergue() {
                   </span>
                   <Controller
                     name="file"
-                    control={control}
+                    control={controlForm}
                     rules={{
                       required: "La imagen de campaña es requerida",
                       validate: {
@@ -435,8 +476,8 @@ function FormAlbergue() {
                       </motion.label>
                     )}
                   />
-                  {errors.file && (
-                    <FormErrors>{errors.file.message}</FormErrors>
+                  {mainErrors.file && (
+                    <FormErrors>{mainErrors.file.message}</FormErrors>
                   )}
                 </div>
                 <div className=" sm:col-span-3 col-span-full">
@@ -444,7 +485,7 @@ function FormAlbergue() {
                     Representante Legal
                   </Label>
                   <Controller
-                    control={control}
+                    control={controlForm}
                     name="proxy"
                     rules={{
                       required: "El campo es requerido"
@@ -457,8 +498,8 @@ function FormAlbergue() {
                       />
                     )}
                   />
-                  {errors.proxy && (
-                    <FormErrors>{errors.proxy.message} </FormErrors>
+                  {mainErrors.proxy && (
+                    <FormErrors>{mainErrors.proxy.message} </FormErrors>
                   )}
                 </div>
                 <div className=" sm:col-span-3 col-span-full">
@@ -467,7 +508,7 @@ function FormAlbergue() {
                   </Label>
                   <Controller
                     name="dni"
-                    control={control}
+                    control={controlForm}
                     rules={{
                       required: "El DNI es requerido",
                       pattern: {
@@ -491,7 +532,9 @@ function FormAlbergue() {
                       />
                     )}
                   />
-                  {errors.dni && <FormErrors>{errors.dni.message} </FormErrors>}
+                  {mainErrors.dni && (
+                    <FormErrors>{mainErrors.dni.message} </FormErrors>
+                  )}
                 </div>
                 <div className="col-span-full">
                   <MainButton type="submit" isLoading={isLoading}>

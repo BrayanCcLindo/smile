@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { Play } from "lucide-react";
-import MainLinkButton from "./mainLinkButton";
+import MainLinkButton from "./buttons/mainLinkButton";
 import { ROUTES } from "../constants/routes";
 import { useTranslation } from "react-i18next";
 

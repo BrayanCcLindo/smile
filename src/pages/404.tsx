@@ -1,5 +1,5 @@
 import { ROUTES } from "../constants/routes";
-import MainLinkButton from "../components/mainLinkButton";
+import MainLinkButton from "../components/buttons/mainLinkButton";
 
 export default function NotFound() {
   return (

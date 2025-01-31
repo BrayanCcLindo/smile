@@ -1,5 +1,5 @@
 import { Eye, LockKeyhole, Rocket } from "lucide-react";
-import MainLinkButton from "../components/mainLinkButton";
+import MainLinkButton from "../components/buttons/mainLinkButton";
 import { useGetCampaigns } from "../Api/getCampaigns";
 import Card from "../components/card";
 import { Link } from "react-router-dom";
@@ -11,8 +11,6 @@ import { ROUTES } from "../constants/routes";
 import { SEOComponent } from "../assets/SEO";
 import CompanyTeam from "../components/teamSection";
 import { useTranslation } from "react-i18next";
-
-// import { useSmileContext } from "../Api/userContext";
 
 function Homepage() {
   const { data } = useGetCampaigns();
@@ -53,6 +51,7 @@ function Homepage() {
           </div>
         </div>
       </motion.div>
+
       <div className="mx-auto body-font max-w-7xl">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap w-full ">

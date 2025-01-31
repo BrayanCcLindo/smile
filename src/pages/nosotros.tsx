@@ -1,8 +1,9 @@
 import { Card, CardContent } from "../components/ui/card";
-import { Button } from "../components/ui/button";
+import { Button } from "../components/buttons/button";
 import { Users, Heart, Target, Mail } from "lucide-react";
 import { members } from "../constants/nosotros";
 import { useTranslation } from "react-i18next";
+import { twMerge } from "tailwind-merge";
 
 export default function NosotrosPage() {
   const { t } = useTranslation("global");
@@ -30,7 +31,15 @@ export default function NosotrosPage() {
             <h2 className="mb-8 text-3xl font-bold text-center text-main">
               {t("aboutPage.ourTeam")}
             </h2>
-            <div className="grid items-center grid-cols-1 gap-8 sm:grid-cols-4">
+            <div
+              className={twMerge(
+                `grid items-center grid-cols-1 gap-8 ${
+                  members.length <= 4
+                    ? `sm:grid-cols-${members.length.toString()}`
+                    : `sm:grid-cols-3`
+                }`
+              )}
+            >
               {members.map(member => (
                 <Card className="relative w-full max-w-sm mx-auto">
                   <a

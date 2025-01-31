@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { SmileType, UserData } from "../type/types";
 import { FormCampaign } from "../pages/formAlbergue";
 import { ROUTES } from "../constants/routes";
+import { CAMPAIGNTYPES_EN } from "../constans/constantsCampaign";
 
 interface SubmitHandlerConfig {
   db: any; // Tipo de Firestore
@@ -51,18 +52,22 @@ export const createSubmitHandler = (config: SubmitHandlerConfig) => {
       if (!campaignExist && config.stateProfile.uid) {
         const baseDocument = {
           nombre: title,
+          nonmbre_en: "",
           descripcion: values.description,
+          descripcion_en: "",
           slug: slug,
           id: config.stateProfile.uid,
           imagenCampaña: config.image,
           meta: Number(values.meta),
           to: `${ROUTES.CAMPANAS}/${slug}`,
           tipo,
+          tipo_en: CAMPAIGNTYPES_EN[tipo],
           category: values.category ?? null,
           creador: config.user?.name ?? config.stateProfile.displayName,
           fechaInicio: startDate,
           fechaFinal: endDate,
           donaciones: [],
+          validation: false,
           ...config.additionalFields
         };
 

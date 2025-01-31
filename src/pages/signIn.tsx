@@ -7,7 +7,7 @@ import { useState } from "react";
 import { auth, db } from "../firebase/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { FormData } from "../type/types";
-import { MainButton } from "../components/mainLinkButton";
+import { MainButton } from "../components/buttons/mainLinkButton";
 import { toast } from "sonner";
 import { useSmileContext } from "../Api/userContext";
 import { SEOComponent } from "../assets/SEO";
